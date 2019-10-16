@@ -1,8 +1,14 @@
 @startuml
 
+skinparam class {
+	BackgroundColor #FFC0CB
+	ArrowColor Black
+	BorderColor Black
+}
+
 package tile{
 
-    abstract Tile{
+    class EmptyTile{
 
     }
 
@@ -10,15 +16,20 @@ package tile{
 
     }
 
+    abstract Effect{
 
-    class Empty{
+    }
+
+    class TileFabric << (S,#FF7700) Singleton >>{
 
     }
 
 }
 
-Wall --|> Tile
-Empty --|> Tile
+Wall --|> Effect
+Effect --|> EmptyTile
+Effect --> "1" EmptyTile : -decore
 
+TileFabric ..> EmptyTile : create
 
 @enduml
