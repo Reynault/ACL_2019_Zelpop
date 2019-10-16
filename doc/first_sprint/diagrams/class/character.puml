@@ -1,0 +1,17 @@
+@startuml
+
+package character{
+
+    class Character{
+
+    }
+
+    class Hero{
+
+    }
+
+}
+
+Hero --|> Character
+
+@enduml

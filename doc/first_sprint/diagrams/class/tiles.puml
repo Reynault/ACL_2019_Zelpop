@@ -1,0 +1,29 @@
+@startuml
+
+package tile{
+
+    class Tile{
+
+    }
+
+    class Wall{
+
+    }
+
+
+    class Empty{
+
+    }
+
+    class Construction{
+
+    }
+
+}
+
+Tile "*" x-up-> "1" Construction
+Wall --|> Construction
+Empty --|> Construction
+
+
+@enduml

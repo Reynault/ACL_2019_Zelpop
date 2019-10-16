@@ -1,0 +1,37 @@
+@startuml
+
+package dungeon{
+
+    class Dungeon{
+
+    }
+
+    class Labyrinth{
+
+
+    }
+
+    class LabyrinthFactory{
+
+    }
+
+    class LabyrinthFile{
+
+    }
+
+    package tile{
+
+    class Tile{
+
+    }
+
+    note "Diagramme de classes\ndes cases" as N1
+
+
+    }
+
+}
+
+
+
+@enduml

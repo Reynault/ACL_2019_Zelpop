@@ -1,0 +1,53 @@
+@startuml
+
+package case{
+
+    class Case{
+
+    }
+
+    class Mur{
+
+    }
+
+    class Evenement{
+
+    }
+
+    class CaseVide{
+
+    }
+
+    class Tresor{
+
+    }
+
+    class Piege{
+
+    }
+
+    class Magique{
+
+    }
+
+    class Passage{
+
+    }
+
+    class Construction{
+
+    }
+
+}
+
+Case "*" x-up-> "1" Construction
+Mur --|> Construction
+CaseVide --|> Construction
+
+Case "*" x-down-> "1" Evenement
+Magique --|> Evenement
+Tresor --|> Evenement
+Piege --|> Evenement
+Passage --|> Evenement
+
+@enduml
