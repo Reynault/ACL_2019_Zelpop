@@ -3,7 +3,8 @@
 package character{
 
     class Character{
-
+        - x : int
+        - y : int
     }
 
     class Hero{

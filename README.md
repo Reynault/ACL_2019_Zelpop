@@ -18,3 +18,4 @@ The idea is to develop a game using an agile method of developpement. (SCRUM)
 - Julien Romary
 - Reynault Sies
 - Matthieu Olejniczak
+- Mohamed Elridha Salhi

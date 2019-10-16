@@ -11,27 +11,50 @@ package dungeon{
 
     }
 
-    class LabyrinthFactory{
-
-    }
-
-    class LabyrinthFile{
-
-    }
-
     package tile{
 
-    class Tile{
+        class Tile{
+
+        }
+
+        note "Diagramme de classes\ndes cases" as N1
 
     }
 
-    note "Diagramme de classes\ndes cases" as N1
+    package character{
 
+        class Character{
+
+        }
+
+        class Hero{
+
+        }
+
+    }
+
+    package labyrinthFactory{
+
+        class LabyrinthFactory{
+
+        }
+
+        class LabyrinthFile{
+
+        }
 
     }
 
 }
 
+Dungeon "1" -left-> "*" Labyrinth
+Dungeon "1" --> "1" LabyrinthFactory
+Labyrinth "1" --> "*" Tile
+Labyrinth "1" -up-> "*" Character
 
+Hero --|> Character
+Dungeon --> "1" Character
+
+LabyrinthFile --|> LabyrinthFactory
 
 @enduml
