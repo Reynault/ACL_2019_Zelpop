@@ -1,8 +1,8 @@
 @startuml
 
-package character{
+package entity{
 
-    class Character{
+    class Entity{
         - x : int
         - y : int
     }
@@ -13,6 +13,6 @@ package character{
 
 }
 
-Hero --|> Character
+Hero --|> Entity
 
 @enduml

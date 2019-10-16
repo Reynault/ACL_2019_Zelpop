@@ -6,7 +6,7 @@ package dungeon{
 
     }
 
-    class Labyrinth{
+    class Maze{
 
 
     }
@@ -17,13 +17,13 @@ package dungeon{
 
         }
 
-        note "Diagramme de classes\ndes cases" as N1
+        note "Class diagram of tiles" as N1
 
     }
 
-    package character{
+    package entity{
 
-        class Character{
+        class Entity{
 
         }
 
@@ -33,13 +33,13 @@ package dungeon{
 
     }
 
-    package labyrinthFactory{
+    package mazeFactory{
 
-        class LabyrinthFactory{
+        class MazeFactory{
 
         }
 
-        class LabyrinthFile{
+        class MazeFile{
 
         }
 
@@ -47,14 +47,14 @@ package dungeon{
 
 }
 
-Dungeon "1" -left-> "*" Labyrinth
-Dungeon "1" --> "1" LabyrinthFactory
-Labyrinth "1" --> "*" Tile
-Labyrinth "1" -up-> "*" Character
+Dungeon "1" -left-> "*" Maze: -maze
+Dungeon "1" --> "1" MazeFactory: -mazeFactory
+Maze "1" --> "*" Tile: -tiles
+Maze "1" -up-> "*" Entity: -entities
 
-Hero --|> Character
-Dungeon --> "1" Character
+Hero --|> Entity
+Dungeon --> "1" Entity : -hero
 
-LabyrinthFile --|> LabyrinthFactory
+MazeFile --|> MazeFactory
 
 @enduml

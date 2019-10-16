@@ -1,39 +1,21 @@
-# Backlog - Premier Sprint
+# Backlog - First Sprint
 
-Développement de la première partie du projet, à savoir, quelques fonctionnalités 
-de bases et un affichage en console. (pas d'intégration graphique pour le moment)
+Development of the first iteration. There is several simple features such as a basic interface on
+ the console. (without graphic interface)
 
-## Fonctionnalités
+## Features
 
-- Le héros est placé sur le plateau de jeu et peut s’y déplacer à l’intérieur.
-- Labyrinthe par défaut avec murs infranchissables.
-- Labyrinthe généré par lecture de fichier. Deux choix :
-    - Tableau dans le fichier :   
-        1 1 1 1 1  
-        1 1 1 1 1  
-        1 1 4 1 1  
-        1 1 1 1 1  
-        1 1 1 1 1  
-    - Json like :  
-    {  
-    Width : 10,  
-    Height : 10,  
-    Murs : [
-        {
-            x : 1
-            y : 1
-        }, ...
-        ]  
-    }
+- The player can move in every directions.
+- There is an empty default maze.
 
 ## Conception
 
-### Diagramme de classes
+### Class Diagram
 
-Trois diagrammes de classes ont été faits :
+Three class diagrams has been made :
 
-- character : Affiche la partie Personnage de l'application.
-- global : Diagramme de classe global de la partie modèle.
-- tiles : Diagramme de classe de la partie Cases.
+- entity shows the entity part where we have the hero and the monsters that moved in the maze.
+- global shows a global view of the model.
+- tiles shows the tiles part.
 
-### Diagrammes de séquences
+### Sequences Diagram
