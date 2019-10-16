@@ -1,0 +1,15 @@
+@startuml
+Actor Utilisateur
+Utilisateur -> Application : L'utilisateur souhaite effectuer un déplacement à gauche
+Application -> Dungeon : deplacementGauche()
+Dungeon -> Maze : deplacementAutorise()
+alt Un mur se trouve dans la direction souhaitée
+Maze --> Dungeon : false
+Dungeon --> Application : false
+Application --> Utilisateur : Aucun déplacement effectué
+end
+Maze -> Maze : setDeplacement()
+Maze --> Dungeon : true
+Dungeon --> Application : true
+Application --> Utilisateur : Déplacement dans la direction souhaitée
+@enduml
