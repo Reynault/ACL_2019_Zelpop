@@ -2,7 +2,7 @@
 
 package tile{
 
-    class Tile{
+    abstract Tile{
 
     }
 
@@ -15,15 +15,10 @@ package tile{
 
     }
 
-    class Construction{
-
-    }
-
 }
 
-Tile "*" x-up-> "1" Construction
-Wall --|> Construction
-Empty --|> Construction
+Wall --|> Tile
+Empty --|> Tile
 
 
 @enduml

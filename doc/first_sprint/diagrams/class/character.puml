@@ -2,7 +2,7 @@
 
 package entity{
 
-    class Entity{
+    abstract Entity{
         - x : int
         - y : int
     }

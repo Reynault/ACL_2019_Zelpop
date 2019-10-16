@@ -13,7 +13,7 @@ package dungeon{
 
     package tile{
 
-        class Tile{
+        abstract Tile{
 
         }
 
@@ -23,11 +23,15 @@ package dungeon{
 
     package entity{
 
-        class Entity{
+        abstract Entity{
 
         }
 
-        class Hero{
+        class Hero << (S,#FF7700) Singleton >>{
+
+        }
+
+        class EntityFactory << (S,#FF7700) Singleton >>{
 
         }
 
@@ -35,7 +39,7 @@ package dungeon{
 
     package mazeFactory{
 
-        class MazeFactory{
+        interface MazeFactory{
 
         }
 
@@ -52,8 +56,10 @@ Dungeon "1" --> "1" MazeFactory: -mazeFactory
 Maze "1" --> "*" Tile: -tiles
 Maze "1" -up-> "*" Entity: -entities
 
+EntityFactory ..> Entity : create
+
 Hero --|> Entity
-Dungeon --> "1" Entity : -hero
+Dungeon "1" --> "1" Entity : -hero
 
 MazeFile --|> MazeFactory
 
