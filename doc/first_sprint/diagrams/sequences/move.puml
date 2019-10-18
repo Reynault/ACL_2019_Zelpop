@@ -1,15 +1,18 @@
 @startuml
-Actor Utilisateur
-Utilisateur -> Application : L'utilisateur souhaite effectuer un déplacement à gauche
-Application -> Dungeon : deplacementGauche()
-Dungeon -> Maze : deplacementAutorise()
-alt Un mur se trouve dans la direction souhaitée
-Maze --> Dungeon : false
-Dungeon --> Application : false
-Application --> Utilisateur : Aucun déplacement effectué
+Actor User
+User -> Dungeon : The user wants to move to the left
+Dungeon -> Maze : MoveHero(Direction d)
+Maze -> Entity : behave(Entity e)
+Entity -> Behavior : behave(Entity e)
+Behavior --> Entity : direction
+Entity --> Maze : direction
+Maze -> Maze : canMove(Entity e, int x, int y)
+alt A wall is blocking the way
+    Maze --> Dungeon : false
+    Dungeon --> User : No deplacement
 end
-Maze -> Maze : setDeplacement()
 Maze --> Dungeon : true
-Dungeon --> Application : true
-Application --> Utilisateur : Déplacement dans la direction souhaitée
+Maze -> Entity : setPosition(direction d)
+Maze -> Entity : setPosition(int x, int y)
+Dungeon --> User : Moving
 @enduml
