@@ -11,6 +11,7 @@ package entity{
         + setPosition(int direction)
         + setPosition(int x, int y)
         + {abstract} draw()
+        + behave(): Direction
     }
 
     class Hero << (S,#FF7700) Singleton >>{
@@ -22,15 +23,15 @@ package entity{
     }
 
     interface Behavior{
-        + {abstract} behave(Entity entity)
+        + {abstract} behave(Entity entity): Direction
     }
 
     class Random{
-        + behave(Entity entity)
+        + behave(Entity entity): Direction
     }
 
     class HeroBehavior{
-        + behave(Entity entity)
+        + behave(Entity entity): Direction
     }
 
 }

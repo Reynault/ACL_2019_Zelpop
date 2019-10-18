@@ -31,7 +31,6 @@ Three class diagrams has been made :
 Mattthieuxx -> Deplacement entité : deux (mouvement libre, mouvement pas possible à cause d'une case)
 
 Jromary -> Génération de labyrinthe
-        -> Génération de sprite
         
 Mohamed -> Affichage des textures
 
