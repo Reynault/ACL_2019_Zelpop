@@ -33,7 +33,7 @@ package tile{
         + {abstract} action()
     }
 
-    class TileFabric << (S,#FF7700) Singleton >>{
+    class TileFactory << (S,#FF7700) Singleton >>{
         + getWall(): Tile
         + getTrap(): Tile
         + getTreasure(): Tile
@@ -48,6 +48,6 @@ Effect --> "1" Tile : -decore
 Trap --|> Effect
 Treasure --|> Effect
 
-TileFabric ..> Tile : create
+TileFactory ..> Tile : create
 
 @enduml
