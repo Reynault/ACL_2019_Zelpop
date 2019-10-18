@@ -12,8 +12,9 @@ package dungeon{
         - toDrawEntity: List<Entity>
         - toDrawTile: List<Tile>
         + draw()
-        + moveHero(Direction direction)
         + updateEntities()
+        + moveEntity(Entity e, Direction d)
+        + moveEntity(Entity e)
         - canMove(Entity i, int x, int y): boolean
     }
 
@@ -85,6 +86,7 @@ enum GlobalDirection{
     + {static} DOWN
     + {static} LEFT
     + {static} RIGHT
+    + {static} IDLE
 }
 
 MazeDefault -left-|> MazeFactory

@@ -8,7 +8,7 @@ package entity{
         - hp: int
         - direction: GlobalDirection
         + getPosition():(int, int, direction)
-        + setPosition(int x, int y, int direction)
+        + setPosition(int direction)
         + setPosition(int x, int y)
         + {abstract} draw()
     }

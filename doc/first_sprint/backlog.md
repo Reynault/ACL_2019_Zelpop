@@ -10,7 +10,8 @@ a file.
 - There is an empty default maze.
 - We can generate a maze using a file.
 - We have different tiles : trap, treasure, wall
-- There is some monsters with basic movement.
+- There is some monsters with basic movement. (no damage, no collision with
+player)
 - There is a basic interface with sprites.
 
 ## Conception
@@ -24,4 +25,13 @@ Three class diagrams has been made :
 - tiles shows the tiles part.
 
 ### Sequences Diagram
+
+- Moving the player
+
+Mattthieuxx -> Deplacement entité : deux (mouvement libre, mouvement pas possible à cause d'une case)
+
+Jromary -> Génération de labyrinthe
+        -> Génération de sprite
+        
+Mohamed -> Affichage des textures
 
