@@ -8,38 +8,46 @@ skinparam class {
 
 package tile{
 
-    class EmptyTile{
-
+    class Tile{
+        + draw()
+        + action()
     }
 
     class Wall{
-
+        + draw()
+        + action()
     }
 
     class Treasure{
-
+        + draw()
+        + action()
     }
 
     class Trap{
-
+        + draw()
+        + action()
     }
 
     abstract Effect{
-
+        + {abstract} draw()
+        + {abstract} action()
     }
 
     class TileFabric << (S,#FF7700) Singleton >>{
-
+        + getWall(): Tile
+        + getTrap(): Tile
+        + getTreasure(): Tile
+        + getEmptyTile(): Tile
     }
 
 }
 
 Wall --|> Effect
-Effect --|> EmptyTile
-Effect --> "1" EmptyTile : -decore
+Effect --|> Tile
+Effect --> "1" Tile : -decore
 Trap --|> Effect
 Treasure --|> Effect
 
-TileFabric ..> EmptyTile : create
+TileFabric ..> Tile : create
 
 @enduml

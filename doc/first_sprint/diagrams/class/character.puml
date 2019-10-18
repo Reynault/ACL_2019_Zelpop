@@ -5,26 +5,32 @@ package entity{
     abstract Entity{
         - x : int
         - y : int
+        - hp: int
+        - direction: GlobalDirection
+        + getPosition():(int, int, direction)
+        + setPosition(int x, int y, int direction)
+        + setPosition(int x, int y)
+        + {abstract} draw()
     }
 
     class Hero << (S,#FF7700) Singleton >>{
-
+        + draw()
     }
 
     class Monster{
-
+        + draw()
     }
 
-    class Behavior{
-
+    interface Behavior{
+        + {abstract} behave(Entity entity)
     }
 
     class Random{
-
+        + behave(Entity entity)
     }
 
     class HeroBehavior{
-
+        + behave(Entity entity)
     }
 
 }
@@ -32,7 +38,7 @@ package entity{
 Hero --|> Entity
 Monster --|> Entity
 Entity --> "1" Behavior
-HeroBehavior --|> Behavior
-Random --|> Behavior
+HeroBehavior ..|> Behavior
+Random ..|> Behavior
 
 @enduml

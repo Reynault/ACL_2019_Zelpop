@@ -7,14 +7,13 @@ package dungeon{
     }
 
     class Maze{
-
-
+        + draw()
     }
 
     package tile{
 
-        abstract Tile{
-
+        class Tile{
+            + draw()
         }
 
         note "Class diagram of tiles" as N1
@@ -24,7 +23,8 @@ package dungeon{
     package entity{
 
         abstract Entity{
-
+            - hp: int
+            + {abstract} draw()
         }
 
         class Hero << (S,#FF7700) Singleton >>{
@@ -53,6 +53,13 @@ package dungeon{
 
     }
 
+}
+
+enum GlobalDirection{
+    + {static} UP
+    + {static} DOWN
+    + {static} LEFT
+    + {static} RIGHT
 }
 
 MazeDefault -left-|> MazeFactory
