@@ -3,17 +3,24 @@
 package dungeon{
 
     class Dungeon{
-
+        - currentMaze
+        + moveHero(Direction d)
+        + updateAll()
     }
 
     class Maze{
+        - toDrawEntity: List<Entity>
+        - toDrawTile: List<Tile>
         + draw()
+        + moveHero(Direction direction)
+        + updateEntities()
+        - canMove(Entity i, int x, int y): boolean
     }
 
     package tile{
 
         class Tile{
-            + draw()
+
         }
 
         note "Class diagram of tiles" as N1
@@ -23,8 +30,7 @@ package dungeon{
     package entity{
 
         abstract Entity{
-            - hp: int
-            + {abstract} draw()
+
         }
 
         class Hero << (S,#FF7700) Singleton >>{
@@ -40,19 +46,38 @@ package dungeon{
     package mazeFactory{
 
         interface MazeFactory{
-
+            + {static}getMaze(): Maze
         }
 
         class MazeFile{
-
+            + getMaze(): Maze
         }
 
         class MazeDefault{
-
+            + getMaze(): Maze
         }
 
     }
 
+}
+
+class TextureFactory{
+    + {static}getMonster()
+    + {static}getHero()
+    + {static}getEmptyTile()
+    + {static}getWall()
+    + {static}getTrap()
+    + {static}getTreasure()
+}
+
+class SpriteManager{
+    + currentSprite: int
+    + setSprite(int x, int y)
+}
+
+class GlobalSprite{
+    + {static} get8Sprite():int
+    + {static} get16Sprite():int
 }
 
 enum GlobalDirection{
@@ -68,11 +93,14 @@ Dungeon "1" --> "1" MazeFactory: -mazeFactory
 Maze "1" --> "*" Tile: -tiles
 Maze "1" -up-> "*" Entity: -entities
 
-EntityFactory ..> Entity : create
+EntityFactory .right.> Entity : create
 
 Hero --|> Entity
 Dungeon "1" --> "1" Entity : -hero
 
 MazeFile --|> MazeFactory
+
+Tile --> "1" SpriteManager
+Entity -right-> "1" SpriteManager
 
 @enduml
