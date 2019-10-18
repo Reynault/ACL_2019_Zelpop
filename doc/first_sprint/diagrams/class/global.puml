@@ -5,7 +5,10 @@ package dungeon{
     class Dungeon{
         - currentMaze
         + moveHero(Direction d)
+        + generateMaze()
+        + generateMaze(File Filename)
         + updateAll()
+        + draw()
     }
 
     class Maze{
@@ -48,14 +51,18 @@ package dungeon{
 
         interface MazeFactory{
             + {static}getMaze(): Maze
+            + {static}getMaze(File fileName)
         }
 
         class MazeFile{
+            - File: fileName
             + getMaze(): Maze
+            + getMaze(File fileName)
         }
 
         class MazeDefault{
             + getMaze(): Maze
+            + getMaze(File fileName)
         }
 
     }
@@ -73,7 +80,10 @@ class TextureFactory{
 
 class SpriteManager{
     + currentSprite: int
+    + SpriteSheet: Image
+    + SpriteManager(Image sprite)
     + setSprite(int x, int y)
+    + getCurrentSprite(): Image
 }
 
 class GlobalSprite{
