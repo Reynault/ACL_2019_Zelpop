@@ -14,13 +14,13 @@ import engine.Game;
  *         versions suivantes.
  * 
  */
-public class PacmanGame implements Game {
+public class ZelpopGame implements Game {
 
 	/**
 	 * constructeur avec fichier source pour le help
 	 * 
 	 */
-	public PacmanGame(String source) {
+	public ZelpopGame(String source) {
 		BufferedReader helpReader;
 		try {
 			helpReader = new BufferedReader(new FileReader(source));

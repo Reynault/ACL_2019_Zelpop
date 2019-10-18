@@ -16,6 +16,14 @@ package tile{
 
     }
 
+    class Treasure{
+
+    }
+
+    class Trap{
+
+    }
+
     abstract Effect{
 
     }
@@ -29,6 +37,8 @@ package tile{
 Wall --|> Effect
 Effect --|> EmptyTile
 Effect --> "1" EmptyTile : -decore
+Trap --|> Effect
+Treasure --|> Effect
 
 TileFabric ..> EmptyTile : create
 

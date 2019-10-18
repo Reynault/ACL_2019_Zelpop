@@ -47,10 +47,15 @@ package dungeon{
 
         }
 
+        class MazeDefault{
+
+        }
+
     }
 
 }
 
+MazeDefault -left-|> MazeFactory
 Dungeon "1" -left-> "*" Maze: -maze
 Dungeon "1" --> "1" MazeFactory: -mazeFactory
 Maze "1" --> "*" Tile: -tiles

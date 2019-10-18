@@ -12,7 +12,7 @@ import engine.GameController;
  * controleur de type KeyListener
  * 
  */
-public class PacmanController implements GameController {
+public class ZelpopController implements GameController {
 
 	/**
 	 * commande en cours
@@ -22,7 +22,7 @@ public class PacmanController implements GameController {
 	/**
 	 * construction du controleur par defaut le controleur n'a pas de commande
 	 */
-	public PacmanController() {
+	public ZelpopController() {
 		this.commandeEnCours = Cmd.IDLE;
 	}
 

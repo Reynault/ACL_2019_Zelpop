@@ -12,7 +12,7 @@ import engine.GamePainter;
  * afficheur graphique pour le game
  * 
  */
-public class PacmanPainter implements GamePainter {
+public class ZelpopPainter implements GamePainter {
 
 	/**
 	 * la taille des cases
@@ -26,7 +26,7 @@ public class PacmanPainter implements GamePainter {
 	 * @param game
 	 *            le jeutest a afficher
 	 */
-	public PacmanPainter() {
+	public ZelpopPainter() {
 	}
 
 	/**

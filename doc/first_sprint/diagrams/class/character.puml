@@ -7,12 +7,32 @@ package entity{
         - y : int
     }
 
-    class Hero{
+    class Hero << (S,#FF7700) Singleton >>{
+
+    }
+
+    class Monster{
+
+    }
+
+    class Behavior{
+
+    }
+
+    class Random{
+
+    }
+
+    class HeroBehavior{
 
     }
 
 }
 
 Hero --|> Entity
+Monster --|> Entity
+Entity --> "1" Behavior
+HeroBehavior --|> Behavior
+Random --|> Behavior
 
 @enduml
