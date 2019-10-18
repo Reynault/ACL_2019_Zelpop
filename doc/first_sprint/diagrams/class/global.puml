@@ -17,7 +17,6 @@ package dungeon{
         + draw()
         + updateEntities()
         + moveEntity(Entity e, Direction d)
-        +
         + moveEntity(Entity e)
         - canMove(Entity i, int x, int y): boolean
     }
@@ -81,6 +80,8 @@ class TextureFactory{
 
 class SpriteManager{
     + currentSprite: int
+    + SpriteSheet: Image
+    + SpriteManager(Image sprite)
     + setSprite(int x, int y)
     + getCurrentSprite(): Image
 }
