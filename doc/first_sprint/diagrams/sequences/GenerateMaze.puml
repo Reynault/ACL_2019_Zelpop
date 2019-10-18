@@ -1,0 +1,17 @@
+@startuml
+Dungeon -> Dungeon : generateMaze(File fileName)
+Dungeon -> MazeFile : getMaze(File fileName)
+Loop maze Size
+    MazeFile -> TileFactory : generateTile
+    create Tile
+    TileFactory -> Tile : new
+    TileFactory --> MazeFile : Tile
+    MazeFile -> EntityFactory : generateEntity
+    create Entity
+    EntityFactory -> Entity : new
+    EntityFactory --> MazeFile : Entity
+end
+create Maze
+MazeFile -> Maze : new
+Maze -> EntityFactory : getHero()
+@enduml
