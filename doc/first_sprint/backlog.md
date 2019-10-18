@@ -1,12 +1,17 @@
 # Backlog - First Sprint
 
-Development of the first iteration. There is several simple features such as a basic interface on
- the console. (without graphic interface)
+Development of the first iteration. There is several simple features such as a graphical interface,
+some kinds of tiles (trap, treasure, wall ...), a basic maze, and the posibility to generate one from
+a file.
 
 ## Features
 
 - The player can move in every directions.
 - There is an empty default maze.
+- We can generate a maze using a file.
+- We have different tiles : trap, treasure, wall ...
+- There is some monsters with basic movement.
+- There is a basic interface with sprites.
 
 ## Conception
 
@@ -19,3 +24,4 @@ Three class diagrams has been made :
 - tiles shows the tiles part.
 
 ### Sequences Diagram
+
