@@ -1,4 +1,6 @@
 @startuml
+Actor User
+User -> Dungeon : The user wants to create a maze
 Dungeon -> Dungeon : generateMaze(File fileName)
 Dungeon -> MazeFile : getMaze(File fileName)
 Loop maze Size
@@ -14,4 +16,6 @@ end
 create Maze
 MazeFile -> Maze : new
 Maze -> EntityFactory : getHero()
+MazeFile --> Dungeon : maze
+Dungeon --> User : A new maze
 @enduml

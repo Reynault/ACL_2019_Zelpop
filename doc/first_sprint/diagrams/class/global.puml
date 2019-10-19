@@ -14,6 +14,7 @@ package dungeon{
     class Maze{
         - toDrawEntity: List<Entity>
         - toDrawTile: List<Tile>
+        + Maze(List<Tile> tiles, List<Entity> entities)
         + draw()
         + updateEntities()
         + moveEntity(Entity e, Direction d)

@@ -26,11 +26,7 @@ Three class diagrams has been made :
 
 ### Sequences Diagram
 
-- Moving the player
-
-Mattthieuxx -> Deplacement entité : deux (mouvement libre, mouvement pas possible à cause d'une case)
-
-Jromary -> Génération de labyrinthe
-        
-Mohamed -> Affichage des textures
+- Moving an entity.
+- Generate a Maze from a file.
+- Drawing all textures with sprites on Maze.
 

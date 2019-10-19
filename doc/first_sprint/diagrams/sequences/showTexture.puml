@@ -1,26 +1,29 @@
 @startuml
-InterfaceGraphique -> Dungeon: Demande a change of texture
-Dungeon -> Dungeon : updateAll()
- note left
-            same thing for Tile
- end note
+User -> Dungeon: The user wants to repaint the frame
+Dungeon -> Dungeon : draw()
 
 Dungeon -> Maze : draw()
 
- loop       looping on al the Entities "toDrawEntity"
+loop looping on all  entities
+    Maze -> Entity : draw()
+    Entity -> SpriteManager : setSprite(int x, int y)
+    SpriteManager -> SpriteManager : Changing the CurrentSprite
+    SpriteManager --> Entity : The sprite to draw
 
-	        Maze -> Entity : draw()
-            Entity -> SpriteManager : setSprite(int x, int y)
-            SpriteManager -> SpriteManager : Changing the CurrentSprite
-            SpriteManager -> TextFactory : getHero()
-            TextFactory --> SpriteManager : The texture
-            SpriteManager --> Entity : The texture
-            Entity --> Maze : The texture
+     note left
+        The draw method
+        will draw the sprite
+     end note
+end
 
- end
 
-Maze --> Dungeon : Retuning all textures changes
-Dungeon --> InterfaceGraphique : draw the new texture changes
+note right
+    The draw method from Maze
+    will do the exact same
+    thing for the tiles
+end note
+
+Dungeon --> User : Drawing
 
 
 @enduml
