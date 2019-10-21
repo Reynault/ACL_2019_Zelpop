@@ -8,8 +8,12 @@ import javax.xml.stream.FactoryConfigurationError;
 import java.util.List;
 
 public class Maze {
-    public Maze(List<Tile> tiles, List<Entity> entities){
+    private List<Entity> entities;
+    private List<Tile> tiles;
 
+    public Maze(List<Tile> tiles, List<Entity> entities){
+        this.tiles = tiles;
+        this.entities = entities;
     }
 
     public void draw(){
@@ -29,7 +33,7 @@ public class Maze {
     }
 
     private boolean canMove(Entity entity, Tile tile){
-        //owe can alway move on the tile
+        //we can alway move on the tile
         return true;
     }
 }

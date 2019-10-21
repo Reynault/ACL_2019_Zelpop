@@ -5,6 +5,12 @@ import model.global.GlobalDirection;
 import java.io.File;
 
 public class Dungeon {
+    private Maze currentMaze;
+
+    public Dungeon(){
+
+    }
+
     public void moveHero(GlobalDirection direction){
 
     }

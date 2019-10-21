@@ -1,5 +1,7 @@
 package sprite;
 
+import model.global.GlobalSprites;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -10,8 +12,8 @@ import java.io.IOException;
 public class TextureFactory {
     private static TextureFactory textureFactory = new TextureFactory();
 
-    private static int HERO_HEIGHT = 24;
-    private static int HERO_LENGTH = 56;
+    private static int HERO_HEIGHT = GlobalSprites.get8Sprite() * 3;
+    private static int HERO_LENGTH = GlobalSprites.get8Sprite() * 7;
 
     private static BufferedImage player;
 
@@ -24,7 +26,7 @@ public class TextureFactory {
     }
 
     public BufferedImage getHero(){
-        BufferedImage hero = player.getSubimage(0, HERO_HEIGHT, HERO_LENGTH, HERO_HEIGHT);
+        BufferedImage hero = player.getSubimage(0, 0, HERO_LENGTH, HERO_HEIGHT);
         return hero;
     }
 
