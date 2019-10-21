@@ -3,8 +3,10 @@ package model;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 
 import engine.GamePainter;
+import sprite.TextureFactory;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -17,8 +19,9 @@ public class ZelpopPainter implements GamePainter {
 	/**
 	 * la taille des cases
 	 */
-	protected static final int WIDTH = 100;
-	protected static final int HEIGHT = 100;
+	protected static final int WIDTH = 1280;
+	protected static final int HEIGHT = 720;
+	protected static final int SCALING = 4;
 
 	/**
 	 * appelle constructeur parent
@@ -35,8 +38,13 @@ public class ZelpopPainter implements GamePainter {
 	@Override
 	public void draw(BufferedImage im) {
 		Graphics2D crayon = (Graphics2D) im.getGraphics();
-		crayon.setColor(Color.blue);
-		crayon.fillOval(0,0,10,10);
+		//crayon.setColor(Color.blue);
+		//crayon.fillOval(0,0,10,10);
+
+		/***** test en cours *****/
+		BufferedImage hero = TextureFactory.getTextureFactory().getHero();
+		BufferedImage perso = hero.getSubimage(0,0, 8, 8);
+		crayon.drawImage(perso, 0, 0, perso.getWidth() * SCALING, perso.getHeight() * SCALING, null);
 
 	}
 

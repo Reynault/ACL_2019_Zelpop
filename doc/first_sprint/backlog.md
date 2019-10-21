@@ -12,7 +12,7 @@ a file.
 - We have different tiles : trap, treasure, wall
 - There is some monsters with basic movement. (no damage, no collision with
 player)
-- There is a basic interface with sprites.
+- There is a basic interface with sprite.
 
 ## Conception
 
@@ -28,5 +28,5 @@ Three class diagrams has been made :
 
 - Moving an entity.
 - Generate a Maze from a file.
-- Drawing all textures with sprites on Maze.
+- Drawing all textures with sprite on Maze.
 
