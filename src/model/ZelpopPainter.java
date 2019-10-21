@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
+import java.util.Random;
 
 import engine.GamePainter;
 import sprite.TextureFactory;
@@ -43,7 +44,8 @@ public class ZelpopPainter implements GamePainter {
 
 		/***** test en cours *****/
 		BufferedImage hero = TextureFactory.getTextureFactory().getHero();
-		BufferedImage perso = hero.getSubimage(0,0, 8, 8);
+		Random random = new Random();
+		BufferedImage perso = hero.getSubimage(8 * random.nextInt(3),8 * random.nextInt(3), 8, 8);
 		crayon.drawImage(perso, 0, 0, perso.getWidth() * SCALING, perso.getHeight() * SCALING, null);
 
 	}
