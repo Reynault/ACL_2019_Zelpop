@@ -5,6 +5,7 @@ import model.dungeon.Maze;
 import java.io.File;
 
 public class MazeDefault implements MazeFactory {
+
     @Override
     public Maze getMaze() {
         return null;
