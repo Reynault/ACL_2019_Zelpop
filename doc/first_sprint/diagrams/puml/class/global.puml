@@ -19,7 +19,6 @@ package dungeon{
         + updateEntities()
         + moveEntity(Entity e, Direction d)
         + moveEntity(Entity e)
-        - canMove(Entity i, int x, int y): boolean
     }
 
     package tile{
@@ -47,6 +46,17 @@ package dungeon{
         }
 
     }
+
+    class ColisionManager << (S,#FF7700) Singleton >>{
+        - {static} instance: ColisionManager
+        - ColisionManager()
+        + getInstance(): ColisionManager
+        + canMove(Entity e, Tile t): boolean
+        + canMove(Entity e1, Entity e2): boolean
+        + setMaze(Maze maze)
+    }
+
+    ColisionManager --> "1" Maze: -maze
 
     package mazeFactory{
 

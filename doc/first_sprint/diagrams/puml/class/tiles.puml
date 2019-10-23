@@ -1,11 +1,4 @@
 @startuml
-
-skinparam class {
-	BackgroundColor #FFC0CB
-	ArrowColor Black
-	BorderColor Black
-}
-
 package tile{
 
     class Tile{
