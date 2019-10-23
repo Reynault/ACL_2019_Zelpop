@@ -1,18 +1,14 @@
 @startuml
-Actor User
-User -> Dungeon : The user wants to move to the left
-Dungeon -> Maze : MoveEntity(hero)
+ZelpopGame -> Dungeon : updateAll()
+Dungeon -> Maze : moveEntities()
+
+
 Maze -> Entity : behave(Entity e)
 Entity -> Behavior : behave(Entity e)
 Behavior --> Entity : direction
 Entity --> Maze : direction
 Maze -> Maze : canMove(Entity e, int x, int y)
-alt Something is blocking the way
-    Maze --> Dungeon : false
-    Dungeon --> User : No deplacement
-else Otherwise
-Maze --> Dungeon : true
-Maze -> Entity : setPosition(direction d)
-Dungeon --> User : Moving
+opt Something is blocking the way
+Maze -> Entity : setPosition(int x, int y)
 end
 @enduml
