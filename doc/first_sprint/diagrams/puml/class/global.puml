@@ -1,5 +1,13 @@
 @startuml
 
+class ZelpopGame{
+
+}
+
+interface Game{
+
+}
+
 package dungeon{
 
     class Dungeon{
@@ -125,6 +133,9 @@ Maze "1" --> "*" Tile: -tiles
 Maze "1" -up-> "*" Entity: -entities
 
 EntityFactory .right.> Entity : create
+
+ZelpopGame .up.|> Game
+ZelpopGame --> "1" Dungeon: -dungeon
 
 Hero --|> Entity
 Dungeon "1" --> "1" Entity : -hero
