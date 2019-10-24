@@ -4,11 +4,53 @@ Dungeon -> Maze : moveEntities()
 
 
 Maze -> Entity : behave(Entity e)
-Entity -> Behavior : behave(Entity e)
-Behavior --> Entity : direction
-Entity --> Maze : direction
-Maze -> Maze : canMove(Entity e, int x, int y)
-opt Something is blocking the way
-Maze -> Entity : setPosition(int x, int y)
+
+Entity -> Behavior : behave(Entity e, IDLE)
+
+note left
+    for monsters entities we use
+    a default direction (which would
+    be the one pressed by the player
+    if it was the hero)
+end note
+
+Behavior -> CollisionManager: canMove(e, x, y)
+
+note left
+    The behavior chooses a target tile
+    and asks to the collision manager if
+    the movement is possible
+end note
+
+CollisionManager -> Maze : getTile(x, y)
+
+Maze --> CollisionManager : tile
+
+CollisionManager -> "tile: Tile": isWall()
+
+alt The tile can't be crossed
+
+    "tile: Tile" --> CollisionManager: false
+
+    CollisionManager --> Behavior: false
+
+else
+
+    "tile: Tile" --> CollisionManager: true
+
+    CollisionManager --> Behavior: true
+
 end
+
+
+Behavior --> Entity : direction
+
+Entity --> Maze : direction
+
+opt Something is blocking the way
+
+    Maze -> Entity : setPosition(int x, int y)
+
+end
+
 @enduml

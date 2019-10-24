@@ -4,26 +4,31 @@ package tile{
     class Tile{
         + draw()
         + action()
+        + isWall(): boolean
     }
 
     class Wall{
         + draw()
         + action()
+        + isWall(): boolean
     }
 
     class Treasure{
         + draw()
         + action()
+        + isWall(): boolean
     }
 
     class Trap{
         + draw()
         + action()
+        + isWall(): boolean
     }
 
     abstract Effect{
         + {abstract} draw()
         + {abstract} action()
+        + {abstract} isWall()
     }
 
     class TileFactory << (S,#FF7700) Singleton >>{

@@ -14,7 +14,7 @@ package entity{
         + behave(Direction direction): Direction
     }
 
-    class Hero << (S,#FF7700) Singleton >>{
+    class Hero {
         + draw()
     }
 

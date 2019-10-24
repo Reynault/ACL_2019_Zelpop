@@ -37,7 +37,7 @@ package dungeon{
 
         }
 
-        class Hero << (S,#FF7700) Singleton >>{
+        class Hero{
 
         }
 
@@ -51,7 +51,7 @@ package dungeon{
         - {static} instance: ColisionManager
         - ColisionManager()
         + getInstance(): ColisionManager
-        + canMove(Entity e, Tile t): boolean
+        + canMove(Entity e, int x, int y): boolean
         + canMove(Entity e1, Entity e2): boolean
         + setMaze(Maze maze)
     }
@@ -78,6 +78,14 @@ package dungeon{
 
     }
 
+}
+
+class ScaleConstant{
+    + {static} getScale(): int
+    + {static} getTileWidth(): int
+    + {static} getTileHeight(): int
+    + {static} getEntityWidth(): int
+    + {static} getEntityHeight(): int
 }
 
 class TextureFactory{
