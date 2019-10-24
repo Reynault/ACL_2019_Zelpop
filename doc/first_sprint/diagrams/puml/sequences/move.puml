@@ -26,15 +26,25 @@ CollisionManager -> Maze : getTile(x, y)
 
 Maze --> CollisionManager : tile
 
-CollisionManager -> "tile: Tile": isWall()
+CollisionManager -> "tile: Tile": canBeCrossed(e)
+note left
+    the tile is checking if
+    the entity can go on it
+end note
+
+"tile: Tile" -> Entity: canPassThrough()
 
 alt The tile can't be crossed
+
+    Entity --> "tile: Tile" : false
 
     "tile: Tile" --> CollisionManager: false
 
     CollisionManager --> Behavior: false
 
 else
+
+    Entity --> "tile: Tile" : true
 
     "tile: Tile" --> CollisionManager: true
 

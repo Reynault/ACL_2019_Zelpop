@@ -6,10 +6,12 @@ package entity{
         - x : int
         - y : int
         - hp: int
+        - passThrought: boolean
         - direction: GlobalDirection
         + getPosition():(int, int, direction)
         + setPosition(int direction)
         + setPosition(int x, int y)
+        + canPassThrought(): boolean
         + {abstract} draw()
         + behave(Direction direction): Direction
     }
