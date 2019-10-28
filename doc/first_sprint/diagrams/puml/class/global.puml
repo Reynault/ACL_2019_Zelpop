@@ -10,6 +10,10 @@ interface Game{
 
 package dungeon{
 
+    class Position{
+
+    }
+
     class Dungeon{
         - currentMaze
         + moveHero(Direction d)
@@ -126,15 +130,16 @@ enum GlobalDirection{
     + {static} IDLE
 }
 
-MazeDefault -left-|> MazeFactory
-Dungeon "1" -left-> "*" Maze: -maze
+MazeDefault --|> MazeFactory
+Dungeon "1" --> "*" Maze: -maze
 Dungeon "1" --> "1" MazeFactory: -mazeFactory
 Maze "1" --> "*" Tile: -tiles
-Maze "1" -up-> "*" Entity: -entities
+Maze "1" --> "*" Entity: -entities
+Maze --> "*" Position
 
-EntityFactory .right.> Entity : create
+EntityFactory ..> Entity : create
 
-ZelpopGame .up.|> Game
+ZelpopGame ..|> Game
 ZelpopGame --> "1" Dungeon: -dungeon
 
 Hero --|> Entity
@@ -143,6 +148,9 @@ Dungeon "1" --> "1" Entity : -hero
 MazeFile --|> MazeFactory
 
 Tile --> "1" SpriteManager
-Entity -right-> "1" SpriteManager
+Entity --> "1" SpriteManager
+
+Position --> "1" Tile: -tile
+Position --> "*" Entity: -entity
 
 @enduml
