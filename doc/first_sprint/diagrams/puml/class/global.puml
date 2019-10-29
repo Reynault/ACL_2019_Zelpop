@@ -10,10 +10,6 @@ interface Game{
 
 package dungeon{
 
-    class Position{
-
-    }
-
     class Dungeon{
         - currentMaze
         + moveHero(Direction d)
@@ -135,7 +131,6 @@ Dungeon "1" --> "*" Maze: -maze
 Dungeon "1" --> "1" MazeFactory: -mazeFactory
 Maze "1" --> "*" Tile: -tiles
 Maze "1" --> "*" Entity: -entities
-Maze --> "*" Position
 
 EntityFactory ..> Entity : create
 
@@ -150,7 +145,5 @@ MazeFile --|> MazeFactory
 Tile --> "1" SpriteManager
 Entity --> "1" SpriteManager
 
-Position --> "1" Tile: -tile
-Position --> "*" Entity: -entity
 
 @enduml
