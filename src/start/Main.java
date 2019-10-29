@@ -14,7 +14,7 @@ public class Main {
 
 		// creation du jeu particulier et de son afficheur
 		ZelpopGame game = new ZelpopGame("helpFilePacman.txt");
-		ZelpopPainter painter = new ZelpopPainter();
+		ZelpopPainter painter = new ZelpopPainter(game);
 		ZelpopController controller = new ZelpopController();
 
 		// classe qui lance le moteur de jeu generique

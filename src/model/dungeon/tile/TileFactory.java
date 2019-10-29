@@ -3,6 +3,12 @@ package model.dungeon.tile;
 public class TileFactory {
 
     /**
+     * Default constructor
+     */
+    public TileFactory() {
+    }
+
+    /**
      * Generate a tile
      */
     public Tile generateTile() {

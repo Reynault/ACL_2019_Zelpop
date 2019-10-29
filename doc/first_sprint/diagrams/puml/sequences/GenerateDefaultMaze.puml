@@ -1,0 +1,23 @@
+@startuml
+Actor User
+User -> Dungeon : The user wants to create a maze
+Dungeon -> Dungeon : generateMaze()
+Dungeon -> MazeDefault : getMaze()
+Loop maze size
+    MazeDefault -> TileFactory : generateTile
+    create Tile
+    TileFactory -> Tile : new
+    TileFactory --> MazeDefault : Tile
+end
+    Loop number of entities
+    MazeDefault -> EntityFactory : generateEntity
+    create Entity
+    EntityFactory -> Entity : new
+    EntityFactory --> MazeDefault : Entity
+end
+create Maze
+MazeDefault -> Maze : new
+Maze -> EntityFactory : getHero()
+MazeDefault --> Dungeon : maze
+Dungeon --> User : A new maze
+@enduml

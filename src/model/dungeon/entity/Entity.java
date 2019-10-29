@@ -6,23 +6,18 @@ import model.global.Position;
 
 public abstract class Entity {
 
-    protected int x;
-    protected int y;
-    protected int hp;
-    protected boolean passThrought;
-    protected GlobalDirection direction;
-
+    private int x;
+    private int y;
+    private int hp;
+    private boolean passThrought;
+    private GlobalDirection direction;
     protected Behavior behavior;
 
     /**
      * Default constructor
-     * @param x x-axis
-     * @param y y-axis
      * @param hp health point
      */
-    protected Entity (int x, int y, int hp) {
-        this.x = x;
-        this.y = y;
+    protected Entity (int hp) {
         this.hp = hp;
     }
 

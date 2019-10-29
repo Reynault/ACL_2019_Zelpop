@@ -2,8 +2,11 @@ package model.dungeon.tile;
 
 import model.dungeon.entity.Entity;
 
-public class Tile {
+public class Tile extends TileFactory {
 
+    /**
+     * Default constructor
+     */
     protected Tile(){
 
     }

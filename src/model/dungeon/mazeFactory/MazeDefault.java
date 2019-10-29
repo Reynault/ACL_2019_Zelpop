@@ -1,6 +1,8 @@
 package model.dungeon.mazeFactory;
 
 import model.dungeon.Maze;
+import model.dungeon.entity.Entity;
+import model.dungeon.entity.EntityFactory;
 import model.dungeon.tile.Tile;
 import model.dungeon.tile.TileFactory;
 
@@ -12,16 +14,25 @@ public class MazeDefault implements MazeFactory {
 
     @Override
     public Maze getMaze() {
-        int defaultValue = 10; // 10*10
-        List<Tile> tiles = new ArrayList<>(defaultValue);
+        TileFactory tf = new TileFactory();
+        int defaultLength = 10; // 10*10
+        int defaultEntities = 5;
+        List<Tile> tiles = new ArrayList<>(defaultLength);
+        List<Entity> entities = new ArrayList<>(defaultEntities);
+
         //Generate a default list of tiles
-        for(int i = 0; i < defaultValue ; i++){
-            for(int j = 0; j < defaultValue ; j++) {
-                tiles.add(TileFactory.generateTile());
+        for(int i = 0; i < defaultLength ; i++){
+            for(int j = 0; j < defaultLength ; j++) {
+                tiles.add(tf.generateTile());
             }
         }
 
-        return new Maze(tiles, null);
+        // Generate a default list of Entities
+        for(int i = 0 ; i < defaultEntities ; i++){
+            entities.add(EntityFactory.getInstance().generateMonster());
+        }
+
+        return new Maze(tiles, entities);
     }
 
     @Override

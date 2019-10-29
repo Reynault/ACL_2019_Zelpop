@@ -1,5 +1,7 @@
 package model.dungeon;
 
+import model.dungeon.entity.EntityFactory;
+import model.dungeon.entity.Hero;
 import model.dungeon.mazeFactory.MazeDefault;
 import model.dungeon.mazeFactory.MazeFactory;
 import model.dungeon.mazeFactory.MazeFile;
@@ -12,6 +14,7 @@ public class Dungeon {
     private Maze currentMaze;
     private MazeFactory mazeDefault;
     private MazeFactory mazeFile;
+    private Hero hero;
 
     /**
      * Default constructor
@@ -19,6 +22,8 @@ public class Dungeon {
     public Dungeon(){
         mazeDefault = new MazeDefault();
         mazeFile = new MazeFile();
+        this.hero = EntityFactory.getInstance().generateHero();
+        generateMaze();
     }
 
     /**
@@ -32,7 +37,7 @@ public class Dungeon {
     /**
      * Generate a maze
      */
-    public void generateMaze(){
+    private void generateMaze(){
         this.currentMaze = mazeDefault.getMaze();
     }
 
@@ -40,7 +45,7 @@ public class Dungeon {
      * Generate a maze with a file
      * @param filename name of the file
      */
-    public void generateMaze(File filename){
+    private void generateMaze(File filename){
         this.currentMaze = mazeFile.getMaze(filename);
     }
 

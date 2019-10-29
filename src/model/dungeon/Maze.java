@@ -1,6 +1,8 @@
 package model.dungeon;
 
 import model.dungeon.entity.Entity;
+import model.dungeon.entity.EntityFactory;
+import model.dungeon.entity.Hero;
 import model.dungeon.tile.Tile;
 import model.global.GlobalDirection;
 
@@ -11,6 +13,7 @@ public class Maze {
 
     private List<Entity> entities;
     private List<Tile> tiles;
+    private Hero hero;
 
     /**
      * Default constructor
@@ -20,6 +23,7 @@ public class Maze {
     public Maze(List<Tile> tiles, List<Entity> entities){
         this.tiles = tiles;
         this.entities = entities;
+        this.hero = EntityFactory.getInstance().getHero();
     }
 
     /**
