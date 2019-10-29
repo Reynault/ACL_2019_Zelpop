@@ -6,9 +6,8 @@ a file.
 
 ## Features
 
-- The player can move in every directions.
-- There is an empty default maze.
-- We can generate a maze using a file.
+- The player can move in every directions. (collision with wall)
+- There is an empty default maze. (which can be generate from a file)
 - We have different tiles : trap, treasure, wall
 - There is some monsters with basic movement. (no damage, no collision with
 player)
