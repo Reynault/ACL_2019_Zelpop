@@ -1,5 +1,8 @@
 package model.dungeon;
 
+import model.dungeon.mazeFactory.MazeDefault;
+import model.dungeon.mazeFactory.MazeFactory;
+import model.dungeon.mazeFactory.MazeFile;
 import model.global.GlobalDirection;
 
 import java.io.File;
@@ -7,12 +10,15 @@ import java.io.File;
 public class Dungeon {
 
     private Maze currentMaze;
+    private MazeFactory mazeDefault;
+    private MazeFactory mazeFile;
 
     /**
      * Default constructor
      */
     public Dungeon(){
-
+        mazeDefault = new MazeDefault();
+        mazeFile = new MazeFile();
     }
 
     /**
@@ -27,7 +33,7 @@ public class Dungeon {
      * Generate a maze
      */
     public void generateMaze(){
-
+        this.currentMaze = mazeDefault.getMaze();
     }
 
     /**
@@ -35,7 +41,7 @@ public class Dungeon {
      * @param filename name of the file
      */
     public void generateMaze(File filename){
-
+        this.currentMaze = mazeFile.getMaze(filename);
     }
 
     /**
