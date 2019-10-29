@@ -1,10 +1,9 @@
 package model.dungeon.tile;
 
-public class Tile extends TileFactory {
+import model.dungeon.entity.Entity;
 
-    /**
-     * Default constructor
-     */
+public class Tile {
+
     protected Tile(){
 
     }
@@ -13,8 +12,12 @@ public class Tile extends TileFactory {
 
     }
 
-    public void action(){
+    public void action(Entity entity){
 
+    }
+
+    public boolean canBeCrossed(){
+        return true;
     }
 
 }

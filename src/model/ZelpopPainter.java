@@ -6,7 +6,11 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 import java.util.Random;
 
+import engine.Game;
 import engine.GamePainter;
+import sprite.SpriteManager;
+import sprite.SpriteManagerHero;
+import sprite.SpriteManagerMonster;
 import sprite.TextureFactory;
 
 /**
@@ -24,13 +28,16 @@ public class ZelpopPainter implements GamePainter {
 	protected static final int HEIGHT = 720;
 	protected static final int SCALING = 4;
 
+	protected Game game;
+
 	/**
 	 * appelle constructeur parent
 	 * 
 	 * @param game
 	 *            le jeutest a afficher
 	 */
-	public ZelpopPainter() {
+	public ZelpopPainter(Game game) {
+	    this.game = game;
 	}
 
 	/**
@@ -43,10 +50,15 @@ public class ZelpopPainter implements GamePainter {
 		//crayon.fillOval(0,0,10,10);
 
 		/***** test en cours *****/
-		BufferedImage hero = TextureFactory.getTextureFactory().getHero();
-		Random random = new Random();
-		BufferedImage perso = hero.getSubimage(8 * random.nextInt(3),8 * random.nextInt(3), 8, 8);
-		crayon.drawImage(perso, 0, 0, perso.getWidth() * SCALING, perso.getHeight() * SCALING, null);
+		//BufferedImage hero = TextureFactory.getTextureFactory().getHero();
+		//Random random = new Random();
+		//BufferedImage perso = hero.getSubimage(8 * random.nextInt(3),8 * random.nextInt(3), 8, 8);
+
+		SpriteManager spritePerso = new SpriteManagerHero(TextureFactory.getTextureFactory().getHero());
+		SpriteManager spriteMonster = new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster());
+
+		crayon.drawImage(spritePerso.getCurrentSprite(), 0 * SCALING, 0 * SCALING, spritePerso.getCurrentSprite().getWidth() * SCALING, spriteMonster.getCurrentSprite().getHeight() * SCALING, null);
+		crayon.drawImage(spriteMonster.getCurrentSprite(), 10 * SCALING,10 * SCALING, spriteMonster.getCurrentSprite().getWidth() * SCALING, spriteMonster.getCurrentSprite().getHeight() * SCALING, null);
 
 	}
 

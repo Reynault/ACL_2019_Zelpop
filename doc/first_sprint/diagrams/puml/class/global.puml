@@ -10,13 +10,9 @@ interface Game{
 
 package dungeon{
 
-    class Position{
-
-    }
-
     class Dungeon{
         - currentMaze
-        + moveHero(Direction d)
+        + moveHero(GlobalDirection d)
         + generateMaze()
         + generateMaze(File Filename)
         + updateAll()
@@ -29,7 +25,7 @@ package dungeon{
         + Maze(List<Tile> tiles, List<Entity> entities)
         + draw()
         + updateEntities()
-        + moveEntity(Entity e, Direction d)
+        + moveEntity(Entity e, GlobalDirection d)
         + moveEntity(Entity e)
     }
 
@@ -92,12 +88,9 @@ package dungeon{
 
 }
 
-class ScaleConstant{
-    + {static} getScale(): int
-    + {static} getTileWidth(): int
-    + {static} getTileHeight(): int
-    + {static} getEntityWidth(): int
-    + {static} getEntityHeight(): int
+
+class ZelpopPainter{
+
 }
 
 class TextureFactory{
@@ -113,7 +106,8 @@ class SpriteManager{
     + currentSprite: int
     + SpriteSheet: Image
     + SpriteManager(Image sprite)
-    + setSprite(int x, int y)
+    + setSprite(GlobalDirection direction)
+    + setSprite()
     + getCurrentSprite(): Image
 }
 
@@ -135,12 +129,13 @@ Dungeon "1" --> "*" Maze: -maze
 Dungeon "1" --> "1" MazeFactory: -mazeFactory
 Maze "1" --> "*" Tile: -tiles
 Maze "1" --> "*" Entity: -entities
-Maze --> "*" Position
 
 EntityFactory ..> Entity : create
 
 ZelpopGame ..|> Game
 ZelpopGame --> "1" Dungeon: -dungeon
+
+ZelpopPainter --> "1" ZelpopGame: - game
 
 Hero --|> Entity
 Dungeon "1" --> "1" Entity : -hero
@@ -150,7 +145,5 @@ MazeFile --|> MazeFactory
 Tile --> "1" SpriteManager
 Entity --> "1" SpriteManager
 
-Position --> "1" Tile: -tile
-Position --> "*" Entity: -entity
 
 @enduml

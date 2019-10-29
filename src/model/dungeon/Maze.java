@@ -63,4 +63,10 @@ public class Maze {
         //we can alway move on the tile
         return true;
     }
+
+    public void moveEntities() {
+        for (Entity e: entities){
+            e.behave();
+        }
+    }
 }
