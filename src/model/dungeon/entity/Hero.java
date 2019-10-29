@@ -1,7 +1,5 @@
 package model.dungeon.entity;
 
-import model.global.GlobalDirection;
-
 public class Hero extends Entity {
 
     /**
@@ -10,13 +8,6 @@ public class Hero extends Entity {
      */
     public Hero(int hp) {
         super(hp);
-    }
-
-    @Override
-    public GlobalDirection behave() {
-        return this.behavior.behave(
-                this, GlobalDirection.IDLE
-        );
     }
 
     @Override

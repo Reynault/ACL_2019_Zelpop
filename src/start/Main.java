@@ -11,7 +11,6 @@ import model.ZelpopGame;
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
-
 		// creation du jeu particulier et de son afficheur
 		ZelpopGame game = new ZelpopGame("helpFilePacman.txt");
 		ZelpopPainter painter = new ZelpopPainter(game);

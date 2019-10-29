@@ -13,11 +13,6 @@ public class Monster extends Entity {
     }
 
     @Override
-    public GlobalDirection behave() {
-        return null;
-    }
-
-    @Override
     public void draw() {
 
     }

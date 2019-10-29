@@ -7,6 +7,8 @@ public class HeroBehavior implements Behavior {
 
     @Override
     public GlobalDirection behave(Entity entity, GlobalDirection direction) {
+
+
         return null;
     }
 }

@@ -6,11 +6,9 @@ import model.global.Position;
 
 public abstract class Entity {
 
-    private int x;
-    private int y;
     private int hp;
     private boolean passThrought;
-    private GlobalDirection direction;
+    private Position position;
     protected Behavior behavior;
 
     /**
@@ -22,20 +20,11 @@ public abstract class Entity {
     }
 
     public Position getPosition(){
-        return new Position(
-                x,
-                y,
-                direction
-        );
+        return position;
     }
 
-    public void setPosition(GlobalDirection direction){
-        this.direction = direction;
-    }
-
-    public void setPosition(int x, int y){
-        this.x = x;
-        this.y = y;
+    public void setPosition(Position position){
+        this.position = position;
     }
 
     public boolean canPassThrought(){
@@ -46,7 +35,9 @@ public abstract class Entity {
         passThrought = value;
     }
 
-    public abstract GlobalDirection behave();
+    public GlobalDirection behave(GlobalDirection direction){
+        return this.behave(direction);
+    }
 
     /**
      * To draw the entity

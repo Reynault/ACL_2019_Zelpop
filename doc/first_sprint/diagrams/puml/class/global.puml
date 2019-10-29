@@ -24,9 +24,10 @@ package dungeon{
         - toDrawTile: List<Tile>
         + Maze(List<Tile> tiles, List<Entity> entities)
         + draw()
-        + updateEntities()
+        + moveEntities()
         + moveEntity(Entity e, GlobalDirection d)
         + moveEntity(Entity e)
+        + canMove(Entity e, Tile t): boolean
     }
 
     package tile{
@@ -54,17 +55,6 @@ package dungeon{
         }
 
     }
-
-    class ColisionManager << (S,#FF7700) Singleton >>{
-        - {static} instance: ColisionManager
-        - ColisionManager()
-        + getInstance(): ColisionManager
-        + canMove(Entity e, int x, int y): boolean
-        + canMove(Entity e1, Entity e2): boolean
-        + setMaze(Maze maze)
-    }
-
-    ColisionManager --> "1" Maze: -maze
 
     package mazeFactory{
 
@@ -111,17 +101,30 @@ class SpriteManager{
     + getCurrentSprite(): Image
 }
 
-class GlobalSprite{
-    + {static} get8Sprite():int
-    + {static} get16Sprite():int
-}
+package global{
 
-enum GlobalDirection{
-    + {static} UP
-    + {static} DOWN
-    + {static} LEFT
-    + {static} RIGHT
-    + {static} IDLE
+    class GlobalSprite{
+        + {static} get8Sprite():int
+        + {static} get16Sprite():int
+    }
+
+    enum GlobalDirection{
+        + {static} UP
+        + {static} DOWN
+        + {static} LEFT
+        + {static} RIGHT
+        + {static} IDLE
+    }
+
+    class Position{
+        + {final} x: int
+        + {final} y: int
+        + {final} direction: GlobalDirection
+        + getX(): int
+        + getY(): int
+        + getDirection(): GlobalDirection
+    }
+
 }
 
 MazeDefault --|> MazeFactory

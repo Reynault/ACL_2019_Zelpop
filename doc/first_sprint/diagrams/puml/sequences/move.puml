@@ -2,64 +2,59 @@
 ZelpopGame -> Dungeon : updateAll()
 Dungeon -> Maze : moveEntities()
 
+loop For every entity
 
-Maze -> Entity : behave(Entity e)
+    Maze -> Entity : behave(Entity e, IDLE)
 
-Entity -> Behavior : behave(Entity e, IDLE)
+    Entity -> Behavior : behave(Entity e, IDLE)
 
-note left
-    for monsters entities we use
-    a default direction (which would
-    be the one pressed by the player
-    if it was the hero)
-end note
+    note left
+        for monsters entities we use
+        a default direction. (It would
+        be a direction for the hero)
+    end note
 
-Behavior -> CollisionManager: canMove(e, x, y)
+    Behavior --> Entity : direction
 
-note left
-    The behavior chooses a target tile
-    and asks to the collision manager if
-    the movement is possible
-end note
+    Entity --> Maze : direction
 
-CollisionManager -> Maze : getTile(x, y)
+    Maze -> Maze : canMove(e, tile)
 
-Maze --> CollisionManager : tile
+    Maze -> Tile : canBeCrossed()
 
-CollisionManager -> "tile: Tile": canBeCrossed(e)
-note left
-    the tile is checking if
-    the entity can go on it
-end note
+    Tile --> Maze : wall
 
-"tile: Tile" -> Entity: canPassThrough()
+    Maze -> Entity : canPassThrough()
 
-alt The tile can't be crossed
+    Entity --> Maze : entity
 
-    Entity --> "tile: Tile" : false
+    note left
+        the maze create a new position depending
+        if the entity can move or not
+    end note
 
-    "tile: Tile" --> CollisionManager: false
+    alt The tile is a wall and the entity can't pass through
 
-    CollisionManager --> Behavior: false
+        Maze --> Maze : false
 
-else
+        note left
+            create a new position with
+            a different direction
+        end note
 
-    Entity --> "tile: Tile" : true
+    else
 
-    "tile: Tile" --> CollisionManager: true
+        Maze --> Maze : true
 
-    CollisionManager --> Behavior: true
+        note left
+            create a new position with
+            a different direction AND a
+            different position (x,y)
+        end note
 
-end
+    end
 
-
-Behavior --> Entity : direction
-
-Entity --> Maze : direction
-
-opt Something is blocking the way
-
-    Maze -> Entity : setPosition(int x, int y)
+    Maze -> Entity : setPosition(position)
 
 end
 
