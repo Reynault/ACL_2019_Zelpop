@@ -11,7 +11,7 @@ loop For every entity
     note left
         for monsters entities we use
         a default direction. (It would
-        be a direction for the hero)
+        be a different direction for the hero)
     end note
 
     Behavior --> Entity : direction

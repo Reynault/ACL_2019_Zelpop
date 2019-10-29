@@ -2,20 +2,20 @@
 Actor User
 User -> Dungeon : The user wants to create a maze
 Dungeon -> Dungeon : generateMaze(File fileName)
-Dungeon -> MazeFile : getMaze(File fileName)
+Dungeon -> MazeFactory : getMaze(File fileName)
 Loop maze Size
-    MazeFile -> TileFactory : generateTile
+    MazeFactory -> TileFactory : generateTile
     create Tile
     TileFactory -> Tile : new
-    TileFactory --> MazeFile : Tile
-    MazeFile -> EntityFactory : generateEntity
+    TileFactory --> MazeFactory : Tile
+    MazeFactory -> EntityFactory : generateEntity
     create Entity
     EntityFactory -> Entity : new
-    EntityFactory --> MazeFile : Entity
+    EntityFactory --> MazeFactory : Entity
 end
 create Maze
-MazeFile -> Maze : new
+MazeFactory -> Maze : new
 Maze -> EntityFactory : getHero()
-MazeFile --> Dungeon : maze
+MazeFactory --> Dungeon : maze
 Dungeon --> User : A new maze
 @enduml

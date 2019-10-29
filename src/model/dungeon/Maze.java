@@ -42,92 +42,85 @@ public class Maze {
     }
 
     /**
-     * Move an entity in the maze
-     * @param entity entity in the maze
-     */
-    public void moveEntity(Entity entity){
-
-    }
-
-    /**
      * Move a entity in the maze using a direction
-     * @param entity entity in the maze
+     * @param e entity in the maze
      * @param direction direction for the move
      */
-    public void moveEntity(Entity entity, GlobalDirection direction){
+    public void moveEntity(Entity e, GlobalDirection direction){
+        int x, y;
+        Position currentPosition, newPosition;
 
+        // Generating a movement
+        direction = e.behave(direction);
+
+        currentPosition = e.getPosition();
+        newPosition = currentPosition;
+
+        x = currentPosition.getX();
+        y = currentPosition.getY();
+
+        switch (direction){
+            case LEFT:
+                x -= 1;
+                break;
+            case UP:
+                y -= 1;
+                break;
+            case DOWN:
+                y += 1;
+                break;
+            case RIGHT:
+                x += 1;
+                break;
+            default:
+                break;
+        }
+
+        // Checking if movement is in the maze
+        if(canMove(e, x, y)){
+            newPosition = new Position(x, y, direction);
+        }else{
+            newPosition = new Position(
+                    currentPosition.getX(),
+                    currentPosition.getY(),
+                    direction
+            );
+        }
+
+        e.setPosition(newPosition);
     }
 
     /**
      * Verify if an entity can move or not
      * @param entity entity who wants to move
-     * @param tile next tile for the entity
+     * @param x position of the target tile
+     * @param y position of the target tile
      * @return true if the entity can move
      */
-    private boolean canMove(Entity entity, Tile tile){
-        if(tile.canBeCrossed()){
-            return true;
-        }else{
-            if(entity.canPassThrought()){
-                return true;
+    private boolean canMove(Entity entity, int x, int y){
+        Tile tile;
+        boolean can = false;
+
+        if(x >= 0 && x < width && y >= 0 && y < height){
+            tile = tiles[x][y];
+            if(tile.canBeCrossed()){
+                can = true;
             }else{
-                return false;
+                if(entity.canPassThrought()) {
+                    can = true;
+                }
             }
         }
+
+        return false;
     }
 
     /**
      * Method that move all the entities non controlled by the player.
      */
     public void moveEntities() {
-        GlobalDirection direction;
-        int x, y;
-        Position currentPosition, newPosition;
-        boolean movementPossible;
-
         for (Entity e: entities){
-
-            // Generating a movement
-            direction = e.behave(GlobalDirection.IDLE);
-            currentPosition = e.getPosition();
-            newPosition = currentPosition;
-
-            x = currentPosition.getX();
-            y = currentPosition.getY();
-
-            switch (direction){
-                case LEFT:
-                    x -= 1;
-                    break;
-                case UP:
-                    y -= 1;
-                    break;
-                case DOWN:
-                    y += 1;
-                    break;
-                case RIGHT:
-                    x += 1;
-                    break;
-                default:
-                    break;
-            }
-
-            // Checking if movement is in the maze
-            if(x >= 0 && x < width && y >= 0 && y < height){
-                // In that case, chacking if entity can move
-                if(canMove(e, tiles[x][y])){
-                    newPosition = new Position(x, y, direction);
-                }else{
-                    newPosition = new Position(
-                            currentPosition.getX(),
-                            currentPosition.getY(),
-                            direction
-                    );
-                }
-            }
-
-            e.setPosition(newPosition);
-
+            moveEntity(e, GlobalDirection.IDLE);
         }
     }
 }

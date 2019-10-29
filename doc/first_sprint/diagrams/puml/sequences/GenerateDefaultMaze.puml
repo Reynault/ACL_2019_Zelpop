@@ -2,22 +2,22 @@
 Actor User
 User -> Dungeon : The user wants to create a maze
 Dungeon -> Dungeon : generateMaze()
-Dungeon -> MazeDefault : getMaze()
+Dungeon -> MazeFactory : getMaze()
 Loop maze size
-    MazeDefault -> TileFactory : generateTile
+    MazeFactory -> TileFactory : generateTile
     create Tile
     TileFactory -> Tile : new
-    TileFactory --> MazeDefault : Tile
+    TileFactory --> MazeFactory : Tile
 end
     Loop number of entities
-    MazeDefault -> EntityFactory : generateEntity
+    MazeFactory -> EntityFactory : generateEntity
     create Entity
     EntityFactory -> Entity : new
-    EntityFactory --> MazeDefault : Entity
+    EntityFactory --> MazeFactory : Entity
 end
 create Maze
-MazeDefault -> Maze : new
+MazeFactory -> Maze : new
 Maze -> EntityFactory : getHero()
-MazeDefault --> Dungeon : maze
+MazeFactory --> Dungeon : maze
 Dungeon --> User : A new maze
 @enduml

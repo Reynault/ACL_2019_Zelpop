@@ -24,7 +24,6 @@ package dungeon{
         - toDrawTile: List<Tile>
         + Maze(List<Tile> tiles, List<Entity> entities)
         + draw()
-        + moveEntities()
         + moveEntity(Entity e, GlobalDirection d)
         + moveEntity(Entity e)
         + canMove(Entity e, Tile t): boolean

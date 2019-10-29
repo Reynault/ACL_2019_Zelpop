@@ -2,9 +2,7 @@ package model.dungeon;
 
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
-import model.dungeon.mazeFactory.MazeDefault;
 import model.dungeon.mazeFactory.MazeFactory;
-import model.dungeon.mazeFactory.MazeFile;
 import model.global.GlobalDirection;
 
 import java.io.File;
@@ -12,16 +10,14 @@ import java.io.File;
 public class Dungeon {
 
     private Maze currentMaze;
-    private MazeFactory mazeDefault;
-    private MazeFactory mazeFile;
+    private MazeFactory mazeFactory;
     private Hero hero;
 
     /**
      * Default constructor
      */
     public Dungeon(){
-        mazeDefault = new MazeDefault();
-        mazeFile = new MazeFile();
+        this.mazeFactory = new MazeFactory();
         this.hero = EntityFactory.getInstance().generateHero();
         generateMaze();
     }
@@ -31,14 +27,17 @@ public class Dungeon {
      * @param direction direction for the move
      */
     public void moveHero(GlobalDirection direction){
-
+        currentMaze.moveEntity(
+                hero,
+                direction
+        );
     }
 
     /**
      * Generate a maze
      */
     private void generateMaze(){
-        this.currentMaze = mazeDefault.getMaze();
+        this.currentMaze = mazeFactory.getMaze();
     }
 
     /**
@@ -46,7 +45,7 @@ public class Dungeon {
      * @param filename name of the file
      */
     private void generateMaze(File filename){
-        this.currentMaze = mazeFile.getMaze(filename);
+        this.currentMaze = mazeFactory.getMaze(filename);
     }
 
     /**
