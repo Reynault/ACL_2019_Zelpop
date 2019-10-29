@@ -5,6 +5,8 @@ import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.tile.Tile;
 import model.dungeon.tile.TileFactory;
+import model.global.GlobalDirection;
+import model.global.Position;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ public class MazeFactory {
     public Maze getMaze() {
         TileFactory tf = new TileFactory();
         int defaultLength = 10; // 10*10
-        int defaultEntities = 5;
+        int defaultEntities = 1;
         Tile[][] tiles = new Tile[10][10];
         List<Entity> entities = new ArrayList<>(defaultEntities);
 
@@ -32,7 +34,9 @@ public class MazeFactory {
 
         // Generate a default list of Entities
         for(int i = 0 ; i < defaultEntities ; i++){
-            entities.add(EntityFactory.getInstance().generateMonster());
+            entities.add(EntityFactory.getInstance().getRandomMonster(
+                    new Position(0,0, GlobalDirection.IDLE))
+            );
         }
 
         return new Maze(tiles, entities);

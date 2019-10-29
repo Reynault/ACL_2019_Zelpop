@@ -1,13 +1,12 @@
 package model.dungeon.entity;
 
+import model.dungeon.entity.behavior.Behavior;
+import model.global.Position;
+
 public class Hero extends Entity {
 
-    /**
-     * Default constructor
-     * @param hp health point
-     */
-    public Hero(int hp) {
-        super(hp);
+    public Hero(int hp, boolean passThrought, Position position, Behavior behavior) {
+        super(hp, passThrought, position, behavior);
     }
 
     @Override

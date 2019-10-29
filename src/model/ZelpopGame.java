@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import engine.Cmd;
 import engine.Game;
+import model.dungeon.Dungeon;
+import model.global.GlobalDirection;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -15,6 +17,8 @@ import engine.Game;
  * 
  */
 public class ZelpopGame implements Game {
+
+    private Dungeon dungeon;
 
 	/**
 	 * constructeur avec fichier source pour le help
@@ -32,6 +36,8 @@ public class ZelpopGame implements Game {
 		} catch (IOException e) {
 			System.out.println("Help not available");
 		}
+
+		dungeon = new Dungeon();
 	}
 
 	/**
@@ -41,7 +47,22 @@ public class ZelpopGame implements Game {
 	 */
 	@Override
 	public void evolve(Cmd commande) {
-		System.out.println("Execute "+commande);
+		switch (commande){
+			case RIGHT:
+			    dungeon.moveHero(GlobalDirection.RIGHT);
+				break;
+			case DOWN:
+                dungeon.moveHero(GlobalDirection.DOWN);
+			    break;
+			case UP:
+                dungeon.moveHero(GlobalDirection.UP);
+			    break;
+			case LEFT:
+                dungeon.moveHero(GlobalDirection.LEFT);
+			    break;
+		}
+
+		dungeon.updateAll();
 	}
 
 	/**

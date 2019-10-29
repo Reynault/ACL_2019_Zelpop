@@ -1,5 +1,10 @@
 package model.dungeon.entity;
 
+import model.dungeon.entity.behavior.HeroBehavior;
+import model.dungeon.entity.behavior.RandomBehavior;
+import model.global.GlobalDirection;
+import model.global.Position;
+
 public class EntityFactory {
 
     private Hero hero;
@@ -17,7 +22,15 @@ public class EntityFactory {
      * Generate the Hero
      */
     public Hero generateHero() {
-        return hero = new Hero(20);  // default hp
+        return hero = new Hero(20,
+                false,
+                            new Position(
+                                    0,
+                                    0,
+                                    GlobalDirection.IDLE
+                            ),
+                    new HeroBehavior()
+                );  // default hp
     }
 
     /**
@@ -31,7 +44,7 @@ public class EntityFactory {
     /**
      * Generate a classic monster
      */
-    public Monster generateMonster() {
-        return new Monster(2);  // default hp
+    public Monster getRandomMonster(Position position) {
+        return new Monster(2, false, position, new RandomBehavior());  // default hp
     }
 }

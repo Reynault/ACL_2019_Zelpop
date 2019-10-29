@@ -1,15 +1,12 @@
 package model.dungeon.entity;
 
-import model.global.GlobalDirection;
+import model.dungeon.entity.behavior.Behavior;
+import model.global.Position;
 
 public class Monster extends Entity {
 
-    /**
-     * Default constructor
-     * @param hp health point
-     */
-    protected Monster(int hp) {
-        super(hp);
+    protected Monster(int hp, boolean passThrought, Position position, Behavior behavior) {
+        super(hp, passThrought, position, behavior);
     }
 
     @Override

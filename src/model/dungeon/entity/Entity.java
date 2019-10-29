@@ -11,13 +11,13 @@ public abstract class Entity {
     private Position position;
     protected Behavior behavior;
 
-    /**
-     * Default constructor
-     * @param hp health point
-     */
-    protected Entity (int hp) {
+    protected Entity(int hp, boolean passThrought, Position position, Behavior behavior) {
         this.hp = hp;
+        this.passThrought = passThrought;
+        this.position = position;
+        this.behavior = behavior;
     }
+
 
     public Position getPosition(){
         return position;
@@ -36,7 +36,7 @@ public abstract class Entity {
     }
 
     public GlobalDirection behave(GlobalDirection direction){
-        return this.behave(direction);
+        return behavior.behave(this, direction);
     }
 
     /**
