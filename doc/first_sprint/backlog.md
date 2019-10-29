@@ -29,3 +29,12 @@ Three class diagrams has been made :
 - Generate a Maze from a file.
 - Drawing all textures with sprite on Maze.
 
+## tasks assignement
+
+- Julien Romary
+    
+    - Sprite
+
+- Reynault Sies
+- Matthieu Olejniczak
+- Mohamed Elridha Salhi

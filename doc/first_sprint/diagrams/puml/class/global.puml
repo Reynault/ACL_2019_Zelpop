@@ -12,7 +12,7 @@ package dungeon{
 
     class Dungeon{
         - currentMaze
-        + moveHero(Direction d)
+        + moveHero(GlobalDirection d)
         + generateMaze()
         + generateMaze(File Filename)
         + updateAll()
@@ -25,7 +25,7 @@ package dungeon{
         + Maze(List<Tile> tiles, List<Entity> entities)
         + draw()
         + updateEntities()
-        + moveEntity(Entity e, Direction d)
+        + moveEntity(Entity e, GlobalDirection d)
         + moveEntity(Entity e)
     }
 
@@ -109,7 +109,8 @@ class SpriteManager{
     + currentSprite: int
     + SpriteSheet: Image
     + SpriteManager(Image sprite)
-    + setSprite(int x, int y)
+    + setSprite(GlobalDirection direction)
+    + setSprite()
     + getCurrentSprite(): Image
 }
 

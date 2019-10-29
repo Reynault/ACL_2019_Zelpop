@@ -8,12 +8,12 @@ package entity{
         - hp: int
         - passThrought: boolean
         - direction: GlobalDirection
-        + getPosition():(int, int, direction)
+        + getPosition():(int, int, GlobalDirection)
         + setPosition(int direction)
         + setPosition(int x, int y)
         + canPassThrought(): boolean
         + {abstract} draw()
-        + behave(Direction direction): Direction
+        + behave(GlobalDirection direction): Direction
     }
 
     class Hero {
@@ -25,15 +25,15 @@ package entity{
     }
 
     interface Behavior{
-        + {abstract} behave(Entity entity, Direction direction): Direction
+        + {abstract} behave(Entity entity, GlobalDirection direction): Direction
     }
 
     class Random{
-        + behave(Entity entity, Direction direction): Direction
+        + behave(Entity entity, GlobalDirection direction): Direction
     }
 
     class HeroBehavior{
-        + behave(Entity entity, Direction direction): Direction
+        + behave(Entity entity, GlobalDirection direction): Direction
     }
 
 }
