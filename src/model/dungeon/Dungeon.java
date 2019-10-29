@@ -42,7 +42,7 @@ public class Dungeon {
      * Update the whole dungeon
      */
     public void updateAll(){
-
+        currentMaze.moveEntities();
     }
 
     /**

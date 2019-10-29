@@ -88,12 +88,9 @@ package dungeon{
 
 }
 
-class ScaleConstant{
-    + {static} getScale(): int
-    + {static} getTileWidth(): int
-    + {static} getTileHeight(): int
-    + {static} getEntityWidth(): int
-    + {static} getEntityHeight(): int
+
+class ZelpopPainter{
+
 }
 
 class TextureFactory{
@@ -137,6 +134,8 @@ EntityFactory ..> Entity : create
 
 ZelpopGame ..|> Game
 ZelpopGame --> "1" Dungeon: -dungeon
+
+ZelpopPainter --> "1" ZelpopGame: - game
 
 Hero --|> Entity
 Dungeon "1" --> "1" Entity : -hero

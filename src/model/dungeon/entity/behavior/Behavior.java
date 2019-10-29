@@ -10,5 +10,5 @@ public interface Behavior {
      * @param entity entity who want to move
      * @return GlobalDirection
      */
-    public abstract GlobalDirection behave(Entity entity);
+    public abstract GlobalDirection behave(Entity entity, GlobalDirection direction);
 }
