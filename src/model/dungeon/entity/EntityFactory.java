@@ -27,7 +27,7 @@ public class EntityFactory {
                             new Position(
                                     0,
                                     0,
-                                    GlobalDirection.IDLE
+                                    GlobalDirection.DOWN
                             ),
                     new HeroBehavior()
                 );  // default hp

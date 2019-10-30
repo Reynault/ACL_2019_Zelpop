@@ -53,41 +53,41 @@ public class Maze {
         // Generating a movement
         direction = e.behave(direction);
 
-        currentPosition = e.getPosition();
-        newPosition = currentPosition;
+        if(direction != GlobalDirection.IDLE) {
 
-        x = currentPosition.getX();
-        y = currentPosition.getY();
+            currentPosition = e.getPosition();
 
-        switch (direction){
-            case LEFT:
-                x -= 1;
-                break;
-            case UP:
-                y -= 1;
-                break;
-            case DOWN:
-                y += 1;
-                break;
-            case RIGHT:
-                x += 1;
-                break;
-            default:
-                break;
+            x = currentPosition.getX();
+            y = currentPosition.getY();
+
+            switch (direction) {
+                case LEFT:
+                    x -= 1;
+                    break;
+                case UP:
+                    y -= 1;
+                    break;
+                case DOWN:
+                    y += 1;
+                    break;
+                case RIGHT:
+                    x += 1;
+                    break;
+            }
+
+            // Checking if movement is in the maze
+            if (canMove(e, x, y)) {
+                newPosition = new Position(x, y, direction);
+            } else {
+                newPosition = new Position(
+                        currentPosition.getX(),
+                        currentPosition.getY(),
+                        direction
+                );
+            }
+
+            e.setPosition(newPosition);
         }
-
-        // Checking if movement is in the maze
-        if(canMove(e, x, y)){
-            newPosition = new Position(x, y, direction);
-        }else{
-            newPosition = new Position(
-                    currentPosition.getX(),
-                    currentPosition.getY(),
-                    direction
-            );
-        }
-
-        e.setPosition(newPosition);
     }
 
     /**
@@ -112,7 +112,7 @@ public class Maze {
             }
         }
 
-        return false;
+        return can;
     }
 
     /**

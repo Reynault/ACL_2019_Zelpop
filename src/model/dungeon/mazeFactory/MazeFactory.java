@@ -19,7 +19,6 @@ public class MazeFactory {
      * @return Maze
      */
     public Maze getMaze() {
-        TileFactory tf = new TileFactory();
         int defaultLength = 10; // 10*10
         int defaultEntities = 1;
         Tile[][] tiles = new Tile[10][10];
@@ -28,7 +27,11 @@ public class MazeFactory {
         //Generate a default list of tiles
         for(int i = 0; i < defaultLength ; i++){
             for(int j = 0; j < defaultLength ; j++) {
-                tiles[i][j] = tf.generateTile();
+                if(i == 1 && j == 1){
+                    tiles[i][j] = TileFactory.getWall();
+                }else{
+                    tiles[i][j] = TileFactory.generateTile();
+                }
             }
         }
 

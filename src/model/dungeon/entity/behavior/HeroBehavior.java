@@ -15,7 +15,7 @@ public class HeroBehavior implements Behavior {
             entity.setPosition(new Position(
                     currentPosition.getX(),
                     currentPosition.getY(),
-                    currentPosition.getGlobalDirection()
+                    direction
             ));
             direction = GlobalDirection.IDLE;
         }
