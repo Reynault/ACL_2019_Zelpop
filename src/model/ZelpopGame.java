@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -39,6 +40,10 @@ public class ZelpopGame implements Game {
 
 		dungeon = new Dungeon();
 	}
+
+	public void draw(BufferedImage img){
+	    dungeon.draw(img);
+    }
 
 	/**
 	 * faire evoluer le jeu suite a une commande

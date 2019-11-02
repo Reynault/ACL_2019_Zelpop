@@ -5,6 +5,7 @@ import model.dungeon.entity.Hero;
 import model.dungeon.mazeFactory.MazeFactory;
 import model.global.GlobalDirection;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class Dungeon {
@@ -57,8 +58,9 @@ public class Dungeon {
 
     /**
      * Drawn the dungeon
+     * @param img
      */
-    public void draw(){
-
+    public void draw(BufferedImage img){
+        currentMaze.draw(img);
     }
 }

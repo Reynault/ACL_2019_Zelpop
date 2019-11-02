@@ -1,5 +1,7 @@
 package engine;
 
+import java.awt.image.BufferedImage;
+
 /**
  * @author Horatiu Cirstea, Vincent Thomas
  *
@@ -21,4 +23,5 @@ public interface Game {
 	 */
 	public boolean isFinished();
 
+    public void draw(BufferedImage img);
 }

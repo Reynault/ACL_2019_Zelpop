@@ -17,4 +17,6 @@ public class GlobalSprites {
     public static int get16Sprite(){
         return 16;
     }
+
+    public static int getScaling(){return 4;}
 }

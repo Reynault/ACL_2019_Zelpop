@@ -44,9 +44,21 @@ public class ZelpopController implements GameController {
 
 		switch (e.getKeyChar()) {
 		// si on appuie sur 'q',commande joueur est gauche
-		case 'l':
-		case 'L':
+		case 'q':
+		case 'Q':
 			this.commandeEnCours = Cmd.LEFT;
+			break;
+		case 'd':
+		case 'D':
+			this.commandeEnCours = Cmd.RIGHT;
+			break;
+		case 's':
+		case 'S':
+			this.commandeEnCours = Cmd.DOWN;
+			break;
+		case 'z':
+		case 'Z':
+			this.commandeEnCours = Cmd.UP;
 			break;
 		}
 

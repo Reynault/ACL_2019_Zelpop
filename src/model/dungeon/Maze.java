@@ -8,6 +8,7 @@ import model.global.GlobalDirection;
 import model.global.Position;
 
 import javax.xml.stream.FactoryConfigurationError;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 import static engine.Cmd.RIGHT;
@@ -36,9 +37,10 @@ public class Maze {
 
     /**
      * Draw the maze
+     * @param img
      */
-    public void draw(){
-
+    public void draw(BufferedImage img){
+        this.hero.draw(img);
     }
 
     /**
