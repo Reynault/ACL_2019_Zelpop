@@ -3,9 +3,11 @@ package model.dungeon.entity;
 import jdk.nashorn.internal.ir.SplitReturn;
 import model.dungeon.entity.behavior.Behavior;
 import model.global.GlobalDirection;
+import model.global.GlobalSprites;
 import model.global.Position;
 import sprite.SpriteManager;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public abstract class Entity {
@@ -49,5 +51,13 @@ public abstract class Entity {
     /**
      * To draw the entity
      */
-    public abstract void draw(BufferedImage img);
+    public void draw(BufferedImage img){
+        Graphics2D crayon = (Graphics2D) img.getGraphics();
+        crayon.drawImage(spriteManager.getCurrentSprite(),
+                position.getX() * GlobalSprites.getScaling() * GlobalSprites.get8Sprite(),
+                position.getY() * GlobalSprites.getScaling() * GlobalSprites.get8Sprite(),
+                spriteManager.getCurrentSprite().getWidth() * GlobalSprites.getScaling(),
+                spriteManager.getCurrentSprite().getHeight() * GlobalSprites.getScaling(),
+                null);
+    }
 }
