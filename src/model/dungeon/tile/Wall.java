@@ -2,13 +2,15 @@ package model.dungeon.tile;
 
 import model.dungeon.entity.Entity;
 
+import java.awt.image.BufferedImage;
+
 public class Wall extends Effect {
     Wall(Tile decore) {
         super(decore);
     }
 
     @Override
-    public void draw() {
+    public void draw(BufferedImage img, int x, int y) {
 
     }
 

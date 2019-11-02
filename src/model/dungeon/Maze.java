@@ -40,6 +40,22 @@ public class Maze {
      * @param img
      */
     public void draw(BufferedImage img){
+        int x = 0;
+        int y = 0;
+        for (Tile[] row :
+                tiles) {
+            for (Tile tile :
+                    row) {
+                tile.draw(img, x, y);
+                x++;
+            }
+            y++;
+            x = 0;
+        }
+        for (Entity e :
+                entities) {
+            e.draw(img);
+        }
         this.hero.draw(img);
     }
 

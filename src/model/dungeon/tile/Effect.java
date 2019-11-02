@@ -2,6 +2,8 @@ package model.dungeon.tile;
 
 import model.dungeon.entity.Entity;
 
+import java.awt.image.BufferedImage;
+
 public abstract class Effect extends Tile {
     private Tile decore;
 
@@ -10,7 +12,7 @@ public abstract class Effect extends Tile {
     }
 
     @Override
-    public abstract void draw();
+    public abstract void draw(BufferedImage img, int x, int y);
 
     @Override
     public abstract void action(Entity e);
