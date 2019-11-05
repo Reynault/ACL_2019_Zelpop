@@ -37,4 +37,8 @@ public class Tile extends TileFactory {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Tile ";
+    }
 }

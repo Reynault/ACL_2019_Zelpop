@@ -5,7 +5,7 @@ import model.dungeon.entity.Entity;
 import java.awt.image.BufferedImage;
 
 public abstract class Effect extends Tile {
-    private Tile decore;
+    protected Tile decore;
 
     Effect(Tile decore){
         this.decore = decore;

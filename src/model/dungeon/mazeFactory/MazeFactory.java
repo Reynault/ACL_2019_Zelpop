@@ -1,5 +1,6 @@
 package model.dungeon.mazeFactory;
 
+import com.sun.corba.se.impl.resolver.SplitLocalResolverImpl;
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
@@ -11,6 +12,7 @@ import model.global.Position;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MazeFactory {
 
@@ -19,15 +21,15 @@ public class MazeFactory {
      * @return Maze
      */
     public Maze getMaze() {
-        int defaultLength = 10; // 10*10
+        int defaultLength = 20; // 10*10
         int defaultEntities = 1;
-        Tile[][] tiles = new Tile[10][10];
+        Tile[][] tiles = new Tile[20][20];
         List<Entity> entities = new ArrayList<>(defaultEntities);
-
+        Random random = new Random();
         //Generate a default list of tiles
         for(int i = 0; i < defaultLength ; i++){
             for(int j = 0; j < defaultLength ; j++) {
-                if(i == 1 && j == 1){
+                if(random.nextInt(2) == 0){
                     tiles[i][j] = TileFactory.getWall();
                 }else{
                     tiles[i][j] = TileFactory.generateTile();
@@ -40,6 +42,14 @@ public class MazeFactory {
             entities.add(EntityFactory.getInstance().getRandomMonster(
                     new Position(0,0, GlobalDirection.IDLE))
             );
+        }
+        for (Tile[] row :
+                tiles) {
+            for (Tile tile :
+                    row) {
+                System.out.print(tile);
+            }
+            System.out.print("\n");
         }
 
         return new Maze(tiles, entities);

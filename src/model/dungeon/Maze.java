@@ -120,7 +120,7 @@ public class Maze {
         boolean can = false;
 
         if(x >= 0 && x < width && y >= 0 && y < height){
-            tile = tiles[x][y];
+            tile = tiles[y][x];
             if(tile.canBeCrossed()){
                 can = true;
             }else{

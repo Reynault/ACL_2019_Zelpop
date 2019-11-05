@@ -52,6 +52,10 @@ public class TextureFactory {
         BufferedImage sprite = tiles.getSubimage(4 * TILE_LENGTH, TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
+    public BufferedImage getWalls(){
+        BufferedImage sprite = tiles.getSubimage(0 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
+        return sprite;
+    }
 
     public static TextureFactory getTextureFactory(){
         return textureFactory;
