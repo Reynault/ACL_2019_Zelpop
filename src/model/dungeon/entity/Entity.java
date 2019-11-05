@@ -1,6 +1,5 @@
 package model.dungeon.entity;
 
-import jdk.nashorn.internal.ir.SplitReturn;
 import model.dungeon.entity.behavior.Behavior;
 import model.global.GlobalDirection;
 import model.global.GlobalSprites;

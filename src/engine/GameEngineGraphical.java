@@ -8,6 +8,9 @@ package engine;
  */
 public class GameEngineGraphical {
 
+	private static double FPS_LIMITER = 60;
+	private double start = 0, diff, wait = (1 / FPS_LIMITER);
+
 	/**
 	 * le game a executer
 	 */
@@ -54,17 +57,32 @@ public class GameEngineGraphical {
 		// creation de l'interface graphique
 		this.gui = new GraphicalInterface(this.gamePainter,this.gameController);
 
+		// init
+		this.gui.paint();
+		this.gui.paint();
+
 		// boucle de game
 		while (!this.game.isFinished()) {
+			// met en attente
+			lockFPS();
 			// demande controle utilisateur
 			Cmd c = this.gameController.getCommand();
-			// fait evoluer le game
-			this.game.evolve(c);
-			// affiche le game
-			this.gui.paint();
-			// met en attente
-			Thread.sleep(100);
+			if (c != Cmd.IDLE) {
+				// fait evoluer le game
+				this.game.evolve(c);
+				// affiche le game
+				this.gui.paint();
+			}
+			this.gameController.resetCommand();
 		}
+	}
+
+	private void lockFPS() throws InterruptedException{
+		diff = (System.currentTimeMillis() - start)/1000;
+		if (diff < wait) {
+			Thread.sleep((long) ((wait - diff)*1000));
+		}
+		start = System.currentTimeMillis();
 	}
 
 }

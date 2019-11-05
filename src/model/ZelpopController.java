@@ -1,6 +1,8 @@
 package model;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 import engine.Cmd;
 import engine.GameController;
@@ -37,6 +39,11 @@ public class ZelpopController implements GameController {
 	}
 
 	@Override
+	public void resetCommand() {
+		this.commandeEnCours = Cmd.IDLE;
+	}
+
+	@Override
 	/**
 	 * met a jour les commandes en fonctions des touches appuyees
 	 */
@@ -69,7 +76,6 @@ public class ZelpopController implements GameController {
 	 * met a jour les commandes quand le joueur relache une touche
 	 */
 	public void keyReleased(KeyEvent e) {
-		this.commandeEnCours = Cmd.IDLE;
 	}
 
 	@Override

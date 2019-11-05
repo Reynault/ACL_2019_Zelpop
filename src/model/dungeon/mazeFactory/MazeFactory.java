@@ -1,6 +1,5 @@
 package model.dungeon.mazeFactory;
 
-import com.sun.corba.se.impl.resolver.SplitLocalResolverImpl;
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
@@ -29,7 +28,7 @@ public class MazeFactory {
         //Generate a default list of tiles
         for(int i = 0; i < defaultLength ; i++){
             for(int j = 0; j < defaultLength ; j++) {
-                if(random.nextInt(2) == 0){
+                if(random.nextInt(5) == 0){
                     tiles[i][j] = TileFactory.getWall();
                 }else{
                     tiles[i][j] = TileFactory.generateTile();
