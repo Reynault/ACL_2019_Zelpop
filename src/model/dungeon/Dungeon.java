@@ -20,7 +20,8 @@ public class Dungeon {
     public Dungeon(){
         this.mazeFactory = new MazeFactory();
         this.hero = EntityFactory.getInstance().generateHero();
-        generateMaze();
+        File file = new File("lisezmoi.txt");
+        generateMaze(file);
     }
 
     /**
