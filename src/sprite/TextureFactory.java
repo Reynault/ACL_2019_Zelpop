@@ -25,12 +25,14 @@ public class TextureFactory {
     private static BufferedImage player;
     private static BufferedImage monster;
     private static BufferedImage tiles;
+    private static BufferedImage chest;
 
     private TextureFactory(){
         try {
             player = ImageIO.read(new File("ressources/players.png"));
             monster = ImageIO.read(new File("ressources/monsters.png"));
             tiles = ImageIO.read(new File("ressources/tiles.png"));
+            chest = ImageIO.read(new File("ressources/chest.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,6 +56,14 @@ public class TextureFactory {
     }
     public BufferedImage getWalls(){
         BufferedImage sprite = tiles.getSubimage(0 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
+        return sprite;
+    }
+    public BufferedImage getTraps(){
+        BufferedImage sprite = tiles.getSubimage(11 * TILE_LENGTH, 6 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
+        return sprite;
+    }
+    public BufferedImage getTreasure(){
+        BufferedImage sprite = chest.getSubimage(2 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
 
