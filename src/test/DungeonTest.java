@@ -18,7 +18,7 @@ class DungeonTest {
     @BeforeEach
     void initialize(){
         // Create a dungeon
-        dungeon = new Dungeon();
+        dungeon = new Dungeon("ressources/level/test.txt");
         // default hero with idle
         hero = EntityFactory.getInstance().getHero();
     }

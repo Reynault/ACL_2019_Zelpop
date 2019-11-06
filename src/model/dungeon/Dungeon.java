@@ -20,9 +20,17 @@ public class Dungeon {
     public Dungeon(){
         this.mazeFactory = new MazeFactory();
         this.hero = EntityFactory.getInstance().generateHero();
-        File file = new File("lisezmoi.txt");
+        File file = new File("ressources/level/firstLevel.txt");
         generateMaze(file);
     }
+
+    public Dungeon(String filepath){
+        this.mazeFactory = new MazeFactory();
+        this.hero = EntityFactory.getInstance().generateHero();
+        File file = new File(filepath);
+        generateMaze(file);
+    }
+
 
     /**
      * Move the hero with the direction
