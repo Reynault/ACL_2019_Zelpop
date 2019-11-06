@@ -16,7 +16,6 @@ with game's player) and all this with a basic interface with sprite.
 
 #Problems
 
-We had few problems with generating sprite to make it clear 
-it was hard to implements the Sprite and add it to screen but in generale
-it we had no problems implementing the rest of features.
+We had a few problems with the generation of sprites, we changed how it works by adding a sprite manager for
+entities and one for tiles. We had no problems implementing the rest of features.
 
