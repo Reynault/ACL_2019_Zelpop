@@ -29,8 +29,8 @@ public class Maze {
      */
     public Maze(Tile[][] tiles, List<Entity> entities){
         this.tiles = tiles;
-        width = tiles.length;
-        height = tiles[0].length;
+        width = tiles[0].length;
+        height = tiles.length;
         this.entities = entities;
         this.hero = EntityFactory.getInstance().getHero();
     }
@@ -52,9 +52,11 @@ public class Maze {
             y++;
             x = 0;
         }
-        for (Entity e :
-                entities) {
-            e.draw(img);
+        if(entities != null && entities.size() > 0){
+            for (Entity e :
+                    entities) {
+                e.draw(img);
+            }
         }
         this.hero.draw(img);
     }
@@ -137,8 +139,10 @@ public class Maze {
      * Method that move all the entities non controlled by the player.
      */
     public void moveEntities() {
-        for (Entity e: entities){
-            moveEntity(e, GlobalDirection.IDLE);
+        if(entities != null && entities.size() > 0) {
+            for (Entity e : entities) {
+                moveEntity(e, GlobalDirection.IDLE);
+            }
         }
     }
 }

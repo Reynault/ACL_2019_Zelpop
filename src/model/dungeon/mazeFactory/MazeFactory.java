@@ -136,7 +136,7 @@ public class MazeFactory {
                     lastInfo = info[1].split("\\}");    // The last information has a }
                     y = Integer.parseInt(lastInfo[0]);
                     if(firstSplit[0].compareTo("Hero") == 0) {
-                        EntityFactory.getInstance().getHero().setPosition(new Position(x, y, GlobalDirection.IDLE));
+                        EntityFactory.getInstance().getHero().setPosition(new Position(x, y, GlobalDirection.DOWN));
                     }
                     else {  // It's an enemy
                         entities.add(EntityFactory.getInstance().getRandomMonster(
