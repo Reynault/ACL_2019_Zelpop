@@ -59,7 +59,7 @@ public class TextureFactory {
         return sprite;
     }
     public BufferedImage getTraps(){
-        BufferedImage sprite = tiles.getSubimage(11 * TILE_LENGTH, 6 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
+        BufferedImage sprite = tiles.getSubimage(13 * TILE_LENGTH, 1 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
     public BufferedImage getTreasure(){
