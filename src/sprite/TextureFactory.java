@@ -29,10 +29,10 @@ public class TextureFactory {
 
     private TextureFactory(){
         try {
-            player = ImageIO.read(new File("ressources/players.png"));
-            monster = ImageIO.read(new File("ressources/monsters.png"));
-            tiles = ImageIO.read(new File("ressources/tiles.png"));
-            chest = ImageIO.read(new File("ressources/chest.png"));
+            player = ImageIO.read(new File("res/sprites/players.png"));
+            monster = ImageIO.read(new File("res/sprites/monsters.png"));
+            tiles = ImageIO.read(new File("res/sprites/tiles.png"));
+            chest = ImageIO.read(new File("res/sprites/chest.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
