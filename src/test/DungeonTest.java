@@ -4,7 +4,6 @@ import model.dungeon.Dungeon;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
 import model.global.GlobalDirection;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +17,7 @@ class DungeonTest {
     @BeforeEach
     void initialize(){
         // Create a dungeon
-        dungeon = new Dungeon("res/level/test.txt");
+        dungeon = new Dungeon("level/test.txt");
         // default hero with idle
         hero = EntityFactory.getInstance().getHero();
     }
