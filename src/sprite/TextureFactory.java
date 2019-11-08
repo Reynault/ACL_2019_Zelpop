@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Random;
 
 public class TextureFactory {
@@ -29,10 +30,22 @@ public class TextureFactory {
 
     private TextureFactory(){
         try {
-            player = ImageIO.read(new File("res/sprites/players.png"));
-            monster = ImageIO.read(new File("res/sprites/monsters.png"));
-            tiles = ImageIO.read(new File("res/sprites/tiles.png"));
-            chest = ImageIO.read(new File("res/sprites/chest.png"));
+            //getting image path
+            InputStream inputStream
+                    = TextureFactory.class.getClassLoader().getResourceAsStream("sprites/players.png");
+            player = ImageIO.read(inputStream);
+
+            inputStream
+                    = TextureFactory.class.getClassLoader().getResourceAsStream("sprites/monsters.png");
+            monster = ImageIO.read(inputStream);
+
+            inputStream
+                    = TextureFactory.class.getClassLoader().getResourceAsStream("sprites/tiles.png");
+            tiles = ImageIO.read(inputStream);
+
+            inputStream
+                    = TextureFactory.class.getClassLoader().getResourceAsStream("sprites/chest.png");
+            chest = ImageIO.read(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
         }

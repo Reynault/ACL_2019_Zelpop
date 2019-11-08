@@ -7,6 +7,7 @@ import model.global.GlobalDirection;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 
 public class Dungeon {
 
@@ -20,14 +21,14 @@ public class Dungeon {
     public Dungeon(){
         this.mazeFactory = new MazeFactory();
         this.hero = EntityFactory.getInstance().generateHero();
-        File file = new File("res/level/secondLevel.txt");
+        InputStream file = Dungeon.class.getClassLoader().getResourceAsStream("level/secondLevel.txt");
         generateMaze(file);
     }
 
     public Dungeon(String filepath){
         this.mazeFactory = new MazeFactory();
         this.hero = EntityFactory.getInstance().generateHero();
-        File file = new File(filepath);
+        InputStream file = Dungeon.class.getClassLoader().getResourceAsStream(filepath);
         generateMaze(file);
     }
 
@@ -54,7 +55,7 @@ public class Dungeon {
      * Generate a maze with a file
      * @param filename name of the file
      */
-    private void generateMaze(File filename){
+    private void generateMaze(InputStream filename){
         this.currentMaze = mazeFactory.getMaze(filename);
     }
 

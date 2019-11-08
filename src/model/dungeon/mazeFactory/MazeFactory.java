@@ -65,11 +65,11 @@ public class MazeFactory {
      * @param file filename
      * @return Maze
      */
-    public Maze getMaze(File file) {
+    public Maze getMaze(InputStream file) {
         Tile[][] tiles = null;
         List<Entity> entities = null;
         try{
-            InputStream flux = new FileInputStream(file);
+            InputStream flux = file;
             InputStreamReader lecture = new InputStreamReader(flux);
             BufferedReader buff = new BufferedReader(lecture);
             String line;
