@@ -5,19 +5,6 @@
 Zelpop is a maze game created in the context of a student project.
 The idea is to develop a game using an agile method of developpement. (SCRUM)
 
-## Installing and running the game
-
-To mention that we worked with Intellij so in order to get the project
-to work you need to get it from git, the following is the link to the 
-gitHub which contains the project :
-
- "https://github.com/Reynault/ACL_2019_Zelpop.git"
- 
-### Junit 5
-
-- After uploading the project make sure that you add the JUnit 5 which been
-used to create the project tests.
-
 ### Running the game
 
 In order to execute the game, you'll have to be on the root of the project.
@@ -36,6 +23,24 @@ ACL_2019_Zelpop\out\artifacts\ACL_2019_Zelpop_jar\ACL_2019_Zelpop.jar
 ```
 java -jar ACL_2019_Zelpop\out\artifacts\ACL_2019_Zelpop_jar\ACL_2019_Zelpop.jar
 ```
+
+## Installing and running the game in Intellij
+
+We worked with Intellij so in order to get the project
+to work on it you'll need to import it with intellij and to set
+the project structure. So you'll have to open the file menu, then project structure,
+and project. At this point, you'll have to specify the output directory which is usually
+the out/ directory, after that, you'll need to lower project language level to 10.
+
+Finally, go to the modules section, you'll need to specify the source folder which is src, 
+the exclude folder which is out and the resources folder which is res. (This point is very important, 
+cause when you will run the project on intellij, it will needs to retrieve files such as textures from it)
+
+### Junit 5
+
+- After uploading the project make sure that you add the JUnit 5 which been
+used to create the project tests.
+
 
 ## First Sprint report
 
