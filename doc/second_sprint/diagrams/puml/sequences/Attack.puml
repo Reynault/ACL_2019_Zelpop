@@ -9,7 +9,8 @@ participant ZelpopGame as z
 participant Dungeon as d
 participant "maze: Maze" as m
 participant "h: Hero" as h
-participant AttackStrategy as as
+participant Behavior as b
+participant AttackHero as as
 participant "entity: Entity" as e
 participant "scoring: Scoring" as s
 
@@ -21,7 +22,9 @@ d -> m: attack()
 
 m -> h: attack(maze)
 
-h -> as: attack(maze, h)
+h -> b: attack(maze, h)
+
+b -> as: attack(maze, h)
 
 as -> h: getDmg()
 
@@ -45,21 +48,15 @@ e --> as: alive
 
 opt alive == false
 
-    as -> as: killEntity(maze, h, entity)
-
-    as -> m: removeEntity(entity)
-
-    m -> e!: delete
-
-    as -> m : getScoreKill( entity )
+    as -> m: killEntity(entity, h)
 
     m -> s: killMonster( entity )
 
     s --> m: bonus
 
-    m --> as: bonus
+    m -> h: increaseScore( bonus )
 
-    as -> h: increaseScore( bonus )
+    m -> e!: delete
 
 end
 
