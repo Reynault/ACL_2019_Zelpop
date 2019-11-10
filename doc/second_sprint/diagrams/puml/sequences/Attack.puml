@@ -10,7 +10,7 @@ participant Dungeon as d
 participant "maze: Maze" as m
 participant "h: Hero" as h
 participant Behavior as b
-participant AttackHero as as
+participant AttackSimple as as
 participant "entity: Entity" as e
 participant "scoring: Scoring" as s
 

@@ -12,11 +12,11 @@ package behavior{
 
         # Behavior(maze: Maze, entity: Entity)
 
-        + behave(): GlobalDirection
+        + behave(): Cmd
 
-        + move(maze: Maze, entity: Entity): GlobalDirection
-        + attack(maze: Maze, entity: Entity)
-        + check(maze: Maze, entity: Entity): boolean
+        - move(maze: Maze, entity: Entity): Cmd
+        - attack(maze: Maze, entity: Entity)
+        - check(maze: Maze, entity: Entity): boolean
     }
 
     note left: behave is a pattern method: \n\nif check then \n   attack \nelse \n   move
@@ -27,7 +27,7 @@ package behavior{
             + check(maze: Maze, entity: Entity): boolean
         }
 
-        class CheckRandom{
+        class CheckSimple{
             + check(maze: Maze, entity: Entity): boolean
         }
 
@@ -40,15 +40,15 @@ package behavior{
     package move{
 
         interface Move{
-            + move(maze: Maze, entity: Entity): GlobalDirection
+            + move(maze: Maze, entity: Entity): Cmd
         }
 
         class MoveRandom{
-            + move(maze: Maze, entity: Entity): GlobalDirection
+            + move(maze: Maze, entity: Entity): Cmd
         }
 
         class MoveHero{
-            + move(maze: Maze, entity: Entity): GlobalDirection
+            + move(maze: Maze, entity: Entity): Cmd
         }
 
     }
@@ -63,10 +63,6 @@ package behavior{
             + attack(maze: Maze, entity: Entity)
         }
 
-        class AttackHero{
-            + attack(maze: Maze, entity: Entity)
-        }
-
     }
 
     class BehaveFabric{
@@ -78,12 +74,11 @@ package behavior{
 
 
 AttackSimple ..|> Attack
-AttackHero ..|> Attack
 
 MoveRandom ..|> Move
 MoveHero ..|> Move
 
-CheckRandom ..|> Check
+CheckSimple ..|> Check
 CheckHero ..|> Check
 
 Entity --> "1" Behavior: - behavior

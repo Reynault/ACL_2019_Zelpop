@@ -8,7 +8,9 @@ participant Dungeon as d
 participant "maze: Maze" as m
 participant "monster: Monster" as e
 participant "Behavior" as b
-participant AttackStrategy as as
+participant Check as check
+participant Attack as attack
+participant Move as move
 participant "h: Hero" as h
 
 z -> d: updateAll()
@@ -21,17 +23,9 @@ loop for every monsters in the maze
 
     e -> b: behave(maze, entity, IDLE)
 
-    b -> b: attack(maze, entity)
+    b -> check: check(maze, entity)
 
-    b --> b: hasAttacked
-
-    note left
-        If the player
-    end note
-
-    opt hasAttacked == false
-
-    end
+    check ->
 
 end
 

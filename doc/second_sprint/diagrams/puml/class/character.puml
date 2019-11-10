@@ -7,12 +7,12 @@ package entity{
         - hp: int
         - passThrought: boolean
         - reward: int
-        + getPosition():(int, int, GlobalDirection)
+        + getPosition():(int, int, Cmd)
         + setPosition(int direction)
         + setPosition(int x, int y)
         + canPassThrought(): boolean
         + {abstract} draw()
-        + behave(maze: Maze, GlobalDirection direction): Direction
+        + behave(maze: Maze, Cmd direction): Direction
         + getReward(): int
         + attack(maze: Maze)
         + takeDamage(dmg: int)

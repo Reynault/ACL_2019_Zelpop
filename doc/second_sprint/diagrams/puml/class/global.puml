@@ -31,7 +31,7 @@ package dungeon{
 
     class Dungeon{
         - nbMaze: int
-        + moveHero(GlobalDirection d)
+        + moveHero(Cmd d)
         + generateMaze()
         + generateMaze(File Filename)
         + attack()
@@ -44,7 +44,7 @@ package dungeon{
         - toDrawTile: List<Tile>
         + Maze(List<Tile> tiles, List<Entity> entities)
         + draw()
-        + moveEntity(Entity e, GlobalDirection d)
+        + moveEntity(Entity e, Cmd d)
         + moveEntity(Entity e)
         + attack()
         + killEntity(killed: Entity, by: Entity)
@@ -114,22 +114,22 @@ package sprite{
         + currentSprite: int
         + SpriteSheet: Image
         + SpriteManager(Image sprite)
-        + {abstract} setSprite(GlobalDirection direction)
+        + {abstract} setSprite(Cmd direction)
         + {abstract} getCurrentSprite(): Image
     }
 
     class SpriteManagerHero{
-        + setSprite(GlobalDirection direction)
+        + setSprite(Cmd direction)
         + getCurrentSprite(): Image
     }
 
     class SpriteManagerMonster{
-        + setSprite(GlobalDirection direction)
+        + setSprite(Cmd direction)
         + getCurrentSprite(): Image
     }
 
     class SpriteManagerTile{
-        + setSprite(GlobalDirection direction)
+        + setSprite(Cmd direction)
         + getCurrentSprite(): Image
     }
 
@@ -146,21 +146,13 @@ package global{
         + {static} get16Sprite():int
     }
 
-    enum GlobalDirection{
-        + {static} UP
-        + {static} DOWN
-        + {static} LEFT
-        + {static} RIGHT
-        + {static} IDLE
-    }
-
     class Position{
         + {final} x: int
         + {final} y: int
-        + {final} direction: GlobalDirection
+        + {final} direction: Cmd
         + getX(): int
         + getY(): int
-        + getDirection(): GlobalDirection
+        + getDirection(): Cmd
     }
 
 }
