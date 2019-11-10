@@ -1,0 +1,10 @@
+@startuml
+
+title When the player wants to save his game
+
+Actor Player
+
+Player -> ZelpopGame: The player wants to save his game
+ZelpopGame -> ZelpopGame: save()
+
+@enduml

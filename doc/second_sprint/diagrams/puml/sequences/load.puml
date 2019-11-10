@@ -1,0 +1,10 @@
+@startuml
+
+title When the player wants to load a game
+
+Actor Player
+
+Player -> ZelpopGame: The player wants to load a game
+ZelpopGame -> ZelpopGame: load()
+
+@enduml
