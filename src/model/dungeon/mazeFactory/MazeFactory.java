@@ -1,6 +1,5 @@
 package model.dungeon.mazeFactory;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
@@ -9,8 +8,9 @@ import model.dungeon.tile.TileFactory;
 import model.global.GlobalDirection;
 import model.global.Position;
 
-import java.io.*;
-import java.lang.reflect.Array;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class MazeFactory {
@@ -280,7 +280,7 @@ public class MazeFactory {
 
         @Override
         public String toString() {
-            return "" + (wall? 1:0);
+
         }
     }
 
@@ -327,7 +327,9 @@ public class MazeFactory {
             regionCopi.removeAll(found);
             //TODO: REGLERE CE BUG
             if (kaput > region.size()*2){
-                return null;
+//                return null;
+                Cell cell = regionCopi.get(0);
+                System.out.println(cell);
             }
         }
 

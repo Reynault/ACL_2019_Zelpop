@@ -9,6 +9,8 @@ The idea is to develop a game using an agile method of developpement. (SCRUM)
 
 In order to execute the game, you'll have to be on the root of the project.
 
+A release has been done and it gives you a .jar and all the sources of the project. (v1.0)
+
 ## Execute Using the JAR file
 
 - To run the game all you have to do is to execute the jar file which 
