@@ -12,7 +12,7 @@ package entity{
         + setPosition(int x, int y)
         + canPassThrought(): boolean
         + {abstract} draw()
-        + behave(GlobalDirection direction): Direction
+        + behave(maze: Maze, GlobalDirection direction): Direction
         + getReward(): int
     }
 
@@ -35,6 +35,13 @@ package entity{
 
     }
 
+    class EntityFactory(){
+        + generateHero(): Entity
+        + getHero(): Entity
+        + getRandomMonster(position: Position): Entity
+    }
+
+    note left: EntityFactory is controlling the creation of Hero.\nThere must be only one.
 
 }
 
@@ -42,6 +49,6 @@ package entity{
 
 Hero --|> Entity
 Monster --|> Entity
-Entity --> "1" Behavior
+Entity --> "1" Behavior: - behavior
 
 @enduml

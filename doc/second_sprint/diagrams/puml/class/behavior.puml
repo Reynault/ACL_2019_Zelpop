@@ -4,54 +4,89 @@ class Entity{
 
 }
 
-class Behavior{
-    + behave(...)
+package behavior{
 
-    + move()
-    + attack()
-    + check()
+    class Behavior{
+        - maze: Maze
+        - entity: Entity
+
+        # Behavior(maze: Maze, entity: Entity)
+
+        + behave(): GlobalDirection
+
+        + move(maze: Maze, entity: Entity): GlobalDirection
+        + attack(maze: Maze, entity: Entity)
+        + check(maze: Maze, entity: Entity): boolean
+    }
+
+    note left: behave is a pattern method: \n\nif check then \n   attack \nelse \n   move
+
+    package check{
+
+        interface Check{
+            + check(maze: Maze, entity: Entity): boolean
+        }
+
+        class CheckRandom{
+            + check(maze: Maze, entity: Entity): boolean
+        }
+
+        class CheckHero{
+            + check(maze: Maze, entity: Entity): boolean
+        }
+
+    }
+
+    package move{
+
+        interface Move{
+            + move(maze: Maze, entity: Entity): GlobalDirection
+        }
+
+        class MoveRandom{
+            + move(maze: Maze, entity: Entity): GlobalDirection
+        }
+
+        class MoveHero{
+            + move(maze: Maze, entity: Entity): GlobalDirection
+        }
+
+    }
+
+    package attack{
+
+        interface Attack{
+            + attack(maze: Maze, entity: Entity)
+        }
+
+        class AttackSimple{
+            + attack(maze: Maze, entity: Entity)
+        }
+
+        class AttackHero{
+            + attack(maze: Maze, entity: Entity)
+        }
+
+    }
+
+    class BehaveFabric{
+        + getMonsterBehavior(maze: Maze, entity: Entity): Behavior
+        + getHeroBehavior(maze: Maze, entity: Entity): Behavior
+    }
+
 }
 
-note left: behave is a pattern method: \n\nif check then \n   attack \nelse \n   move
 
+AttackSimple ..|> Attack
+AttackHero ..|> Attack
 
-class Check{
+MoveRandom ..|> Move
+MoveHero ..|> Move
 
-}
+CheckRandom ..|> Check
+CheckHero ..|> Check
 
-class CheckRandom{
-
-}
-
-class Move{
-
-}
-
-class MoveRandom{
-
-}
-
-class Attack{
-
-}
-
-class AttackSimple{
-
-}
-
-AttackSimple --|> Attack
-
-MoveRandom --|> Move
-
-CheckRandom --|> Check
-
-Entity --> "1" Behavior
-
-class BehaveFabric{
-    + getMonsterBehavior()
-    + getHeroBehavior()
-}
-
+Entity --> "1" Behavior: - behavior
 
 Behavior --> "1" Move
 Behavior --> "1" Check

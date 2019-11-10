@@ -13,12 +13,22 @@ package scoring{
         + findChest(Tile tile): int
     }
 
-    class ScoringParameter{
-
+    abstract ScoringParameter{
+        + {abstract} killMonster(entity: Entity): int
+        + {abstract} leaveMaze(): int
+        + {abstract} findChest(Tile tile): int
     }
 
-    class ScoringLife{
+    note left: Scoring can be decorated with\ndifferent properties
 
+    class ScoringLife{
+        + killMonster(entity: Entity): int
+        + leaveMaze(): int
+        + findChest(Tile tile): int
+    }
+
+    class ScoringFactory{
+        + getDefaultScoring(multiplier: int)
     }
 
 }
