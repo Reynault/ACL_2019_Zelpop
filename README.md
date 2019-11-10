@@ -5,7 +5,7 @@
 Zelpop is a maze game creative in the context of a student project.
 The idea is to develop a game using an agile method of developpement. (SCRUM)
 
-#First Sprint report
+# First Sprint report
 
 To sum up everything we have done in the first sprint, we can
 say that we managed to implement all the features we planned
@@ -18,7 +18,7 @@ generating the maze from file and Mohamed Elridha Salhi making
 this report.
 
 
-#Implemented Features
+# Implemented Features
 
 So the player can move in every direction on the maze, we generate
 the game's default maze from a file, the maze may contains some 
@@ -26,13 +26,13 @@ monsters and as we mentioned (with no damage and no collision
 with game's player) and all this with a basic interface with sprite.
 
 
-#Problems
+# Problems
 
 We had a few problems with the generation of sprites, we changed how 
 it works by adding a sprite manager for entities and one for tiles.
 We had no problems implementing the rest of features.
 
-#Installing and running the game
+# Installing and running the game
 
 To mention that we worked with Intellij so in order to get the project
 to work you need to get it from git, the following is the link to the 
@@ -40,17 +40,17 @@ gitHub which contains the project :
 
  "https://github.com/Reynault/ACL_2019_Zelpop.git"
  
-###Junit 5
+### Junit 5
 
 - After uploading the project make sure that you add the JUnit 5 which been
 used to create the project tests.
 
-###Running the game
+### Running the game
 
 - To execute the game you need to access the start folder which contains
 the main.
 
-##Execute Using the JAR file
+## Execute Using the JAR file
 
 - To run the game all you have to do is to execute the jar file which 
 can be found by the following path :
