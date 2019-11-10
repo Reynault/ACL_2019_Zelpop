@@ -63,6 +63,10 @@ package behavior{
             + attack(maze: Maze, entity: Entity)
         }
 
+        class AttackHero{
+            + attack(maze: Maze, entity: Entity)
+        }
+
     }
 
     class BehaveFabric{
@@ -74,6 +78,7 @@ package behavior{
 
 
 AttackSimple ..|> Attack
+AttackHero ..|> Attack
 
 MoveRandom ..|> Move
 MoveHero ..|> Move

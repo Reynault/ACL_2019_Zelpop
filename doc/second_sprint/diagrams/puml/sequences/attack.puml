@@ -12,7 +12,6 @@ participant "h: Hero" as h
 participant Behavior as b
 participant AttackSimple as as
 participant "entity: Entity" as e
-participant "scoring: Scoring" as s
 
 player --> z: The player wants to attack
 
@@ -42,30 +41,11 @@ m --> as: entity
 
 as -> e: takeDamage(dmg)
 
-as -> e: isAlive()
+ref over e
+    See the diagram when an
+    entity is taking damages
+    entitled takeDamage.
+end ref
 
-e --> as: alive
-
-opt alive == false
-
-    as -> m: killEntity(entity, h)
-
-    m -> h: isHero()
-
-    h --> m: hero
-
-    opt hero == true
-
-        m -> s: killMonster( entity )
-
-        s --> m: bonus
-
-        m -> h: increaseScore( bonus )
-
-    end
-
-    m -> e!: delete
-
-end
 
 @enduml

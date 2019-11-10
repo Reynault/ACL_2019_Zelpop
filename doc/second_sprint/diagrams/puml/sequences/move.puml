@@ -1,0 +1,79 @@
+@startuml
+
+title When a monster is moved
+autonumber
+
+ZelpopGame -> Dungeon : updateAll()
+Dungeon -> Maze : moveEntities()
+
+loop For every entity
+
+    Maze -> Entity : behave(Maze maze, Entity e, IDLE)
+
+    Entity -> Behavior : behave(Maze maze, Entity e, IDLE)
+
+    note left
+        for monsters entities we use
+        a default direction. (It would
+        be a different direction for the hero)
+    end note
+
+    Behavior -> CheckSimple : check(Maze maze, Entity e)
+
+    note left
+        check is checking if the monster
+        can attack or not, in this case,
+        there is nothing to attack
+    end note
+
+    CheckSimple --> Behavior : false
+
+    Behavior -> MoveRandom : move(Maze maze, Entity e)
+
+    MoveRandom --> Behavior : direction
+
+    Behavior --> Entity : direction
+
+    Entity --> Maze : direction
+
+    Maze -> Maze : canMove(e, tile)
+
+    Maze -> Tile : canBeCrossed()
+
+    Tile --> Maze : wall
+
+    Maze -> Entity : canPassThrough()
+
+    Entity --> Maze : entity
+
+    note left
+        the maze create a new position depending
+        if the entity can move or not
+    end note
+
+    alt The tile is a wall and the entity can't pass through
+
+        Maze --> Maze : false
+
+        note left
+            create a new position with
+            a different direction
+        end note
+
+    else
+
+        Maze --> Maze : true
+
+        note left
+            create a new position with
+            a different direction AND a
+            different position (x,y)
+        end note
+
+    end
+
+    Maze -> Entity : setPosition(position)
+
+end
+
+@enduml

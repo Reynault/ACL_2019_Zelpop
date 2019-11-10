@@ -1,0 +1,79 @@
+@startuml
+
+title When a monster is nearby a player
+autonumber
+
+participant ZelpopGame as z
+participant Dungeon as d
+participant "maze: Maze" as m
+participant "entity: Monster" as e
+participant "t: Tile" as t
+participant "Behavior" as b
+participant CheckSimple as check
+participant AttackSimple as attack
+participant MoveRandom as move
+participant "h: Hero" as h
+
+z -> d: updateAll()
+
+d -> m: moveEntities()
+
+loop for every monsters in the maze
+
+    m -> e: behave(maze, entity, IDLE)
+
+    e -> b: behave(maze, entity, IDLE)
+
+    note left
+        Behavior has a pattern method
+        that will check if the entity
+        can attack or not
+    end note
+
+    b -> check: check(maze, entity)
+
+    check -> m: getEntity(x, y)
+
+    note left
+        Getting the entity in front of
+        the monster
+    end note
+
+    m --> check: h
+
+    check -> h: isHero()
+
+    h --> check: true
+
+    check --> b: true
+
+    b -> attack: attack(maze, entity)
+
+    attack -> e: getDmg()
+
+    e --> attack: dmg
+
+    attack -> m: getEntity(x, y)
+
+    note left
+        Getting the entity in front
+        of the monster
+    end note
+
+    m --> attack: entity
+
+    attack -> h: takeDamage(dmg)
+
+    ref over h
+        See the diagram when an
+        entity is taking damages
+        entitled takeDamage.
+    end ref
+
+    b --> e: direction
+
+    e --> m: direction
+
+end
+
+@enduml
