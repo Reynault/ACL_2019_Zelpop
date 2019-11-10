@@ -64,7 +64,7 @@ public class TextureFactory {
     }
 
     public BufferedImage getTiles(){
-        BufferedImage sprite = tiles.getSubimage(4 * TILE_LENGTH, TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
+        BufferedImage sprite = tiles.getSubimage(4 * TILE_LENGTH, 2 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
     public BufferedImage getWalls(){
@@ -72,11 +72,11 @@ public class TextureFactory {
         return sprite;
     }
     public BufferedImage getTraps(){
-        BufferedImage sprite = tiles.getSubimage(13 * TILE_LENGTH, 1 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
+        BufferedImage sprite = tiles.getSubimage(13 * TILE_LENGTH, 2 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
     public BufferedImage getTreasure(){
-        BufferedImage sprite = chest.getSubimage(2 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
+        BufferedImage sprite = chest.getSubimage(0 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
 
