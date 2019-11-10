@@ -35,7 +35,7 @@ interface Game{
 package dungeon{
 
     class Dungeon{
-        - currentMaze
+        - nbMaze: int
         + moveHero(GlobalDirection d)
         + generateMaze()
         + generateMaze(File Filename)
@@ -170,6 +170,18 @@ package global{
         + getDirection(): GlobalDirection
     }
 
+}
+
+package engine{
+    enum Cmd{
+        LEFT
+        RIGHT
+        UP
+        DOWN
+        IDLE
+        ATTACK
+        LEAVE_LEVEL
+    }
 }
 
 MazeDefault --|> MazeFactory

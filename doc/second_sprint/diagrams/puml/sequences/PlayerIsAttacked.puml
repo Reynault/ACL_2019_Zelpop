@@ -1,0 +1,16 @@
+@startuml
+
+title When the player is attacked
+autonumber
+
+participant ZelpopGame as z
+participant Dungeon as d
+participant "maze: Maze" as m
+participant "h: Hero" as h
+participant AttackStrategy as as
+participant "entity: Entity" as e
+participant "scoring: Scoring" as s
+
+
+
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+
+class Maze{
+
+}
+
+class Scoring{
+    - multiplier: int
+    + killMonster(entity: Entity): int
+    + leaveMaze(): int
+    + findChest(Tile tile): int
+}
+
+class ScoringParameter{
+
+}
+
+class ScoringLife{
+
+}
+
+ScoringLife --|> ScoringParameter
+
+ScoringParameter --> "1" Scoring: - decore
+
+Maze --> "1" Scoring: - scoring
+
+class Entity{
+    - reward: int
+    + getReward(): int
+}
+
+@enduml

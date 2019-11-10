@@ -1,0 +1,66 @@
+@startuml
+
+title When the player wants to attack
+autonumber
+
+actor player
+
+participant ZelpopGame as z
+participant Dungeon as d
+participant "maze: Maze" as m
+participant "h: Hero" as h
+participant AttackStrategy as as
+participant "entity: Entity" as e
+participant "scoring: Scoring" as s
+
+player --> z: The player wants to attack
+
+z -> d: attack()
+
+d -> m: attack()
+
+m -> h: attack(maze)
+
+h -> as: attack(maze, h)
+
+as -> h: getDmg()
+
+h --> as: damage
+
+as -> m: getEntity(x, y)
+
+note left
+maze will loop on every
+entities it owns and search
+for the one at (x, y)
+end note
+
+m --> as: entity
+
+as -> e: takeDamage(dmg)
+
+as -> e: isAlive()
+
+e --> as: alive
+
+opt alive == false
+
+    as -> as: killEntity(maze, h, entity)
+
+    as -> m: removeEntity(entity)
+
+    m -> e!: delete
+
+    as -> m : getScoreKill( entity )
+
+    m -> s: killMonster( entity )
+
+    s --> m: bonus
+
+    m --> as: bonus
+
+    as -> h: increaseScore( bonus )
+
+end
+
+@enduml
