@@ -1,14 +1,15 @@
 # Backlog - Second Sprint
 
-Development of the second iteration. In this iteration, we add a score system for the player, an attack system based on 
-the specification, an health system so the can die, random generated mazes, a saving and loading system and the 
+Development of the second iteration. In this iteration, we add a score system for the player, an attack system, 
+an health system so the can die, random generated mazes, a saving and loading system and the 
 behavior of tiles such as traps and treasures which are based on the other systems. (life, score) 
 
 ## Features
 
 - There is now an HP system, the player loses if his life is at 0. (same for a monster)
 - The player can attack nearby monsters.
-- There is now a collision with monsters. (Both lose HP)
+- There is now a collision with the monster, the player can't pass through it.
+- Monsters can hit the player when he is nearby. (for now, just next to the monster)
 - There is a score that increases when the player beat a Maze, a monster or find a chest.
 - There is now the behavior of traps and treasures.
     - Traps hit the player.
