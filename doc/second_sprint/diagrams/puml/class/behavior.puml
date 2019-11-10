@@ -1,0 +1,59 @@
+@startuml
+
+class Entity{
+
+}
+
+class Behavior{
+    + behave(...)
+
+    + move()
+    + attack()
+    + check()
+}
+
+note left: behave is a pattern method: \n\nif check then \n   attack \nelse \n   move
+
+
+class Check{
+
+}
+
+class CheckRandom{
+
+}
+
+class Move{
+
+}
+
+class MoveRandom{
+
+}
+
+class Attack{
+
+}
+
+class AttackSimple{
+
+}
+
+AttackSimple --|> Attack
+
+MoveRandom --|> Move
+
+CheckRandom --|> Check
+
+Entity --> "1" Behavior
+
+class BehaveFabric{
+    + getMonsterBehavior()
+    + getHeroBehavior()
+}
+
+
+Behavior --> "1" Move
+Behavior --> "1" Check
+Behavior --> "1" Attack
+@enduml

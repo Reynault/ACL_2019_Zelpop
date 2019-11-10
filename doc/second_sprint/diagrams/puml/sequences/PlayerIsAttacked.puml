@@ -6,11 +6,33 @@ autonumber
 participant ZelpopGame as z
 participant Dungeon as d
 participant "maze: Maze" as m
-participant "h: Hero" as h
+participant "monster: Monster" as e
+participant "Behavior" as b
 participant AttackStrategy as as
-participant "entity: Entity" as e
-participant "scoring: Scoring" as s
+participant "h: Hero" as h
 
+z -> d: updateAll()
 
+d -> m: moveEntities()
+
+loop for every monsters in the maze
+
+    m -> e: behave(maze, entity, IDLE)
+
+    e -> b: behave(maze, entity, IDLE)
+
+    b -> b: attack(maze, entity)
+
+    b --> b: hasAttacked
+
+    note left
+        If the player
+    end note
+
+    opt hasAttacked == false
+
+    end
+
+end
 
 @enduml

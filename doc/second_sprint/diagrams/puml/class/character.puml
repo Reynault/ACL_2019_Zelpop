@@ -6,12 +6,14 @@ package entity{
         - position: Position
         - hp: int
         - passThrought: boolean
+        - reward: int
         + getPosition():(int, int, GlobalDirection)
         + setPosition(int direction)
         + setPosition(int x, int y)
         + canPassThrought(): boolean
         + {abstract} draw()
         + behave(GlobalDirection direction): Direction
+        + getReward(): int
     }
 
     class Hero {
@@ -25,31 +27,14 @@ package entity{
 
     package behavior{
 
-        interface Behavior{
-            + {abstract} behave(Entity entity, GlobalDirection direction): Direction
+        class Behavior{
+
         }
 
-        class Random{
-            + behave(Entity entity, GlobalDirection direction): Direction
-        }
-
-        class HeroBehavior{
-            + behave(Entity entity, GlobalDirection direction): Direction
-        }
+        note left: Class diagram of behavior
 
     }
 
-    package attack{
-
-        interface AttackStrategy{
-            + attack(maze: Maze, entity: Entity)
-        }
-
-        class SimpleAttack{
-            + attack(maze: Maze, entity: Entity)
-        }
-
-    }
 
 }
 
@@ -58,11 +43,5 @@ package entity{
 Hero --|> Entity
 Monster --|> Entity
 Entity --> "1" Behavior
-HeroBehavior ..|> Behavior
-Random ..|> Behavior
-
-Entity --> "1" AttackStrategy: - attackStrategy
-
-SimpleAttack ..|> AttackStrategy
 
 @enduml

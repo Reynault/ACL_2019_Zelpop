@@ -23,11 +23,6 @@ package state{
     }
 }
 
-InGame ..|> GameState
-Menu ..|> GameState
-
-ZelpopGame --> "1" GameState: - state
-
 interface Game{
 
 }
@@ -53,13 +48,23 @@ package dungeon{
         + canMove(Entity e, Tile t): boolean
     }
 
+    package scoring{
+
+        class Scoring{
+
+        }
+
+        note left: Class diagram of scoring
+
+    }
+
     package tile{
 
         class Tile{
 
         }
 
-        note "Class diagram of tiles" as N1
+        note left: Class diagram of tiles
 
     }
 
@@ -69,23 +74,7 @@ package dungeon{
 
         }
 
-        class Hero{
-
-        }
-
-        class EntityFactory << (S,#FF7700) Singleton >>{
-
-        }
-
-        package attack{
-
-            interface AttackStrategy{
-            }
-
-            class SimpleAttack{
-            }
-
-        }
+        note left: Class diagram of entities
 
     }
 
@@ -184,31 +173,27 @@ package engine{
     }
 }
 
-MazeDefault --|> MazeFactory
-
 Dungeon "1" --> "*" Maze: -maze
 Dungeon "1" --> "1" MazeFactory: -mazeFactory
 
 Maze "1" --> "*" Tile: -tiles
 Maze "1" --> "*" Entity: -entities
 
-EntityFactory ..> Entity : create
-
 ZelpopGame ..|> Game
 ZelpopGame --> "1" Dungeon: -dungeon
 
 ZelpopPainter --> "1" ZelpopGame: - game
 
-Hero --|> Entity
-
 Dungeon "1" --> "1" Entity : -hero
-
-MazeFile --|> MazeFactory
 
 Tile --> "1" SpriteManager
 
 Entity --> "1" SpriteManager
-Entity --> "1" AttackStrategy: - attackStrategy
 
-SimpleAttack ..|> AttackStrategy
+InGame ..|> GameState
+Menu ..|> GameState
+
+Maze --> "1" Scoring: - scoring
+
+ZelpopGame --> "1" GameState: - state
 @enduml

@@ -4,18 +4,22 @@ class Maze{
 
 }
 
-class Scoring{
-    - multiplier: int
-    + killMonster(entity: Entity): int
-    + leaveMaze(): int
-    + findChest(Tile tile): int
-}
+package scoring{
 
-class ScoringParameter{
+    class Scoring{
+        - multiplier: int
+        + killMonster(entity: Entity): int
+        + leaveMaze(): int
+        + findChest(Tile tile): int
+    }
 
-}
+    class ScoringParameter{
 
-class ScoringLife{
+    }
+
+    class ScoringLife{
+
+    }
 
 }
 
@@ -24,10 +28,5 @@ ScoringLife --|> ScoringParameter
 ScoringParameter --> "1" Scoring: - decore
 
 Maze --> "1" Scoring: - scoring
-
-class Entity{
-    - reward: int
-    + getReward(): int
-}
 
 @enduml
