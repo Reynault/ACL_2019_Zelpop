@@ -34,6 +34,7 @@ package dungeon{
         + moveHero(GlobalDirection d)
         + generateMaze()
         + generateMaze(File Filename)
+        + attack()
         + updateAll()
         + draw()
     }
@@ -45,6 +46,9 @@ package dungeon{
         + draw()
         + moveEntity(Entity e, GlobalDirection d)
         + moveEntity(Entity e)
+        + attack()
+        + killEntity(killed: Entity, by: Entity)
+        + getEntity(x: int, y: int): Entity
         + canMove(Entity e, Tile t): boolean
     }
 

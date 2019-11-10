@@ -14,10 +14,16 @@ package entity{
         + {abstract} draw()
         + behave(maze: Maze, GlobalDirection direction): Direction
         + getReward(): int
+        + attack(maze: Maze)
+        + takeDamage(dmg: int)
+        + isAlive(): boolean
+        + getDmg(): int
     }
 
     class Hero {
         - score: int
+        + increaseScore(bonus: int)
+        + getScore(): int
         + draw()
     }
 
