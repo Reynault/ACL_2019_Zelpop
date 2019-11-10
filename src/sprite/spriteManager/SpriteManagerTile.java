@@ -1,6 +1,7 @@
-package sprite;
+package sprite.spriteManager;
 
 import model.global.GlobalDirection;
+import sprite.spriteManager.SpriteManager;
 
 import java.awt.image.BufferedImage;
 

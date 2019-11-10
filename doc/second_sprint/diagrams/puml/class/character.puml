@@ -1,0 +1,68 @@
+@startuml
+
+package entity{
+
+    abstract Entity{
+        - position: Position
+        - hp: int
+        - passThrought: boolean
+        + getPosition():(int, int, GlobalDirection)
+        + setPosition(int direction)
+        + setPosition(int x, int y)
+        + canPassThrought(): boolean
+        + {abstract} draw()
+        + behave(GlobalDirection direction): Direction
+    }
+
+    class Hero {
+        - score: int
+        + draw()
+    }
+
+    class Monster{
+        + draw()
+    }
+
+    package behavior{
+
+        interface Behavior{
+            + {abstract} behave(Entity entity, GlobalDirection direction): Direction
+        }
+
+        class Random{
+            + behave(Entity entity, GlobalDirection direction): Direction
+        }
+
+        class HeroBehavior{
+            + behave(Entity entity, GlobalDirection direction): Direction
+        }
+
+    }
+
+    package attack{
+
+        interface AttackStrategy{
+            + attack(maze: Maze, entity: Entity)
+        }
+
+        class SimpleAttack{
+            + attack(maze: Maze, entity: Entity)
+        }
+
+    }
+
+}
+
+
+
+Hero --|> Entity
+Monster --|> Entity
+Entity --> "1" Behavior
+HeroBehavior ..|> Behavior
+Random ..|> Behavior
+
+Entity --> "1" AttackStrategy: - attackStrategy
+
+SimpleAttack ..|> AttackStrategy
+
+@enduml

@@ -2,7 +2,7 @@ package model.dungeon.tile;
 
 import model.dungeon.entity.Entity;
 import model.global.GlobalSprites;
-import sprite.SpriteManagerTile;
+import sprite.spriteManager.SpriteManagerTile;
 import sprite.TextureFactory;
 
 import java.awt.*;

@@ -1,17 +1,10 @@
 package model;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.RescaleOp;
-import java.util.Random;
 
 import engine.Game;
 import engine.GamePainter;
-import sprite.SpriteManager;
-import sprite.SpriteManagerHero;
-import sprite.SpriteManagerMonster;
-import sprite.TextureFactory;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas

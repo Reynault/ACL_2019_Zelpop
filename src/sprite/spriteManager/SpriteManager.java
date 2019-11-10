@@ -1,4 +1,4 @@
-package sprite;
+package sprite.spriteManager;
 
 import model.global.GlobalDirection;
 

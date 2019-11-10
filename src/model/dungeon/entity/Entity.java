@@ -4,7 +4,7 @@ import model.dungeon.entity.behavior.Behavior;
 import model.global.GlobalDirection;
 import model.global.GlobalSprites;
 import model.global.Position;
-import sprite.SpriteManager;
+import sprite.spriteManager.SpriteManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

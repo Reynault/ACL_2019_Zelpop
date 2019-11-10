@@ -1,13 +1,9 @@
 package model.dungeon.entity;
 
 import model.dungeon.entity.behavior.Behavior;
-import model.global.GlobalSprites;
 import model.global.Position;
-import sprite.SpriteManagerHero;
+import sprite.spriteManager.SpriteManagerHero;
 import sprite.TextureFactory;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Hero extends Entity {
 

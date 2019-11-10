@@ -1,0 +1,202 @@
+@startuml
+
+class ZelpopGame{
+    + setState(state: State)
+}
+
+package state{
+    interface GameState{
+        + draw(game: Game, image: BufferedImage)
+        + evolve(commande: Cmd)
+    }
+
+    class InGame{
+        - dungeon: Dungeon
+
+        + draw(game: Game, image: BufferedImage)
+        + evolve(commande: Cmd)
+    }
+
+    class Menu{
+        + draw(game: Game, image: BufferedImage)
+        + evolve(commande: Cmd)
+    }
+}
+
+InGame ..|> GameState
+Menu ..|> GameState
+
+ZelpopGame --> "1" GameState: - state
+
+interface Game{
+
+}
+
+package dungeon{
+
+    class Dungeon{
+        - currentMaze
+        + moveHero(GlobalDirection d)
+        + generateMaze()
+        + generateMaze(File Filename)
+        + updateAll()
+        + draw()
+    }
+
+    class Maze{
+        - toDrawEntity: List<Entity>
+        - toDrawTile: List<Tile>
+        + Maze(List<Tile> tiles, List<Entity> entities)
+        + draw()
+        + moveEntity(Entity e, GlobalDirection d)
+        + moveEntity(Entity e)
+        + canMove(Entity e, Tile t): boolean
+    }
+
+    package tile{
+
+        class Tile{
+
+        }
+
+        note "Class diagram of tiles" as N1
+
+    }
+
+    package entity{
+
+        abstract Entity{
+
+        }
+
+        class Hero{
+
+        }
+
+        class EntityFactory << (S,#FF7700) Singleton >>{
+
+        }
+
+        package attack{
+
+            interface AttackStrategy{
+            }
+
+            class SimpleAttack{
+            }
+
+        }
+
+    }
+
+    package mazeFactory{
+
+        interface MazeFactory{
+            + {static} getMaze(): Maze
+            + {static} getMaze(File fileName)
+            + {static} getRandomMaze()
+        }
+
+    }
+
+}
+
+
+class ZelpopPainter{
+
+}
+
+class TextureFactory{
+    + {static}getMonster()
+    + {static}getHero()
+    + {static}getEmptyTile()
+    + {static}getWall()
+    + {static}getTrap()
+    + {static}getTreasure()
+}
+
+package sprite{
+
+    abstract SpriteManager{
+        + currentSprite: int
+        + SpriteSheet: Image
+        + SpriteManager(Image sprite)
+        + {abstract} setSprite(GlobalDirection direction)
+        + {abstract} getCurrentSprite(): Image
+    }
+
+    class SpriteManagerHero{
+        + setSprite(GlobalDirection direction)
+        + getCurrentSprite(): Image
+    }
+
+    class SpriteManagerMonster{
+        + setSprite(GlobalDirection direction)
+        + getCurrentSprite(): Image
+    }
+
+    class SpriteManagerTile{
+        + setSprite(GlobalDirection direction)
+        + getCurrentSprite(): Image
+    }
+
+}
+
+SpriteManagerHero --|> SpriteManager
+SpriteManagerMonster --|> SpriteManager
+SpriteManagerTile --|> SpriteManager
+
+package global{
+
+    class GlobalSprite{
+        + {static} get8Sprite():int
+        + {static} get16Sprite():int
+    }
+
+    enum GlobalDirection{
+        + {static} UP
+        + {static} DOWN
+        + {static} LEFT
+        + {static} RIGHT
+        + {static} IDLE
+    }
+
+    class Position{
+        + {final} x: int
+        + {final} y: int
+        + {final} direction: GlobalDirection
+        + getX(): int
+        + getY(): int
+        + getDirection(): GlobalDirection
+    }
+
+}
+
+MazeDefault --|> MazeFactory
+
+Dungeon "1" --> "*" Maze: -maze
+Dungeon "1" --> "1" MazeFactory: -mazeFactory
+
+Maze "1" --> "*" Tile: -tiles
+Maze "1" --> "*" Entity: -entities
+
+EntityFactory ..> Entity : create
+
+ZelpopGame ..|> Game
+ZelpopGame --> "1" Dungeon: -dungeon
+
+ZelpopPainter --> "1" ZelpopGame: - game
+
+Hero --|> Entity
+
+Dungeon "1" --> "1" Entity : -hero
+
+MazeFile --|> MazeFactory
+
+Tile --> "1" SpriteManager
+
+Entity --> "1" SpriteManager
+Entity --> "1" AttackStrategy: - attackStrategy
+
+SimpleAttack ..|> AttackStrategy
+@enduml

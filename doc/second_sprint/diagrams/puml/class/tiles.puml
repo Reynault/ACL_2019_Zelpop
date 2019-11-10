@@ -1,0 +1,58 @@
+@startuml
+package tile{
+
+    class Tile{
+        + draw()
+        + action()
+        + canBeCrossed(): boolean
+    }
+
+    class Wall{
+        + draw()
+        + action()
+        + canBeCrossed(): boolean
+    }
+
+    class Treasure{
+        + draw()
+        + action()
+        + canBeCrossed(): boolean
+    }
+
+    class Trap{
+        + draw()
+        + action()
+        + canBeCrossed(): boolean
+    }
+
+    abstract Effect{
+        + {abstract} draw()
+        + {abstract} action()
+        + {abstract} canBeCrossed(): boolean
+    }
+
+    class Stairs{
+        + draw()
+        + action()
+        + canBeCrossed(): boolean
+    }
+
+    class TileFactory << (S,#FF7700) Singleton >>{
+        + getWall(): Tile
+        + getTrap(): Tile
+        + getTreasure(): Tile
+        + getEmptyTile(): Tile
+    }
+
+}
+
+Wall --|> Effect
+Effect --|> Tile
+Effect --> "1" Tile : -decore
+Trap --|> Effect
+Treasure --|> Effect
+Stairs --|> Effect
+
+TileFactory ..> Tile : create
+
+@enduml
