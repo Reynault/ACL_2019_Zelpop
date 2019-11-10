@@ -160,14 +160,25 @@ public class MazeFactory {
         return new Maze(tiles, entities);
     }
 
+    /**
+     * Generation of a simple maze using an algorithm that
+     * split regions into 2 recursively in order to have a maze
+     * filled with empty rooms
+     * @param size the size of the labyrinth
+     * @return the maze
+     */
     private Tile[][] generatorMaze(int size){
         Tile[][] tiles = new Tile[size][size];
         Cell[][] cells = new Cell[size][size];
+
+        // Initialise cell table
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[0].length; j++) {
                 cells[i][j] = new Cell();
             }
         }
+
+        // Initialise values of cells
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[0].length; j++) {
                 if (i == 0){
@@ -207,6 +218,7 @@ public class MazeFactory {
             }
         }
 
+        // Just displaying some information
         for (Cell[] row :
                 cells) {
             for (Cell cell :
@@ -216,15 +228,19 @@ public class MazeFactory {
             System.out.print("\n");
         }
 
+        // create a region out of cells
         ArrayList<Cell> region = new ArrayList<>();
         for (Cell[] row :
                 cells) {
             region.addAll(Arrays.asList(row));
         }
 
+        // split the list in order to have two regions
+        // and split each new regions into two again, and again, ...
         split(region);
         System.out.println("\n");
 
+        // Just displaying some information
         for (Cell[] row :
                 cells) {
             for (Cell cell :
@@ -234,6 +250,7 @@ public class MazeFactory {
             System.out.print("\n");
         }
 
+        // Translate the cell table into a tile table
         int i=0;
         int j=0;
         for (Cell[] row :
@@ -280,34 +297,54 @@ public class MazeFactory {
 
         @Override
         public String toString() {
-
+            if(wall){
+                return String.valueOf(1);
+            }else{
+                return String.valueOf(0);
+            }
         }
     }
 
     private ArrayList<Cell> split(ArrayList<Cell> region){
         ArrayList<Cell> regionCopi = new ArrayList<>();
+
+        // We make a copy, cause we will work with a brand new one
+        // which will be used as a set
         regionCopi = (ArrayList<Cell>) region.clone();
         Random random = new Random();
+
+        // We chose two random cells
         int cell1 = random.nextInt(region.size() - 1);
         int cell2 = cell1;
         while (cell1 == cell2){
             cell2 = random.nextInt(region.size() - 1);
         }
+
+        // We instantiate two sub regions
         ArrayList<Cell> region1 = new ArrayList<>();
         ArrayList<Cell> region2 = new ArrayList<>();
 
+        // Each one will receive one cell
         region1.add(regionCopi.get(cell1));
         region2.add(regionCopi.get(cell2));
 
+        // Each cell is then removed from the main region
+        // (in order to make sure that we will not assign them again)
         regionCopi.remove(cell1);
         regionCopi.remove(cell2);
 
         Collections.shuffle(regionCopi);
         int kaput = 0;
+
+        // While the main set isn't empty, it means that we haven't assign every
+        // cell yet
         while (!regionCopi.isEmpty()){
             kaput++;
             ArrayList<Cell> found = new ArrayList<>();
+            // For each cells contained in the set
             for (Cell cell : regionCopi) {
+                // We check if there siblings are in one of
+                // the two regions, it will then be assign to it
                 if(region1.contains(cell.up) ||
                         region1.contains(cell.rigth) ||
                         region1.contains(cell.down) ||
@@ -324,17 +361,23 @@ public class MazeFactory {
                     }
                 }
             }
+
+            // Then we remove every assigned cell from
+            // the main set
             regionCopi.removeAll(found);
-            //TODO: REGLERE CE BUG
+            //TODO: REGLER CE BUG
             if (kaput > region.size()*2){
-//                return null;
-                Cell cell = regionCopi.get(0);
-                System.out.println(cell);
+                return null;
             }
         }
 
+        // Once all cells are assigned, we will create
+        // the separation with walls
         if (region1.size() > 10  && region2.size() > 10){
             ArrayList<Cell> found = new ArrayList<>();
+            // For each cells in the first region,
+            // if there is a sibling that is from de second region,
+            // then it's a wall
             for (Cell cell :
                     region1) {
                 if(region2.contains(cell.up) ||
@@ -345,9 +388,15 @@ public class MazeFactory {
                     found.add(cell);
                 }
             }
+            // And we remove all the wall from the first region
             region1.removeAll(found);
             if(found.size() > 1){
+                // Then we create a door
                 found.get(random.nextInt(found.size() - 1)).wall = false;
+
+                // And we do the same for each region
+
+
                 if (region1.size() > 20){
                     System.out.println("Size Region1 : " + region1.size());
                     split(region1);
