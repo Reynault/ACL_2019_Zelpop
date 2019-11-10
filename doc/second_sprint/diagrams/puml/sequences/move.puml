@@ -74,6 +74,23 @@ loop For every entity
 
     Maze -> Entity : setPosition(position)
 
+    note left
+        applying the effect of
+        the tile on the entity
+    end note
+
+    Entity -> Tile : action(entity)
+
+    ref over Tile
+        See diagram when a player
+        is standing on a trap
+    end ref
+
+    ref over Tile
+        See diagram when a player
+        is standing on a treasure
+    end ref
+
 end
 
 @enduml

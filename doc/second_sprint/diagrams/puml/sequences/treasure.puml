@@ -1,0 +1,26 @@
+@startuml
+
+title When a player is standing on a treasure
+autonumber
+
+participant "maze: Maze" as m
+participant "t: Tile" as t
+participant "e: entity" as e
+
+m -> t: action(maze, e)
+
+t -> e: isHero()
+
+e --> t: hero
+
+opt hero == true
+
+    t -> m: getChestScore()
+
+    m --> t: bonus
+
+    t -> e: increaseScore(bonus)
+
+end
+
+@enduml

@@ -43,8 +43,8 @@ used to create the project tests in order to not having any errors.
 
 ###Running th game
 
-- To lunch the execution you need to access the start folder which contains
-tha main after that all you have to do is enjoy the game.
+- To execute the game you need to access the start folder which contains
+the main.
 
 ##Execute Using the JAR file
 
