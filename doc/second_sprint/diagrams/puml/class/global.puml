@@ -6,20 +6,20 @@ class ZelpopGame{
 
 package state{
     interface GameState{
-        + draw(game: Game, image: BufferedImage)
-        + evolve(commande: Cmd)
+        + draw(image: BufferedImage)
+        + evolve(game: Game, commande: Cmd)
     }
 
     class InGame{
         - dungeon: Dungeon
 
-        + draw(game: Game, image: BufferedImage)
-        + evolve(commande: Cmd)
+        + draw(image: BufferedImage)
+        + evolve(game: Game, commande: Cmd)
     }
 
     class Menu{
-        + draw(game: Game, image: BufferedImage)
-        + evolve(commande: Cmd)
+        + draw(image: BufferedImage)
+        + evolve(game: Game, commande: Cmd)
     }
 }
 
@@ -37,6 +37,7 @@ package dungeon{
         + attack()
         + updateAll()
         + draw()
+        + changeLevel()
     }
 
     class Maze{
@@ -50,6 +51,9 @@ package dungeon{
         + killEntity(killed: Entity, by: Entity)
         + getEntity(x: int, y: int): Entity
         + canMove(Entity e, Tile t): boolean
+        + removeEntity(e: Entity)
+        + getChestScore(): int
+        + isFinished(): boolean
     }
 
     package scoring{
@@ -106,6 +110,7 @@ class TextureFactory{
     + {static}getWall()
     + {static}getTrap()
     + {static}getTreasure()
+    + {static}getStairs()
 }
 
 package sprite{

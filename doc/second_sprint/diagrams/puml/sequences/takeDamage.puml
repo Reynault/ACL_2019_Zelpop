@@ -1,6 +1,6 @@
 @startuml
 
-title When an entity is taking damage
+title When an entity is taking damage from another
 autonumber
 
 participant "maze: Maze" as m

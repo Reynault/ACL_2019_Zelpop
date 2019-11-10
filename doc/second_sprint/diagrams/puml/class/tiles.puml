@@ -2,39 +2,45 @@
 package tile{
 
     class Tile{
-        + draw()
-        + action()
+        + draw(image: BufferedImage)
+        + action(maze: Maze, entity: Entity)
         + canBeCrossed(): boolean
+        + isStairs(): boolean
     }
 
     class Wall{
-        + draw()
-        + action()
+        + draw(image: BufferedImage)
+        + action(maze: Maze, entity: Entity)
         + canBeCrossed(): boolean
+        + isStairs(): boolean
     }
 
     class Treasure{
-        + draw()
-        + action()
+        + draw(image: BufferedImage)
+        + action(maze: Maze, entity: Entity)
         + canBeCrossed(): boolean
+        + isStairs(): boolean
     }
 
     class Trap{
-        + draw()
-        + action()
+        + draw(image: BufferedImage)
+        + action(maze: Maze, entity: Entity)
         + canBeCrossed(): boolean
+        + isStairs(): boolean
     }
 
     abstract Effect{
-        + {abstract} draw()
-        + {abstract} action()
+        + {abstract} draw(image: BufferedImage)
+        + {abstract} action(maze: Maze, entity: Entity)
         + {abstract} canBeCrossed(): boolean
+        + {abstract} isStairs(): boolean
     }
 
     class Stairs{
-        + draw()
-        + action()
+        + draw(image: BufferedImage)
+        + action(maze: Maze, entity: Entity)
         + canBeCrossed(): boolean
+        + isStairs(): boolean
     }
 
     class TileFactory << (S,#FF7700) Singleton >>{

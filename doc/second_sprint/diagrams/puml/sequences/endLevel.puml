@@ -1,0 +1,50 @@
+@startuml
+
+title When the player wants to quit the maze
+autonumber
+
+actor player
+
+participant ZelpopGame as z
+participant Dungeon as d
+participant "maze: Maze" as m
+participant "tile: Tile" as t
+participant "h: Hero" as h
+participant "position: Position" as p
+participant "MazeFactory" as mf
+
+player --> z: The player wants to leave the maze
+
+z -> d: changeLevel()
+
+d -> m: isFinished(): boolean
+
+m -> h: getPosition()
+
+h --> m: position
+
+m -> p: getX()
+
+p --> m: x
+
+m -> p: getY()
+
+p --> m: y
+
+m -> t: isStairs()
+
+t --> m: true
+
+m --> d: true
+
+
+d -> mf : getRandomMaze()
+
+note left
+    The dungeon is changing
+    the current maze
+end note
+
+mf --> d : maze
+
+@enduml

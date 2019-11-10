@@ -1,0 +1,34 @@
+@startuml
+
+title When a player is standing on a trap
+autonumber
+
+participant "maze: Maze" as m
+participant "t: Tile" as t
+participant "e: entity" as e
+
+m -> t: action(maze, e)
+
+t -> e: isHero()
+
+e --> t: hero
+
+opt hero == true
+
+    t -> e: takeDamage(trap damages)
+
+    t -> e: isAlive()
+
+    e --> t: alive
+
+    opt alive == false
+
+        t -> m: removeEntity(e)
+
+        m -> e!
+
+    end
+
+end
+
+@enduml
