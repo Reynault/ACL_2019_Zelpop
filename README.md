@@ -7,24 +7,10 @@ The idea is to develop a game using an agile method of developpement. (SCRUM)
 
 ### Running the game
 
-In order to execute the game, you'll have to be on the root of the project.
+A release has been made, it gives you a .jar and all the sources of the project. (tag = v1.0)
+You can download it and execute the .jar from git.
 
-A release has been done and it gives you a .jar and all the sources of the project. (v1.0)
-
-## Execute Using the JAR file
-
-- To run the game all you have to do is to execute the jar file which 
-can be found by the following path :
-
-```
-ACL_2019_Zelpop\out\artifacts\ACL_2019_Zelpop_jar\ACL_2019_Zelpop.jar
-```
-
-- You can execute the jar using this commands :
-
-```
-java -jar ACL_2019_Zelpop\out\artifacts\ACL_2019_Zelpop_jar\ACL_2019_Zelpop.jar
-```
+If you want to execute it from the main project, please follow the following steps: 
 
 ## Installing and running the game in Intellij
 
@@ -42,6 +28,21 @@ cause when you will run the project on intellij, it will needs to retrieve files
 
 - After uploading the project make sure that you add the JUnit 5 which been
 used to create the project tests.
+
+## Execute Using the JAR file
+
+- To run the game all you have to do is to execute the jar file which 
+can be found by the following path :
+
+```
+ACL_2019_Zelpop\out\artifacts\ACL_2019_Zelpop_jar\ACL_2019_Zelpop.jar
+```
+
+- You can execute the jar using this commands :
+
+```
+java -jar ACL_2019_Zelpop\out\artifacts\ACL_2019_Zelpop_jar\ACL_2019_Zelpop.jar
+```
 
 
 ## First Sprint report
