@@ -32,9 +32,6 @@ We had a few problems with the generation of sprites, we changed how
 it works by adding a sprite manager for entities and one for tiles.
 We had no problems implementing the rest of features.
 
-*************************************
-*************************************
-
 #Installing and running the game
 
 To mention that we worked with Intellij so in order to get the project
