@@ -1,0 +1,41 @@
+@startuml
+
+title When the player wants to launch a game
+autonumber
+
+actor player
+
+participant "game: ZelpopGame" as game
+participant "menu: State" as s
+
+player -> game: the player wants to create a new game
+
+game -> s: evolve(game, ENTER)
+
+create "inGame: State" as i
+s -> i: create
+
+note left
+    If the current selected
+    button is the one that
+    initiate the creation
+    of a new game
+end note
+
+create "Dungeon" as d
+i -> d: create
+
+create "m: Maze" as m
+d -> m: create
+
+ref over m
+    See diagram explaining
+    how to generate a new Maze
+end ref
+
+s -> game: setState(inGame)
+
+
+
+
+@enduml

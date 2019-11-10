@@ -6,20 +6,20 @@ class ZelpopGame{
 
 package state{
     interface GameState{
-        + draw(game: Game, image: BufferedImage)
-        + evolve(commande: Cmd)
+        + draw(image: BufferedImage)
+        + evolve(game: Game, commande: Cmd)
     }
 
     class InGame{
         - dungeon: Dungeon
 
-        + draw(game: Game, image: BufferedImage)
-        + evolve(commande: Cmd)
+        + draw(image: BufferedImage)
+        + evolve(game: Game, commande: Cmd)
     }
 
     class Menu{
-        + draw(game: Game, image: BufferedImage)
-        + evolve(commande: Cmd)
+        + draw(image: BufferedImage)
+        + evolve(game: Game, commande: Cmd)
     }
 }
 
