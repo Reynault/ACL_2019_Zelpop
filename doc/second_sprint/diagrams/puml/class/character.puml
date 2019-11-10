@@ -17,6 +17,7 @@ package entity{
         + attack(maze: Maze)
         + takeDamage(dmg: int)
         + isAlive(): boolean
+        + isHero(): boolean
         + getDmg(): int
     }
 
@@ -24,11 +25,13 @@ package entity{
         - score: int
         + increaseScore(bonus: int)
         + getScore(): int
+        + isHero(): boolean
         + draw()
     }
 
     class Monster{
         + draw()
+        + isHero(): boolean
     }
 
     package behavior{

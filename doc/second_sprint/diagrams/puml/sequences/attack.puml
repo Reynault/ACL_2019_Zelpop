@@ -22,7 +22,7 @@ d -> m: attack()
 
 m -> h: attack(maze)
 
-h -> b: attack(maze, h)
+h -> b: behave(maze, h, ATTACK)
 
 b -> as: attack(maze, h)
 
@@ -50,11 +50,19 @@ opt alive == false
 
     as -> m: killEntity(entity, h)
 
-    m -> s: killMonster( entity )
+    m -> h: isHero()
 
-    s --> m: bonus
+    h --> m: hero
 
-    m -> h: increaseScore( bonus )
+    opt hero == true
+
+        m -> s: killMonster( entity )
+
+        s --> m: bonus
+
+        m -> h: increaseScore( bonus )
+
+    end
 
     m -> e!: delete
 
