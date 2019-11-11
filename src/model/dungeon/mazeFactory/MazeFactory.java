@@ -8,6 +8,7 @@ import model.dungeon.tile.TileFactory;
 import model.global.GlobalDirection;
 import model.global.Position;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -155,7 +156,8 @@ public class MazeFactory {
             System.out.println(e.toString());
         }
 
-        tiles = generatorMaze(22);
+        //tiles = generatorMaze(20);
+        //tiles = generatorMaze(22);
 
         return new Maze(tiles, entities);
     }
@@ -168,247 +170,89 @@ public class MazeFactory {
      * @return the maze
      */
     private Tile[][] generatorMaze(int size){
-        Tile[][] tiles = new Tile[size][size];
-        Cell[][] cells = new Cell[size][size];
-
-        // Initialise cell table
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; j < cells[0].length; j++) {
-                cells[i][j] = new Cell();
+        Tile[][] maze = new Tile[size][size];
+        int[][] cells = new int[size][size];
+        for (int[] row : cells) {
+            for (int cell : row) {
+                cell = 0;
             }
         }
 
-        // Initialise values of cells
-        for (int i = 0; i < cells.length; i++) {
-            for (int j = 0; j < cells[0].length; j++) {
-                if (i == 0){
-                    if (j == 0){
-                        cells[i][j].setCell(null, cells[i][j + 1], cells[i + 1][j], null);
-                    }else{
-                        if (j == cells[0].length - 1){
-                            cells[i][j].setCell(null, null, cells[i + 1][j], cells[i][j - 1]);
-                        }else{
-                            cells[i][j].setCell(null, cells[i][j + 1], cells[i + 1][j], cells[i][j - 1]);
-                        }
-                    }
-                }else{
-                    if (i == cells.length - 1){
-                        if (j == 0){
-                            cells[i][j].setCell(cells[i - 1][j], cells[i][j + 1], null, null);
-                        }else {
-                            if (j == cells[0].length - 1){
-                                cells[i][j].setCell(cells[i - 1][j], null, null, cells[i][j - 1]);
-                            }else{
-                                cells[i][j].setCell(cells[i - 1][j], cells[i][j + 1], null, cells[i][j - 1]);
+        split(cells, 0, size, 0, size, 0, 0);
 
-                            }
-                        }
-                    }else{
-                        if (j == 0){
-                            cells[i][j].setCell(cells[i - 1][j], cells[i][j + 1], cells[i + 1][j], null);
-                        }else {
-                            if (j == cells[0].length - 1){
-                                cells[i][j].setCell(cells[i - 1][j], null, cells[i + 1][j], cells[i][j - 1]);
-                            }else{
-                                cells[i][j].setCell(cells[i - 1][j], cells[i][j + 1], cells[i + 1][j], cells[i][j - 1]);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        // Just displaying some information
-        for (Cell[] row :
-                cells) {
-            for (Cell cell :
-                    row) {
+        for (int[] row : cells) {
+            for (int cell : row) {
                 System.out.print(cell);
             }
             System.out.print("\n");
         }
 
-        // create a region out of cells
-        ArrayList<Cell> region = new ArrayList<>();
-        for (Cell[] row :
-                cells) {
-            region.addAll(Arrays.asList(row));
-        }
-
-        // split the list in order to have two regions
-        // and split each new regions into two again, and again, ...
-        split(region);
-        System.out.println("\n");
-
-        // Just displaying some information
-        for (Cell[] row :
-                cells) {
-            for (Cell cell :
-                    row) {
-                System.out.print(cell);
-            }
-            System.out.print("\n");
-        }
-
-        // Translate the cell table into a tile table
         int i=0;
         int j=0;
-        for (Cell[] row :
-                cells) {
-            for (Cell cell :
-                    row) {
-                if(cell.isWall()){
-                    tiles[i][j] = TileFactory.getWall();
+        for (int[] row : cells) {
+            for (int cell : row) {
+                if(cell == 1){
+                    maze[i][j] = TileFactory.getWall();
                 }else{
-                    tiles[i][j] = TileFactory.generateTile();
+                    maze[i][j] = TileFactory.generateTile();
                 }
                 j++;
             }
             j=0;
             i++;
         }
-
-
-        return tiles;
+        
+        return maze;
     }
 
-    class Cell{
-        Cell up;
-        Cell right;
-        Cell down;
-        Cell left;
-        Boolean wall = false;
-
-        public Cell() {
-        }
-
-        public void setCell(Cell up, Cell rigth, Cell down, Cell left) {
-            this.up = up;
-            this.right = rigth;
-            this.down = down;
-            this.left = left;
-        }
-        public Boolean isWall() {
-            return wall;
-        }
-        public void setWall() {
-            this.wall = true;
-        }
-
-        @Override
-        public String toString() {
-            if(wall){
-                return String.valueOf(1);
-            }else{
-                return String.valueOf(0);
+    private void split(int[][] cells, int xmin, int xmax, int ymin, int ymax, int prevx, int prevy) {
+        for (int[] row : cells) {
+            for (int cell : row) {
+                System.out.print(cell);
             }
+            System.out.print("\n");
         }
-    }
-
-    private ArrayList<Cell> split(ArrayList<Cell> region){
-        ArrayList<Cell> regionCopi = new ArrayList<>();
-        // We make a copy, cause we will work with a brand new one
-        // which will be used as a set
-        regionCopi = (ArrayList<Cell>) region.clone();
+        System.out.print("\n");
+        //final case to make sure we can split
+        if(xmax-xmin < 4 || ymax-ymin < 4){
+            return;
+        }
         Random random = new Random();
 
-        // We chose two random cells
-        int cell1 = random.nextInt(region.size() - 1);
-        int cell2 = cell1;
-        while (cell1 == cell2){
-            cell2 = random.nextInt(region.size() - 1);
+        // selection on cut verticaly and horizontaly
+        int cutx = prevx;
+        while (cutx == prevx || cutx == xmin || cutx == xmax-1){
+             cutx = random.nextInt(xmax - xmin ) + xmin;
+        }
+        int cuty = prevy;
+        while (cuty == prevy || cuty == ymin || cuty == ymax-1) {
+            cuty = random.nextInt(ymax - ymin) + ymin;
         }
 
-        // We instantiate two sub regions
-        ArrayList<Cell> region1 = new ArrayList<>();
-        ArrayList<Cell> region2 = new ArrayList<>();
-
-        // Each one will receive one cell
-        region1.add(regionCopi.get(cell1));
-        region2.add(regionCopi.get(cell2));
-
-        // Each cell is then removed from the main region
-        // (in order to make sure that we will not assign them again)
-        regionCopi.remove(cell1);
-        regionCopi.remove(cell2);
-
-        Collections.shuffle(regionCopi);
-        int kaput = 0;
-
-        // While the main set isn't empty, it means that we haven't assign every
-        // cell yet
-        while (!regionCopi.isEmpty()){
-            kaput++;
-            ArrayList<Cell> found = new ArrayList<>();
-            // For each cells contained in the set
-            for (Cell cell : regionCopi) {
-                // We check if there siblings are in one of
-                // the two regions, it will then be assign to it
-                if(region1.contains(cell.up) ||
-                        region1.contains(cell.right) ||
-                        region1.contains(cell.down) ||
-                        region1.contains(cell.left)){
-                    region1.add(cell);
-                    found.add(cell);
-                }else if(region2.contains(cell.up) ||
-                            region2.contains(cell.right) ||
-                            region2.contains(cell.down) ||
-                            region2.contains(cell.left)){
-                        region2.add(cell);
-                        found.add(cell);
-                }
-            }
-
-            // Then we remove every assigned cell from
-            // the main set
-            regionCopi.removeAll(found);
-            //TODO: REGLER CE BUG
-            if (kaput > region.size()*2){
-                return null;
-            }
-        }
-
-        // Once all cells are assigned, we will create
-        // the separation with walls
-        if (region1.size() > 10  && region2.size() > 10){
-            ArrayList<Cell> found = new ArrayList<>();
-            // For each cells in the first region,
-            // if there is a sibling that is from de second region,
-            // then it's a wall
-            for (Cell cell :
-                    region1) {
-                if(region2.contains(cell.up) ||
-                        region2.contains(cell.right) ||
-                        region2.contains(cell.down) ||
-                        region2.contains(cell.left)) {
-                    cell.setWall();
-                    found.add(cell);
-                }
-            }
-            // And we remove all the wall from the first region
-            region1.removeAll(found);
-            if(found.size() > 1){
-                // Then we create a door
-                found.get(random.nextInt(found.size() - 1)).wall = false;
-
-                // And we do the same for each region
-
-
-                if (region1.size() > 20){
-                    System.out.println("Size Region1 : " + region1.size());
-                    split(region1);
-                }
-
-                if (region2.size() > 20){
-                    System.out.println("Size Region2 : " + region2.size());
-                    split(region2);
+        // placing 1 on cut lines
+        for (int i = ymin; i < ymax; i++) {
+            for (int j = xmin; j < xmax; j++) {
+                if (i == cuty || j == cutx){
+                    cells[i][j] = 1;
                 }
             }
         }
+        int doorx1 = random.nextInt(cutx - xmin ) + xmin;
+        int doorx2 = random.nextInt(xmax - cutx ) + cutx;
+        int doory1 = random.nextInt(cuty - ymin ) + ymin;
+        int doory2 = random.nextInt(ymax - cuty ) + cuty;
 
-        return null;
+        cells[cuty][doorx1] = 0;
+        cells[cuty][doorx2] = 0;
+
+        cells[doory1][cutx] = 0;
+        cells[doory2][cutx] = 0;
+
+        split(cells, xmin, cutx, ymin, cuty, doorx1, doory1);
+        split(cells, cutx+1, xmax, ymin, cuty, doorx1, doory2);
+        split(cells, xmin, cutx, cuty+1, ymax, doorx2, doory1);
+        split(cells, cutx+1, xmax, cuty+1, ymax, doorx2, doory2);
+
     }
-
-
 }
 
