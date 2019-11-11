@@ -164,12 +164,13 @@ public class MazeFactory {
 
     /**
      * Generation of a simple maze using an algorithm that
-     * split regions into 2 recursively in order to have a maze
+     * split regions into 4 recursively in order to have a maze
      * filled with empty rooms
      * @param size the size of the labyrinth
      * @return the maze
      */
     private Tile[][] generatorMaze(int size){
+        // init of return and int[][] to generate maze
         Tile[][] maze = new Tile[size][size];
         int[][] cells = new int[size][size];
         for (int[] row : cells) {
@@ -187,6 +188,7 @@ public class MazeFactory {
             System.out.print("\n");
         }
 
+        // convertion of int[][ into a maze
         int i=0;
         int j=0;
         for (int[] row : cells) {
@@ -206,13 +208,6 @@ public class MazeFactory {
     }
 
     private void split(int[][] cells, int xmin, int xmax, int ymin, int ymax, int prevx, int prevy) {
-        for (int[] row : cells) {
-            for (int cell : row) {
-                System.out.print(cell);
-            }
-            System.out.print("\n");
-        }
-        System.out.print("\n");
         //final case to make sure we can split
         if(xmax-xmin < 4 || ymax-ymin < 4){
             return;
@@ -237,17 +232,20 @@ public class MazeFactory {
                 }
             }
         }
+        // generatin 2 set of 2 door to remove to like 4 regions together
         int doorx1 = random.nextInt(cutx - xmin ) + xmin;
         int doorx2 = random.nextInt(xmax - cutx ) + cutx;
         int doory1 = random.nextInt(cuty - ymin ) + ymin;
         int doory2 = random.nextInt(ymax - cuty ) + cuty;
 
+        // oppening the door
         cells[cuty][doorx1] = 0;
         cells[cuty][doorx2] = 0;
 
         cells[doory1][cutx] = 0;
         cells[doory2][cutx] = 0;
 
+        // calling recursivly on those 4 regions
         split(cells, xmin, cutx, ymin, cuty, doorx1, doory1);
         split(cells, cutx+1, xmax, ymin, cuty, doorx1, doory2);
         split(cells, xmin, cutx, cuty+1, ymax, doorx2, doory1);
