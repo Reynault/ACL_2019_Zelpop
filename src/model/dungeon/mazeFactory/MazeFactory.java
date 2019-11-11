@@ -274,7 +274,7 @@ public class MazeFactory {
 
     class Cell{
         Cell up;
-        Cell rigth;
+        Cell right;
         Cell down;
         Cell left;
         Boolean wall = false;
@@ -284,7 +284,7 @@ public class MazeFactory {
 
         public void setCell(Cell up, Cell rigth, Cell down, Cell left) {
             this.up = up;
-            this.rigth = rigth;
+            this.right = rigth;
             this.down = down;
             this.left = left;
         }
@@ -307,7 +307,6 @@ public class MazeFactory {
 
     private ArrayList<Cell> split(ArrayList<Cell> region){
         ArrayList<Cell> regionCopi = new ArrayList<>();
-
         // We make a copy, cause we will work with a brand new one
         // which will be used as a set
         regionCopi = (ArrayList<Cell>) region.clone();
@@ -346,19 +345,17 @@ public class MazeFactory {
                 // We check if there siblings are in one of
                 // the two regions, it will then be assign to it
                 if(region1.contains(cell.up) ||
-                        region1.contains(cell.rigth) ||
+                        region1.contains(cell.right) ||
                         region1.contains(cell.down) ||
                         region1.contains(cell.left)){
                     region1.add(cell);
                     found.add(cell);
-                }else{
-                    if(region2.contains(cell.up) ||
-                            region2.contains(cell.rigth) ||
+                }else if(region2.contains(cell.up) ||
+                            region2.contains(cell.right) ||
                             region2.contains(cell.down) ||
                             region2.contains(cell.left)){
                         region2.add(cell);
                         found.add(cell);
-                    }
                 }
             }
 
@@ -381,7 +378,7 @@ public class MazeFactory {
             for (Cell cell :
                     region1) {
                 if(region2.contains(cell.up) ||
-                        region2.contains(cell.rigth) ||
+                        region2.contains(cell.right) ||
                         region2.contains(cell.down) ||
                         region2.contains(cell.left)) {
                     cell.setWall();
