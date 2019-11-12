@@ -9,6 +9,8 @@ import engine.Cmd;
 import engine.Game;
 import model.dungeon.Dungeon;
 import model.global.GlobalDirection;
+import model.state.GameState;
+import model.state.Menu;
 
 /**
  * @author Horatiu Cirstea, Vincent Thomas
@@ -19,31 +21,23 @@ import model.global.GlobalDirection;
  */
 public class ZelpopGame implements Game {
 
-    private Dungeon dungeon;
+	private GameState currentState;
 
 	/**
 	 * constructeur avec fichier source pour le help
 	 * 
 	 */
-	public ZelpopGame(String source) {
-		BufferedReader helpReader;
-		try {
-			helpReader = new BufferedReader(new FileReader(source));
-			String ligne;
-			while ((ligne = helpReader.readLine()) != null) {
-				System.out.println(ligne);
-			}
-			helpReader.close();
-		} catch (IOException e) {
-			System.out.println("Help not available");
-		}
-
-		dungeon = new Dungeon();
+	public ZelpopGame() {
+		currentState = new Menu();
 	}
 
 	public void draw(BufferedImage img){
-	    dungeon.draw(img);
+		currentState.draw(img);
     }
+
+	public void setState(GameState state) {
+		currentState = state;
+	}
 
 	/**
 	 * faire evoluer le jeu suite a une commande
@@ -52,22 +46,7 @@ public class ZelpopGame implements Game {
 	 */
 	@Override
 	public void evolve(Cmd commande) {
-		switch (commande){
-			case RIGHT:
-			    dungeon.moveHero(GlobalDirection.RIGHT);
-				break;
-			case DOWN:
-                dungeon.moveHero(GlobalDirection.DOWN);
-			    break;
-			case UP:
-                dungeon.moveHero(GlobalDirection.UP);
-			    break;
-			case LEFT:
-                dungeon.moveHero(GlobalDirection.LEFT);
-			    break;
-		}
-
-		dungeon.updateAll();
+		currentState.evolve(this, commande);
 	}
 
 	/**
@@ -77,6 +56,14 @@ public class ZelpopGame implements Game {
 	public boolean isFinished() {
 		// le jeu n'est jamais fini
 		return false;
+	}
+
+	public void save(){
+
+	}
+
+	public Dungeon load(){
+		return null;
 	}
 
 }

@@ -32,9 +32,3 @@ behavior of tiles such as traps and treasures which are based on the other syste
 |    Matthieu    | Save and continue a game        |   -   |   -   |
 |     Julien     | The stairs tile                 |   -   |   -   |
 | Reynault, Reda | New menu interface              |   -   |   -   |
-
-## Conception
-
-### Class Diagram
-
-### Sequences Diagram

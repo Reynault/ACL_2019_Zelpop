@@ -27,6 +27,7 @@ public class TextureFactory {
     private static BufferedImage monster;
     private static BufferedImage tiles;
     private static BufferedImage chest;
+    private static BufferedImage text;
 
     private TextureFactory(){
         try {
@@ -46,6 +47,10 @@ public class TextureFactory {
             inputStream
                     = TextureFactory.class.getClassLoader().getResourceAsStream("sprites/chest.png");
             chest = ImageIO.read(inputStream);
+
+            inputStream
+                    = TextureFactory.class.getClassLoader().getResourceAsStream("sprites/text.png");
+            text = ImageIO.read(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,6 +83,9 @@ public class TextureFactory {
     public BufferedImage getTreasure(){
         BufferedImage sprite = chest.getSubimage(0 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
+    }
+    public BufferedImage getText(){
+        return text;
     }
 
     public static TextureFactory getTextureFactory(){
