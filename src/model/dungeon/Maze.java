@@ -78,7 +78,7 @@ public class Maze {
                     // Drawing the current tile
                     tiles[currentY][currentX].draw(img,
                             (x * tilePositionX) + xShift,
-                            (y * tilePositionY) + yShift);
+                            (y * tilePositionY) + yShift, GlobalSprites.getScaling());
                 } else {
                     // Otherwise, the void
                     crayon.fillRect(
@@ -99,14 +99,14 @@ public class Maze {
                     pos.getY() >= (posHero.getY() - nbTileDisplayed) && pos.getY() <= (posHero.getY() + nbTileDisplayed)) {
                 currentX = -(posHero.getX() - pos.getX());
                 currentY = -(posHero.getY() - pos.getY());
-                e.draw(img, (currentX * tilePositionX) + xShift, (currentY * tilePositionY) + yShift);
+                e.draw(img, (currentX * tilePositionX) + xShift, (currentY * tilePositionY) + yShift, GlobalSprites.getScaling());
             }
         }
 
         // Drawing hero at the center of the screen
-        hero.draw(img, xShift, yShift);
+        hero.draw(img, xShift, yShift, GlobalSprites.getScaling());
 
-        // Drawing the side bar which inform the player of informations such as the hero's HP
+        // Drawing the side bar which inform the player of with things like the hero's HP
         Color sideBarColor = new Color(
                 0x2E2E2E
         );
@@ -123,16 +123,41 @@ public class Maze {
                 sideBarSizeY
         );
 
+
+        // Drawing the mini-map
+        int miniShiftx = xShift + nbTileDisplayed * unit + unit;
+        int miniShifty = yShift - nbTileDisplayed * unit + unit;
+
+        int miniTilePositionX = (GlobalSprites.get8Sprite() * GlobalSprites.getMiniScaling());
+        int miniTilePositionY = (GlobalSprites.get8Sprite() * GlobalSprites.getMiniScaling());
+
+        // Drawing surrounding tiles
+        for (int x = 0; x < tiles.length; x++) {
+            for (int y = 0; y < tiles[x].length; y++) {
+                // Drawing the current tile
+                tiles[y][x].draw(img,
+                        (x * miniTilePositionX) + miniShiftx,
+                        (y * miniTilePositionY) + miniShifty, GlobalSprites.getMiniScaling());
+            }
+        }
+
+        // Drawing mini hero
+        hero.draw(img,
+                miniShiftx + (posHero.getX() * GlobalSprites.get8Sprite() * GlobalSprites.getMiniScaling()),
+                miniShifty + (posHero.getY() * GlobalSprites.get8Sprite() * GlobalSprites.getMiniScaling()),
+                GlobalSprites.getMiniScaling());
+
+
         // Drawing the HP label
         TextManager text = new TextManager();
         BufferedImage label = text.getString("HP", textColor);
 
-        int sideBarElementX = xShift + nbTileDisplayed * GlobalSprites.getScaling() * GlobalSprites.get8Sprite() + unit;
+        int sideBarElementX = xShift + nbTileDisplayed * unit + unit;
         
         crayon.drawImage(
                 label,
                 sideBarElementX,
-                yShift - nbTileDisplayed * unit + unit,
+                yShift - nbTileDisplayed * unit + unit * 8,
                 label.getWidth(),
                 label.getHeight(),
                 null
@@ -143,7 +168,7 @@ public class Maze {
 
         crayon.drawRect(
                 sideBarElementX,
-                yShift - nbTileDisplayed * unit + unit * 2,
+                yShift - nbTileDisplayed * unit + unit * 10,
                 unit * 6,
                 unit
         );
@@ -152,7 +177,7 @@ public class Maze {
 
         crayon.fillRect(
                 sideBarElementX,
-                yShift - nbTileDisplayed * unit + unit * 2,
+                yShift - nbTileDisplayed * unit + unit * 10,
                 unit *  HPratio * 6,
                 unit
         );
@@ -160,9 +185,7 @@ public class Maze {
         crayon.dispose();
 
         // FORMER VERSION OF DRAW
-
-
-/*
+        /*
         int x = 0;
         int y = 0;
         for (Tile[] row :

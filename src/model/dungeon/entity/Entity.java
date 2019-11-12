@@ -57,32 +57,19 @@ public abstract class Entity {
     }
 
     /**
-     * Draw the entity
-     * @param img the image in which the entity will be drawn
-     */
-    public void draw(BufferedImage img){
-        Graphics2D crayon = (Graphics2D) img.getGraphics();
-        crayon.drawImage(spriteManager.getCurrentSprite(),
-                position.getX() * GlobalSprites.getScaling() * GlobalSprites.get8Sprite(),
-                position.getY() * GlobalSprites.getScaling() * GlobalSprites.get8Sprite(),
-                spriteManager.getCurrentSprite().getWidth() * GlobalSprites.getScaling(),
-                spriteManager.getCurrentSprite().getHeight() * GlobalSprites.getScaling(),
-                null);
-    }
-
-    /**
      * Draw the entity at a given position
      * @param img the image in which the entity will be drawn
      * @param x x position
      * @param y y position
+     * @param scale scale of the entity
      */
-    public void draw(BufferedImage img, int x, int y){
+    public void draw(BufferedImage img, int x, int y, int scale){
         Graphics2D crayon = (Graphics2D) img.getGraphics();
         crayon.drawImage(spriteManager.getCurrentSprite(),
                 x,
                 y,
-                spriteManager.getCurrentSprite().getWidth() * GlobalSprites.getScaling(),
-                spriteManager.getCurrentSprite().getHeight() * GlobalSprites.getScaling(),
+                spriteManager.getCurrentSprite().getWidth() * scale,
+                spriteManager.getCurrentSprite().getHeight() * scale,
                 null);
     }
 }

@@ -12,7 +12,7 @@ public abstract class Effect extends Tile {
     }
 
     @Override
-    public abstract void draw(BufferedImage img, int x, int y);
+    public abstract void draw(BufferedImage img, int x, int y, int scale);
 
     @Override
     public abstract void action(Entity e);
