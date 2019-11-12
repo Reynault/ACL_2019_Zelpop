@@ -19,8 +19,8 @@ public class Trap extends Effect {
         decore.draw(img, x, y);
         Graphics2D crayon = (Graphics2D) img.getGraphics();
         crayon.drawImage(spriteManager.getCurrentSprite(),
-                x * GlobalSprites.getScaling() * GlobalSprites.get8Sprite(),
-                y * GlobalSprites.getScaling() * GlobalSprites.get8Sprite(),
+                x,
+                y,
                 spriteManager.getCurrentSprite().getWidth() * GlobalSprites.getScaling(),
                 spriteManager.getCurrentSprite().getHeight() * GlobalSprites.getScaling(),
                 null);
