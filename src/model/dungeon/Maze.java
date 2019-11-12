@@ -154,8 +154,8 @@ public class Maze {
 
         // FORMER VERSION OF DRAW
 
-        /*
 
+/*
         int x = 0;
         int y = 0;
         for (Tile[] row :
