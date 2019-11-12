@@ -157,7 +157,7 @@ public class MazeFactory {
         }
 
         //tiles = generatorMaze(20);
-        //tiles = generatorMaze(22);
+        tiles = generatorMaze(22);
 
         return new Maze(tiles, entities);
     }
@@ -179,7 +179,11 @@ public class MazeFactory {
             }
         }
 
-        split(cells, 0, size, 0, size, 0, 0);
+        split(cells, 0, size, 0, size,
+                new ArrayList<Integer>(Arrays.asList(0)),
+                new ArrayList<Integer>(Arrays.asList(0)),
+                new ArrayList<Integer>(Arrays.asList(0)),
+                new ArrayList<Integer>(Arrays.asList(0)));
 
         for (int[] row : cells) {
             for (int cell : row) {
@@ -207,20 +211,20 @@ public class MazeFactory {
         return maze;
     }
 
-    private void split(int[][] cells, int xmin, int xmax, int ymin, int ymax, int prevx, int prevy) {
+    private void split(int[][] cells, int xmin, int xmax, int ymin, int ymax, ArrayList<Integer> prevxu, ArrayList<Integer> prevyr, ArrayList<Integer> prevxd, ArrayList<Integer> prevyl) {
         //final case to make sure we can split
-        if(xmax-xmin < 4 || ymax-ymin < 4){
+        if(xmax-xmin < prevxd.size() + prevxd.size() + 3 || ymax-ymin < prevyl.size() + prevyr.size() + 3){
             return;
         }
         Random random = new Random();
 
         // selection on cut verticaly and horizontaly
-        int cutx = prevx;
-        while (cutx == prevx || cutx == xmin || cutx == xmax-1){
-             cutx = random.nextInt(xmax - xmin ) + xmin;
+        int cutx = prevxd.get(0);
+        while (prevxd.contains(cutx) || prevxu.contains(cutx) || cutx == xmin || cutx == xmax-1){
+            cutx = random.nextInt(xmax - xmin ) + xmin;
         }
-        int cuty = prevy;
-        while (cuty == prevy || cuty == ymin || cuty == ymax-1) {
+        int cuty = prevyl.get(0);
+        while (prevyl.contains(cuty) || prevyr.contains(cuty) || cuty == ymin || cuty == ymax-1) {
             cuty = random.nextInt(ymax - ymin) + ymin;
         }
 
@@ -232,11 +236,13 @@ public class MazeFactory {
                 }
             }
         }
+        System.out.println("Cutx: " + cutx + " | xmin: " + xmin + " | xmax: " + xmax );
+        System.out.println("Cuty: " + cuty + " | ymin: " + ymin + " | ymax: " + ymax );
         // generatin 2 set of 2 door to remove to like 4 regions together
         int doorx1 = random.nextInt(cutx - xmin ) + xmin;
-        int doorx2 = random.nextInt(xmax - cutx ) + cutx;
+        int doorx2 = random.nextInt(xmax - cutx-1 ) + cutx+1;
         int doory1 = random.nextInt(cuty - ymin ) + ymin;
-        int doory2 = random.nextInt(ymax - cuty ) + cuty;
+        int doory2 = random.nextInt(ymax - cuty-1 ) + cuty+1;
 
         // oppening the door
         cells[cuty][doorx1] = 0;
@@ -246,10 +252,33 @@ public class MazeFactory {
         cells[doory2][cutx] = 0;
 
         // calling recursivly on those 4 regions
+        /**
         split(cells, xmin, cutx, ymin, cuty, doorx1, doory1);
         split(cells, cutx+1, xmax, ymin, cuty, doorx1, doory2);
         split(cells, xmin, cutx, cuty+1, ymax, doorx2, doory1);
         split(cells, cutx+1, xmax, cuty+1, ymax, doorx2, doory2);
+        **/
+
+        split(cells, xmin, cutx, ymin, cuty,
+                prevxu,
+                new ArrayList<Integer>(Arrays.asList(doory1)),
+                new ArrayList<Integer>(Arrays.asList(doorx1)),
+                prevyl);
+        split(cells, cutx+1, xmax, ymin, cuty,
+                prevxu,
+                prevyr,
+                new ArrayList<Integer>(Arrays.asList(doorx2)),
+                new ArrayList<Integer>(Arrays.asList(doory1)));
+        split(cells, xmin, cutx, cuty+1, ymax,
+                new ArrayList<Integer>(Arrays.asList(doorx1)),
+                new ArrayList<Integer>(Arrays.asList(doory2)),
+                prevxd,
+                prevyl);
+        split(cells, cutx+1, xmax, cuty+1, ymax,
+                new ArrayList<Integer>(Arrays.asList(doorx1)),
+                prevyr,
+                prevxd,
+                new ArrayList<Integer>(Arrays.asList(doory2)));
 
     }
 }
