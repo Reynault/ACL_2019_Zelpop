@@ -1,5 +1,6 @@
 package model.dungeon;
 
+import javafx.geometry.Pos;
 import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
@@ -78,12 +79,6 @@ public class Maze {
                     tiles[currentY][currentX].draw(img,
                             (x * tilePositionX) + xShift,
                             (y * tilePositionY) + yShift);
-
-                    // Drawing entities on this tile
-                    Entity e = getEntity(currentX, currentY);
-                    if( e != null){
-                        e.draw(img, (x * tilePositionX) + xShift, (y * tilePositionY) + yShift);
-                    }
                 } else {
                     // Otherwise, the void
                     crayon.fillRect(
@@ -93,6 +88,18 @@ public class Maze {
                             unit
                     );
                 }
+            }
+        }
+
+        // Drawing surrounding entities
+        for(Entity e: entities) {
+            Position pos = e.getPosition();
+            // If it is nearby
+            if (pos.getX() >= (posHero.getX() - nbTileDisplayed) && pos.getX() <= (posHero.getX() + nbTileDisplayed) &&
+                    pos.getY() >= (posHero.getY() - nbTileDisplayed) && pos.getY() <= (posHero.getY() + nbTileDisplayed)) {
+                currentX = -(posHero.getX() - pos.getX());
+                currentY = -(posHero.getY() - pos.getY());
+                e.draw(img, (currentX * tilePositionX) + xShift, (currentY * tilePositionY) + yShift);
             }
         }
 
