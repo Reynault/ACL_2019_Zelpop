@@ -5,5 +5,5 @@ package engine;
  *
  */
 public enum Cmd {
-	 LEFT,RIGHT,UP,DOWN,IDLE,ATTACK,LEAVE_LEVEL;
+	 LEFT,RIGHT,UP,DOWN,IDLE,ATTACK,LEAVE_LEVEL,EXIT_GAME;
 }

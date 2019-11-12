@@ -73,6 +73,9 @@ public class ZelpopController implements GameController {
 			case KeyEvent.VK_SPACE:
 				this.commandeEnCours = Cmd.ATTACK;
 				break;
+			case KeyEvent.VK_ESCAPE:
+				this.commandeEnCours = Cmd.EXIT_GAME;
+				break;
 		}
 	}
 

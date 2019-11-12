@@ -7,6 +7,7 @@ import model.dungeon.tile.Tile;
 import model.global.GlobalDirection;
 import model.global.GlobalSprites;
 import model.global.Position;
+import sprite.spriteManager.TextManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -45,25 +46,30 @@ public class Maze {
         int width, height,
                 xShift, yShift,
                 currentX, currentY,
-                tilePositionX, tilePositionY;
+                tilePositionX, tilePositionY,
+                sideBarSizeX, sideBarSizeY;
 
-        int screenX = 9;
+        int nbTileDisplayed = 9;
         Position posHero = hero.getPosition();
-
+        int unit = GlobalSprites.get8Sprite() * GlobalSprites.getScaling();
+        
         crayon.setColor(Color.BLACK);
 
         width = img.getWidth();
         height = img.getHeight();
 
-        xShift = width / 2;
+        sideBarSizeX = 8*(GlobalSprites.getScaling() * GlobalSprites.get8Sprite());
+        sideBarSizeY = (nbTileDisplayed*2+1) * unit;
+
+        xShift = width / 2 - sideBarSizeX/2;
         yShift = height / 2;
 
         tilePositionX = (GlobalSprites.getScaling() * GlobalSprites.get8Sprite());
         tilePositionY = (GlobalSprites.getScaling() * GlobalSprites.get8Sprite());
 
         // Drawing surrounding tiles
-        for (int x = -screenX; x <= screenX; x++) {
-            for (int y = -screenX; y <= screenX; y++) {
+        for (int x = -nbTileDisplayed; x <= nbTileDisplayed; x++) {
+            for (int y = -nbTileDisplayed; y <= nbTileDisplayed; y++) {
                 currentX = posHero.getX() + x;
                 currentY = posHero.getY() + y;
                 // If the tile exists
@@ -83,8 +89,8 @@ public class Maze {
                     crayon.fillRect(
                             (x * tilePositionX) + xShift,
                             (y * tilePositionY) + yShift,
-                            GlobalSprites.get8Sprite() * GlobalSprites.getScaling(),
-                            GlobalSprites.get8Sprite() * GlobalSprites.getScaling()
+                            unit,
+                            unit
                     );
                 }
             }
@@ -93,7 +99,61 @@ public class Maze {
         // Drawing hero at the center of the screen
         hero.draw(img, xShift, yShift);
 
+        // Drawing the side bar which inform the player of informations such as the hero's HP
+        Color sideBarColor = new Color(
+                0x2E2E2E
+        );
+        Color textColor = Color.WHITE;
+        Color pvColor = new Color(0x890502);
+
+        crayon.setColor(sideBarColor);
+
+        // Drawing the bar
+        crayon.fillRect(
+                xShift + nbTileDisplayed * unit,
+                yShift - nbTileDisplayed * unit,
+                sideBarSizeX,
+                sideBarSizeY
+        );
+
+        // Drawing the HP label
+        TextManager text = new TextManager();
+        BufferedImage label = text.getString("HP", textColor);
+
+        int sideBarElementX = xShift + nbTileDisplayed * GlobalSprites.getScaling() * GlobalSprites.get8Sprite() + unit;
+        
+        crayon.drawImage(
+                label,
+                sideBarElementX,
+                yShift - nbTileDisplayed * unit + unit,
+                label.getWidth(),
+                label.getHeight(),
+                null
+        );
+
+        // Drawing the HP bar
+        crayon.setColor(pvColor);
+
+        crayon.drawRect(
+                sideBarElementX,
+                yShift - nbTileDisplayed * unit + unit * 2,
+                unit * 6,
+                unit
+        );
+
+        int HPratio = hero.getMaxHp() / hero.getHp();
+
+        crayon.fillRect(
+                sideBarElementX,
+                yShift - nbTileDisplayed * unit + unit * 2,
+                unit *  HPratio * 6,
+                unit
+        );
+
+        // FORMER VERSION OF DRAW
+
         /*
+
         int x = 0;
         int y = 0;
         for (Tile[] row :

@@ -67,12 +67,10 @@ public class GameEngineGraphical {
 			lockFPS();
 			// demande controle utilisateur
 			Cmd c = this.gameController.getCommand();
-			if (c != Cmd.IDLE) {
-				// fait evoluer le game
-				this.game.evolve(c);
-				// affiche le game
-				this.gui.paint();
-			}
+			// fait evoluer le game
+			this.game.evolve(c);
+			// affiche le game
+			this.gui.paint();
 			this.gameController.resetCommand();
 		}
 	}

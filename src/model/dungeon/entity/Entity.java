@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 
 public abstract class Entity {
 
+    protected int maxHp;
     protected int hp;
     protected boolean passThrought;
     protected Position position;
@@ -18,6 +19,7 @@ public abstract class Entity {
     protected SpriteManager spriteManager;
 
     protected Entity(int hp, boolean passThrought, Position position, Behavior behavior, SpriteManager spriteManager) {
+        this.maxHp = hp;
         this.hp = hp;
         this.passThrought = passThrought;
         this.position = position;
@@ -25,6 +27,13 @@ public abstract class Entity {
         this.spriteManager = spriteManager;
     }
 
+    public int getHp() {
+        return hp;
+    }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
 
     public Position getPosition(){
         return position;

@@ -30,21 +30,26 @@ public class InGame implements GameState{
 
     @Override
     public void evolve(ZelpopGame game, Cmd commande) {
-        switch (commande){
-            case RIGHT:
-                dungeon.moveHero(GlobalDirection.RIGHT);
-                break;
-            case DOWN:
-                dungeon.moveHero(GlobalDirection.DOWN);
-                break;
-            case UP:
-                dungeon.moveHero(GlobalDirection.UP);
-                break;
-            case LEFT:
-                dungeon.moveHero(GlobalDirection.LEFT);
-                break;
-        }
+        if(commande != Cmd.IDLE) {
+            switch (commande) {
+                case RIGHT:
+                    dungeon.moveHero(GlobalDirection.RIGHT);
+                    break;
+                case DOWN:
+                    dungeon.moveHero(GlobalDirection.DOWN);
+                    break;
+                case UP:
+                    dungeon.moveHero(GlobalDirection.UP);
+                    break;
+                case LEFT:
+                    dungeon.moveHero(GlobalDirection.LEFT);
+                    break;
+                case EXIT_GAME:
+                    System.exit(0);
+                    break;
+            }
 
-        dungeon.updateAll();
+            dungeon.updateAll();
+        }
     }
 }

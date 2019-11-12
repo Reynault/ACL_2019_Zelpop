@@ -72,9 +72,19 @@ public class TextManager {
         }
 
         // Special
+
+        // Space
         images[32] = text.getSubimage(
                 11*taille,
                 0,
+                taille,
+                taille
+        );
+
+        // :
+        images[58] = text.getSubimage(
+                10*taille,
+                7*taille,
                 taille,
                 taille
         );
