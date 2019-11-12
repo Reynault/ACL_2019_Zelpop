@@ -10,4 +10,8 @@ public abstract class MenuButton {
     }
 
     public abstract void trigger(ZelpopGame game);
+
+    public String getName(){
+        return name;
+    }
 }

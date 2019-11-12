@@ -19,7 +19,7 @@ public class Menu implements GameState{
     private int selectedButton;
     private TextManager textManager;
 
-    private static int BUTTON_WIDTH = GlobalSprites.get8Sprite()*GlobalSprites.getScaling()*6;
+    private static int BUTTON_WIDTH = GlobalSprites.get8Sprite()*GlobalSprites.getScaling()*10;
     private static int BUTTON_HEIGHT = GlobalSprites.get8Sprite()*GlobalSprites.getScaling()*3;
     private static int TOP_SPAN = 50;
 
@@ -38,15 +38,25 @@ public class Menu implements GameState{
 
     @Override
     public void draw(BufferedImage image) {
-        Graphics2D crayon = (Graphics2D) image.getGraphics();
-        crayon.setColor(Color.BLACK);
-        int width = image.getWidth();
-        int height = image.getHeight();
-
         MenuButton button;
+        BufferedImage titleImage;
+        int width, height;
+        Color backgroundColor, titleColor, buttonColor, selectedButtonColor;
 
-        BufferedImage titleImage = textManager.getString(title, Color.RED);
-        BufferedImage buttonImage;
+        Graphics2D crayon = (Graphics2D) image.createGraphics();
+
+        width = image.getWidth();
+        height = image.getHeight();
+
+        backgroundColor = new Color(0x4A362A);
+        titleColor = Color.WHITE;
+        buttonColor = Color.BLACK;
+        selectedButtonColor = Color.GRAY;
+
+        crayon.setBackground(backgroundColor);
+        crayon.clearRect(0,0, width, height);
+
+        titleImage = textManager.getString(title, titleColor);
 
         crayon.drawImage(
                 titleImage,
@@ -59,13 +69,27 @@ public class Menu implements GameState{
 
         for(int i = 0; i < buttons.length; i++){
             button = buttons[i];
-
-//            crayon.draw(
-//                    ((width/2) - (BUTTON_WIDTH/2)),
-//                    ((TOP_SPAN + BUTTON_HEIGHT) * i) + (titleImage.getHeight() + TOP_SPAN*2),
-//                    BUTTON_WIDTH,
-//                    BUTTON_HEIGHT
-//            );
+            if(i == selectedButton){
+                crayon.setColor(selectedButtonColor);
+            }else{
+                crayon.setColor(buttonColor);
+            }
+            crayon.fillRect(
+                    ((width/2) - (BUTTON_WIDTH/2)),
+                    ((TOP_SPAN + BUTTON_HEIGHT) * i) + (titleImage.getHeight() + TOP_SPAN*3),
+                    BUTTON_WIDTH,
+                    BUTTON_HEIGHT
+            );
+            titleImage = textManager.getString(button.getName(), titleColor);
+            crayon.drawImage(
+                    titleImage,
+                    ((width/2) - (titleImage.getWidth()/2)),
+                    ((TOP_SPAN + BUTTON_HEIGHT) * i) + (titleImage.getHeight() + TOP_SPAN*3) + (BUTTON_HEIGHT/2) -
+                            (GlobalSprites.get8Sprite() * GlobalSprites.getScaling())/2,
+                    titleImage.getWidth(),
+                    titleImage.getHeight(),
+                    null
+            );
         }
     }
 

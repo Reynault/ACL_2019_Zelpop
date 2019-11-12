@@ -70,6 +70,14 @@ public class TextManager {
 
             x ++;
         }
+
+        // Special
+        images[32] = text.getSubimage(
+                11*taille,
+                0,
+                taille,
+                taille
+        );
     }
 
     public BufferedImage getString(String s, Color color){
@@ -97,8 +105,6 @@ public class TextManager {
                     }
                 }
             }
-
-            crayon.setBackground(Color.BLUE);
 
             crayon.drawImage(
                     character,
