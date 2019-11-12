@@ -126,6 +126,8 @@ public class TextManager {
             );
         }
 
+        crayon.dispose();
+
         return image;
     }
 

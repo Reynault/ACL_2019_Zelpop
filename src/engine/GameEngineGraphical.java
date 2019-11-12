@@ -59,7 +59,6 @@ public class GameEngineGraphical {
 
 		// init
 		this.gui.paint();
-		this.gui.paint();
 
 		// boucle de game
 		while (!this.game.isFinished()) {
@@ -67,10 +66,12 @@ public class GameEngineGraphical {
 			lockFPS();
 			// demande controle utilisateur
 			Cmd c = this.gameController.getCommand();
-			// fait evoluer le game
-			this.game.evolve(c);
-			// affiche le game
-			this.gui.paint();
+			if(c != Cmd.IDLE) {
+				// fait evoluer le game
+				this.game.evolve(c);
+				// affiche le game
+				this.gui.paint();
+			}
 			this.gameController.resetCommand();
 		}
 	}

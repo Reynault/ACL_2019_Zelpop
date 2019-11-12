@@ -150,6 +150,8 @@ public class Maze {
                 unit
         );
 
+        crayon.dispose();
+
         // FORMER VERSION OF DRAW
 
         /*

@@ -26,30 +26,29 @@ public class InGame implements GameState{
         crayon.setBackground(new Color(0x4A362A));
         crayon.clearRect(0,0, image.getWidth(), image.getHeight());
         dungeon.draw(image);
+        crayon.dispose();
     }
 
     @Override
     public void evolve(ZelpopGame game, Cmd commande) {
-        if(commande != Cmd.IDLE) {
-            switch (commande) {
-                case RIGHT:
-                    dungeon.moveHero(GlobalDirection.RIGHT);
-                    break;
-                case DOWN:
-                    dungeon.moveHero(GlobalDirection.DOWN);
-                    break;
-                case UP:
-                    dungeon.moveHero(GlobalDirection.UP);
-                    break;
-                case LEFT:
-                    dungeon.moveHero(GlobalDirection.LEFT);
-                    break;
-                case EXIT_GAME:
-                    System.exit(0);
-                    break;
-            }
-
-            dungeon.updateAll();
+        switch (commande) {
+            case RIGHT:
+                dungeon.moveHero(GlobalDirection.RIGHT);
+                break;
+            case DOWN:
+                dungeon.moveHero(GlobalDirection.DOWN);
+                break;
+            case UP:
+                dungeon.moveHero(GlobalDirection.UP);
+                break;
+            case LEFT:
+                dungeon.moveHero(GlobalDirection.LEFT);
+                break;
+            case EXIT_GAME:
+                System.exit(0);
+                break;
         }
+
+        dungeon.updateAll();
     }
 }

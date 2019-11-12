@@ -19,7 +19,6 @@ public class ZelpopPainter implements GamePainter {
 	 */
 	protected static final int WIDTH = 1280;
 	protected static final int HEIGHT = 720;
-	protected static final int SCALING = 4;
 
 	protected Game game;
 
@@ -38,21 +37,6 @@ public class ZelpopPainter implements GamePainter {
 	 */
 	@Override
 	public void draw(BufferedImage im) {
-		Graphics2D crayon = (Graphics2D) im.getGraphics();
-		//crayon.setColor(Color.blue);
-		//crayon.fillOval(0,0,10,10);
-
-		/***** test en cours *****/
-		//BufferedImage hero = TextureFactory.getTextureFactory().getHero();
-		//Random random = new Random();
-		//BufferedImage perso = hero.getSubimage(8 * random.nextInt(3),8 * random.nextInt(3), 8, 8);
-
-		//SpriteManager spritePerso = new SpriteManagerHero(TextureFactory.getTextureFactory().getHero());
-		//SpriteManager spriteMonster = new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster());
-
-		//crayon.drawImage(spritePerso.getCurrentSprite(), 0 * SCALING, 0 * SCALING, spritePerso.getCurrentSprite().getWidth() * SCALING, spriteMonster.getCurrentSprite().getHeight() * SCALING, null);
-		//crayon.drawImage(spriteMonster.getCurrentSprite(), 10 * SCALING,10 * SCALING, spriteMonster.getCurrentSprite().getWidth() * SCALING, spriteMonster.getCurrentSprite().getHeight() * SCALING, null);
-
 		game.draw(im);
 
 	}

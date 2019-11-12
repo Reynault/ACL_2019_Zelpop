@@ -43,7 +43,7 @@ public class Menu implements GameState{
         int width, height;
         Color backgroundColor, titleColor, buttonColor, selectedButtonColor;
 
-        Graphics2D crayon = (Graphics2D) image.createGraphics();
+        Graphics2D crayon = (Graphics2D) image.getGraphics();
 
         width = image.getWidth();
         height = image.getHeight();
@@ -91,6 +91,8 @@ public class Menu implements GameState{
                     null
             );
         }
+
+        crayon.dispose();
     }
 
     @Override
