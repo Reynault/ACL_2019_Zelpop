@@ -124,27 +124,46 @@ public class Maze {
         );
 
 
-        // Drawing the mini-map
-        int miniShiftx = xShift + nbTileDisplayed * unit + unit;
-        int miniShifty = yShift - nbTileDisplayed * unit + unit;
+        crayon.setColor(Color.BLACK);
 
-        int miniTilePositionX = (GlobalSprites.get8Sprite() * GlobalSprites.getMiniScaling());
-        int miniTilePositionY = (GlobalSprites.get8Sprite() * GlobalSprites.getMiniScaling());
+        // Drawing the mini-map
+        int nbTileDisplyedOnMap = 14;
+        int miniUnit = GlobalSprites.get8Sprite() * GlobalSprites.getMiniScaling();
+
+        int miniShiftx = xShift + nbTileDisplayed * unit + unit * 4;
+        int miniShifty = yShift - nbTileDisplayed * unit + unit * 4;
+
+        int miniTilePositionX = miniUnit;
+        int miniTilePositionY = miniUnit;
 
         // Drawing surrounding tiles
-        for (int x = 0; x < tiles.length; x++) {
-            for (int y = 0; y < tiles[x].length; y++) {
-                // Drawing the current tile
-                tiles[y][x].draw(img,
-                        (x * miniTilePositionX) + miniShiftx,
-                        (y * miniTilePositionY) + miniShifty, GlobalSprites.getMiniScaling());
+        for (int x = -nbTileDisplyedOnMap; x <= nbTileDisplyedOnMap; x++) {
+            for (int y = -nbTileDisplyedOnMap; y <= nbTileDisplyedOnMap; y++) {
+                currentX = posHero.getX() + x;
+                currentY = posHero.getY() + y;
+                // If the tile exists
+                if (currentX >= 0 && currentY >= 0 && currentY < tiles.length && currentX < tiles[currentY].length) {
+                    // Drawing the current tile
+                    tiles[currentY][currentX].draw(img,
+                            (x * miniTilePositionX) + miniShiftx,
+                            (y * miniTilePositionY) + miniShifty,
+                            GlobalSprites.getMiniScaling());
+                } else {
+                    // Otherwise, the void
+                    crayon.fillRect(
+                            (x * miniTilePositionX) + miniShiftx,
+                            (y * miniTilePositionY) + miniShifty,
+                            miniUnit,
+                            miniUnit
+                    );
+                }
             }
         }
 
         // Drawing mini hero
         hero.draw(img,
-                miniShiftx + (posHero.getX() * GlobalSprites.get8Sprite() * GlobalSprites.getMiniScaling()),
-                miniShifty + (posHero.getY() * GlobalSprites.get8Sprite() * GlobalSprites.getMiniScaling()),
+                miniShiftx,
+                miniShifty,
                 GlobalSprites.getMiniScaling());
 
 
