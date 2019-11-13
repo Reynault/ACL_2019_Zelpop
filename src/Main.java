@@ -1,5 +1,3 @@
-package start;
-
 import model.ZelpopPainter;
 import engine.GameEngineGraphical;
 import model.ZelpopController;

@@ -1,6 +1,5 @@
 package model.dungeon;
 
-import javafx.geometry.Pos;
 import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
