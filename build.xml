@@ -1,37 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="ACL_2019_Zelpop" basedir="." default="all">
 
-    <target name="all" depends="init, clean, compile, test, jar"/>
+    <target name="all" depends="init, clean, compile, jar, run"/>
 
     <!-- Naming all used properties -->
     <target name="init">
         <property name="app.name" value="ACL_2019_Zelpop"/>
         <property name="src.path" value="src"/>
         <property name="res.path" value="res"/>
-        <property name="class.path" value="build/class"/>
-        <property name="test.path" value="test"/>
+        <property name="build.path" value="build"/>
+        <property name="class.path" value="${build.path}/class"/>
+        <property name="jar.path" value="${build.path}/jar"/>
     </target>
 
     <!-- Cleaning build directory-->
     <target name="clean" depends="init">
-        
+        <delete dir="${class.path}"/>
+        <mkdir dir="${class.path}"/>
+        <mkdir dir="${jar.path}"/>
     </target>
 
     <!-- Compiling -->
     <target name="compile" depends="clean">
-
+        <javac srcdir="${src.path}"
+               destdir="${class.path}"
+               classpath="${class.path}"/>
     </target>
-
-    <!-- Testing -->
-    <target name="test" depends="compile">
-
-    </target>
-
 
     <!-- Creating jar -->
-    <target name="jar" depends="test">
-
+    <target name="jar" depends="compile">
+        <jar jarfile="${jar.path}/${app.name}.jar" basedir="${src.path}">
+            <manifest>
+                <attribute name="${class.path}/Main" value="Main"/>
+            </manifest>
+        </jar>
     </target>
 
+    <target name="run" depends="jar">
+        <java jar="${jar.path}/${app.name}.jar" fork="true"/>
+    </target>
 
 </project>
