@@ -5,44 +5,12 @@
 Zelpop is a maze game created in the context of a student project.
 The idea is to develop a game using an agile method of developpement. (SCRUM)
 
-### Running the game
+## Running the game
 
-A release has been made, it gives you a .jar and all the sources of the project. (tag = v1.0)
-You can download it and execute the .jar from git.
+An ant build file is given in the repository at the root of the project. 
+It builds and create a jar automatically, if you want to use it, please execute the following command:
 
-If you want to execute it from the main project, please follow the following steps: 
-
-## Installing and running the game in Intellij
-
-We worked with Intellij so in order to get the project
-to work on it you'll need to import it with intellij and to set
-the project structure. So you'll have to open the file menu, then project structure,
-and project. At this point, you'll have to specify the output directory which is usually
-the out/ directory, after that, you'll need to lower project language level to 10.
-
-Finally, go to the modules section, you'll need to specify the source folder which is src, 
-the exclude folder which is out and the resources folder which is res. (This point is very important, 
-cause when you will run the project on intellij, it will needs to retrieve files such as textures from it)
-
-### Junit 5
-
-- After uploading the project make sure that you add the JUnit 5 which been
-used to create the project tests.
-
-## Execute Using the JAR file
-
-- To run the game all you have to do is to execute the jar file which 
-can be found by the following path :
-
-```
-ACL_2019_Zelpop\out\artifacts\ACL_2019_Zelpop_jar\ACL_2019_Zelpop.jar
-```
-
-- You can execute the jar using this commands :
-
-```
-java -jar ACL_2019_Zelpop\out\artifacts\ACL_2019_Zelpop_jar\ACL_2019_Zelpop.jar
-```
+``` ant -buildfile build.xml ```
 
 
 ## First Sprint report
