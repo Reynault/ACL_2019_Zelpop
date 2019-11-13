@@ -47,6 +47,9 @@ public class InGame implements GameState{
             case EXIT_GAME:
                 System.exit(0);
                 break;
+            case ATTACK:
+                dungeon.attack();
+                break;
         }
 
         dungeon.updateAll();
