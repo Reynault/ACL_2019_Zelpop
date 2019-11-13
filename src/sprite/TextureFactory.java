@@ -1,6 +1,7 @@
 package sprite;
 
 import model.global.GlobalSprites;
+import sprite.spriteManager.TextManager;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -28,6 +29,8 @@ public class TextureFactory {
     private static BufferedImage tiles;
     private static BufferedImage chest;
     private static BufferedImage text;
+
+    private static TextManager textManager = new TextManager();
 
     private TextureFactory(){
         try {
@@ -90,5 +93,9 @@ public class TextureFactory {
 
     public static TextureFactory getTextureFactory(){
         return textureFactory;
+    }
+
+    public static TextManager getTextManager() {
+        return textManager;
     }
 }

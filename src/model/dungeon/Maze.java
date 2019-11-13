@@ -7,6 +7,7 @@ import model.dungeon.tile.Tile;
 import model.global.GlobalDirection;
 import model.global.GlobalSprites;
 import model.global.Position;
+import sprite.TextureFactory;
 import sprite.spriteManager.TextManager;
 
 import java.awt.*;
@@ -148,7 +149,7 @@ public class Maze {
 
 
         // Drawing the HP label
-        TextManager text = new TextManager();
+        TextManager text = TextureFactory.getTextManager();
         BufferedImage label = text.getString("HP", textColor);
 
         int sideBarElementX = xShift + nbTileDisplayed * unit + unit;

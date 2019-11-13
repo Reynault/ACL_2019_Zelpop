@@ -7,6 +7,7 @@ import model.state.buttons.ContinueButton;
 import model.state.buttons.MenuButton;
 import model.state.buttons.NewGame;
 import model.state.buttons.QuitMenu;
+import sprite.TextureFactory;
 import sprite.spriteManager.TextManager;
 
 import java.awt.*;
@@ -17,7 +18,6 @@ public class Menu implements GameState{
 
     private MenuButton[] buttons;
     private int selectedButton;
-    private TextManager textManager;
 
     private static int BUTTON_WIDTH = GlobalSprites.get8Sprite()*GlobalSprites.getScaling()*10;
     private static int BUTTON_HEIGHT = GlobalSprites.get8Sprite()*GlobalSprites.getScaling()*3;
@@ -32,8 +32,6 @@ public class Menu implements GameState{
         buttons[0] = new NewGame("New Game");
         buttons[1] = new ContinueButton("Continue");
         buttons[2] = new QuitMenu("Quit");
-
-        textManager = new TextManager();
     }
 
     @Override
@@ -41,6 +39,7 @@ public class Menu implements GameState{
         MenuButton button;
         BufferedImage titleImage;
         int width, height;
+        TextManager textManager = TextureFactory.getTextManager();
         Color backgroundColor, titleColor, buttonColor, selectedButtonColor;
 
         Graphics2D crayon = (Graphics2D) image.getGraphics();
