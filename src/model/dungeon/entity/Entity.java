@@ -71,5 +71,6 @@ public abstract class Entity {
                 spriteManager.getCurrentSprite().getWidth() * scale,
                 spriteManager.getCurrentSprite().getHeight() * scale,
                 null);
+        crayon.dispose();
     }
 }

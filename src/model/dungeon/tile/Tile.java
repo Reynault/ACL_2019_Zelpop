@@ -27,6 +27,7 @@ public class Tile extends TileFactory {
                 spriteManager.getCurrentSprite().getWidth() * scale,
                 spriteManager.getCurrentSprite().getHeight() * scale,
                 null);
+        crayon.dispose();
     }
 
     public void action(Entity entity){

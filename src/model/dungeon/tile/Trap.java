@@ -24,6 +24,7 @@ public class Trap extends Effect {
                 spriteManager.getCurrentSprite().getWidth() * scale,
                 spriteManager.getCurrentSprite().getHeight() * scale,
                 null);
+        crayon.dispose();
     }
 
     @Override
