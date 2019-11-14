@@ -21,6 +21,9 @@ public class Maze {
     private int width, height;
     private Hero hero;
 
+    private static String PV_STATUS = "HP";
+    private static String SCORE_STATUS = "SCORE";
+
     /**
      * Default constructor
      * <p>
@@ -111,7 +114,7 @@ public class Maze {
                 0x2E2E2E
         );
         Color textColor = Color.WHITE;
-        Color pvColor = new Color(0x890502);
+        Color pvColor = new Color(0x800000);
 
         crayon.setColor(sideBarColor);
 
@@ -169,16 +172,16 @@ public class Maze {
 
         // Drawing the HP label
         TextManager text = TextureFactory.getTextManager();
-        BufferedImage label = text.getString("HP", textColor);
+        BufferedImage labelHP = text.getString(PV_STATUS, textColor);
 
         int sideBarElementX = xShift + nbTileDisplayed * unit + unit;
         
         crayon.drawImage(
-                label,
+                labelHP,
                 sideBarElementX,
                 yShift - nbTileDisplayed * unit + unit * 8,
-                label.getWidth(),
-                label.getHeight(),
+                labelHP.getWidth(),
+                labelHP.getHeight(),
                 null
         );
 
@@ -201,31 +204,34 @@ public class Maze {
                 unit
         );
 
+        // Drawing score indicator
+        BufferedImage labelScore = text.getString(SCORE_STATUS, textColor);
+
+        // Drawing label
+        crayon.drawImage(
+                labelScore,
+                sideBarElementX,
+                yShift + (labelScore.getHeight()*3),
+                labelScore.getWidth(),
+                labelScore.getHeight(),
+                null
+        );
+
+        // Drawing score value
+        Color labelScoreColor = new Color(0x198DD8);
+
+        BufferedImage labelScoreValue = text.getString("80000", labelScoreColor);
+
+        crayon.drawImage(
+                labelScoreValue,
+                sideBarElementX,
+                yShift + (labelScoreValue.getHeight()*5),
+                labelScoreValue.getWidth(),
+                labelScoreValue.getHeight(),
+                null
+                );
+
         crayon.dispose();
-
-        // FORMER VERSION OF DRAW
-        /*
-        int x = 0;
-        int y = 0;
-        for (Tile[] row :
-                tiles) {
-            for (Tile tile :
-                    row) {
-                tile.draw(img, x, y);
-                x++;
-            }
-            y++;
-            x = 0;
-        }
-        if(entities != null && entities.size() > 0){
-            for (Entity e :
-                    entities) {
-                e.draw(img);
-            }
-        }
-        this.hero.draw(img);
-        */
-
     }
 
     /**

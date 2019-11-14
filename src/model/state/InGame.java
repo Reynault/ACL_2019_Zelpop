@@ -12,10 +12,6 @@ import java.awt.image.BufferedImage;
 public class InGame implements GameState{
     private Dungeon dungeon;
 
-    public InGame(){
-        dungeon = new Dungeon();
-    }
-
     public InGame(Dungeon dungeon){
         this.dungeon = dungeon;
     }
@@ -45,7 +41,7 @@ public class InGame implements GameState{
                 dungeon.moveHero(GlobalDirection.LEFT);
                 break;
             case EXIT_GAME:
-                System.exit(0);
+                game.setState(StateFactory.getMenu());
                 break;
         }
 

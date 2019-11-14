@@ -13,7 +13,7 @@ public class ContinueButton extends MenuButton{
     public void trigger(ZelpopGame game) {
         Dungeon dungeon = game.load();
         if(dungeon == null){
-            game.setState(new InGame());
+            game.setState(new InGame(new Dungeon()));
         }else{
             game.setState(new InGame(dungeon));
         }

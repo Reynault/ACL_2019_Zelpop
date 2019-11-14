@@ -67,6 +67,10 @@ public class ZelpopController implements GameController {
 			case 'Z':
 				this.commandeEnCours = Cmd.UP;
 				break;
+			case 'r':
+			case 'R':
+				this.commandeEnCours = Cmd.RESTART;
+				break;
 		}
 
 		switch (e.getKeyCode()){
