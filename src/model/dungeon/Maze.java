@@ -3,6 +3,7 @@ package model.dungeon;
 import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
+import model.dungeon.scoring.Scoring;
 import model.dungeon.tile.Tile;
 import model.global.GlobalDirection;
 import model.global.GlobalSprites;
@@ -20,6 +21,7 @@ public class Maze {
     private Tile[][] tiles;
     private int width, height;
     private Hero hero;
+    private Scoring scoring;
 
     private static String PV_STATUS = "HP";
     private static String SCORE_STATUS = "SCORE";
@@ -56,7 +58,7 @@ public class Maze {
         int nbTileDisplayed = 9;
         Position posHero = hero.getPosition();
         int unit = GlobalSprites.get8Sprite() * GlobalSprites.getScaling();
-        
+
         crayon.setColor(Color.BLACK);
 
         width = img.getWidth();
@@ -319,6 +321,26 @@ public class Maze {
                 moveEntity(e, GlobalDirection.IDLE);
             }
         }
+    }
+
+    /**
+     * Entity is attacking
+     */
+    public void attack(){
+        this.hero.attack(this);
+    }
+
+    /**
+     *
+     */
+    public void killEntity(Entity entity , Hero h){
+
+        //check sur le hero
+        if (h.isHero()){
+        int bonus = scoring.killMonster(entity);
+        h.increaseScore(bonus);
+        }
+
     }
 
     /**

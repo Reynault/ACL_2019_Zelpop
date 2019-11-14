@@ -1,6 +1,8 @@
 package model.dungeon.entity;
 
+import model.dungeon.Maze;
 import model.dungeon.entity.behavior.Behavior;
+import model.dungeon.entity.behavior.attack.Attack;
 import model.global.GlobalDirection;
 import model.global.GlobalSprites;
 import model.global.Position;
@@ -17,6 +19,7 @@ public abstract class Entity {
     protected Position position;
     protected Behavior behavior;
     protected SpriteManager spriteManager;
+    protected Attack attack;
 
     protected Entity(int hp, boolean passThrought, Position position, Behavior behavior, SpriteManager spriteManager) {
         this.maxHp = hp;
@@ -54,6 +57,53 @@ public abstract class Entity {
 
     public GlobalDirection behave(GlobalDirection direction){
         return behavior.behave(this, direction);
+    }
+
+
+    /**
+     * Entity is attacking
+     * @param maze
+     */
+    public void attack (Maze maze){
+       behavior.behave(maze , this , this.attack);
+    }
+
+    /**
+     *
+     */
+    public int getDmg(){
+        return 0;
+    }
+
+    /**
+     *
+     */
+    public void takeDamage(){
+
+    }
+
+    /**
+     *
+     */
+    public boolean isAlive(){
+        if (this.hp != 0)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     *
+     */
+    public void increaseScore(double bonus){
+
+    }
+
+    /**
+     *
+     */
+    public Boolean isHero(){
+        return true;
     }
 
     /**

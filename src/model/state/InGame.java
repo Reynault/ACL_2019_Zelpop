@@ -43,6 +43,9 @@ public class InGame implements GameState{
             case EXIT_GAME:
                 game.setState(StateFactory.getMenu());
                 break;
+            case ATTACK:
+                dungeon.attack();
+                break;
         }
 
         dungeon.updateAll();

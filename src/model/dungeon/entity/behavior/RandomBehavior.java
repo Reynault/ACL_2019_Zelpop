@@ -1,6 +1,8 @@
 package model.dungeon.entity.behavior;
 
+import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
+import model.dungeon.entity.behavior.attack.Attack;
 import model.global.GlobalDirection;
 
 public class RandomBehavior implements Behavior {
@@ -31,5 +33,10 @@ public class RandomBehavior implements Behavior {
         }
 
         return movement;
+    }
+
+    @Override
+    public GlobalDirection behave(Maze maze, Entity entity, Attack attack) {
+        return null;
     }
 }

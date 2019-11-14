@@ -44,6 +44,14 @@ public class Dungeon {
         );
     }
 
+
+    /**
+     * Entity is attacking
+     */
+    public void attack(){
+        currentMaze.attack();
+    }
+
     /**
      * Generate a maze
      */
