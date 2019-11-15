@@ -7,8 +7,9 @@ import model.global.GlobalDirection;
 
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import java.io.Serializable;
 
-public class Dungeon {
+public class Dungeon implements Serializable {
 
     private Maze currentMaze;
     private MazeFactory mazeFactory;
@@ -34,7 +35,6 @@ public class Dungeon {
 
     /**
      * Move the hero with the direction
-     *
      * @param direction direction for the move
      */
     public void moveHero(GlobalDirection direction) {
@@ -61,7 +61,6 @@ public class Dungeon {
 
     /**
      * Generate a maze with a file
-     *
      * @param filename name of the file
      */
     private void generateMaze(InputStream filename) {
@@ -76,9 +75,16 @@ public class Dungeon {
     }
 
     /**
+     * Give an image for each tile and entity and the hero (used after a load)
+     */
+    public void setImages() {
+        this.currentMaze.setImages();
+        this.hero.setImage();
+    }
+
+    /**
      * Drawn the dungeon
-     *
-     * @param img
+     * @param img image
      */
     public void draw(BufferedImage img) {
         currentMaze.draw(img);

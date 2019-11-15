@@ -1,8 +1,6 @@
 package model;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
 
 import engine.Cmd;
 import engine.GameController;
@@ -12,7 +10,7 @@ import engine.GameController;
  * @author Horatiu Cirstea, Vincent Thomas
  *
  * controleur de type KeyListener
- * 
+ *
  */
 public class ZelpopController implements GameController {
 
@@ -43,10 +41,10 @@ public class ZelpopController implements GameController {
 		this.commandeEnCours = Cmd.IDLE;
 	}
 
-	@Override
 	/**
 	 * met a jour les commandes en fonctions des touches appuyees
 	 */
+	@Override
 	public void keyPressed(KeyEvent e) {
 
 		switch (e.getKeyChar()) {
@@ -71,7 +69,11 @@ public class ZelpopController implements GameController {
 			case 'R':
 				this.commandeEnCours = Cmd.RESTART;
 				break;
-		}
+            case 'o':
+            case 'O':
+                this.commandeEnCours = Cmd.SAVE;
+                break;
+        }
 
 		switch (e.getKeyCode()){
 			case KeyEvent.VK_SPACE:
@@ -83,17 +85,17 @@ public class ZelpopController implements GameController {
 		}
 	}
 
-	@Override
 	/**
 	 * met a jour les commandes quand le joueur relache une touche
 	 */
+	@Override
 	public void keyReleased(KeyEvent e) {
 	}
 
-	@Override
 	/**
 	 * ne fait rien
 	 */
+	@Override
 	public void keyTyped(KeyEvent e) {
 
 	}

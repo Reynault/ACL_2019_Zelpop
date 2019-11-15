@@ -10,4 +10,13 @@ public class Monster extends Entity {
     protected Monster(int hp, boolean passThrought, Position position, Behavior behavior) {
         super(hp, passThrought, position, behavior, new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster()));
     }
+
+    /**
+     * Give an image for the hero (used after a load)
+     */
+    public void setImage() {
+        spriteManager = new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster());
+
+        //super.setImage(new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster()));
+    }
 }

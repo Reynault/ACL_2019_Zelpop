@@ -9,7 +9,9 @@ import model.dungeon.entity.behavior.move.Move;
 import model.global.GlobalDirection;
 import model.global.Position;
 
-public class HeroBehavior implements Behavior {
+import java.io.Serializable;
+
+public class HeroBehavior implements Behavior, Serializable {
 
     protected Attack attack;
     protected Check check;

@@ -13,9 +13,11 @@ import sprite.spriteManager.TextManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.List;
 
-public class Maze {
+
+public class Maze implements Serializable {
 
     private List<Entity> entities;
     private Tile[][] tiles;
@@ -28,9 +30,7 @@ public class Maze {
 
     /**
      * Default constructor
-     * <p>
      * The maze must have at least one line and one column
-     *
      * @param tiles    list of tiles
      * @param entities list of entities
      */
@@ -43,9 +43,22 @@ public class Maze {
     }
 
     /**
+     * Give an image for each tile and entity (used after a load)
+     */
+    public void setImages() {
+        for(int i = 0 ; i < tiles.length ; i++){
+            for(int j = 0 ; j < tiles[0].length ; j++){
+                tiles[i][j].setImage();
+            }
+        }
+        for (Entity e : entities) {
+            e.setImage();
+        }
+    }
+
+    /**
      * Draw the maze
-     *
-     * @param img
+     * @param img image
      */
     public void draw(BufferedImage img) {
         Graphics2D crayon = (Graphics2D) img.getGraphics();
@@ -177,7 +190,7 @@ public class Maze {
         BufferedImage labelHP = text.getString(PV_STATUS, textColor);
 
         int sideBarElementX = xShift + nbTileDisplayed * unit + unit;
-        
+
         crayon.drawImage(
                 labelHP,
                 sideBarElementX,
@@ -238,7 +251,6 @@ public class Maze {
 
     /**
      * Move a entity in the maze using a direction
-     *
      * @param e         entity in the maze
      * @param direction direction for the move
      */
@@ -331,7 +343,7 @@ public class Maze {
     }
 
     /**
-     *
+     * To kill the entity
      */
     public void killEntity(Entity entity , Hero h){
 

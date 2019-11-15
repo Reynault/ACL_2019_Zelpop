@@ -1,42 +1,95 @@
 package model;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import engine.Cmd;
 import engine.Game;
 import model.dungeon.Dungeon;
-import model.global.GlobalDirection;
 import model.state.GameState;
 import model.state.Menu;
 
-/**
- * @author Horatiu Cirstea, Vincent Thomas
- *
- *         Version avec personnage qui peut se deplacer. A completer dans les
- *         versions suivantes.
- * 
- */
-public class ZelpopGame implements Game {
+public class ZelpopGame implements Game, Serializable {
 
 	private GameState currentState;
 
 	/**
-	 * constructeur avec fichier source pour le help
+	 * Default constructor
 	 * 
 	 */
 	public ZelpopGame() {
 		currentState = new Menu();
 	}
 
+	/**
+	 * Draw the game
+	 * @param img image
+	 */
 	public void draw(BufferedImage img){
 		currentState.draw(img);
     }
 
+	/**
+	 * Set a state for the game
+	 * @param state state for the game
+	 */
 	public void setState(GameState state) {
 		currentState = state;
+	}
+
+	/**
+	 * Save the game in a file
+	 */
+	public void save(Dungeon dungeon) {
+		File f = new File("zelpopSave.ser");
+		try{
+			if(!f.exists()){
+				f.createNewFile();
+			}
+		}
+		catch (IOException e){
+			e.printStackTrace();
+		}
+
+		try {
+			FileOutputStream file = new FileOutputStream(f);
+			ObjectOutputStream o = new ObjectOutputStream(file);
+			o.writeObject(dungeon);
+			o.close();
+			file.close();
+		}
+		catch (FileNotFoundException e){
+			e.printStackTrace();
+		}
+		catch (IOException e){
+			e.printStackTrace();
+		}
+		System.out.println("Sauvegarde effectuée");
+	}
+
+	/**
+	 * Load a game from a file
+	 */
+	public Dungeon load() {
+		Dungeon dungeon = null;
+		try {
+			FileInputStream file = new FileInputStream(new File("zelpopSave.ser"));
+			ObjectInputStream o = new ObjectInputStream(file);
+			dungeon = (Dungeon)o.readObject();
+			dungeon.setImages();
+			o.close();
+			file.close();
+		}
+		catch (FileNotFoundException e){
+			e.printStackTrace();
+		}
+		catch (IOException e){
+			e.printStackTrace();
+		}
+		catch (ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		return dungeon;
 	}
 
 	/**
@@ -56,14 +109,6 @@ public class ZelpopGame implements Game {
 	public boolean isFinished() {
 		// le jeu n'est jamais fini
 		return false;
-	}
-
-	public void save(){
-
-	}
-
-	public Dungeon load(){
-		return null;
 	}
 
 }

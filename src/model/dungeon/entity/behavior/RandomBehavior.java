@@ -5,7 +5,9 @@ import model.dungeon.entity.Entity;
 import model.dungeon.entity.behavior.attack.Attack;
 import model.global.GlobalDirection;
 
-public class RandomBehavior implements Behavior {
+import java.io.Serializable;
+
+public class RandomBehavior implements Behavior, Serializable {
     @Override
     public GlobalDirection behave(Entity entity, GlobalDirection direction) {
 

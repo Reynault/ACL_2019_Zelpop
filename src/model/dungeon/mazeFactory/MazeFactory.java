@@ -8,13 +8,13 @@ import model.dungeon.tile.TileFactory;
 import model.global.GlobalDirection;
 import model.global.Position;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.*;
 
-public class MazeFactory {
+public class MazeFactory implements Serializable {
 
     /**
      * Maze's getter

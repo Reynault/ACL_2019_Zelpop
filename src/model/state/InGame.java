@@ -1,7 +1,6 @@
 package model.state;
 
 import engine.Cmd;
-import engine.Game;
 import model.ZelpopGame;
 import model.dungeon.Dungeon;
 import model.global.GlobalDirection;
@@ -9,9 +8,14 @@ import model.global.GlobalDirection;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class InGame implements GameState{
+public class InGame implements GameState {
+
     private Dungeon dungeon;
 
+    /**
+     * Default constructor
+     * @param dungeon dungeon of the game
+     */
     public InGame(Dungeon dungeon){
         this.dungeon = dungeon;
     }
@@ -48,6 +52,10 @@ public class InGame implements GameState{
                 break;
         }
 
-        dungeon.updateAll();
+        if(commande != Cmd.SAVE) {
+            dungeon.updateAll();
+        } else {
+            game.save(dungeon);
+        }
     }
 }

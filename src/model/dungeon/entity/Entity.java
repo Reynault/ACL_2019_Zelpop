@@ -4,14 +4,14 @@ import model.dungeon.Maze;
 import model.dungeon.entity.behavior.Behavior;
 import model.dungeon.entity.behavior.attack.Attack;
 import model.global.GlobalDirection;
-import model.global.GlobalSprites;
 import model.global.Position;
 import sprite.spriteManager.SpriteManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public abstract class Entity {
+public abstract class Entity implements Serializable {
 
     protected int maxHp;
     protected int hp;
@@ -96,7 +96,6 @@ public abstract class Entity {
      *
      */
     public void increaseScore(double bonus){
-
     }
 
     /**
@@ -105,6 +104,11 @@ public abstract class Entity {
     public Boolean isHero(){
         return true;
     }
+
+    /**
+     * Give an image for the entity (used after a load)
+     */
+    public abstract void setImage();
 
     /**
      * Draw the entity at a given position
