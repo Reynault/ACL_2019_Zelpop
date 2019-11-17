@@ -381,7 +381,12 @@ public class Maze implements Serializable {
     public boolean isFinished() {
         Position pos = hero.getPosition();
         Tile t = tiles[pos.getY()][pos.getX()];
-        return t.isStairs();
+        if(t.isStairs()){
+            hero.increaseScore(scoring.leaveMaze());
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public void removeEntity(Entity e) {

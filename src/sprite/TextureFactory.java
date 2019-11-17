@@ -60,7 +60,7 @@ public class TextureFactory {
     }
 
     public BufferedImage getHero(){
-        BufferedImage sprite = player.getSubimage(0, 0, HERO_LENGTH, HERO_HEIGHT);
+        BufferedImage sprite = player.getSubimage(0, 5*HERO_HEIGHT, HERO_LENGTH, HERO_HEIGHT);
         return sprite;
     }
 
