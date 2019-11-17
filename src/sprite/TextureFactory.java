@@ -83,8 +83,12 @@ public class TextureFactory {
         BufferedImage sprite = tiles.getSubimage(13 * TILE_LENGTH, 2 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
-    public BufferedImage getTreasure(){
+    public BufferedImage getFilledTreasure(){
         BufferedImage sprite = chest.getSubimage(0 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
+        return sprite;
+    }
+    public BufferedImage getEmptyTreasue(){
+        BufferedImage sprite = chest.getSubimage(1 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
     public BufferedImage getText(){
