@@ -1,6 +1,6 @@
 package model.dungeon.entity.behavior.attack;
 
-import javafx.util.Pair;
+import model.Pair;
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 import model.dungeon.entity.Hero;
@@ -19,10 +19,10 @@ public class AttackSimple implements Attack {
         int y = pos.getY();
 
         if(pos.getCmd() != Cmd.IDLE) {
-            Pair<Integer, Integer> val = maze.getPositionByDirection(x, y, pos.getCmd());
+            Pair val = maze.getPositionByDirection(x, y, pos.getCmd());
 
             // Fetching targeted entity (In this case (AttackSimple), the entity in front of the attacker)
-            Entity victim = maze.getEntity(val.getKey(), val.getValue());
+            Entity victim = maze.getEntity(val.getX(), val.getY());
 
             if (victim != null) {
                 victim.takeDamage(entity.getDmg());

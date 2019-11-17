@@ -1,6 +1,6 @@
 package model.dungeon;
 
-import javafx.util.Pair;
+import model.Pair;
 import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
@@ -277,11 +277,11 @@ public class Maze implements Serializable {
             x = currentPosition.getX();
             y = currentPosition.getY();
 
-            Pair<Integer, Integer> p = getPositionByDirection(x, y, direction);
+            Pair p = getPositionByDirection(x, y, direction);
 
             // Checking if movement is in the maze
-            if (canMove(e, p.getKey(), p.getValue())) {
-                newPosition = new Position(p.getKey(), p.getValue(), direction);
+            if (canMove(e, p.getX(), p.getY())) {
+                newPosition = new Position(p.getX(), p.getY(), direction);
             } else {
                 newPosition = new Position(
                         currentPosition.getX(),
@@ -300,7 +300,7 @@ public class Maze implements Serializable {
         }
     }
 
-    public Pair<Integer, Integer> getPositionByDirection(int x, int y, Cmd direction){
+    public Pair getPositionByDirection(int x, int y, Cmd direction){
         switch (direction) {
             case LEFT:
                 x -= 1;
@@ -315,7 +315,7 @@ public class Maze implements Serializable {
                 x += 1;
                 break;
         }
-        return new Pair<Integer, Integer>(x,y);
+        return new Pair(x,y);
     }
 
     /**
