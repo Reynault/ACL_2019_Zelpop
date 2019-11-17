@@ -380,7 +380,7 @@ public class Maze implements Serializable {
 
     public boolean isFinished() {
         Position pos = hero.getPosition();
-        Tile t = tiles[pos.getX()][pos.getY()];
+        Tile t = tiles[pos.getY()][pos.getX()];
         return t.isStairs();
     }
 

@@ -8,10 +8,10 @@ import model.global.Position;
 
 public class EntityFactory {
 
-    private static int HERO_HP = 20;
-    private static int HERO_X = 0;
-    private static int HERO_Y = 0;
-    private static GlobalDirection HERO_DIRECTION = GlobalDirection.DOWN;
+    public static int HERO_HP = 20;
+    public static int HERO_X = 0;
+    public static int HERO_Y = 0;
+    public static GlobalDirection HERO_DIRECTION = GlobalDirection.DOWN;
 
     private static int MONSTER_HP = 6;
 

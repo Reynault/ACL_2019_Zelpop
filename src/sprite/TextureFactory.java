@@ -60,14 +60,12 @@ public class TextureFactory {
     }
 
     public BufferedImage getHero(){
-        Random random = new Random();
-        BufferedImage sprite = player.getSubimage(0, HERO_HEIGHT * random.nextInt(14), HERO_LENGTH, HERO_HEIGHT);
+        BufferedImage sprite = player.getSubimage(0, 0, HERO_LENGTH, HERO_HEIGHT);
         return sprite;
     }
 
     public BufferedImage getMonster(){
-        Random random = new Random();
-        BufferedImage sprite = monster.getSubimage(0, MONSTER_HEIGHT * random.nextInt(24), MONSTER_LENGTH, MONSTER_HEIGHT);
+        BufferedImage sprite = monster.getSubimage(0, 5*MONSTER_HEIGHT, MONSTER_LENGTH, MONSTER_HEIGHT);
         return sprite;
     }
 
@@ -75,22 +73,32 @@ public class TextureFactory {
         BufferedImage sprite = tiles.getSubimage(4 * TILE_LENGTH, 2 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
+
     public BufferedImage getWalls(){
         BufferedImage sprite = tiles.getSubimage(0 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
+
     public BufferedImage getTraps(){
         BufferedImage sprite = tiles.getSubimage(13 * TILE_LENGTH, 2 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
+
     public BufferedImage getFilledTreasure(){
         BufferedImage sprite = chest.getSubimage(0 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
+
     public BufferedImage getEmptyTreasue(){
         BufferedImage sprite = chest.getSubimage(1 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
+
+    public BufferedImage getStairs(){
+        BufferedImage sprite = tiles.getSubimage(8 * TILE_LENGTH, 2 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
+        return sprite;
+    }
+
     public BufferedImage getText(){
         return text;
     }

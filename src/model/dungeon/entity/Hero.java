@@ -16,6 +16,5 @@ public class Hero extends Entity {
      */
     public void setImage() {
         spriteManager = new SpriteManagerHero(TextureFactory.getTextureFactory().getHero());
-        //super.setImage(new SpriteManagerHero(TextureFactory.getTextureFactory().getHero()));
     }
 }

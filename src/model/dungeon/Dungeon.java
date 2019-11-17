@@ -1,9 +1,11 @@
 package model.dungeon;
 
+import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
 import model.dungeon.mazeFactory.MazeFactory;
 import model.global.GlobalDirection;
+import model.global.Position;
 
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
@@ -98,6 +100,10 @@ public class Dungeon implements Serializable {
     public void changeLevel(){
         if(currentMaze.isFinished()){
             currentMaze = mazeFactory.getRandomMaze(DEFAULT_MAZE_SIZE);
+            hero.setPosition(new Position(
+                    EntityFactory.HERO_X,
+                    EntityFactory.HERO_Y,
+                    EntityFactory.HERO_DIRECTION));
         }
     }
 }

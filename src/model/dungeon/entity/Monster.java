@@ -16,7 +16,5 @@ public class Monster extends Entity {
      */
     public void setImage() {
         spriteManager = new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster());
-
-        //super.setImage(new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster()));
     }
 }
