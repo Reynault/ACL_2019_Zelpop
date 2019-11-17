@@ -12,6 +12,13 @@ It builds and create a jar automatically, if you want to use it, please execute 
 
 ``` ant -buildfile build.xml ```
 
+## How to play
+
+- Move with Z = UP, Q = LEFT, S = DOWN, D = RIGHT
+- Attack with SPACE
+- Change level above stairs with E
+- Save with O
+- Menu with ESCAPE
 
 ## First Sprint report
 
