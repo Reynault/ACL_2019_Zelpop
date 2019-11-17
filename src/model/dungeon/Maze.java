@@ -357,11 +357,11 @@ public class Maze implements Serializable {
      */
     public void moveEntities() {
         if (entities != null && entities.size() > 0) {
-            for (Entity e : entities) {
-                moveEntity(e, Cmd.IDLE);
-            }
             for(Entity e: removedEntity){
                 removeEntity(e);
+            }
+            for (Entity e : entities) {
+                moveEntity(e, Cmd.IDLE);
             }
         }
     }

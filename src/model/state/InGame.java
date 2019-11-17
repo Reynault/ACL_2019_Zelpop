@@ -30,6 +30,7 @@ public class InGame implements GameState {
 
     @Override
     public void evolve(ZelpopGame game, Cmd commande) {
+        boolean dontUpdate = false;
         switch (commande) {
             case RIGHT:
                 dungeon.moveHero(Cmd.RIGHT);
@@ -44,20 +45,26 @@ public class InGame implements GameState {
                 dungeon.moveHero(Cmd.LEFT);
                 break;
             case EXIT_GAME:
+                dontUpdate = true;
                 game.setState(StateFactory.getMenu());
                 break;
             case ATTACK:
                 dungeon.attack();
                 break;
             case LEAVE_LEVEL:
+                dontUpdate = true;
                 dungeon.changeLevel();
                 break;
             case SAVE:
+                dontUpdate = true;
                 game.save(dungeon);
+                break;
+            case RESTART:
+                dontUpdate = true;
                 break;
         }
 
-        if(commande != Cmd.SAVE && commande != Cmd.LEAVE_LEVEL && commande != Cmd.RESTART) {
+        if(!dontUpdate) {
             dungeon.updateAll(game);
         }
     }
