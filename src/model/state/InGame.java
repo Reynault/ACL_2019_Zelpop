@@ -50,6 +50,9 @@ public class InGame implements GameState {
             case ATTACK:
                 dungeon.attack();
                 break;
+            case LEAVE_LEVEL:
+                dungeon.changeLevel();
+                break;
         }
 
         if(commande != Cmd.SAVE) {
