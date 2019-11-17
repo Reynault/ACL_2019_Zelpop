@@ -7,8 +7,6 @@ public class CheckHero implements Check {
 
     @Override
     public boolean check(Maze maze, Entity entity) {
-
-
         return false;
     }
 }

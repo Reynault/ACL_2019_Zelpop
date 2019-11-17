@@ -11,9 +11,13 @@ public class EntityFactory {
     public static int HERO_Y = 0;
     public static Cmd HERO_DIRECTION = Cmd.DOWN;
     public static int HERO_DAMAGE = 5;
+    public static int HERO_VALUE = 50;
+    public static int HERO_SCORE = 0;
 
-    private static int MONSTER_HP = 10;
-    private static int MONSTER_DAMAGE = 2;
+    public static int MONSTER_HP = 10;
+    public static int MONSTER_DAMAGE = 5;
+    public static int MONSTER_VALUE = 50;
+    public static int MONSTER_SCORE = 0;
 
     private Hero hero;
 
@@ -33,6 +37,8 @@ public class EntityFactory {
         return hero = new Hero(HERO_HP,
                 false,
                             HERO_DAMAGE,
+                            HERO_SCORE,
+                            HERO_VALUE,
                             new Position(
                                     HERO_X,
                                     HERO_Y,
@@ -57,6 +63,8 @@ public class EntityFactory {
         return new Monster(MONSTER_HP,
                 false,
                 MONSTER_DAMAGE,
+                MONSTER_SCORE,
+                MONSTER_VALUE,
                 position,
                 BehaveFactory.getSimpleBehavior());  // default hp
     }

@@ -1,5 +1,6 @@
 package model.dungeon;
 
+import javafx.util.Pair;
 import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
@@ -14,12 +15,15 @@ import sprite.spriteManager.TextManager;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.net.Inet4Address;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class Maze implements Serializable {
 
     private List<Entity> entities;
+    private List<Entity> removedEntity;
     private Tile[][] tiles;
     private int width, height;
     private Hero hero;
@@ -42,6 +46,7 @@ public class Maze implements Serializable {
         this.entities = entities;
         this.hero = EntityFactory.getInstance().getHero();
         this.scoring = scoring;
+        removedEntity = new ArrayList<>();
     }
 
     /**
@@ -213,12 +218,12 @@ public class Maze implements Serializable {
                 unit
         );
 
-        int HPratio = hero.getMaxHp() / hero.getHp();
+        double HPratio = (double)hero.getHp() / (double)hero.getMaxHp();
 
         crayon.fillRect(
                 sideBarElementX,
                 yShift - nbTileDisplayed * unit + unit * 10,
-                unit * HPratio * 6,
+                (int)(unit * HPratio * 6),
                 unit
         );
 
@@ -264,7 +269,7 @@ public class Maze implements Serializable {
 
         // Generating a movement
         direction = e.behave(this, direction);
-        System.out.println(direction);
+
         if (direction != Cmd.IDLE) {
 
             currentPosition = e.getPosition();
@@ -272,24 +277,11 @@ public class Maze implements Serializable {
             x = currentPosition.getX();
             y = currentPosition.getY();
 
-            switch (direction) {
-                case LEFT:
-                    x -= 1;
-                    break;
-                case UP:
-                    y -= 1;
-                    break;
-                case DOWN:
-                    y += 1;
-                    break;
-                case RIGHT:
-                    x += 1;
-                    break;
-            }
+            Pair<Integer, Integer> p = getPositionByDirection(x, y, direction);
 
             // Checking if movement is in the maze
-            if (canMove(e, x, y)) {
-                newPosition = new Position(x, y, direction);
+            if (canMove(e, p.getKey(), p.getValue())) {
+                newPosition = new Position(p.getKey(), p.getValue(), direction);
             } else {
                 newPosition = new Position(
                         currentPosition.getX(),
@@ -308,6 +300,24 @@ public class Maze implements Serializable {
         }
     }
 
+    public Pair<Integer, Integer> getPositionByDirection(int x, int y, Cmd direction){
+        switch (direction) {
+            case LEFT:
+                x -= 1;
+                break;
+            case UP:
+                y -= 1;
+                break;
+            case DOWN:
+                y += 1;
+                break;
+            case RIGHT:
+                x += 1;
+                break;
+        }
+        return new Pair<Integer, Integer>(x,y);
+    }
+
     /**
      * Verify if an entity can move or not
      *
@@ -320,14 +330,22 @@ public class Maze implements Serializable {
         Tile tile;
         boolean can = false;
 
+        // Checking if the movement is in the maze
         if (x >= 0 && x < width && y >= 0 && y < height) {
             tile = tiles[y][x];
+
+            // Checking if the entity can go on the tile
             if (tile.canBeCrossed()) {
                 can = true;
             } else {
                 if (entity.canPassThrought()) {
                     can = true;
                 }
+            }
+
+            // Checking there already is an entity on it
+            if(getEntity(x,y) != null || (hero.getPosition().getX() == x && hero.getPosition().getY() == y) ){
+                can = false;
             }
         }
 
@@ -342,6 +360,9 @@ public class Maze implements Serializable {
             for (Entity e : entities) {
                 moveEntity(e, Cmd.IDLE);
             }
+            for(Entity e: removedEntity){
+                removeEntity(e);
+            }
         }
     }
 
@@ -355,16 +376,12 @@ public class Maze implements Serializable {
     /**
      * To kill the entity
      */
-    public void killEntity(Entity entity, Hero h) {
-
-        //check sur le hero
-        if (h.isHero()) {
-            int bonus = scoring.killMonster(entity);
-            h.increaseScore(bonus);
-        }
+    public void killEntity(Entity entity, Entity h) {
+        int bonus = scoring.killMonster(entity);
+        h.increaseScore(bonus);
 
         // Deleting killed entity
-        removeEntity(entity);
+        removedEntity.add(entity);
     }
 
     /**
@@ -372,11 +389,18 @@ public class Maze implements Serializable {
      */
     public Entity getEntity(int x, int y) {
         Entity res = null;
-        for (Entity entity : entities) {
-            if (entity.getPosition().getY() == y && entity.getPosition().getX() == x) {
-                res = entity;
+        Position pos = hero.getPosition();
+
+        if(pos.getX() == x && pos.getY() == y){
+            res = hero;
+        }else {
+            for (Entity entity : entities) {
+                if (entity.getPosition().getY() == y && entity.getPosition().getX() == x) {
+                    res = entity;
+                }
             }
         }
+
         return res;
     }
 

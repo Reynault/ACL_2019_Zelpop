@@ -2,13 +2,19 @@ package model.dungeon.entity;
 
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Position;
+import sprite.spriteManager.SpriteManager;
 import sprite.spriteManager.SpriteManagerMonster;
 import sprite.TextureFactory;
 
 public class Monster extends Entity {
 
-    protected Monster(int hp, boolean passThrought, int damage, Position position, Behavior behavior) {
-        super(hp, passThrought, damage, position, behavior, new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster()));
+    protected Monster(int hp, boolean passThrought, int damage, int score, int value, Position position, Behavior behavior) {
+        super(hp, passThrought, damage, score, value, position, behavior, new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster()));
+    }
+
+    @Override
+    public Boolean isHero() {
+        return false;
     }
 
     /**

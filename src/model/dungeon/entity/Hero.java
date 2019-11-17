@@ -2,13 +2,20 @@ package model.dungeon.entity;
 
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Position;
+import sprite.spriteManager.SpriteManager;
 import sprite.spriteManager.SpriteManagerHero;
 import sprite.TextureFactory;
 
-public class Hero extends Entity {
+public class Hero extends Entity{
 
-    public Hero(int hp, boolean passThrought, int damage, Position position, Behavior behavior) {
-        super(hp, passThrought, damage, position, behavior, new SpriteManagerHero(TextureFactory.getTextureFactory().getHero()));
+
+    protected Hero(int hp, boolean passThrought, int damage, int score, int value, Position position, Behavior behavior) {
+        super(hp, passThrought, damage, score, value, position, behavior, new SpriteManagerHero(TextureFactory.getTextureFactory().getHero()));
+    }
+
+    @Override
+    public Boolean isHero() {
+        return true;
     }
 
     /**

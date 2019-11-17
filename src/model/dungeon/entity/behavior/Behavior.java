@@ -6,24 +6,19 @@ import model.dungeon.entity.behavior.attack.Attack;
 import model.dungeon.entity.behavior.check.Check;
 import model.dungeon.entity.behavior.move.Move;
 import model.global.Cmd;
-import model.global.Position;
 
 import java.io.Serializable;
 
 public class Behavior implements Serializable {
 
-    Attack attack;
-    Check check;
-    Move move;
-    Maze currentMaze;
-    Entity currentEntity;
+    private Attack attack;
+    private Check check;
+    private Move move;
 
     public Behavior(Attack attack, Check check, Move move) {
         this.attack = attack;
         this.check = check;
         this.move = move;
-        this.currentMaze = currentMaze;
-        this.currentEntity = currentEntity;
     }
 
     /**

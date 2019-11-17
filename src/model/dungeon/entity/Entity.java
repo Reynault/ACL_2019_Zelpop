@@ -20,8 +20,9 @@ public abstract class Entity implements Serializable {
     protected SpriteManager spriteManager;
     protected int damage;
     protected int score;
+    protected int value;
 
-    protected Entity(int hp, boolean passThrought, int damage, Position position, Behavior behavior, SpriteManager spriteManager) {
+    protected Entity(int hp, boolean passThrought, int damage, int score, int value, Position position, Behavior behavior, SpriteManager spriteManager) {
         this.maxHp = hp;
         this.hp = hp;
         this.passThrought = passThrought;
@@ -30,6 +31,12 @@ public abstract class Entity implements Serializable {
         this.score = 0;
         this.spriteManager = spriteManager;
         this.damage = damage;
+        this.score = score;
+        this.value = value;
+    }
+
+    public int getValue(){
+        return value;
     }
 
     public int getHp() {
@@ -91,10 +98,11 @@ public abstract class Entity implements Serializable {
      *
      */
     public boolean isAlive() {
-        if (this.hp != 0)
+        if (this.hp > 0) {
             return true;
-        else
+        }else {
             return false;
+        }
     }
 
     /**
@@ -111,9 +119,7 @@ public abstract class Entity implements Serializable {
     /**
      *
      */
-    public Boolean isHero() {
-        return true;
-    }
+    public abstract Boolean isHero();
 
     /**
      * Give an image for the entity (used after a load)

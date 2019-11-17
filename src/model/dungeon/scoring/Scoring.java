@@ -16,7 +16,7 @@ public class Scoring implements Serializable {
 
 
     public int killMonster(Entity entity) {
-        return 1;
+        return entity.getValue();
     }
 
     public int leaveMaze() {

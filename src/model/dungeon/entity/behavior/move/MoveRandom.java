@@ -3,6 +3,7 @@ package model.dungeon.entity.behavior.move;
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 import model.global.Cmd;
+import model.global.Position;
 
 public class MoveRandom implements Move {
     @Override
@@ -29,6 +30,12 @@ public class MoveRandom implements Move {
                 movement = Cmd.IDLE;
                 break;
         }
+
+        entity.setPosition(new Position(
+                entity.getPosition().getX(),
+                entity.getPosition().getY(),
+                movement
+        ));
 
         return movement;
     }

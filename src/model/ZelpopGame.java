@@ -79,15 +79,8 @@ public class ZelpopGame implements Game, Serializable {
 			dungeon.setImages();
 			o.close();
 			file.close();
-		}
-		catch (FileNotFoundException e){
-			e.printStackTrace();
-		}
-		catch (IOException e){
-			e.printStackTrace();
-		}
-		catch (ClassNotFoundException e){
-			e.printStackTrace();
+		}catch (Exception e){
+			dungeon = new Dungeon();
 		}
 		return dungeon;
 	}

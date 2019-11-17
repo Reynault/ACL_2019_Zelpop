@@ -57,7 +57,7 @@ public class InGame implements GameState {
                 break;
         }
 
-        if(commande != Cmd.SAVE && commande != Cmd.LEAVE_LEVEL) {
+        if(commande != Cmd.SAVE && commande != Cmd.LEAVE_LEVEL && commande != Cmd.RESTART) {
             dungeon.updateAll(game);
         }
     }

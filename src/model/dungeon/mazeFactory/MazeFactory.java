@@ -24,7 +24,7 @@ public class MazeFactory implements Serializable {
 
     private static int BASIC_MAZE_SCORE = 50;
 
-    private static int TRAP_DAMAGE = 2;
+    private static int TRAP_DAMAGE = 5;
     private static int TREASURE_GOLD = 50;
 
     /**
@@ -178,6 +178,7 @@ public class MazeFactory implements Serializable {
     private int specialTileRation = 10;
     private int entityRatio = 30;
     private boolean hasStairs;
+    private int minimumDistance;
 
     /**
      * Generation of a simple maze using an algorithm that
@@ -189,6 +190,7 @@ public class MazeFactory implements Serializable {
      */
     public Maze getRandomMaze(int size) {
         MAZE_COUNTER++;
+        minimumDistance = 3/4;
         // The maze will have one stairs
         hasStairs = false;
 
@@ -226,7 +228,8 @@ public class MazeFactory implements Serializable {
             do {
                 x = random.nextInt(cells.length);
                 y = random.nextInt(cells[x].length);
-            } while (cells[x][y] != 0);
+                // While the stairs are near the spawn and while it is in a wall
+            } while (cells[x][y] != 0 && size * minimumDistance > (x+y));
             cells[x][y] = 4;
         }
 
@@ -351,11 +354,6 @@ public class MazeFactory implements Serializable {
     private void fillRoom(int[][] cells, int xmin, int xmax, int ymin, int ymax) {
         Random random = new Random();
         int rand;
-        // Choosing if we add the stairs
-        boolean addStairsInThisRoom = false;
-        if (!hasStairs) {
-            addStairsInThisRoom = true;
-        }
 //        System.out.println("xmin : " + xmin);
 //        System.out.println("xmax : " + xmax);
 //        System.out.println("ymin : " + ymin);
@@ -365,22 +363,13 @@ public class MazeFactory implements Serializable {
                 rand = random.nextInt(specialTileRation);
                 if (rand == 1) {
                     rand = random.nextInt(3);
-                    if (addStairsInThisRoom) {
-                        cells[j][i] = 4;
-                        System.out.println("stairs filling room\n" +
-                                "\nX: " + j +
-                                "\nY: " + i);
-                        hasStairs = true;
-                        addStairsInThisRoom = false;
-                    } else {
-                        switch (rand) {
-                            case 1:
-                                cells[j][i] = 2;
-                                break;
-                            case 2:
-                                cells[j][i] = 3;
-                                break;
-                        }
+                    switch (rand) {
+                        case 1:
+                            cells[j][i] = 2;
+                            break;
+                        case 2:
+                            cells[j][i] = 3;
+                            break;
                     }
                 }
             }

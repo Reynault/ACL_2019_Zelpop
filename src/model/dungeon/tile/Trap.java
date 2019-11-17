@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 public class Trap extends Effect {
 
     private int trapDamage;
+    private boolean triggered;
 
     /**
      * Default constructor
@@ -20,12 +21,17 @@ public class Trap extends Effect {
         super(decore);
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
         this.trapDamage = trapDamage;
+        this.triggered = false;
     }
 
     @Override
     public void setImage() {
         decore.setImage();
-        spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
+        if(triggered){
+            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
+        }else {
+            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
+        }
     }
 
     @Override
@@ -43,9 +49,13 @@ public class Trap extends Effect {
 
     @Override
     public void action(Maze maze, Entity e) {
-        e.takeDamage(trapDamage);
-        if(!e.isAlive()){
-            maze.removeEntity(e);
+        if(!triggered) {
+            e.takeDamage(trapDamage);
+            triggered = true;
+            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTiles());
+            if (!e.isAlive()) {
+                maze.removeEntity(e);
+            }
         }
     }
 
