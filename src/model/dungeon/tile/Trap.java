@@ -1,5 +1,6 @@
 package model.dungeon.tile;
 
+import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 import sprite.spriteManager.SpriteManagerTile;
 import sprite.TextureFactory;
@@ -9,6 +10,8 @@ import java.awt.image.BufferedImage;
 
 public class Trap extends Effect {
 
+    private int trapDamage;
+
     /**
      * Default constructor
      * @param decore decorated tile
@@ -16,6 +19,7 @@ public class Trap extends Effect {
     Trap(Tile decore) {
         super(decore);
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
+        trapDamage = 2;
     }
 
     @Override
@@ -38,12 +42,25 @@ public class Trap extends Effect {
     }
 
     @Override
-    public void action(Entity e) {
-
+    public void action(Maze maze, Entity e) {
+        e.takeDamage(trapDamage);
+        if(!e.isAlive()){
+            maze.removeEntity(e);
+        }
     }
 
     @Override
     public boolean canBeCrossed() {
         return true;
+    }
+
+    @Override
+    public boolean isStairs() {
+        return false;
+    }
+
+    @Override
+    public int getGold() {
+        return 0;
     }
 }

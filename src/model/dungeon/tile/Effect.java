@@ -1,5 +1,6 @@
 package model.dungeon.tile;
 
+import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 
 import java.awt.image.BufferedImage;
@@ -18,8 +19,14 @@ public abstract class Effect extends Tile implements Serializable {
     public abstract void draw(BufferedImage img, int x, int y, int scale);
 
     @Override
-    public abstract void action(Entity e);
+    public abstract void action(Maze maze, Entity e);
 
     @Override
     public abstract boolean canBeCrossed();
+
+    @Override
+    public abstract boolean isStairs();
+
+    @Override
+    public abstract int getGold();
 }

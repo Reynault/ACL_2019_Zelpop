@@ -31,23 +31,25 @@ public class Maze implements Serializable {
     /**
      * Default constructor
      * The maze must have at least one line and one column
+     *
      * @param tiles    list of tiles
      * @param entities list of entities
      */
-    public Maze(Tile[][] tiles, List<Entity> entities) {
+    public Maze(Tile[][] tiles, List<Entity> entities, Scoring scoring) {
         this.tiles = tiles;
         width = tiles[0].length;
         height = tiles.length;
         this.entities = entities;
         this.hero = EntityFactory.getInstance().getHero();
+        this.scoring = scoring;
     }
 
     /**
      * Give an image for each tile and entity (used after a load)
      */
     public void setImages() {
-        for(int i = 0 ; i < tiles.length ; i++){
-            for(int j = 0 ; j < tiles[0].length ; j++){
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[0].length; j++) {
                 tiles[i][j].setImage();
             }
         }
@@ -58,6 +60,7 @@ public class Maze implements Serializable {
 
     /**
      * Draw the maze
+     *
      * @param img image
      */
     public void draw(BufferedImage img) {
@@ -77,10 +80,10 @@ public class Maze implements Serializable {
         width = img.getWidth();
         height = img.getHeight();
 
-        sideBarSizeX = 8*(GlobalSprites.getScaling() * GlobalSprites.get8Sprite());
-        sideBarSizeY = (nbTileDisplayed*2+1) * unit;
+        sideBarSizeX = 8 * (GlobalSprites.getScaling() * GlobalSprites.get8Sprite());
+        sideBarSizeY = (nbTileDisplayed * 2 + 1) * unit;
 
-        xShift = width / 2 - sideBarSizeX/2;
+        xShift = width / 2 - sideBarSizeX / 2;
         yShift = height / 2;
 
         tilePositionX = (GlobalSprites.getScaling() * GlobalSprites.get8Sprite());
@@ -110,7 +113,7 @@ public class Maze implements Serializable {
         }
 
         // Drawing surrounding entities
-        for(Entity e: entities) {
+        for (Entity e : entities) {
             Position pos = e.getPosition();
             // If it is nearby
             if (pos.getX() >= (posHero.getX() - nbTileDisplayed) && pos.getX() <= (posHero.getX() + nbTileDisplayed) &&
@@ -215,7 +218,7 @@ public class Maze implements Serializable {
         crayon.fillRect(
                 sideBarElementX,
                 yShift - nbTileDisplayed * unit + unit * 10,
-                unit *  HPratio * 6,
+                unit * HPratio * 6,
                 unit
         );
 
@@ -226,7 +229,7 @@ public class Maze implements Serializable {
         crayon.drawImage(
                 labelScore,
                 sideBarElementX,
-                yShift + (labelScore.getHeight()*3),
+                yShift + (labelScore.getHeight() * 3),
                 labelScore.getWidth(),
                 labelScore.getHeight(),
                 null
@@ -235,22 +238,23 @@ public class Maze implements Serializable {
         // Drawing score value
         Color labelScoreColor = new Color(0x198DD8);
 
-        BufferedImage labelScoreValue = text.getString("80000", labelScoreColor);
+        BufferedImage labelScoreValue = text.getString(String.valueOf(hero.getScore()), labelScoreColor);
 
         crayon.drawImage(
                 labelScoreValue,
                 sideBarElementX,
-                yShift + (labelScoreValue.getHeight()*5),
+                yShift + (labelScoreValue.getHeight() * 5),
                 labelScoreValue.getWidth(),
                 labelScoreValue.getHeight(),
                 null
-                );
+        );
 
         crayon.dispose();
     }
 
     /**
      * Move a entity in the maze using a direction
+     *
      * @param e         entity in the maze
      * @param direction direction for the move
      */
@@ -294,7 +298,13 @@ public class Maze implements Serializable {
                 );
             }
 
+            // Setting position
             e.setPosition(newPosition);
+
+            // Then adding tile action to the hero
+            Position position = hero.getPosition();
+            Tile t = tiles[position.getY()][position.getX()];
+            t.action(this, hero);
         }
     }
 
@@ -338,19 +348,19 @@ public class Maze implements Serializable {
     /**
      * Entity is attacking
      */
-    public void attack(){
+    public void attack() {
         this.hero.attack(this);
     }
 
     /**
      * To kill the entity
      */
-    public void killEntity(Entity entity , Hero h){
+    public void killEntity(Entity entity, Hero h) {
 
         //check sur le hero
-        if (h.isHero()){
-        int bonus = scoring.killMonster(entity);
-        h.increaseScore(bonus);
+        if (h.isHero()) {
+            int bonus = scoring.killMonster(entity);
+            h.increaseScore(bonus);
         }
 
     }
@@ -358,13 +368,27 @@ public class Maze implements Serializable {
     /**
      * Method getEntity, it fetch an entity from a specify tile on the maze
      */
-    public Entity getEntity(int x, int y){
+    public Entity getEntity(int x, int y) {
         Entity res = null;
-        for(Entity entity: entities){
-            if(entity.getPosition().getY() == y && entity.getPosition().getX() == x){
+        for (Entity entity : entities) {
+            if (entity.getPosition().getY() == y && entity.getPosition().getX() == x) {
                 res = entity;
             }
         }
         return res;
+    }
+
+    public boolean isFinished() {
+        Position pos = hero.getPosition();
+        Tile t = tiles[pos.getX()][pos.getY()];
+        return t.isStairs();
+    }
+
+    public void removeEntity(Entity e) {
+        entities.remove(e);
+    }
+
+    public int getChestScore(Tile tile) {
+        return scoring.findChest(tile);
     }
 }

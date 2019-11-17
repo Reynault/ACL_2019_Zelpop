@@ -5,6 +5,8 @@ import model.dungeon.tile.Tile;
 
 public class Scoring {
 
+    Scoring(){};
+
     private int multiplier ;
 
     public int killMonster(Entity entity){
@@ -16,6 +18,6 @@ public class Scoring {
     }
 
     public int findChest(Tile tile){
-        return 1;
+        return tile.getGold();
     }
 }

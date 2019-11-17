@@ -1,5 +1,6 @@
 package model.dungeon.tile;
 
+import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 import sprite.spriteManager.SpriteManagerTile;
 import sprite.TextureFactory;
@@ -38,13 +39,23 @@ public class Wall extends Effect {
     }
 
     @Override
-    public void action(Entity e) {
+    public void action(Maze maze, Entity e) {
         
     }
 
     @Override
     public boolean canBeCrossed() {
         return false;
+    }
+
+    @Override
+    public boolean isStairs() {
+        return false;
+    }
+
+    @Override
+    public int getGold() {
+        return 0;
     }
 
     @Override

@@ -15,16 +15,21 @@ public class Dungeon implements Serializable {
     private MazeFactory mazeFactory;
     private Hero hero;
 
+    private static int DEFAULT_MAZE_SIZE = 20;
+
     /**
-     * Default constructor
+     * Default constructor with random generated maze
      */
     public Dungeon() {
         this.mazeFactory = new MazeFactory();
         this.hero = EntityFactory.getInstance().generateHero();
-        InputStream file = Dungeon.class.getClassLoader().getResourceAsStream("level/secondLevel.txt");
-        generateMaze(file);
+        currentMaze = mazeFactory.getRandomMaze(DEFAULT_MAZE_SIZE);
     }
 
+    /**
+     * Constructor with filepath containing the maze
+     * @param filepath
+     */
     public Dungeon(String filepath) {
         this.mazeFactory = new MazeFactory();
         this.hero = EntityFactory.getInstance().generateHero();
@@ -88,5 +93,11 @@ public class Dungeon implements Serializable {
      */
     public void draw(BufferedImage img) {
         currentMaze.draw(img);
+    }
+
+    public void changeLevel(){
+        if(currentMaze.isFinished()){
+            currentMaze = mazeFactory.getRandomMaze(DEFAULT_MAZE_SIZE);
+        }
     }
 }

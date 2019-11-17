@@ -3,6 +3,8 @@ package model.dungeon.mazeFactory;
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
+import model.dungeon.scoring.ScoringFactory;
+import model.dungeon.scoring.ScoringParameter;
 import model.dungeon.tile.Tile;
 import model.dungeon.tile.TileFactory;
 import model.global.GlobalDirection;
@@ -53,7 +55,7 @@ public class MazeFactory implements Serializable {
             System.out.print("\n");
         }
         */
-        return new Maze(tiles, entities);
+        return new Maze(tiles, entities, ScoringFactory.getSimpleScoring());
     }
 
     /**************************************
@@ -156,11 +158,13 @@ public class MazeFactory implements Serializable {
             System.out.println(e.toString());
         }
 
-        //tiles = generatorMaze(20);
-        tiles = generatorMaze(22);
-
-        return new Maze(tiles, entities);
+        return new Maze(tiles, entities, ScoringFactory.getSimpleScoring());
     }
+
+    // 1/25
+    private int specialTileRation = 25;
+    private int entityRatio = 25;
+    private boolean hasStairs;
 
     /**
      * Generation of a simple maze using an algorithm that
@@ -169,7 +173,10 @@ public class MazeFactory implements Serializable {
      * @param size the size of the labyrinth
      * @return the maze
      */
-    private Tile[][] generatorMaze(int size){
+    public Maze getRandomMaze(int size){
+        // The maze will have one stairs
+        hasStairs = false;
+
         // init of return and int[][] to generate maze
         Tile[][] maze = new Tile[size][size];
         int[][] cells = new int[size][size];
@@ -192,30 +199,57 @@ public class MazeFactory implements Serializable {
             System.out.print("\n");
         }
 
+        // Getting random object and entity list
+        Random random = new Random();
+        ArrayList<Entity> entities = new ArrayList<>();
+
         // convertion of int[][ into a maze
         int i=0;
         int j=0;
         for (int[] row : cells) {
             for (int cell : row) {
-                if(cell == 1){
-                    maze[i][j] = TileFactory.getWall();
-                }else{
-                    maze[i][j] = TileFactory.generateTile();
+                switch (cell){
+                    case 1:
+                        maze[i][j] = TileFactory.getWall();
+                        break;
+                    case 2:
+                        maze[i][j] = TileFactory.getTrap();
+                        break;
+                    case 3:
+                        maze[i][j] = TileFactory.getTreasure();
+                        break;
+                    case 4:
+                        maze[i][j] = TileFactory.getStairs();
+                        break;
+                    default:
+                        maze[i][j] = TileFactory.generateTile();
+                        // Then adding entity
+                        if(random.nextInt(entityRatio) == 1){
+                            entities.add(EntityFactory.getInstance().getRandomMonster(
+                                    new Position(j, i, GlobalDirection.IDLE)
+                            ));
+                        }
+                        break;
                 }
                 j++;
             }
             j=0;
             i++;
         }
-        
-        return maze;
+
+        return new Maze(maze, entities, ScoringFactory.getSimpleScoring());
     }
 
     private void split(int[][] cells, int xmin, int xmax, int ymin, int ymax, ArrayList<Integer> prevxu, ArrayList<Integer> prevyr, ArrayList<Integer> prevxd, ArrayList<Integer> prevyl) {
         //final case to make sure we can split
         if(xmax-xmin < prevxd.size() + prevxd.size() + 3 || ymax-ymin < prevyl.size() + prevyr.size() + 3){
+            // If we can't split, we fill the room with tiles
+//            if(xmax-xmin < prevxd.size() + prevxd.size() || ymax-ymin < prevyl.size() + prevyr.size()){
+                fillRoom(cells, xmin, xmax, ymin, ymax);
+//            }
             return;
         }
+
         Random random = new Random();
 
         // selection on cut verticaly and horizontaly
@@ -236,8 +270,9 @@ public class MazeFactory implements Serializable {
                 }
             }
         }
-        System.out.println("Cutx: " + cutx + " | xmin: " + xmin + " | xmax: " + xmax );
-        System.out.println("Cuty: " + cuty + " | ymin: " + ymin + " | ymax: " + ymax );
+
+//        System.out.println("Cutx: " + cutx + " | xmin: " + xmin + " | xmax: " + xmax );
+//        System.out.println("Cuty: " + cuty + " | ymin: " + ymin + " | ymax: " + ymax );
         // generatin 2 set of 2 door to remove to like 4 regions together
         int doorx1 = random.nextInt(cutx - xmin ) + xmin;
         int doorx2 = random.nextInt(xmax - cutx-1 ) + cutx+1;
@@ -280,6 +315,45 @@ public class MazeFactory implements Serializable {
                 prevxd,
                 new ArrayList<Integer>(Arrays.asList(doory2)));
 
+    }
+
+
+
+    private void fillRoom(int[][] cells, int xmin, int xmax, int ymin, int ymax){
+        Random random = new Random();
+        int rand;
+        // Choosing if we add the stairs
+        boolean addStairsInThisRoom = false;
+        if(!hasStairs){
+            if(random.nextInt(2) == 1){
+                addStairsInThisRoom = true;
+            }
+        }
+        System.out.println("xmin : " + xmin);
+        System.out.println("xmax : " + xmax);
+        System.out.println("ymin : " + ymin);
+        System.out.println("ymax : " + ymax);
+        for(int i = xmin  ; i < xmax; i++){
+            for (int j = ymin; j < ymax; j++){
+                rand = random.nextInt(specialTileRation);
+                if(rand == 1 ){
+                    rand = random.nextInt(3);
+                    if(addStairsInThisRoom){
+                        cells[i][j] = 4;
+                        hasStairs = true;
+                    }else{
+                        switch (rand){
+                            case 1:
+                                cells[i][j] = 2;
+                                break;
+                            case 2:
+                                cells[i][j] = 3;
+                                break;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

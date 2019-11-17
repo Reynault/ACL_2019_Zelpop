@@ -24,4 +24,6 @@ public class TileFactory {
     public static Tile getEmptyTile(){
         return new Tile();
     }
+
+    public static Tile getStairs(){return new Stairs(new Tile());}
 }

@@ -1,5 +1,6 @@
 package model.dungeon.tile;
 
+import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 import sprite.spriteManager.SpriteManagerTile;
 import sprite.TextureFactory;
@@ -9,12 +10,17 @@ import java.awt.image.BufferedImage;
 
 public class Treasure extends Effect {
 
+    private boolean open;
+    private int gold;
+
     /**
      * Default constructor
      * @param decore decorated tile
      */
     Treasure(Tile decore) {
         super(decore);
+        open = false;
+        gold = 50;
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTreasure());
     }
 
@@ -38,12 +44,25 @@ public class Treasure extends Effect {
     }
 
     @Override
-    public void action(Entity e) {
-
+    public void action(Maze maze, Entity e) {
+        if(!open) {
+            e.increaseScore(maze.getChestScore(this));
+        }
+        open = true;
     }
 
     @Override
     public boolean canBeCrossed() {
         return true;
+    }
+
+    @Override
+    public boolean isStairs() {
+        return false;
+    }
+
+    @Override
+    public int getGold() {
+        return gold;
     }
 }

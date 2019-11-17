@@ -20,6 +20,7 @@ public abstract class Entity implements Serializable {
     protected Behavior behavior;
     protected SpriteManager spriteManager;
     protected Attack attack;
+    protected int score;
 
     protected Entity(int hp, boolean passThrought, Position position, Behavior behavior, SpriteManager spriteManager) {
         this.maxHp = hp;
@@ -27,6 +28,7 @@ public abstract class Entity implements Serializable {
         this.passThrought = passThrought;
         this.position = position;
         this.behavior = behavior;
+        this.score = 0;
         this.spriteManager = spriteManager;
     }
 
@@ -78,7 +80,7 @@ public abstract class Entity implements Serializable {
     /**
      *
      */
-    public void takeDamage(){
+    public void takeDamage(int damage){
 
     }
 
@@ -95,7 +97,12 @@ public abstract class Entity implements Serializable {
     /**
      *
      */
-    public void increaseScore(double bonus){
+    public void increaseScore(int bonus){
+        score += bonus;
+    }
+
+    public int getScore(){
+        return score;
     }
 
     /**

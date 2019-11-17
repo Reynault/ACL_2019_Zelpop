@@ -1,5 +1,6 @@
 package model.dungeon.tile;
 
+import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 import sprite.spriteManager.SpriteManager;
 import sprite.spriteManager.SpriteManagerTile;
@@ -45,7 +46,7 @@ public class Tile extends TileFactory implements Serializable {
         crayon.dispose();
     }
 
-    public void action(Entity entity){
+    public void action(Maze maze, Entity entity){
 
     }
 
@@ -57,8 +58,16 @@ public class Tile extends TileFactory implements Serializable {
         return true;
     }
 
+    public boolean isStairs(){
+        return false;
+    }
+
     @Override
     public String toString() {
         return "Tile ";
+    }
+
+    public int getGold() {
+        return 0;
     }
 }
