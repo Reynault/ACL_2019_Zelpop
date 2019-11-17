@@ -16,10 +16,10 @@ public class Trap extends Effect {
      * Default constructor
      * @param decore decorated tile
      */
-    Trap(Tile decore) {
+    Trap(Tile decore, int trapDamage) {
         super(decore);
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
-        trapDamage = 2;
+        this.trapDamage = trapDamage;
     }
 
     @Override

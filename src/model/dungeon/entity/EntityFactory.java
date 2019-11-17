@@ -3,9 +3,17 @@ package model.dungeon.entity;
 import model.dungeon.entity.behavior.HeroBehavior;
 import model.dungeon.entity.behavior.RandomBehavior;
 import model.global.GlobalDirection;
+import model.global.GlobalSprites;
 import model.global.Position;
 
 public class EntityFactory {
+
+    private static int HERO_HP = 20;
+    private static int HERO_X = 0;
+    private static int HERO_Y = 0;
+    private static GlobalDirection HERO_DIRECTION = GlobalDirection.DOWN;
+
+    private static int MONSTER_HP = 6;
 
     private Hero hero;
 
@@ -22,12 +30,12 @@ public class EntityFactory {
      * Generate the Hero
      */
     public Hero generateHero() {
-        return hero = new Hero(20,
+        return hero = new Hero(HERO_HP,
                 false,
                             new Position(
-                                    0,
-                                    0,
-                                    GlobalDirection.DOWN
+                                    HERO_X,
+                                    HERO_Y,
+                                    HERO_DIRECTION
                             ),
                     new HeroBehavior()
                 );  // default hp
@@ -45,6 +53,6 @@ public class EntityFactory {
      * Generate a classic monster
      */
     public Monster getRandomMonster(Position position) {
-        return new Monster(2, false, position, new RandomBehavior());  // default hp
+        return new Monster(6, false, position, new RandomBehavior());  // default hp
     }
 }

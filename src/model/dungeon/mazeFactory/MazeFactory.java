@@ -18,6 +18,9 @@ import java.util.*;
 
 public class MazeFactory implements Serializable {
 
+    private static int TRAP_DAMAGE = 2;
+    private static int TREASURE_GOLD = 50;
+
     /**
      * Maze's getter
      * @return Maze
@@ -111,10 +114,10 @@ public class MazeFactory implements Serializable {
                             tiles[i][j] = TileFactory.getEmptyTile();
                         }
                         else if(typeOfTile.compareTo("c") == 0){  // chest/treasure
-                            tiles[i][j] = TileFactory.getTreasure();
+                            tiles[i][j] = TileFactory.getTreasure(TREASURE_GOLD);
                         }
                         else if(typeOfTile.compareTo("t") == 0){  // trap
-                            tiles[i][j] = TileFactory.getTrap();
+                            tiles[i][j] = TileFactory.getTrap(TRAP_DAMAGE);
                         }
                     }
                     line = buff.readLine();
@@ -213,10 +216,10 @@ public class MazeFactory implements Serializable {
                         maze[i][j] = TileFactory.getWall();
                         break;
                     case 2:
-                        maze[i][j] = TileFactory.getTrap();
+                        maze[i][j] = TileFactory.getTrap(TRAP_DAMAGE);
                         break;
                     case 3:
-                        maze[i][j] = TileFactory.getTreasure();
+                        maze[i][j] = TileFactory.getTreasure(TREASURE_GOLD);
                         break;
                     case 4:
                         maze[i][j] = TileFactory.getStairs();

@@ -9,16 +9,16 @@ public class TileFactory {
         return new Tile();
     }
 
-    public static Tile getTrap(){
-        return new Trap(new Tile());
+    public static Tile getTrap(int damage){
+        return new Trap(new Tile(), damage);
     }
 
     public static Tile getWall(){
         return new Wall(new Tile());
     }
 
-    public static Tile getTreasure(){
-        return new Treasure(new Tile());
+    public static Tile getTreasure(int gold){
+        return new Treasure(new Tile(), gold);
     }
 
     public static Tile getEmptyTile(){

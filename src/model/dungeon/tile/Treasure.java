@@ -17,10 +17,10 @@ public class Treasure extends Effect {
      * Default constructor
      * @param decore decorated tile
      */
-    Treasure(Tile decore) {
+    Treasure(Tile decore, int gold) {
         super(decore);
         open = false;
-        gold = 50;
+        this.gold = gold;
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTreasure());
     }
 
