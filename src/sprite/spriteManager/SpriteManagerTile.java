@@ -1,6 +1,6 @@
 package sprite.spriteManager;
 
-import model.global.GlobalDirection;
+import model.global.Cmd;
 
 import java.awt.image.BufferedImage;
 
@@ -12,7 +12,7 @@ public class SpriteManagerTile extends SpriteManager {
     }
 
     @Override
-    public void setSprite(GlobalDirection direction) {
+    public void setSprite(Cmd direction) {
 
     }
 

@@ -5,7 +5,7 @@ import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
 import model.dungeon.scoring.Scoring;
 import model.dungeon.tile.Tile;
-import model.global.GlobalDirection;
+import model.global.Cmd;
 import model.global.GlobalSprites;
 import model.global.Position;
 import sprite.TextureFactory;
@@ -236,7 +236,7 @@ public class Maze implements Serializable {
         );
 
         // Drawing score value
-        Color labelScoreColor = new Color(0x198DD8);
+        Color labelScoreColor = new Color(0xB99828);
 
         BufferedImage labelScoreValue = text.getString(String.valueOf(hero.getScore()), labelScoreColor);
 
@@ -258,14 +258,14 @@ public class Maze implements Serializable {
      * @param e         entity in the maze
      * @param direction direction for the move
      */
-    public void moveEntity(Entity e, GlobalDirection direction) {
+    public void moveEntity(Entity e, Cmd direction) {
         int x, y;
         Position currentPosition, newPosition;
 
         // Generating a movement
-        direction = e.behave(direction);
-
-        if (direction != GlobalDirection.IDLE) {
+        direction = e.behave(this, direction);
+        System.out.println(direction);
+        if (direction != Cmd.IDLE) {
 
             currentPosition = e.getPosition();
 
@@ -340,7 +340,7 @@ public class Maze implements Serializable {
     public void moveEntities() {
         if (entities != null && entities.size() > 0) {
             for (Entity e : entities) {
-                moveEntity(e, GlobalDirection.IDLE);
+                moveEntity(e, Cmd.IDLE);
             }
         }
     }
@@ -363,6 +363,8 @@ public class Maze implements Serializable {
             h.increaseScore(bonus);
         }
 
+        // Deleting killed entity
+        removeEntity(entity);
     }
 
     /**

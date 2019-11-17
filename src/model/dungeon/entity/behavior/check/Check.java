@@ -3,7 +3,9 @@ package model.dungeon.entity.behavior.check;
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 
-public interface Check {
+import java.io.Serializable;
 
-    public abstract boolean check(Maze maze, Entity entity);
+public interface Check extends Serializable {
+
+    boolean check(Maze maze, Entity entity);
 }

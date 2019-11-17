@@ -1,6 +1,6 @@
 package sprite.spriteManager;
 
-import model.global.GlobalDirection;
+import model.global.Cmd;
 import model.global.GlobalSprites;
 
 import java.awt.geom.AffineTransform;
@@ -13,7 +13,7 @@ public class SpriteManagerHero extends SpriteManager {
     }
 
     @Override
-    public void setSprite(GlobalDirection direction){
+    public void setSprite(Cmd direction){
         this.frame = (frame + 1) % 2;
         facing = direction;
     }

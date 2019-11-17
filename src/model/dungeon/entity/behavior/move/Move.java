@@ -1,10 +1,12 @@
 package model.dungeon.entity.behavior.move;
 
-import engine.Cmd;
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
+import model.global.Cmd;
 
-public interface Move {
+import java.io.Serializable;
 
-    public abstract Cmd move(Maze maze, Entity entity);
+public interface Move extends Serializable {
+
+    Cmd move(Maze maze, Entity entity, Cmd commande);
 }

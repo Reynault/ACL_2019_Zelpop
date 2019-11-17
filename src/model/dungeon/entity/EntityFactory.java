@@ -1,9 +1,7 @@
 package model.dungeon.entity;
 
-import model.dungeon.entity.behavior.HeroBehavior;
-import model.dungeon.entity.behavior.RandomBehavior;
-import model.global.GlobalDirection;
-import model.global.GlobalSprites;
+import model.dungeon.entity.behavior.BehaveFactory;
+import model.global.Cmd;
 import model.global.Position;
 
 public class EntityFactory {
@@ -11,9 +9,11 @@ public class EntityFactory {
     public static int HERO_HP = 20;
     public static int HERO_X = 0;
     public static int HERO_Y = 0;
-    public static GlobalDirection HERO_DIRECTION = GlobalDirection.DOWN;
+    public static Cmd HERO_DIRECTION = Cmd.DOWN;
+    public static int HERO_DAMAGE = 5;
 
-    private static int MONSTER_HP = 6;
+    private static int MONSTER_HP = 10;
+    private static int MONSTER_DAMAGE = 2;
 
     private Hero hero;
 
@@ -32,12 +32,13 @@ public class EntityFactory {
     public Hero generateHero() {
         return hero = new Hero(HERO_HP,
                 false,
+                            HERO_DAMAGE,
                             new Position(
                                     HERO_X,
                                     HERO_Y,
                                     HERO_DIRECTION
                             ),
-                    new HeroBehavior()
+                    BehaveFactory.getHeroBehavior()
                 );  // default hp
     }
 
@@ -53,6 +54,10 @@ public class EntityFactory {
      * Generate a classic monster
      */
     public Monster getRandomMonster(Position position) {
-        return new Monster(6, false, position, new RandomBehavior());  // default hp
+        return new Monster(MONSTER_HP,
+                false,
+                MONSTER_DAMAGE,
+                position,
+                BehaveFactory.getSimpleBehavior());  // default hp
     }
 }

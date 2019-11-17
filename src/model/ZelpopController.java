@@ -2,8 +2,8 @@ package model;
 
 import java.awt.event.KeyEvent;
 
-import engine.Cmd;
 import engine.GameController;
+import model.global.Cmd;
 
 
 /**

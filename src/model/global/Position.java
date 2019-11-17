@@ -5,12 +5,12 @@ import java.io.Serializable;
 public class Position implements Serializable {
     private final int x;
     private final int y;
-    private final GlobalDirection globalDirection;
+    private final Cmd cmd;
 
-    public Position(int x, int y, GlobalDirection globalDirection) {
+    public Position(int x, int y, Cmd cmd) {
         this.x = x;
         this.y = y;
-        this.globalDirection = globalDirection;
+        this.cmd = cmd;
     }
 
     public int getX() {
@@ -21,7 +21,7 @@ public class Position implements Serializable {
         return y;
     }
 
-    public GlobalDirection getGlobalDirection() {
-        return globalDirection;
+    public Cmd getCmd() {
+        return cmd;
     }
 }

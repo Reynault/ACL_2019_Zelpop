@@ -7,8 +7,8 @@ import sprite.TextureFactory;
 
 public class Hero extends Entity {
 
-    public Hero(int hp, boolean passThrought, Position position, Behavior behavior) {
-        super(hp, passThrought, position, behavior, new SpriteManagerHero(TextureFactory.getTextureFactory().getHero()));
+    public Hero(int hp, boolean passThrought, int damage, Position position, Behavior behavior) {
+        super(hp, passThrought, damage, position, behavior, new SpriteManagerHero(TextureFactory.getTextureFactory().getHero()));
     }
 
     /**

@@ -3,9 +3,9 @@ package model;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
-import engine.Cmd;
 import engine.Game;
 import model.dungeon.Dungeon;
+import model.global.Cmd;
 import model.state.GameState;
 import model.state.Menu;
 

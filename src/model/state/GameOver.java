@@ -1,9 +1,8 @@
 package model.state;
 
-import engine.Cmd;
 import model.ZelpopGame;
 import model.dungeon.Dungeon;
-import model.global.GlobalSprites;
+import model.global.Cmd;
 import sprite.TextureFactory;
 import sprite.spriteManager.TextManager;
 

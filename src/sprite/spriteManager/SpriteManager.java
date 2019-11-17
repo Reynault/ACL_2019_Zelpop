@@ -1,6 +1,6 @@
 package sprite.spriteManager;
 
-import model.global.GlobalDirection;
+import model.global.Cmd;
 
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
@@ -12,16 +12,16 @@ public abstract class SpriteManager implements Serializable {
     protected final static int RIGHT = 0;
 
     protected int frame;
-    protected GlobalDirection facing;
+    protected Cmd facing;
     protected transient BufferedImage sprite;
 
     public SpriteManager(BufferedImage sprite) {
         this.sprite = sprite;
         frame = 0;
-        facing = GlobalDirection.LEFT;
+        facing = Cmd.LEFT;
     }
 
-    public abstract void setSprite(GlobalDirection direction);
+    public abstract void setSprite(Cmd direction);
 
     public abstract BufferedImage getCurrentSprite();
 }

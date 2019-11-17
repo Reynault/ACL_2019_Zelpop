@@ -2,8 +2,7 @@ package model.dungeon.entity;
 
 import model.dungeon.Maze;
 import model.dungeon.entity.behavior.Behavior;
-import model.dungeon.entity.behavior.attack.Attack;
-import model.global.GlobalDirection;
+import model.global.Cmd;
 import model.global.Position;
 import sprite.spriteManager.SpriteManager;
 
@@ -19,10 +18,10 @@ public abstract class Entity implements Serializable {
     protected Position position;
     protected Behavior behavior;
     protected SpriteManager spriteManager;
-    protected Attack attack;
+    protected int damage;
     protected int score;
 
-    protected Entity(int hp, boolean passThrought, Position position, Behavior behavior, SpriteManager spriteManager) {
+    protected Entity(int hp, boolean passThrought, int damage, Position position, Behavior behavior, SpriteManager spriteManager) {
         this.maxHp = hp;
         this.hp = hp;
         this.passThrought = passThrought;
@@ -30,6 +29,7 @@ public abstract class Entity implements Serializable {
         this.behavior = behavior;
         this.score = 0;
         this.spriteManager = spriteManager;
+        this.damage = damage;
     }
 
     public int getHp() {
@@ -40,54 +40,57 @@ public abstract class Entity implements Serializable {
         return maxHp;
     }
 
-    public Position getPosition(){
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(Position position){
+    public void setPosition(Position position) {
         this.position = position;
-        spriteManager.setSprite(position.getGlobalDirection());
+        spriteManager.setSprite(position.getCmd());
     }
 
-    public boolean canPassThrought(){
+    public boolean canPassThrought() {
         return passThrought;
     }
 
-    public void setPassThrought(boolean value){
+    public void setPassThrought(boolean value) {
         passThrought = value;
     }
 
-    public GlobalDirection behave(GlobalDirection direction){
-        return behavior.behave(this, direction);
+    public Cmd behave(Maze maze, Cmd direction) {
+        return behavior.behave(maze, this, direction);
     }
 
 
     /**
      * Entity is attacking
+     *
      * @param maze
      */
-    public void attack (Maze maze){
-       behavior.behave(maze , this , this.attack);
+    public void attack(Maze maze) {
+        behavior.behave(maze, this, Cmd.ATTACK);
     }
 
     /**
      *
      */
-    public int getDmg(){
-        return 0;
+    public int getDmg() {
+        return damage;
     }
 
     /**
      *
      */
-    public void takeDamage(int damage){
-
+    public void takeDamage(int damage) {
+        if (damage >= 0) {
+            hp = hp - damage;
+        }
     }
 
     /**
      *
      */
-    public boolean isAlive(){
+    public boolean isAlive() {
         if (this.hp != 0)
             return true;
         else
@@ -97,18 +100,18 @@ public abstract class Entity implements Serializable {
     /**
      *
      */
-    public void increaseScore(int bonus){
+    public void increaseScore(int bonus) {
         score += bonus;
     }
 
-    public int getScore(){
+    public int getScore() {
         return score;
     }
 
     /**
      *
      */
-    public Boolean isHero(){
+    public Boolean isHero() {
         return true;
     }
 
@@ -119,12 +122,13 @@ public abstract class Entity implements Serializable {
 
     /**
      * Draw the entity at a given position
-     * @param img the image in which the entity will be drawn
-     * @param x x position
-     * @param y y position
+     *
+     * @param img   the image in which the entity will be drawn
+     * @param x     x position
+     * @param y     y position
      * @param scale scale of the entity
      */
-    public void draw(BufferedImage img, int x, int y, int scale){
+    public void draw(BufferedImage img, int x, int y, int scale) {
         Graphics2D crayon = (Graphics2D) img.getGraphics();
         crayon.drawImage(spriteManager.getCurrentSprite(),
                 x,

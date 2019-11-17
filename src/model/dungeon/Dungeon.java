@@ -1,11 +1,13 @@
 package model.dungeon;
 
-import model.dungeon.entity.Entity;
+import engine.Game;
+import model.ZelpopGame;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
 import model.dungeon.mazeFactory.MazeFactory;
-import model.global.GlobalDirection;
+import model.global.Cmd;
 import model.global.Position;
+import model.state.StateFactory;
 
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
@@ -44,7 +46,7 @@ public class Dungeon implements Serializable {
      * Move the hero with the direction
      * @param direction direction for the move
      */
-    public void moveHero(GlobalDirection direction) {
+    public void moveHero(Cmd direction) {
         currentMaze.moveEntity(
                 hero,
                 direction
@@ -77,8 +79,11 @@ public class Dungeon implements Serializable {
     /**
      * Update the whole dungeon
      */
-    public void updateAll() {
+    public void updateAll(ZelpopGame game) {
         currentMaze.moveEntities();
+        if(!hero.isAlive()){
+            game.setState(StateFactory.getGameOver(this));
+        }
     }
 
     /**

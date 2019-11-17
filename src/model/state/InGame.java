@@ -1,9 +1,8 @@
 package model.state;
 
-import engine.Cmd;
 import model.ZelpopGame;
 import model.dungeon.Dungeon;
-import model.global.GlobalDirection;
+import model.global.Cmd;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -33,16 +32,16 @@ public class InGame implements GameState {
     public void evolve(ZelpopGame game, Cmd commande) {
         switch (commande) {
             case RIGHT:
-                dungeon.moveHero(GlobalDirection.RIGHT);
+                dungeon.moveHero(Cmd.RIGHT);
                 break;
             case DOWN:
-                dungeon.moveHero(GlobalDirection.DOWN);
+                dungeon.moveHero(Cmd.DOWN);
                 break;
             case UP:
-                dungeon.moveHero(GlobalDirection.UP);
+                dungeon.moveHero(Cmd.UP);
                 break;
             case LEFT:
-                dungeon.moveHero(GlobalDirection.LEFT);
+                dungeon.moveHero(Cmd.LEFT);
                 break;
             case EXIT_GAME:
                 game.setState(StateFactory.getMenu());
@@ -53,12 +52,13 @@ public class InGame implements GameState {
             case LEAVE_LEVEL:
                 dungeon.changeLevel();
                 break;
+            case SAVE:
+                game.save(dungeon);
+                break;
         }
 
-        if(commande != Cmd.SAVE) {
-            dungeon.updateAll();
-        } else {
-            game.save(dungeon);
+        if(commande != Cmd.SAVE && commande != Cmd.LEAVE_LEVEL) {
+            dungeon.updateAll(game);
         }
     }
 }

@@ -1,7 +1,7 @@
 package model.state;
 
-import engine.Cmd;
 import model.ZelpopGame;
+import model.global.Cmd;
 import model.global.GlobalSprites;
 import model.state.buttons.ContinueButton;
 import model.state.buttons.MenuButton;

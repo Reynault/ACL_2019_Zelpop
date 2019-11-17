@@ -3,7 +3,9 @@ package model.dungeon.scoring;
 import model.dungeon.entity.Entity;
 import model.dungeon.tile.Tile;
 
-public class Scoring {
+import java.io.Serializable;
+
+public class Scoring implements Serializable {
     private int score;
     private int multiplier;
 

@@ -4,26 +4,65 @@ import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 import model.dungeon.entity.behavior.attack.Attack;
 import model.dungeon.entity.behavior.check.Check;
-import model.global.GlobalDirection;
+import model.dungeon.entity.behavior.move.Move;
+import model.global.Cmd;
+import model.global.Position;
 
-public interface Behavior {
+import java.io.Serializable;
 
+public class Behavior implements Serializable {
+
+    Attack attack;
+    Check check;
+    Move move;
+    Maze currentMaze;
+    Entity currentEntity;
+
+    public Behavior(Attack attack, Check check, Move move) {
+        this.attack = attack;
+        this.check = check;
+        this.move = move;
+        this.currentMaze = currentMaze;
+        this.currentEntity = currentEntity;
+    }
 
     /**
      * The behavior of an entity is used to determine a direction
-     * @param entity entity who want to move
-     * @return GlobalDirection
-     */
-    public abstract GlobalDirection behave(Entity entity, GlobalDirection direction);
-
-
-
-    /**
+     * <p>
+     * It is a pattern method that implement a behavior depending on the movement
+     * given by parameter commande
      *
-     * @param maze
-     * @param entity
-     * @param attack
-     * @return
+     * @param entity entity who want to move
+     * @return Cmd
      */
-    public abstract GlobalDirection behave(Maze maze, Entity entity, Attack attack);
+    public Cmd behave(Maze maze, Entity entity, Cmd commande) {
+        Cmd res = Cmd.IDLE;
+        switch (commande) {
+            case ATTACK:
+
+                attack.attack(maze, entity);
+                break;
+
+            case DOWN:
+            case RIGHT:
+            case LEFT:
+            case UP:
+
+                res = move.move(maze, entity, commande);
+                break;
+
+            default:
+
+                // Pattern Method
+                if (check.check(maze, entity)) {
+                    attack.attack(maze, entity);
+                } else {
+                    res = move.move(maze, entity, commande);
+                }
+
+                break;
+        }
+
+        return res;
+    }
 }

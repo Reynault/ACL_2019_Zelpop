@@ -6,7 +6,7 @@ import model.dungeon.entity.EntityFactory;
 import model.dungeon.scoring.ScoringFactory;
 import model.dungeon.tile.Tile;
 import model.dungeon.tile.TileFactory;
-import model.global.GlobalDirection;
+import model.global.Cmd;
 import model.global.Position;
 
 import java.io.BufferedReader;
@@ -53,7 +53,7 @@ public class MazeFactory implements Serializable {
         // Generate a default list of Entities
         for (int i = 0; i < defaultEntities; i++) {
             entities.add(EntityFactory.getInstance().getRandomMonster(
-                    new Position(0, 0, GlobalDirection.IDLE))
+                    new Position(0, 0, Cmd.IDLE))
             );
         }
         /*
@@ -153,10 +153,10 @@ public class MazeFactory implements Serializable {
                     lastInfo = info[1].split("\\}");    // The last information has a }
                     y = Integer.parseInt(lastInfo[0]);
                     if (firstSplit[0].compareTo("Hero") == 0) {
-                        EntityFactory.getInstance().getHero().setPosition(new Position(x, y, GlobalDirection.DOWN));
+                        EntityFactory.getInstance().getHero().setPosition(new Position(x, y, Cmd.DOWN));
                     } else {  // It's an enemy
                         entities.add(EntityFactory.getInstance().getRandomMonster(
-                                new Position(x, y, GlobalDirection.IDLE))
+                                new Position(x, y, Cmd.IDLE))
                         );
                     }
                 }
@@ -176,7 +176,7 @@ public class MazeFactory implements Serializable {
     }
 
     private int specialTileRation = 10;
-    private int entityRatio = 25;
+    private int entityRatio = 30;
     private boolean hasStairs;
 
     /**
@@ -253,7 +253,7 @@ public class MazeFactory implements Serializable {
                         // Then adding entity
                         if (random.nextInt(entityRatio) == 1) {
                             entities.add(EntityFactory.getInstance().getRandomMonster(
-                                    new Position(j, i, GlobalDirection.IDLE)
+                                    new Position(j, i, Cmd.IDLE)
                             ));
                         }
                         break;
