@@ -64,7 +64,7 @@ public class ZelpopGame implements Game, Serializable {
 		catch (IOException e){
 			e.printStackTrace();
 		}
-		System.out.println("Sauvegarde effectuée");
+//		System.out.println("Sauvegarde effectuée");
 	}
 
 	/**

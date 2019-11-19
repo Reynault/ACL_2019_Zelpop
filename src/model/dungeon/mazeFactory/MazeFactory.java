@@ -223,7 +223,7 @@ public class MazeFactory implements Serializable {
 
         // If there isn't any stairs, add one
         if (!hasStairs) {
-            System.out.println("Boucle stairs debuggage");
+//            System.out.println("Boucle stairs debuggage");
             int x, y;
             do {
                 x = random.nextInt(cells.length);
