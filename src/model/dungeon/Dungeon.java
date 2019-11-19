@@ -1,6 +1,7 @@
 package model.dungeon;
 
 import model.ZelpopGame;
+import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
 import model.dungeon.mazeFactory.MazeFactory;
@@ -9,7 +10,7 @@ import model.global.Position;
 import model.state.StateFactory;
 
 import java.awt.image.BufferedImage;
-import java.io.Serializable;
+import java.io.*;
 
 public class Dungeon implements Serializable {
 
@@ -28,6 +29,18 @@ public class Dungeon implements Serializable {
         this.entityFactory = new EntityFactory();
         this.hero = entityFactory.generateHero();
         currentMaze = mazeFactory.getRandomMaze(DEFAULT_MAZE_SIZE, entityFactory);
+    }
+
+    /**
+     * Default constructor with a file given in parameter
+     */
+    public Dungeon(File file) throws FileNotFoundException {
+        this.mazeFactory = new MazeFactory();
+        this.entityFactory = new EntityFactory();
+        this.hero = entityFactory.generateHero();
+
+        InputStream is = new FileInputStream(file);
+        currentMaze = mazeFactory.getMaze(is, entityFactory);
     }
 
 
@@ -57,7 +70,6 @@ public class Dungeon implements Serializable {
     public void updateAll(ZelpopGame game) {
         currentMaze.moveEntities();
         if (!hero.isAlive()) {
-            System.out.println("DEATH");
             game.setState(StateFactory.getGameOver(this));
         }
     }
@@ -68,6 +80,10 @@ public class Dungeon implements Serializable {
     public void setImages() {
         this.currentMaze.setImages();
         this.hero.setImage();
+    }
+
+    public Hero getHero(){
+        return entityFactory.getHero();
     }
 
     /**

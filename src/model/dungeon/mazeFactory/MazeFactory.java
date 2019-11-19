@@ -86,8 +86,8 @@ public class MazeFactory implements Serializable {
      */
     public Maze getMaze(InputStream file, EntityFactory entityFactory) {
         MAZE_COUNTER++;
-        Tile[][] tiles = null;
-        List<Entity> entities = null;
+        Tile[][] tiles = new Tile[0][0];
+        List<Entity> entities = new ArrayList<>();
         try {
             InputStream flux = file;
             InputStreamReader lecture = new InputStreamReader(flux);

@@ -1,9 +1,11 @@
 import model.dungeon.Dungeon;
-import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
 import model.global.Cmd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,11 +15,15 @@ class DungeonTest {
     Hero hero;
 
     @BeforeEach
-    void initialize(){
-        // Create a dungeon
-        dungeon = new Dungeon("res/level/test.txt");
-        // default hero with idle
-        hero = EntityFactory.getInstance().getHero();
+    void initialize() {
+        try {
+            // Create a dungeon
+            dungeon = new Dungeon(new File("res/level/test.txt"));
+            // default hero with idle
+            hero = dungeon.getHero();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getCause());
+        }
     }
 
     @Test
