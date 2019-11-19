@@ -1,7 +1,7 @@
 import model.dungeon.Dungeon;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
-import model.global.GlobalDirection;
+import model.global.Cmd;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,17 +22,17 @@ class DungeonTest {
 
     @Test
     void moveHero_different_direction() {
-        dungeon.moveHero(GlobalDirection.UP);
-        assertEquals(GlobalDirection.UP, hero.getPosition().getGlobalDirection());
+        dungeon.moveHero(Cmd.UP);
+        assertEquals(Cmd.UP, hero.getPosition().getCmd());
         assertEquals(0, hero.getPosition().getX());
         assertEquals(0, hero.getPosition().getY());
     }
 
     @Test
     void moveHero_move_right() {
-        dungeon.moveHero(GlobalDirection.RIGHT);
-        dungeon.moveHero(GlobalDirection.RIGHT);
-        assertEquals(GlobalDirection.RIGHT, hero.getPosition().getGlobalDirection());
+        dungeon.moveHero(Cmd.RIGHT);
+        dungeon.moveHero(Cmd.RIGHT);
+        assertEquals(Cmd.RIGHT, hero.getPosition().getCmd());
         assertEquals(1, hero.getPosition().getX());
         assertEquals(0, hero.getPosition().getY());
     }
@@ -40,21 +40,21 @@ class DungeonTest {
     @Test
     void moveHero_move_down() {
         // Once cause already down
-        dungeon.moveHero(GlobalDirection.DOWN);
-        assertEquals(GlobalDirection.DOWN, hero.getPosition().getGlobalDirection());
+        dungeon.moveHero(Cmd.DOWN);
+        assertEquals(Cmd.DOWN, hero.getPosition().getCmd());
         assertEquals(0, hero.getPosition().getX());
         assertEquals(1, hero.getPosition().getY());
     }
 
     @Test
     void moveHero_move_up() {
-        dungeon.moveHero(GlobalDirection.DOWN);
-        dungeon.moveHero(GlobalDirection.DOWN);
+        dungeon.moveHero(Cmd.DOWN);
+        dungeon.moveHero(Cmd.DOWN);
         // Change the direction
-        dungeon.moveHero(GlobalDirection.UP);
+        dungeon.moveHero(Cmd.UP);
         // Move the player
-        dungeon.moveHero(GlobalDirection.UP);
-        assertEquals(GlobalDirection.UP, hero.getPosition().getGlobalDirection());
+        dungeon.moveHero(Cmd.UP);
+        assertEquals(Cmd.UP, hero.getPosition().getCmd());
         assertEquals(0, hero.getPosition().getX());
         assertEquals(1, hero.getPosition().getY());
     }
@@ -62,63 +62,63 @@ class DungeonTest {
 
     @Test
     void moveHero_move_left() {
-        dungeon.moveHero(GlobalDirection.RIGHT);
-        dungeon.moveHero(GlobalDirection.RIGHT);
-        dungeon.moveHero(GlobalDirection.RIGHT);
+        dungeon.moveHero(Cmd.RIGHT);
+        dungeon.moveHero(Cmd.RIGHT);
+        dungeon.moveHero(Cmd.RIGHT);
         // Change the direction
-        dungeon.moveHero(GlobalDirection.LEFT);
+        dungeon.moveHero(Cmd.LEFT);
         // Move the player
-        dungeon.moveHero(GlobalDirection.LEFT);
-        assertEquals(GlobalDirection.LEFT, hero.getPosition().getGlobalDirection());
+        dungeon.moveHero(Cmd.LEFT);
+        assertEquals(Cmd.LEFT, hero.getPosition().getCmd());
         assertEquals(1, hero.getPosition().getX());
         assertEquals(0, hero.getPosition().getY());
     }
 
     @Test
     void moveHero_out_of_bound() {
-        dungeon.moveHero(GlobalDirection.UP);
-        dungeon.moveHero(GlobalDirection.UP);
-        assertEquals(GlobalDirection.UP, hero.getPosition().getGlobalDirection());
+        dungeon.moveHero(Cmd.UP);
+        dungeon.moveHero(Cmd.UP);
+        assertEquals(Cmd.UP, hero.getPosition().getCmd());
         assertEquals(0, hero.getPosition().getX());
         assertEquals(0, hero.getPosition().getY());
     }
 
     @Test
     void moveHero_change_direction() {
-        dungeon.moveHero(GlobalDirection.LEFT);
-        dungeon.moveHero(GlobalDirection.UP);
-        assertEquals(GlobalDirection.UP, hero.getPosition().getGlobalDirection());
+        dungeon.moveHero(Cmd.LEFT);
+        dungeon.moveHero(Cmd.UP);
+        assertEquals(Cmd.UP, hero.getPosition().getCmd());
         assertEquals(0, hero.getPosition().getX());
         assertEquals(0, hero.getPosition().getY());
     }
 
     @Test
     void moveHero_change_direction_after_movement() {
-        dungeon.moveHero(GlobalDirection.RIGHT);
-        dungeon.moveHero(GlobalDirection.RIGHT);
-        dungeon.moveHero(GlobalDirection.UP);
-        assertEquals(GlobalDirection.UP, hero.getPosition().getGlobalDirection());
+        dungeon.moveHero(Cmd.RIGHT);
+        dungeon.moveHero(Cmd.RIGHT);
+        dungeon.moveHero(Cmd.UP);
+        assertEquals(Cmd.UP, hero.getPosition().getCmd());
         assertEquals(1, hero.getPosition().getX());
         assertEquals(0, hero.getPosition().getY());
     }
 
     @Test
     void moveHero_moving_into_wall() {
-        dungeon.moveHero(GlobalDirection.DOWN);
-        dungeon.moveHero(GlobalDirection.RIGHT);
-        dungeon.moveHero(GlobalDirection.RIGHT);
-        assertEquals(GlobalDirection.RIGHT, hero.getPosition().getGlobalDirection());
+        dungeon.moveHero(Cmd.DOWN);
+        dungeon.moveHero(Cmd.RIGHT);
+        dungeon.moveHero(Cmd.RIGHT);
+        assertEquals(Cmd.RIGHT, hero.getPosition().getCmd());
         assertEquals(0, hero.getPosition().getX());
         assertEquals(1, hero.getPosition().getY());
     }
 
     @Test
     void moveHero_moving_after_wall() {
-        dungeon.moveHero(GlobalDirection.DOWN);
-        dungeon.moveHero(GlobalDirection.DOWN);
-        dungeon.moveHero(GlobalDirection.RIGHT);
-        dungeon.moveHero(GlobalDirection.RIGHT);
-        assertEquals(GlobalDirection.RIGHT, hero.getPosition().getGlobalDirection());
+        dungeon.moveHero(Cmd.DOWN);
+        dungeon.moveHero(Cmd.DOWN);
+        dungeon.moveHero(Cmd.RIGHT);
+        dungeon.moveHero(Cmd.RIGHT);
+        assertEquals(Cmd.RIGHT, hero.getPosition().getCmd());
         assertEquals(1, hero.getPosition().getX());
         assertEquals(2, hero.getPosition().getY());
     }
