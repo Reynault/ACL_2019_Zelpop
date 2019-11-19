@@ -6,6 +6,8 @@ import sprite.spriteManager.SpriteManager;
 import sprite.spriteManager.SpriteManagerHero;
 import sprite.TextureFactory;
 
+import java.io.Serializable;
+
 public class Hero extends Entity{
 
 
@@ -23,5 +25,6 @@ public class Hero extends Entity{
      */
     public void setImage() {
         spriteManager = new SpriteManagerHero(TextureFactory.getTextureFactory().getHero());
+        spriteManager.setSprite(position.getCmd());
     }
 }

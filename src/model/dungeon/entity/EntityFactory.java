@@ -4,7 +4,9 @@ import model.dungeon.entity.behavior.BehaveFactory;
 import model.global.Cmd;
 import model.global.Position;
 
-public class EntityFactory {
+import java.io.Serializable;
+
+public class EntityFactory implements Serializable {
 
     public static int HERO_HP = 20;
     public static int HERO_X = 0;
@@ -20,15 +22,6 @@ public class EntityFactory {
     public static int MONSTER_SCORE = 0;
 
     private Hero hero;
-
-    private static EntityFactory ourInstance = new EntityFactory();
-
-    public static EntityFactory getInstance() {
-        return ourInstance;
-    }
-
-    private EntityFactory() {
-    }
 
     /**
      * Generate the Hero

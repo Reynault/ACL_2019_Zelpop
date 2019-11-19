@@ -27,6 +27,7 @@ public class Maze implements Serializable {
     private int width, height;
     private Hero hero;
     private Scoring scoring;
+    private EntityFactory entityFactory;
 
     private static String PV_STATUS = "HP";
     private static String SCORE_STATUS = "SCORE";
@@ -38,12 +39,13 @@ public class Maze implements Serializable {
      * @param tiles    list of tiles
      * @param entities list of entities
      */
-    public Maze(Tile[][] tiles, List<Entity> entities, Scoring scoring) {
+    public Maze(Tile[][] tiles, List<Entity> entities, Scoring scoring, EntityFactory entityFactory) {
         this.tiles = tiles;
         width = tiles[0].length;
         height = tiles.length;
         this.entities = entities;
-        this.hero = EntityFactory.getInstance().getHero();
+        this.hero = entityFactory.getHero();
+        System.out.println("THE HERO : "+this.hero);
         this.scoring = scoring;
         removedEntity = new ArrayList<>();
     }

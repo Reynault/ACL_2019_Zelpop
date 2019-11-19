@@ -32,7 +32,7 @@ public class MazeFactory implements Serializable {
      *
      * @return Maze
      */
-    public Maze getMaze() {
+    public Maze getMaze(EntityFactory entityFactory) {
         MAZE_COUNTER++;
         int defaultLength = 20;
         int defaultEntities = 1;
@@ -52,7 +52,7 @@ public class MazeFactory implements Serializable {
 
         // Generate a default list of Entities
         for (int i = 0; i < defaultEntities; i++) {
-            entities.add(EntityFactory.getInstance().getRandomMonster(
+            entities.add(entityFactory.getRandomMonster(
                     new Position(0, 0, Cmd.IDLE))
             );
         }
@@ -68,8 +68,8 @@ public class MazeFactory implements Serializable {
         */
         return new Maze(tiles, entities, ScoringFactory.getSimpleScoring(
                 MAZE_COUNTER,
-                BASIC_MAZE_SCORE
-        ));
+                BASIC_MAZE_SCORE),
+                entityFactory);
     }
 
     /**************************************
@@ -84,7 +84,7 @@ public class MazeFactory implements Serializable {
      * @param file filename
      * @return Maze
      */
-    public Maze getMaze(InputStream file) {
+    public Maze getMaze(InputStream file, EntityFactory entityFactory) {
         MAZE_COUNTER++;
         Tile[][] tiles = null;
         List<Entity> entities = null;
@@ -153,9 +153,9 @@ public class MazeFactory implements Serializable {
                     lastInfo = info[1].split("\\}");    // The last information has a }
                     y = Integer.parseInt(lastInfo[0]);
                     if (firstSplit[0].compareTo("Hero") == 0) {
-                        EntityFactory.getInstance().getHero().setPosition(new Position(x, y, Cmd.DOWN));
+                        entityFactory.getHero().setPosition(new Position(x, y, Cmd.DOWN));
                     } else {  // It's an enemy
-                        entities.add(EntityFactory.getInstance().getRandomMonster(
+                        entities.add(entityFactory.getRandomMonster(
                                 new Position(x, y, Cmd.IDLE))
                         );
                     }
@@ -171,14 +171,14 @@ public class MazeFactory implements Serializable {
 
         return new Maze(tiles, entities, ScoringFactory.getSimpleScoring(
                 MAZE_COUNTER,
-                BASIC_MAZE_SCORE
-        ));
+                BASIC_MAZE_SCORE),
+                entityFactory);
     }
 
     private int specialTileRation = 10;
     private int entityRatio = 30;
     private boolean hasStairs;
-    private int minimumDistance;
+    private double minimumDistance;
 
     /**
      * Generation of a simple maze using an algorithm that
@@ -188,9 +188,9 @@ public class MazeFactory implements Serializable {
      * @param size the size of the labyrinth
      * @return the maze
      */
-    public Maze getRandomMaze(int size) {
+    public Maze getRandomMaze(int size, EntityFactory entityFactory) {
         MAZE_COUNTER++;
-        minimumDistance = 3/4;
+        minimumDistance = (double)3/4;
         // The maze will have one stairs
         hasStairs = false;
 
@@ -220,7 +220,6 @@ public class MazeFactory implements Serializable {
         Random random = new Random();
         ArrayList<Entity> entities = new ArrayList<>();
 
-
         // If there isn't any stairs, add one
         if (!hasStairs) {
 //            System.out.println("Boucle stairs debuggage");
@@ -229,7 +228,7 @@ public class MazeFactory implements Serializable {
                 x = random.nextInt(cells.length);
                 y = random.nextInt(cells[x].length);
                 // While the stairs are near the spawn and while it is in a wall
-            } while (cells[x][y] != 0 && size * minimumDistance > (x+y));
+            } while (cells[x][y] != 0 || (((double)size)*minimumDistance) >= (x+y));
             cells[x][y] = 4;
         }
 
@@ -255,7 +254,7 @@ public class MazeFactory implements Serializable {
                         maze[i][j] = TileFactory.generateTile();
                         // Then adding entity
                         if (random.nextInt(entityRatio) == 1) {
-                            entities.add(EntityFactory.getInstance().getRandomMonster(
+                            entities.add(entityFactory.getRandomMonster(
                                     new Position(j, i, Cmd.IDLE)
                             ));
                         }
@@ -269,8 +268,8 @@ public class MazeFactory implements Serializable {
 
         return new Maze(maze, entities, ScoringFactory.getSimpleScoring(
                 MAZE_COUNTER,
-                BASIC_MAZE_SCORE
-        ));
+                BASIC_MAZE_SCORE),
+                entityFactory);
     }
 
     private void split(int[][] cells, int xmin, int xmax, int ymin, int ymax, ArrayList<Integer> prevxu, ArrayList<Integer> prevyr, ArrayList<Integer> prevxd, ArrayList<Integer> prevyl) {
