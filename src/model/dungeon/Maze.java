@@ -15,7 +15,6 @@ import sprite.spriteManager.TextManager;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
-import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -218,12 +217,12 @@ public class Maze implements Serializable {
                 unit
         );
 
-        double HPratio = (double)hero.getHp() / (double)hero.getMaxHp();
+        double HPratio = (double) hero.getHp() / (double) hero.getMaxHp();
 
         crayon.fillRect(
                 sideBarElementX,
                 yShift - nbTileDisplayed * unit + unit * 10,
-                (int)(unit * HPratio * 6),
+                (int) (unit * HPratio * 6),
                 unit
         );
 
@@ -300,7 +299,7 @@ public class Maze implements Serializable {
         }
     }
 
-    public Pair getPositionByDirection(int x, int y, Cmd direction){
+    public Pair getPositionByDirection(int x, int y, Cmd direction) {
         switch (direction) {
             case LEFT:
                 x -= 1;
@@ -315,7 +314,7 @@ public class Maze implements Serializable {
                 x += 1;
                 break;
         }
-        return new Pair(x,y);
+        return new Pair(x, y);
     }
 
     /**
@@ -344,7 +343,7 @@ public class Maze implements Serializable {
             }
 
             // Checking there already is an entity on it
-            if(getEntity(x,y) != null || (hero.getPosition().getX() == x && hero.getPosition().getY() == y) ){
+            if (getEntity(x, y) != null || (hero.getPosition().getX() == x && hero.getPosition().getY() == y)) {
                 can = false;
             }
         }
@@ -357,7 +356,7 @@ public class Maze implements Serializable {
      */
     public void moveEntities() {
         if (entities != null && entities.size() > 0) {
-            for(Entity e: removedEntity){
+            for (Entity e : removedEntity) {
                 removeEntity(e);
             }
             for (Entity e : entities) {
@@ -391,9 +390,9 @@ public class Maze implements Serializable {
         Entity res = null;
         Position pos = hero.getPosition();
 
-        if(pos.getX() == x && pos.getY() == y){
+        if (pos.getX() == x && pos.getY() == y) {
             res = hero;
-        }else {
+        } else {
             for (Entity entity : entities) {
                 if (entity.getPosition().getY() == y && entity.getPosition().getX() == x) {
                     res = entity;
@@ -407,10 +406,10 @@ public class Maze implements Serializable {
     public boolean isFinished() {
         Position pos = hero.getPosition();
         Tile t = tiles[pos.getY()][pos.getX()];
-        if(t.isStairs()){
+        if (t.isStairs()) {
             hero.increaseScore(scoring.leaveMaze());
             return true;
-        }else{
+        } else {
             return false;
         }
     }

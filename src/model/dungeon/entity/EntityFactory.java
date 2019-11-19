@@ -4,9 +4,7 @@ import model.dungeon.entity.behavior.BehaveFactory;
 import model.global.Cmd;
 import model.global.Position;
 
-import java.io.Serializable;
-
-public class EntityFactory{
+public class EntityFactory {
 
     public static int HERO_HP = 20;
     public static int HERO_X = 0;

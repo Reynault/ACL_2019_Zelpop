@@ -103,7 +103,7 @@ public class MazeFactory implements Serializable {
                 lengthWidth2 = lengthWidth[1];  // y}
                 String[] widthString = lengthWidth2.split("\\}");
                 int width = Integer.parseInt(widthString[0]);   // width of the maze
-                System.out.println("length : " + length + " | width : " + width);
+//                System.out.println("length : " + length + " | width : " + width);
 
                 line = buff.readLine(); // next line
 
