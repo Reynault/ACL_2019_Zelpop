@@ -28,7 +28,7 @@ public class Trap extends Effect {
     public void setImage() {
         decore.setImage();
         if(triggered){
-            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
+            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTiles());
         }else {
             spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
         }
