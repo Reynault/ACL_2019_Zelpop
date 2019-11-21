@@ -62,7 +62,13 @@ alt entity == null
 
         opt breakable == true
 
-            as --> t: takeDamage(damage)
+            as -> t: takeDamage(damage)
+            note left
+            When a wall or a trap is destroyed,
+            it simply switching with the decorated
+            tile
+            end note
+
 
         end
 
@@ -77,6 +83,16 @@ else
         entity is taking damages
         entitled takeDamage.
     end ref
+
+    as -> e: getCounter()
+
+    e --> as: counter
+
+    as -> hero: takeDamage(counter)
+    note left
+    The entity is then taking damages depending on
+    the defence of the victim
+    end note
 
 end
 
