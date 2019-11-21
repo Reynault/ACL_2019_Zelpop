@@ -1,0 +1,99 @@
+@startuml
+
+class Entity{
+
+}
+
+package behavior{
+
+    class Behavior{
+        - maze: Maze
+        - entity: Entity
+
+        # Behavior(maze: Maze, entity: Entity)
+
+        + behave(): Cmd
+
+        - move(maze: Maze, entity: Entity): Cmd
+        - attack(maze: Maze, entity: Entity)
+        - check(maze: Maze, entity: Entity): boolean
+    }
+
+    note left: behave is a pattern method: \n\nif check then \n   attack \nelse \n   move
+
+    package check{
+
+        interface Check{
+            + check(maze: Maze, entity: Entity): boolean
+        }
+
+        class CheckSimple{
+            + check(maze: Maze, entity: Entity): boolean
+        }
+
+        class CheckHero{
+            + check(maze: Maze, entity: Entity): boolean
+        }
+
+    }
+
+    package move{
+
+        interface Move{
+            + move(maze: Maze, entity: Entity): Cmd
+        }
+
+        class MoveRandom{
+            + move(maze: Maze, entity: Entity): Cmd
+        }
+
+        class MoveHero{
+            + move(maze: Maze, entity: Entity): Cmd
+        }
+
+        class MoveFocus{
+            + move(maze: Maze, entity: Entity): Cmd
+        }
+
+    }
+
+    package attack{
+
+        interface Attack{
+            + attack(maze: Maze, entity: Entity)
+        }
+
+        class AttackSimple{
+            + attack(maze: Maze, entity: Entity)
+        }
+
+        class AttackHero{
+            + attack(maze: Maze, entity: Entity)
+        }
+
+    }
+
+    class BehaveFabric{
+        + getMonsterBehavior(maze: Maze, entity: Entity): Behavior
+        + getGobelinBehavior(maze: Maze, entity: Entity): Behavior
+        + getHeroBehavior(maze: Maze, entity: Entity): Behavior
+    }
+
+}
+
+
+AttackSimple ..|> Attack
+AttackHero ..|> Attack
+
+MoveRandom ..|> Move
+MoveHero ..|> Move
+
+CheckSimple ..|> Check
+CheckHero ..|> Check
+
+Entity --> "1" Behavior: - behavior
+
+Behavior --> "1" Move
+Behavior --> "1" Check
+Behavior --> "1" Attack
+@enduml

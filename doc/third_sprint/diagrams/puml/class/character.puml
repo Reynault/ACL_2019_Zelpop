@@ -1,0 +1,87 @@
+@startuml
+
+package entity{
+
+    abstract Entity{
+        - position: Position
+        - hp: int
+        - passThrought: boolean
+        - reward: int
+        - regen: int
+        - defence: int
+        + getPosition():(int, int, Cmd)
+        + setPosition(int direction)
+        + setPosition(int x, int y)
+        + canPassThrought(): boolean
+        + {abstract} draw()
+        + behave(maze: Maze, Cmd direction): Direction
+        + getReward(): int
+        + attack(maze: Maze)
+        + takeDamage(dmg: int)
+        + isAlive(): boolean
+        + isHero(): boolean
+        + getDmg(): int
+        + getCounter(): int
+        + applyRegen()
+    }
+
+    class Hero {
+        - score: int
+        + increaseScore(bonus: int)
+        + getScore(): int
+        + isHero(): boolean
+        + draw()
+    }
+
+    package npc{
+
+        class Monster{
+            + isHero(): boolean
+        }
+
+        class Gobelin{
+            + draw()
+        }
+
+        class Ghost{
+            + draw()
+        }
+
+        class Thieve{
+            + draw()
+        }
+        note top: Thieves are former monsters from\nsprint one and two
+
+    }
+
+    package behavior{
+
+        class Behavior{
+
+        }
+
+        note left: Class diagram of behavior
+
+    }
+
+    class EntityFactory(){
+        + generateHero(): Entity
+        + getHero(): Entity
+        + getRandomMonster(position: Position): Entity
+    }
+
+    note left: EntityFactory is controlling the creation of Hero.\nThere must be only one.
+
+}
+
+
+
+Hero --|> Entity
+Monster --|> Entity
+Entity --> "1" Behavior: - behavior
+
+Gobelin --|> Monster
+Ghost --|> Monster
+Thieve --|> Monster
+
+@enduml

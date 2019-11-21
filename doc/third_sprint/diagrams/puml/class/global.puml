@@ -1,0 +1,214 @@
+@startuml
+
+class ZelpopGame{
+    + setState(state: State)
+}
+
+package state{
+    interface GameState{
+        + draw(image: BufferedImage)
+        + evolve(game: Game, commande: Cmd)
+    }
+
+    class InGame{
+        - dungeon: Dungeon
+
+        + draw(image: BufferedImage)
+        + evolve(game: Game, commande: Cmd)
+    }
+
+    class Menu{
+        + draw(image: BufferedImage)
+        + evolve(game: Game, commande: Cmd)
+    }
+
+    class Tutorial{
+        + draw(image: BufferedImage)
+        + evolve(game: Game, commande: Cmd)
+    }
+}
+
+interface Game{
+
+}
+
+package dungeon{
+
+    class Dungeon{
+        - nbMaze: int
+        + moveHero(Cmd d)
+        + generateMaze()
+        + generateMaze(File Filename)
+        + attack()
+        + updateAll()
+        + draw()
+        + changeLevel()
+    }
+
+    class Maze{
+        - toDrawEntity: List<Entity>
+        - toDrawTile: List<Tile>
+        + Maze(List<Tile> tiles, List<Entity> entities, EntityFactory factory)
+        + draw()
+        + moveEntity(Entity e, Cmd d)
+        + moveEntity(Entity e)
+        + attack()
+        + killEntity(killed: Entity, by: Entity)
+        + getEntity(x: int, y: int): Entity
+        + canMove(Entity e, Tile t): boolean
+        + removeEntity(e: Entity)
+        + getChestScore(): int
+        + isFinished(): boolean
+    }
+
+    package scoring{
+
+        class Scoring{
+
+        }
+
+        note left: Class diagram of scoring
+
+    }
+
+    package tile{
+
+        class Tile{
+
+        }
+
+        note left: Class diagram of tiles
+
+    }
+
+    package entity{
+
+        abstract Entity{
+
+        }
+
+        note left: Class diagram of entities
+
+    }
+
+    package mazeFactory{
+
+        interface MazeFactory{
+            + {static} getMaze(): Maze
+            + {static} getMaze(File fileName)
+            + {static} getRandomMaze()
+        }
+
+    }
+
+}
+
+
+class ZelpopPainter{
+
+}
+
+class TextureFactory{
+    + {static}getMonster()
+    + {static}getHero()
+    + {static}getEmptyTile()
+    + {static}getWall()
+    + {static}getTrap()
+    + {static}getTreasure()
+    + {static}getStairs()
+    + {static}getTeleportTrap()
+    + {static}getBreakableWall()
+}
+
+package sprite{
+
+    abstract SpriteManager{
+        + currentSprite: int
+        + SpriteSheet: Image
+        + SpriteManager(Image sprite)
+        + {abstract} setSprite(Cmd direction)
+        + {abstract} getCurrentSprite(): Image
+    }
+
+    abstract SpriteManagerEntity{
+        - isAttacking: boolean
+        + isAttacking()
+    }
+
+    class SpriteManagerHero{
+        + setSprite(Cmd direction)
+        + getCurrentSprite(): Image
+    }
+
+    class SpriteManagerMonster{
+        + setSprite(Cmd direction)
+        + getCurrentSprite(): Image
+    }
+
+    class SpriteManagerTile{
+        + setSprite(Cmd direction)
+        + getCurrentSprite(): Image
+    }
+
+}
+
+SpriteManagerHero --|> SpriteManagerEntity
+SpriteManagerMonster --|> SpriteManagerEntity
+SpriteManagerEntity --|> SpriteManager
+SpriteManagerTile --|> SpriteManager
+
+package global{
+
+    class GlobalSprite{
+        + {static} get8Sprite():int
+        + {static} get16Sprite():int
+    }
+
+    class Position{
+        + {final} x: int
+        + {final} y: int
+        + {final} direction: Cmd
+        + getX(): int
+        + getY(): int
+        + getDirection(): Cmd
+    }
+
+}
+
+package engine{
+    enum Cmd{
+        LEFT
+        RIGHT
+        UP
+        DOWN
+        IDLE
+        ATTACK
+        LEAVE_LEVEL
+    }
+}
+
+Dungeon "1" --> "*" Maze: -maze
+Dungeon "1" --> "1" MazeFactory: -mazeFactory
+
+Maze "1" --> "*" Tile: -tiles
+Maze "1" --> "*" Entity: -entities
+
+ZelpopGame ..|> Game
+ZelpopGame --> "1" Dungeon: -dungeon
+
+ZelpopPainter --> "1" ZelpopGame: - game
+
+Dungeon "1" --> "1" Entity : -hero
+
+Tile --> "1" SpriteManager
+
+Entity --> "1" SpriteManager
+
+InGame ..|> GameState
+Menu ..|> GameState
+Tutorial ..|> GameState
+
+Maze --> "1" Scoring: - scoring
+
+ZelpopGame --> "1" GameState: - state
+@enduml

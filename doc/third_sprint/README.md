@@ -61,7 +61,7 @@ that focus the player during the whole game. A new monster that can go through w
     - New Attack class
     - New isTrap method
         - Hp
-        - damageIt(int damage)
+        - getDamage(int damage)
         - isDestroyed()
 - How to use interface
     - New GameState --> At the beginning of a game (new game) <press any key to continue>

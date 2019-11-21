@@ -1,0 +1,86 @@
+@startuml
+package tile{
+
+    class Tile{
+        + draw(image: BufferedImage)
+        + action(maze: Maze, entity: Entity)
+        + canBeCrossed(): boolean
+        + isStairs(): boolean
+    }
+
+    class Wall{
+        + draw(image: BufferedImage)
+        + action(maze: Maze, entity: Entity)
+        + canBeCrossed(): boolean
+        + isStairs(): boolean
+    }
+
+    class Treasure{
+        + draw(image: BufferedImage)
+        + action(maze: Maze, entity: Entity)
+        + canBeCrossed(): boolean
+        + isStairs(): boolean
+    }
+
+    abstract Breakable{
+        - hp
+        + {abstract} isBreakable(): boolean
+        + getDamage(int: damage)
+        + isDestroyed(): boolean
+    }
+
+    class Teleport{
+        + draw(image: BufferedImage)
+        + action(maze: Maze, entity: Entity)
+        + canBeCrossed(): boolean
+        + isStairs(): boolean
+    }
+
+    class Trap{
+        + draw(image: BufferedImage)
+        + action(maze: Maze, entity: Entity)
+        + canBeCrossed(): boolean
+        + isStairs(): boolean
+    }
+
+    abstract Effect{
+        + {abstract} draw(image: BufferedImage)
+        + {abstract} action(maze: Maze, entity: Entity)
+        + {abstract} canBeCrossed(): boolean
+        + {abstract} isStairs(): boolean
+    }
+
+    class Stairs{
+        + draw(image: BufferedImage)
+        + action(maze: Maze, entity: Entity)
+        + canBeCrossed(): boolean
+        + isStairs(): boolean
+    }
+
+    class TileFactory{
+        + {static}getMonster()
+        + {static}getHero()
+        + {static}getEmptyTile()
+        + {static}getWall()
+        + {static}getTrap()
+        + {static}getTreasure()
+        + {static}getStairs()
+        + {static}getTeleportTrap()
+        + {static}getBreakableWall()
+    }
+
+}
+
+Wall --|> Effect
+Effect --|> Tile
+Effect --> "1" Tile : -decore
+Trap --|> Effect
+Treasure --|> Effect
+Stairs --|> Effect
+Teleport --|> Effect
+
+Tile --|> Breakable
+
+TileFactory ..> Tile : create
+
+@enduml

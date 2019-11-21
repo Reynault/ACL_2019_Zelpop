@@ -1,0 +1,42 @@
+@startuml
+
+class Maze{
+
+}
+
+package scoring{
+
+    class Scoring{
+        - multiplier: int
+        + killMonster(entity: Entity): int
+        + leaveMaze(): int
+        + findChest(Tile tile): int
+    }
+
+    abstract ScoringParameter{
+        + {abstract} killMonster(entity: Entity): int
+        + {abstract} leaveMaze(): int
+        + {abstract} findChest(Tile tile): int
+    }
+
+    note left: Scoring can be decorated with\ndifferent properties
+
+    class ScoringLife{
+        + killMonster(entity: Entity): int
+        + leaveMaze(): int
+        + findChest(Tile tile): int
+    }
+
+    class ScoringFactory{
+        + getDefaultScoring(multiplier: int)
+    }
+
+}
+
+ScoringLife --|> ScoringParameter
+
+ScoringParameter --> "1" Scoring: - decore
+
+Maze --> "1" Scoring: - scoring
+
+@enduml
