@@ -25,7 +25,7 @@ package tile{
     abstract Breakable{
         - hp
         + {abstract} isBreakable(): boolean
-        + getDamage(int: damage)
+        + takeDamage(int: damage)
         + isDestroyed(): boolean
     }
 

@@ -59,6 +59,7 @@ package dungeon{
         + removeEntity(e: Entity)
         + getChestScore(): int
         + isFinished(): boolean
+        + getTile(x:int, y:int): Tile
     }
 
     package scoring{

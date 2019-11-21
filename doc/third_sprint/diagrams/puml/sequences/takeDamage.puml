@@ -1,0 +1,39 @@
+@startuml
+
+title When an entity is taking damage from another
+autonumber
+
+participant "maze: Maze" as m
+participant "entity: Entity" as e
+participant "t: Tile" as t
+participant Attack as as
+participant "h: Hero" as h
+participant Scoring as s
+
+
+as -> e: isAlive()
+
+e --> as: alive
+
+opt alive == false
+
+    as -> m: killEntity(entity, h)
+
+    m -> h: isHero()
+
+    h --> m: hero
+
+    opt hero == true
+
+        m -> s: killMonster( entity )
+
+        s --> m: bonus
+
+        m -> h: increaseScore( bonus )
+
+    end
+
+    m -> e!: delete
+
+end
+@enduml
