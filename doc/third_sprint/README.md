@@ -31,3 +31,4 @@ that focus the player during the whole game. A new monster that can go through w
 |    Reynault    | Teleport                        |   -   |   -   |
 |     Reynault   | Destructible traps              |   -   |   -   |
 |   - | New how to use interface        |   -   |   -   |
+|   Reynault | Update Random maze to implement new features       |   -   |   -   |
