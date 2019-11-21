@@ -32,6 +32,22 @@ the hero and monsters movements, Matthieu Olejniczak worked on
 generating the maze from file and Mohamed Elridha Salhi making
 this report.
 
+## Second Sprint report
+
+During this sprint, we manage to implement all the features explained in the backlog.
+However, there was a problem with the save use case. We wanted to use the serialization to
+simplify the process, but it wasn't as simple as we expected and we got a lot of bugs. We had
+to change some aspects of our conception. 
+
+For example, we can't serialize things such as Buffered images,
+and some objects where singleton, and static objects can't be serialize.
+So in the next sprint, we will make sure that the implementation of such things are possible.
+
+Furthermore, we searched a lot about the generation of random mazes, we have tested multiple algorithms before
+ending up with the current one.
+
+So to summarize, we were a little overconfident on certain aspects, in the future we will make sure to 
+estimate better our choices.
 
 ### Implemented Features
 
