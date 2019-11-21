@@ -23,11 +23,11 @@ that focus the player during the whole game. A new monster that can go through w
 
 |     Member     |             Feature             | State | Tests |
 |:--------------:|:-------------------------------:|:-----:|:-----:|
-|      -      | Attack animation                |   -   |   -   |
+|   Reynault     | Attack animation                |   -   |   -   |
 |    -    | Gobelin                         |   -   |   -   |
 |     -     | Ghost                           |   -   |   -   |
-|    -    | Stat system (model)             |   -   |   -   |
+|     JRomary    | Stat system (model)             |   -   |   -   |
 |    -    | Stat system (interface)         |   -   |   -   |
-|    -    | Teleport                        |   -   |   -   |
-|     -     | Destructible traps              |   -   |   -   |
-| - | New how to use interface        |   -   |   -   |
+|    Reynault    | Teleport                        |   -   |   -   |
+|     Reynault   | Destructible traps              |   -   |   -   |
+|   - | New how to use interface        |   -   |   -   |
