@@ -2,36 +2,21 @@ package model.dungeon.tile;
 
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
-import sprite.spriteManager.SpriteManagerTile;
 import sprite.TextureFactory;
+import sprite.spriteManager.SpriteManagerTile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Trap extends Effect {
-
-    private int trapDamage;
-    private boolean triggered;
-
-    /**
-     * Default constructor
-     * @param decore decorated tile
-     */
-    Trap(Tile decore, int trapDamage) {
+public class BreakableWall extends Effect{
+    BreakableWall(Tile decore) {
         super(decore);
-        spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
-        this.trapDamage = trapDamage;
-        this.triggered = false;
+        spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getBreakableWall());
     }
 
     @Override
     public void setImage() {
-        decore.setImage();
-        if(triggered){
-            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTiles());
-        }else {
-            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
-        }
+        spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getBreakableWall());
     }
 
     @Override
@@ -49,19 +34,12 @@ public class Trap extends Effect {
 
     @Override
     public void action(Maze maze, Entity e) {
-        if(!triggered) {
-            e.takeDamage(trapDamage);
-            triggered = true;
-            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTiles());
-            if (!e.isAlive()) {
-                maze.removeEntity(e);
-            }
-        }
+
     }
 
     @Override
     public boolean canBeCrossed() {
-        return true;
+        return false;
     }
 
     @Override
@@ -76,6 +54,6 @@ public class Trap extends Effect {
 
     @Override
     public boolean isBreakable() {
-        return super.isBreakable();
+        return true;
     }
 }

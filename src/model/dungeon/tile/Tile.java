@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
-public class Tile extends TileFactory implements Serializable {
+public class Tile extends Breakable implements Serializable {
 
     protected SpriteManager spriteManager;
 
@@ -69,5 +69,14 @@ public class Tile extends TileFactory implements Serializable {
 
     public int getGold() {
         return 0;
+    }
+
+    @Override
+    public boolean isBreakable() {
+        return false;
+    }
+
+    public void switchTiles(Tile t1, Tile t2){
+        t1 = t2;
     }
 }

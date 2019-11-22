@@ -45,7 +45,6 @@ public class Maze implements Serializable {
         height = tiles.length;
         this.entities = entities;
         this.hero = entityFactory.getHero();
-        System.out.println("THE HERO : "+this.hero);
         this.scoring = scoring;
         removedEntity = new ArrayList<>();
     }
@@ -327,7 +326,7 @@ public class Maze implements Serializable {
      * @param y      position of the target tile
      * @return true if the entity can move
      */
-    private boolean canMove(Entity entity, int x, int y) {
+    public boolean canMove(Entity entity, int x, int y) {
         Tile tile;
         boolean can = false;
 
@@ -422,5 +421,21 @@ public class Maze implements Serializable {
 
     public int getChestScore(Tile tile) {
         return scoring.findChest(tile);
+    }
+
+    public int getWidth(){
+        return width;
+    }
+
+    public int getHeight(){
+        return height;
+    }
+
+    public Tile getTile(int x, int y) {
+        Tile tile = null;
+        if(x < width && x >= 0 && y < height && y >= 0){
+            tile = tiles[y][x];
+        }
+        return tile;
     }
 }

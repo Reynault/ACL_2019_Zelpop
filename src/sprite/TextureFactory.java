@@ -99,6 +99,11 @@ public class TextureFactory {
         return sprite;
     }
 
+    public BufferedImage getBreakableWall(){
+        BufferedImage sprite = tiles.getSubimage(0 * TILE_LENGTH, 3 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
+        return sprite;
+    }
+
     public BufferedImage getText(){
         return text;
     }

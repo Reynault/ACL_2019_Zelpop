@@ -250,6 +250,12 @@ public class MazeFactory implements Serializable {
                     case 4:
                         maze[i][j] = TileFactory.getStairs();
                         break;
+                    case 5:
+                        maze[i][j] = TileFactory.getTeleport();
+                        break;
+                    case 6:
+                        maze[i][j] = TileFactory.getBreakableWall();
+                        break;
                     default:
                         maze[i][j] = TileFactory.generateTile();
                         // Then adding entity
@@ -361,13 +367,19 @@ public class MazeFactory implements Serializable {
             for (int j = ymin; j < ymax; j++) {
                 rand = random.nextInt(specialTileRation);
                 if (rand == 1) {
-                    rand = random.nextInt(3);
+                    rand = random.nextInt(5);
                     switch (rand) {
                         case 1:
                             cells[j][i] = 2;
                             break;
                         case 2:
                             cells[j][i] = 3;
+                            break;
+                        case 3:
+                            cells[j][i] = 5;
+                            break;
+                        case 4:
+                            cells[j][i] = 6;
                             break;
                     }
                 }
