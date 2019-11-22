@@ -100,7 +100,7 @@ public class TextureFactory {
     }
 
     public BufferedImage getBreakableWall(){
-        BufferedImage sprite = tiles.getSubimage(0 * TILE_LENGTH, 3 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
+        BufferedImage sprite = tiles.getSubimage(3 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
 

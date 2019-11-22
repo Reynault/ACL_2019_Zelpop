@@ -9,7 +9,8 @@ import java.io.Serializable;
 public abstract class Effect extends Tile implements Serializable {
     protected Tile decore;
 
-    Effect(Tile decore){
+    Effect(int hp, Tile decore){
+        super(hp);
         this.decore = decore;
     }
 

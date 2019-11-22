@@ -17,8 +17,8 @@ public class Treasure extends Effect {
      * Default constructor
      * @param decore decorated tile
      */
-    Treasure(Tile decore, int gold) {
-        super(decore);
+    Treasure(int hp, Tile decore, int gold) {
+        super(hp, decore);
         open = false;
         this.gold = gold;
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getFilledTreasure());

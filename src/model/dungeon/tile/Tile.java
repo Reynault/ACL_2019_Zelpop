@@ -17,7 +17,8 @@ public class Tile extends Breakable implements Serializable {
     /**
      * Default constructor
      */
-    protected Tile(){
+    protected Tile(int hp){
+        super(hp);
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTiles());
     }
 
@@ -78,5 +79,6 @@ public class Tile extends Breakable implements Serializable {
 
     public void switchTiles(Tile t1, Tile t2){
         t1 = t2;
+        System.out.println("?");
     }
 }

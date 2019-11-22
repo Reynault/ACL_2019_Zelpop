@@ -10,8 +10,8 @@ import java.awt.image.BufferedImage;
 
 public class Stairs extends Effect{
 
-    Stairs(Tile decore) {
-        super(decore);
+    Stairs(int hp, Tile decore) {
+        super(hp, decore);
         spriteManager = new SpriteManagerTile(
                 TextureFactory.getTextureFactory().getStairs()
         );

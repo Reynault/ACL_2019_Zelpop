@@ -45,7 +45,7 @@ public class MazeFactory implements Serializable {
                 if (random.nextInt(5) == 0) {
                     tiles[i][j] = TileFactory.getWall();
                 } else {
-                    tiles[i][j] = TileFactory.generateTile();
+                    tiles[i][j] = TileFactory.getEmptyTile();
                 }
             }
         }
@@ -257,7 +257,7 @@ public class MazeFactory implements Serializable {
                         maze[i][j] = TileFactory.getBreakableWall();
                         break;
                     default:
-                        maze[i][j] = TileFactory.generateTile();
+                        maze[i][j] = TileFactory.getEmptyTile();
                         // Then adding entity
                         if (random.nextInt(entityRatio) == 1) {
                             entities.add(entityFactory.getRandomMonster(

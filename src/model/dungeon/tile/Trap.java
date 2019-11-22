@@ -17,8 +17,8 @@ public class Trap extends Effect {
      * Default constructor
      * @param decore decorated tile
      */
-    Trap(Tile decore, int trapDamage) {
-        super(decore);
+    Trap(int hp, Tile decore, int trapDamage) {
+        super(hp, decore);
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
         this.trapDamage = trapDamage;
         this.triggered = false;

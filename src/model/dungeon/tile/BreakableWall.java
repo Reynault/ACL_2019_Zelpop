@@ -9,8 +9,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class BreakableWall extends Effect{
-    BreakableWall(Tile decore) {
-        super(decore);
+    BreakableWall(int hp, Tile decore) {
+        super(hp, decore);
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getBreakableWall());
     }
 

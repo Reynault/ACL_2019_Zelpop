@@ -11,8 +11,8 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Teleport extends Effect{
-    Teleport(Tile decore) {
-        super(decore);
+    Teleport(int hp, Tile decore) {
+        super(hp, decore);
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getHero());
     }
 
