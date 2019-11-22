@@ -1,0 +1,100 @@
+@startuml
+
+title When the player wants to attack
+autonumber
+
+actor player
+
+participant ZelpopGame as z
+participant Dungeon as d
+participant "maze: Maze" as m
+participant "h: Hero" as h
+participant "SpriteManagerEntity" as sme
+participant Behavior as b
+participant AttackSimple as as
+participant "entity: Entity" as e
+participant "tile: Tile" as t
+
+
+player --> z: The player wants to attack
+
+z -> d: attack()
+
+d -> m: attack()
+
+m -> h: attack(maze)
+
+h -> sme: isAttacking()
+note left
+We notify the sprite manager
+that it has to display the attack sprite
+end note
+
+h -> b: behave(maze, h, ATTACK)
+
+b -> as: attack(maze, h)
+
+as -> h: getDmg()
+
+h --> as: damage
+
+as -> m: getEntity(x, y)
+
+note left
+maze will loop on every
+entities it owns and search
+for the one at (x, y)
+end note
+
+m --> as: entity
+
+alt entity == null
+
+    as -> m: getTile(x, y)
+
+    m --> as: t
+
+    opt t != null
+
+        as -> t: isBreakable()
+
+        t --> as: breakable
+
+        opt breakable == true
+
+            as -> t: takeDamage(damage)
+            note left
+            When a wall or a trap is destroyed,
+            it simply switching with the decorated
+            tile
+            end note
+
+
+        end
+
+    end
+
+else
+
+    as -> e: takeDamage(damage)
+
+    ref over e
+        See the diagram when an
+        entity is taking damages
+        entitled takeDamage.
+    end ref
+
+    as -> e: getCounter()
+
+    e --> as: counter
+
+    as -> hero: takeDamage(counter)
+    note left
+    The entity is then taking damages depending on
+    the defence of the victim
+    end note
+
+end
+
+
+@enduml
