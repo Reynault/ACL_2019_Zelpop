@@ -76,6 +76,6 @@ public class Trap extends Effect {
 
     @Override
     public boolean isBreakable() {
-        return super.isBreakable();
+        return true;
     }
 }
