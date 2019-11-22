@@ -21,17 +21,17 @@ that focus the player during the whole game. A new monster that can go through w
 
 ## Attribution
 
-|     Member     |             Feature             | State | Tests |
-|:--------------:|:-------------------------------:|:-----:|:-----:|
-|   Reynault     | Attack animation                |   -   |   -   |
-|    -    | Gobelin                         |   -   |   -   |
-|     -     | Ghost                           |   -   |   -   |
-|     JRomary    | Stat system (model)             |   -   |   -   |
-|    -    | Stat system (interface)         |   -   |   -   |
-|    Reynault    | Teleport                        |   -   |   -   |
-|     Reynault   | Destructible traps              |   -   |   -   |
-|   - | New how to use interface        |   -   |   -   |
-|   Reynault | Update Random maze to implement new features       |   -   |   -   |
+|     Member     |             Feature                          | State |
+|:--------------:|:--------------------------------------------:|:-----:|
+|   Reynault     | Attack animation                             |   -   |
+|    Reda        | Gobelin                                      |   -   |
+|     Reda       | Ghost                                        |   -   |
+|     Jromary    | Stat system (model)                          |   -   |
+|    Matthieu    | Stat system (interface)                      |   -   |
+|    Reynault    | Teleport                                     |   -   |
+|     Reynault   | Destructible traps                           |   -   |
+|   Matthieu     | New how to use interface                     |   -   |
+|   Reynault     | Update Random maze to implement new features |   -   |
 
 ## Implementation ideas
 

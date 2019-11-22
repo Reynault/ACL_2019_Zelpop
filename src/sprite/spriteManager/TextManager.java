@@ -1,7 +1,6 @@
 package sprite.spriteManager;
 
 import model.global.GlobalSprites;
-import org.w3c.dom.css.RGBColor;
 import sprite.TextureFactory;
 
 import java.awt.*;

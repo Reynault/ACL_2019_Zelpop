@@ -22,13 +22,13 @@ behavior of tiles such as traps and treasures which are based on the other syste
 
 ## Attribution
 
-|     Member     |             Feature             | State | Tests |
-|:--------------:|:-------------------------------:|:-----:|:-----:|
-|      Reda      | Attack system                   |   DONE   |   -   |
-|    Reynault    | HP system                       |   DONE   |   -   |
-|     Julien     | Maze randomly generated         |   DONE   |   -   |
-|    Matthieu    | Tiles behavior (Trap, treasure) |   DONE   |   -   |
-|    Reynault    | Score system                    |   DONE   |   -   |
-|    Matthieu    | Save and continue a game        |   DONE   |   -   |
-|     Julien     | The stairs tile                 |   DONE   |   -   |
-| Reynault, Reda | New menu interface              |   DONE   |   -   |
+|     Member     |             Feature             | State |
+|:--------------:|:-------------------------------:|:-----:|
+|      Reda      | Attack system                   |   DONE   |
+|    Reynault    | HP system                       |   DONE   |
+|     Julien     | Maze randomly generated         |   DONE   |
+|    Matthieu    | Tiles behavior (Trap, treasure) |   DONE   |
+|    Reynault    | Score system                    |   DONE   |
+|    Matthieu    | Save and continue a game        |   DONE   |
+|     Julien     | The stairs tile                 |   DONE   |
+| Reynault, Reda | New menu interface              |   DONE   |
