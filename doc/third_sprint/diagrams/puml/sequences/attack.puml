@@ -46,23 +46,43 @@ entities it owns and search
 for the one at (x, y)
 end note
 
-m --> as: entity
 
-alt entity == null
+alt entity != null
 
-    as -> m: getTile(x, y)
+    as -> m: attackEntity(entity, victim, damage)
 
-    m --> as: t
+    m -> e: takeDamage(damage)
+
+    ref over e
+        See the diagram when an
+        entity is taking damages
+        entitled takeDamage.
+    end ref
+
+    as -> e: getCounter()
+
+    e --> as: counter
+
+    as -> m: attackEntity(entity, victim, counter)
+    note left
+    The entity is then taking damages depending on
+    the defence of the victim, for more details, see the
+    take damages diagram
+    end note
+
+else
+
+    as -> m: destroy(int x, int y, int damage)
 
     opt t != null
 
-        as -> t: isBreakable()
+        m -> t: isBreakable()
 
-        t --> as: breakable
+        t --> m: breakable
 
         opt breakable == true
 
-            as -> t: takeDamage(damage)
+            m -> t: takeDamage(damage)
             note left
             When a wall or a trap is destroyed,
             it simply switching with the decorated
@@ -75,34 +95,16 @@ alt entity == null
 
             opt destroyed == true
 
-                as --> m: destroy(x, y)
+                note left
+                    The tile is replaced by
+                    its decorated one
+                end note
 
             end
 
         end
 
     end
-
-else
-
-    as -> e: takeDamage(damage)
-
-    ref over e
-        See the diagram when an
-        entity is taking damages
-        entitled takeDamage.
-    end ref
-
-    as -> e: getCounter()
-
-    e --> as: counter
-
-    as -> hero: takeDamage(counter)
-    note left
-    The entity is then taking damages depending on
-    the defence of the victim
-    end note
-
 end
 
 

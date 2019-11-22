@@ -374,17 +374,6 @@ public class Maze implements Serializable {
     }
 
     /**
-     * To kill the entity
-     */
-    public void killEntity(Entity entity, Entity h) {
-        int bonus = scoring.killMonster(entity);
-        h.increaseScore(bonus);
-
-        // Deleting killed entity
-        removedEntity.add(entity);
-    }
-
-    /**
      * Method getEntity, it fetch an entity from a specify tile on the maze
      */
     public Entity getEntity(int x, int y) {
@@ -431,6 +420,12 @@ public class Maze implements Serializable {
         return height;
     }
 
+    /**
+     * Getter that give the selected tile from the maze
+     * @param x the x position
+     * @param y the y position
+     * @return the selected tile
+     */
     public Tile getTile(int x, int y) {
         Tile tile = null;
         if(x < width && x >= 0 && y < height && y >= 0){
@@ -439,9 +434,48 @@ public class Maze implements Serializable {
         return tile;
     }
 
-    public void destroy(int x, int y){
+    /**
+     * Method that destroy a targeted tile in the maze,
+     * the maze is taking damages from an entity, and if its
+     * destroyed, it becomes its decorated tile.
+     *
+     * @param x the x position
+     * @param y the y position
+     * @param damage the damages taken by the tile
+     */
+    public void destroy(int x, int y, int damage){
+        // The target is in the maze
         if(x < width && x >= 0 && y < height && y >= 0) {
-            tiles[y][x] = tiles[y][x].getAncestor();
+            Tile tile = tiles[x][y];
+            // And is breakable
+            if(tile.isBreakable()){
+                // It takes damages
+                tile.takeDamage(damage);
+                if(tile.isDestroyed()){
+                    // And if destroyed, then it becomes its ancestor
+                    tiles[y][x] = tiles[y][x].getAncestor();
+                }
+            }
+        }
+    }
+
+    /**
+     * Method that hit a target from an entity. If the target is dead, then
+     * it is removed from the maze.
+     * @param entity The attacker
+     * @param victim The victim
+     * @param damage The damages taken by the victim
+     */
+    public void attackEntity(Entity entity, Entity victim, int damage) {
+        // Damaging the victim with entity's damages
+        victim.takeDamage(damage);
+        if (!victim.isAlive()) {
+            // If its dead, then we have to remove it and to increase score
+            int bonus = scoring.killMonster(entity);
+            entity.increaseScore(bonus);
+
+            // Deleting killed entity
+            removedEntity.add(entity);
         }
     }
 }

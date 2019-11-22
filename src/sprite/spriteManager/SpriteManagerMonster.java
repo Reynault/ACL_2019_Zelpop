@@ -7,10 +7,15 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
-public class SpriteManagerMonster extends SpriteManager {
+public class SpriteManagerMonster extends SpriteManagerEntity {
 
     public SpriteManagerMonster(BufferedImage sprite) {
         super(sprite);
+    }
+
+    @Override
+    public void isAttacking() {
+
     }
 
     @Override

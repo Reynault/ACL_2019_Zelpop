@@ -5,6 +5,7 @@ import model.dungeon.entity.behavior.Behavior;
 import model.global.Cmd;
 import model.global.Position;
 import sprite.spriteManager.SpriteManager;
+import sprite.spriteManager.SpriteManagerEntity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,12 +18,12 @@ public abstract class Entity implements Serializable {
     protected boolean passThrought;
     protected Position position;
     protected Behavior behavior;
-    protected SpriteManager spriteManager;
+    protected SpriteManagerEntity spriteManager;
     protected int damage;
     protected int score;
     protected int value;
 
-    protected Entity(int hp, boolean passThrought, int damage, int score, int value, Position position, Behavior behavior, SpriteManager spriteManager) {
+    protected Entity(int hp, boolean passThrought, int damage, int score, int value, Position position, Behavior behavior, SpriteManagerEntity spriteManager) {
         this.maxHp = hp;
         this.hp = hp;
         this.passThrought = passThrought;
@@ -76,6 +77,7 @@ public abstract class Entity implements Serializable {
      */
     public void attack(Maze maze) {
         behavior.behave(maze, this, Cmd.ATTACK);
+        spriteManager.isAttacking();
     }
 
     /**

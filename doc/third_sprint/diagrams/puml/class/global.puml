@@ -60,6 +60,8 @@ package dungeon{
         + getChestScore(): int
         + isFinished(): boolean
         + getTile(x:int, y:int): Tile
+        + attackEntity(entity: Entity, victim: Entity, damage: int)
+        + destroy(x: int, y: int, damage: int)
     }
 
     package scoring{

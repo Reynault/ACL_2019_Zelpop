@@ -26,18 +26,11 @@ public class AttackHero implements Attack {
             Entity victim = maze.getEntity(val.getX(), val.getY());
 
             if (victim != null) {
-                victim.takeDamage(entity.getDmg());
-                if (!victim.isAlive()) {
-                    maze.killEntity(victim, entity);
-                }
+                // Attacking nearby entity
+                maze.attackEntity(entity, victim, damage);
             }else{
-                // If there is no entity, we target the tile
-                // if its breakable
-                Tile tile = maze.getTile(val.getX(), val.getY());
-                if(tile != null && tile.isBreakable()){
-                    tile.takeDamage(damage);
-                    maze.destroy(val.getX(), val.getY());
-                }
+                // If there is no entity, attacking the tile
+                maze.destroy(val.getX(), val.getY(), damage);
             }
         }
     }

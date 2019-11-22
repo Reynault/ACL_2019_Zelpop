@@ -25,10 +25,7 @@ public class AttackSimple implements Attack {
             Entity victim = maze.getEntity(val.getX(), val.getY());
 
             if (victim != null) {
-                victim.takeDamage(entity.getDmg());
-                if (!victim.isAlive()) {
-                    maze.killEntity(victim, entity);
-                }
+                maze.attackEntity(entity, victim, damage);
             }
         }
     }
