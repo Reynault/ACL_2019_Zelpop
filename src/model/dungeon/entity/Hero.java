@@ -2,13 +2,10 @@ package model.dungeon.entity;
 
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Position;
-import sprite.spriteManager.SpriteManager;
 import sprite.spriteManager.SpriteManagerHero;
 import sprite.TextureFactory;
 
-import java.io.Serializable;
-
-public class Hero extends Entity{
+public class Hero extends Entity {
 
 
     protected Hero(int hp, boolean passThrought, int damage, int score, int value, Position position, Behavior behavior) {

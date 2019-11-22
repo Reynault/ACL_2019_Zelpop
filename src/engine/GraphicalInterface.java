@@ -38,6 +38,7 @@ public class GraphicalInterface  {
 		f.setVisible(true);
 		f.getContentPane().setFocusable(true);
 		f.getContentPane().requestFocus();
+		f.setResizable(false);
 	}
 	
 	/**

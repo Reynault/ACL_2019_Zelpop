@@ -27,7 +27,6 @@ public class Maze implements Serializable {
     private int width, height;
     private Hero hero;
     private Scoring scoring;
-    private EntityFactory entityFactory;
 
     private static String PV_STATUS = "HP";
     private static String SCORE_STATUS = "SCORE";
