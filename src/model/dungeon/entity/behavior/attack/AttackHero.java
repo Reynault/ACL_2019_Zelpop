@@ -36,7 +36,7 @@ public class AttackHero implements Attack {
                 Tile tile = maze.getTile(val.getX(), val.getY());
                 if(tile != null && tile.isBreakable()){
                     tile.takeDamage(damage);
-                    maze.destroy(val.getY(), val.getX());
+                    //maze.destroy(val.getX(), val.getY());
                 }
             }
         }

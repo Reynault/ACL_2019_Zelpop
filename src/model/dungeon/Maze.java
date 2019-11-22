@@ -440,6 +440,8 @@ public class Maze implements Serializable {
     }
 
     public void destroy(int x, int y){
-        tiles[x][y] = tiles[x][y].getAncestor();
+        if(x < width && x >= 0 && y < height && y >= 0) {
+            tiles[y][x] = tiles[y][x].getAncestor();
+        }
     }
 }

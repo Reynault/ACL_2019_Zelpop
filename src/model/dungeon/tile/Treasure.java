@@ -28,7 +28,7 @@ public class Treasure extends Effect {
     public void setImage() {
         decore.setImage();
         if(open) {
-            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getEmptyTreasue());
+            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getEmptyTreasure());
         }else{
             spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getFilledTreasure());
         }
@@ -51,7 +51,7 @@ public class Treasure extends Effect {
     public void action(Maze maze, Entity e) {
         if(!open) {
             e.increaseScore(maze.getChestScore(this));
-            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getEmptyTreasue());
+            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getEmptyTreasure());
         }
         open = true;
     }

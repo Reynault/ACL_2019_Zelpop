@@ -11,14 +11,22 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Teleport extends Effect{
+    private boolean isTriggered;
+
     Teleport(int hp, Tile decore) {
         super(hp, decore);
-        spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getHero());
+        spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
+        isTriggered = false;
     }
 
     @Override
     public void setImage() {
-        spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
+        decore.setImage();
+        if(isTriggered){
+            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTiles());
+        }else {
+            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
+        }
     }
 
     @Override
@@ -36,26 +44,31 @@ public class Teleport extends Effect{
 
     @Override
     public void action(Maze maze, Entity e) {
-        // Retrieving information from maze
-        int width = maze.getWidth();
-        int height = maze.getHeight();
+        if(!isTriggered) {
+            // Retrieving information from maze
+            int width = maze.getWidth();
+            int height = maze.getHeight();
 
-        // Fetching empty position in the maze
-        int x, y;
-        Random random = new Random();
-        do{
-            x = random.nextInt(height);
-            y = random.nextInt(width);
-        }while(maze.getEntity(x,y) != null || !maze.canMove(e, x,y));
+            // Fetching empty position in the maze
+            int x, y;
+            Random random = new Random();
+            do {
+                x = random.nextInt(height);
+                y = random.nextInt(width);
+            } while (maze.getEntity(x, y) != null || !maze.canMove(e, x, y));
 
-        // Moving the entity
-        e.setPosition(
-                new Position(
-                        x,
-                        y,
-                        e.getPosition().getCmd()
-                )
-        );
+            // Moving the entity
+            e.setPosition(
+                    new Position(
+                            x,
+                            y,
+                            e.getPosition().getCmd()
+                    )
+            );
+
+            isTriggered = true;
+            spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTiles());
+        }
     }
 
     @Override
