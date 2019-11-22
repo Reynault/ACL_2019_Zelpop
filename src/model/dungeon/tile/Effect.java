@@ -35,11 +35,7 @@ public abstract class Effect extends Tile implements Serializable {
     public void takeDamage(int damage) {
         // Taking damage
         super.takeDamage(damage);
-        change(this, decore);
-    }
 
-    public static void change(Tile e, Tile t){
-        e = t;
     }
 
     @Override
