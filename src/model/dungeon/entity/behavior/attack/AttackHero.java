@@ -3,6 +3,7 @@ package model.dungeon.entity.behavior.attack;
 import model.Pair;
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
+import model.dungeon.tile.Breakable;
 import model.dungeon.tile.Tile;
 import model.global.Cmd;
 import model.global.Position;
@@ -35,6 +36,7 @@ public class AttackHero implements Attack {
                 Tile tile = maze.getTile(val.getX(), val.getY());
                 if(tile != null && tile.isBreakable()){
                     tile.takeDamage(damage);
+                    maze.destroy(val.getY(), val.getX());
                 }
             }
         }

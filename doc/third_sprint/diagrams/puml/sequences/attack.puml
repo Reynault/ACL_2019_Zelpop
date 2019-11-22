@@ -69,6 +69,15 @@ alt entity == null
             tile
             end note
 
+            as -> t: isDestroyed()
+
+            t --> as: destroyed
+
+            opt destroyed == true
+
+                as --> m: destroy(x, y)
+
+            end
 
         end
 

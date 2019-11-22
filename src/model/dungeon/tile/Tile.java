@@ -77,8 +77,7 @@ public class Tile extends Breakable implements Serializable {
         return false;
     }
 
-    public void switchTiles(Tile t1, Tile t2){
-        t1 = t2;
-        System.out.println("?");
+    public Tile getAncestor(){
+        return this;
     }
 }

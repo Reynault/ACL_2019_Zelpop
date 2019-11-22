@@ -14,8 +14,8 @@ public class Wall extends Effect {
      * Default constructor
      * @param decore decorated tile
      */
-    Wall(Tile decore) {
-        super(decore);
+    Wall(int hp, Tile decore) {
+        super(hp, decore);
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getWalls());
     }
 

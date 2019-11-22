@@ -35,7 +35,10 @@ public abstract class Effect extends Tile implements Serializable {
     public void takeDamage(int damage) {
         // Taking damage
         super.takeDamage(damage);
-        // Replacing current tile by its decorated one
-        switchTiles(this, decore);
+    }
+
+    @Override
+    public Tile getAncestor(){
+        return decore;
     }
 }

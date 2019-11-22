@@ -16,7 +16,7 @@ public class TileFactory {
     }
 
     public static Tile getWall(){
-        return new Wall(new Tile(DEFAULT_HP));
+        return new Wall(DEFAULT_HP, new Tile(DEFAULT_HP));
     }
 
     public static Tile getTreasure(int gold){
