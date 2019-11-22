@@ -283,7 +283,7 @@ public class Maze implements Serializable {
             // Checking if movement is in the maze
             if (canMove(e, p.getX(), p.getY())) {
                 newPosition = new Position(p.getX(), p.getY(), direction);
-            } else {
+                } else {
                 newPosition = new Position(
                         currentPosition.getX(),
                         currentPosition.getY(),

@@ -1,0 +1,15 @@
+{8,10}
+(w)(w)(w)(w)(w)(w)(w)(w)
+(w)(x)(x)(w)(x)(x)(x)(w)
+(w)(w)(w)(w)(x)(x)(x)(w)
+(w)(x)(w)(x)(x)(x)(x)(w)
+(w)(x)(x)(x)(x)(x)(x)(w)
+(w)(x)(x)(x)(c)(t)(x)(w)
+(w)(x)(x)(x)(x)(x)(x)(w)
+(w)(x)(x)(x)(x)(w)(w)(w)
+(w)(x)(x)(x)(x)(w)(x)(w)
+(w)(w)(w)(w)(w)(w)(w)(w)
+2
+Hero{1,1}
+Zombie{2,1}
+Zombie{6,8}
