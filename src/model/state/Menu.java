@@ -12,6 +12,7 @@ import sprite.spriteManager.TextManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Timer;
 
 public class Menu implements GameState{
     private String title;
@@ -36,6 +37,7 @@ public class Menu implements GameState{
 
     @Override
     public void draw(BufferedImage image) throws InterruptedException {
+
         MenuButton button;
         BufferedImage titleImage;
         int width, height;
@@ -109,6 +111,7 @@ public class Menu implements GameState{
                 break;
             case ATTACK:
                 buttons[selectedButton].trigger(game);
+                System.out.println("qsdqds");
                 break;
         }
     }

@@ -20,9 +20,7 @@ public class SpriteManagerTile extends SpriteManager {
     }
 
     @Override
-    public List<BufferedImage> getCurrentSprite() {
-        ArrayList<BufferedImage> liste = new ArrayList<>();
-        liste.add(sprite);
-        return liste;
+    public BufferedImage getCurrentSprite() {
+        return sprite;
     }
 }

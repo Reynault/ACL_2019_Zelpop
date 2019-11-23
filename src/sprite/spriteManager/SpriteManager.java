@@ -24,5 +24,5 @@ public abstract class SpriteManager implements Serializable {
 
     public abstract void setSprite(Cmd direction);
 
-    public abstract List<BufferedImage> getCurrentSprite();
+    public abstract BufferedImage getCurrentSprite();
 }

@@ -1,5 +1,6 @@
 package model.dungeon.entity;
 
+import javafx.scene.control.ButtonBar;
 import model.dungeon.Maze;
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Cmd;
@@ -7,6 +8,7 @@ import model.global.GlobalSprites;
 import model.global.Position;
 import sprite.spriteManager.SpriteManagerEntity;
 
+import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
@@ -139,23 +141,14 @@ public abstract class Entity implements Serializable {
      */
     public void draw(BufferedImage img, int x, int y, int scale) throws InterruptedException{
         Graphics2D crayon = (Graphics2D) img.getGraphics();
-        BufferedImage image;
-        List<BufferedImage> images =  spriteManager.getCurrentSprite();
+        BufferedImage image = spriteManager.getCurrentSprite();
 
-        for(int i = 0; i < images.size(); i++) {
-
-            if(i > 0) {
-                Thread.sleep(GlobalSprites.getAnimationDelay());
-            }
-
-            image = images.get(i);
-            crayon.drawImage(image,
-                    x,
-                    y,
-                    image.getWidth() * scale,
-                    image.getHeight() * scale,
-                    null);
-            crayon.dispose();
-        }
+        crayon.drawImage(image,
+                x,
+                y,
+                image.getWidth() * scale,
+                image.getHeight() * scale,
+                null);
+        crayon.dispose();
     }
 }

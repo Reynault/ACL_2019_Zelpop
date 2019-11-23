@@ -17,10 +17,10 @@ public interface GamePainter {
 	 * @param image
 	 *            image sur laquelle dessiner
 	 */
-	public abstract void draw(BufferedImage image) throws InterruptedException;
+	void draw(BufferedImage image) throws InterruptedException;
 
-	public abstract int getWidth();
+	int getWidth();
 
-	public abstract int getHeight();
+	int getHeight();
 	
 }

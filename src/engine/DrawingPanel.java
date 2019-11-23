@@ -87,6 +87,7 @@ public class DrawingPanel extends JPanel {
 		super.paint(g);
 		g.drawImage(this.currentImage, 0, 0, getWidth(), getHeight(), 0, 0,
 				getWidth(), getHeight(), null);
+		g.dispose();
 	}
 
 }

@@ -44,24 +44,15 @@ public class Tile extends Breakable implements Serializable {
 
     protected static void drawPartOfTile(BufferedImage img, int x, int y, int scale, SpriteManager spriteManager) throws InterruptedException{
         Graphics2D crayon = (Graphics2D) img.getGraphics();
-        BufferedImage image;
-        List<BufferedImage> images =  spriteManager.getCurrentSprite();
+        BufferedImage image = spriteManager.getCurrentSprite();
 
-        for(int i = 0; i < images.size(); i++) {
-
-            if(i > 0) {
-                Thread.sleep(GlobalSprites.getAnimationDelay());
-            }
-
-            image = images.get(i);
-            crayon.drawImage(image,
-                    x,
-                    y,
-                    image.getWidth() * scale,
-                    image.getHeight() * scale,
-                    null);
-            crayon.dispose();
-        }
+        crayon.drawImage(image,
+                x,
+                y,
+                image.getWidth() * scale,
+                image.getHeight() * scale,
+                null);
+        crayon.dispose();
     }
 
     public void action(Maze maze, Entity entity){

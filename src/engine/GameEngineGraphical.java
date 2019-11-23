@@ -55,6 +55,7 @@ public class GameEngineGraphical {
 	 * permet de lancer le game
 	 */
 	public void run() throws InterruptedException {
+        Cmd c;
 
 		// creation de l'interface graphique
 		this.gui = new GraphicalInterface(this.gamePainter,this.gameController);
@@ -65,16 +66,19 @@ public class GameEngineGraphical {
 		// boucle de game
 		while (!this.game.isFinished()) {
 			// met en attente
-			lockFPS();
+            lockFPS();
+
 			// demande controle utilisateur
-			Cmd c = this.gameController.getCommand();
+			c = this.gameController.getCommand();
+            this.gameController.resetCommand();
+
+            // fait evoluer le jeu si il y a une commande
 			if (c != Cmd.IDLE) {
-				// fait evoluer le game
 				this.game.evolve(c);
-				// affiche le game
-				this.gui.paint();
 			}
-			this.gameController.resetCommand();
+
+			// affiche le game
+            this.gui.paint();
 		}
 	}
 
