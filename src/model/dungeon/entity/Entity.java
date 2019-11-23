@@ -4,7 +4,6 @@ import model.dungeon.Maze;
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Cmd;
 import model.global.Position;
-import sprite.spriteManager.SpriteManager;
 import sprite.spriteManager.SpriteManagerEntity;
 
 import java.awt.*;
@@ -77,7 +76,7 @@ public abstract class Entity implements Serializable {
      */
     public void attack(Maze maze) {
         behavior.behave(maze, this, Cmd.ATTACK);
-        spriteManager.isAttacking();
+        spriteManager.setAttacking();
     }
 
     /**
@@ -138,6 +137,7 @@ public abstract class Entity implements Serializable {
      */
     public void draw(BufferedImage img, int x, int y, int scale) {
         Graphics2D crayon = (Graphics2D) img.getGraphics();
+
         crayon.drawImage(spriteManager.getCurrentSprite(),
                 x,
                 y,

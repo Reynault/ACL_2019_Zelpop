@@ -14,17 +14,13 @@ public class SpriteManagerHero extends SpriteManagerEntity {
     }
 
     @Override
-    public void isAttacking() {
-        isAttacking = true;
+    public void setAttacking() {
+        attacking = true;
     }
 
     @Override
     public void setSprite(Cmd direction){
-        if(isAttacking){
-            this.attackFrame = (attackFrame+1)%2;
-        }else{
-            this.frame = (frame + 1) % 2;
-        }
+        this.frame = (frame + 1) % 2;
         facing = direction;
     }
 
@@ -33,36 +29,36 @@ public class SpriteManagerHero extends SpriteManagerEntity {
         BufferedImage toReturn;
         switch (facing){
             case DOWN:{
-                if(isAttacking) {
-                    toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * (attackFrame*5), GlobalSprites.get8Sprite() * DOWN, GlobalSprites.get8Sprite(), GlobalSprites.get8Sprite());
+                if(attacking) {
+                    toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * (attackFrame*5), GlobalSprites.get8Sprite() * DOWN, GlobalSprites.get16Sprite(), GlobalSprites.get8Sprite());
                 }else{
                     toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * frame, GlobalSprites.get8Sprite() * DOWN, GlobalSprites.get8Sprite(), GlobalSprites.get8Sprite());
                 }
                 break;
             }
             case UP:{
-                if(isAttacking) {
-                    toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * (attackFrame*5), GlobalSprites.get8Sprite() * DOWN, GlobalSprites.get8Sprite(), GlobalSprites.get8Sprite());
+                if(attacking) {
+                    toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * (attackFrame*5), GlobalSprites.get8Sprite() * UP, GlobalSprites.get16Sprite(), GlobalSprites.get8Sprite());
                 }else {
                     toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * frame, GlobalSprites.get8Sprite() * UP, GlobalSprites.get8Sprite(), GlobalSprites.get8Sprite());
                 }
                 break;
             }
             case LEFT:{
-                if(isAttacking) {
-                    toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * (attackFrame*5), GlobalSprites.get8Sprite() * DOWN, GlobalSprites.get8Sprite(), GlobalSprites.get8Sprite());
+                if(attacking) {
+                    toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * (attackFrame*5), GlobalSprites.get8Sprite() * RIGHT, GlobalSprites.get16Sprite(), GlobalSprites.get8Sprite());
                 }else {
                     toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * frame, GlobalSprites.get8Sprite() * RIGHT, GlobalSprites.get8Sprite(), GlobalSprites.get8Sprite());
-                    AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-                    tx.translate(-toReturn.getWidth(null), 0);
-                    AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-                    toReturn = op.filter(toReturn, null);
                 }
+                AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
+                tx.translate(-toReturn.getWidth(null), 0);
+                AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+                toReturn = op.filter(toReturn, null);
                 break;
             }
             case RIGHT:{
-                if(isAttacking) {
-                    toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * (attackFrame*5), GlobalSprites.get8Sprite() * DOWN, GlobalSprites.get8Sprite(), GlobalSprites.get8Sprite());
+                if(attacking) {
+                    toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * (attackFrame*5), GlobalSprites.get8Sprite() * RIGHT, GlobalSprites.get16Sprite(), GlobalSprites.get8Sprite());
                 }else {
                     toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * frame, GlobalSprites.get8Sprite() * RIGHT, GlobalSprites.get8Sprite(), GlobalSprites.get8Sprite());
                 }
@@ -74,6 +70,12 @@ public class SpriteManagerHero extends SpriteManagerEntity {
                 break;
             }
         }
+
+        if(attackFrame == 1){
+            attacking = false;
+            attackFrame = 0;
+        }
+
         return toReturn;
     }
 }

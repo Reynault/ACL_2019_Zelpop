@@ -446,7 +446,7 @@ public class Maze implements Serializable {
     public void destroy(int x, int y, int damage){
         // The target is in the maze
         if(x < width && x >= 0 && y < height && y >= 0) {
-            Tile tile = tiles[x][y];
+            Tile tile = tiles[y][x];
             // And is breakable
             if(tile.isBreakable()){
                 // It takes damages
@@ -471,11 +471,11 @@ public class Maze implements Serializable {
         victim.takeDamage(damage);
         if (!victim.isAlive()) {
             // If its dead, then we have to remove it and to increase score
-            int bonus = scoring.killMonster(entity);
+            int bonus = scoring.killMonster(victim);
             entity.increaseScore(bonus);
 
             // Deleting killed entity
-            removedEntity.add(entity);
+            removedEntity.add(victim);
         }
     }
 }

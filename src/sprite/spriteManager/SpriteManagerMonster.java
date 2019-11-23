@@ -14,7 +14,7 @@ public class SpriteManagerMonster extends SpriteManagerEntity {
     }
 
     @Override
-    public void isAttacking() {
+    public void setAttacking() {
 
     }
 
