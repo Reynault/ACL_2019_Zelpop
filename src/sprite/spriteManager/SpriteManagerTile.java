@@ -2,7 +2,10 @@ package sprite.spriteManager;
 
 import model.global.Cmd;
 
+import javax.swing.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SpriteManagerTile extends SpriteManager {
 
@@ -17,7 +20,9 @@ public class SpriteManagerTile extends SpriteManager {
     }
 
     @Override
-    public BufferedImage getCurrentSprite() {
-        return sprite;
+    public List<BufferedImage> getCurrentSprite() {
+        ArrayList<BufferedImage> liste = new ArrayList<>();
+        liste.add(sprite);
+        return liste;
     }
 }

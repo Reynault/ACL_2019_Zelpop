@@ -138,12 +138,14 @@ public abstract class Entity implements Serializable {
     public void draw(BufferedImage img, int x, int y, int scale) {
         Graphics2D crayon = (Graphics2D) img.getGraphics();
 
-        crayon.drawImage(spriteManager.getCurrentSprite(),
-                x,
-                y,
-                spriteManager.getCurrentSprite().getWidth() * scale,
-                spriteManager.getCurrentSprite().getHeight() * scale,
-                null);
-        crayon.dispose();
+        for(BufferedImage image : spriteManager.getCurrentSprite()) {
+            crayon.drawImage(image,
+                    x,
+                    y,
+                    image.getWidth() * scale,
+                    image.getHeight() * scale,
+                    null);
+            crayon.dispose();
+        }
     }
 }

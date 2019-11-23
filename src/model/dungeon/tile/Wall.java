@@ -26,19 +26,6 @@ public class Wall extends Effect {
     }
 
     @Override
-    public void draw(BufferedImage img, int x, int y, int scale) {
-        decore.draw(img, x, y, scale);
-        Graphics2D crayon = (Graphics2D) img.getGraphics();
-        crayon.drawImage(spriteManager.getCurrentSprite(),
-                x,
-                y,
-                spriteManager.getCurrentSprite().getWidth() * scale,
-                spriteManager.getCurrentSprite().getHeight() * scale,
-                null);
-        crayon.dispose();
-    }
-
-    @Override
     public void action(Maze maze, Entity e) {
         
     }

@@ -4,6 +4,7 @@ import model.global.Cmd;
 
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.util.List;
 
 public abstract class SpriteManager implements Serializable {
     protected final static int UP = 2;
@@ -23,5 +24,5 @@ public abstract class SpriteManager implements Serializable {
 
     public abstract void setSprite(Cmd direction);
 
-    public abstract BufferedImage getCurrentSprite();
+    public abstract List<BufferedImage> getCurrentSprite();
 }

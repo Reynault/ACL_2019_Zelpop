@@ -37,14 +37,20 @@ public class Tile extends Breakable implements Serializable {
      * @param scale scale of the game
      */
     public void draw(BufferedImage img, int x, int y, int scale){
+        drawPartOfTile(img, x, y, scale, spriteManager);
+    }
+
+    protected static void drawPartOfTile(BufferedImage img, int x, int y, int scale, SpriteManager spriteManager){
         Graphics2D crayon = (Graphics2D) img.getGraphics();
-        crayon.drawImage(spriteManager.getCurrentSprite(),
-                x,
-                y,
-                spriteManager.getCurrentSprite().getWidth() * scale,
-                spriteManager.getCurrentSprite().getHeight() * scale,
-                null);
-        crayon.dispose();
+        for (BufferedImage image: spriteManager.getCurrentSprite()) {
+            crayon.drawImage(image,
+                    x,
+                    y,
+                    image.getWidth() * scale,
+                    image.getHeight() * scale,
+                    null);
+            crayon.dispose();
+        }
     }
 
     public void action(Maze maze, Entity entity){
