@@ -21,7 +21,7 @@ public abstract class SpriteManager implements Serializable {
     public SpriteManager(BufferedImage sprite) {
         this.sprite = sprite;
         frame = 0;
-        facing = Cmd.LEFT;
+        facing = Cmd.DOWN;
     }
 
     public abstract void setSprite(Cmd direction);
@@ -32,4 +32,6 @@ public abstract class SpriteManager implements Serializable {
         Timer timer = new Timer();
         timer.schedule(task, delay);
     }
+
+    public abstract void draw(BufferedImage img, int x, int y, int scale);
 }

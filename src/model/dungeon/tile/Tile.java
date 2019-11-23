@@ -42,17 +42,8 @@ public class Tile extends Breakable{
         drawPartOfTile(img, x, y, scale, spriteManager);
     }
 
-    protected static void drawPartOfTile(BufferedImage img, int x, int y, int scale, SpriteManager spriteManager) throws InterruptedException{
-        Graphics2D crayon = (Graphics2D) img.getGraphics();
-        BufferedImage image = spriteManager.getCurrentSprite();
-
-        crayon.drawImage(image,
-                x,
-                y,
-                image.getWidth() * scale,
-                image.getHeight() * scale,
-                null);
-        crayon.dispose();
+    static void drawPartOfTile(BufferedImage img, int x, int y, int scale, SpriteManager spriteManager) throws InterruptedException{
+        spriteManager.draw(img, x, y, scale);
     }
 
     public void action(Maze maze, Entity entity){

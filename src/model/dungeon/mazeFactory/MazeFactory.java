@@ -259,7 +259,7 @@ public class MazeFactory implements Serializable {
                     default:
                         maze[i][j] = TileFactory.getEmptyTile();
                         // Then adding entity
-                        if (random.nextInt(entityRatio) == 1) {
+                        if (random.nextInt(entityRatio) == 1 && i != 0 && j != 0) {
                             entities.add(entityFactory.getRandomMonster(
                                     new Position(j, i, Cmd.IDLE)
                             ));
@@ -368,28 +368,29 @@ public class MazeFactory implements Serializable {
 //        System.out.println("ymax : " + ymax);
         for (int i = xmin; i < xmax; i++) {
             for (int j = ymin; j < ymax; j++) {
-
-                rand = random.nextInt(specialTileRatio);
-                if (rand == 1) {
-                    if(room){
-                        rand = 5;
-                    }else{
-                        rand = 3;
-                    }
-                    rand = random.nextInt(rand);
-                    switch (rand) {
-                        case 1:
-                            cells[j][i] = 2;
-                            break;
-                        case 2:
-                            cells[j][i] = 3;
-                            break;
-                        case 3:
-                            cells[j][i] = 4;
-                            break;
-                        case 4:
-                            cells[j][i] = 5;
-                            break;
+                if(j !=  0 && i != 0) {
+                    rand = random.nextInt(specialTileRatio);
+                    if (rand == 1) {
+                        if (room) {
+                            rand = 5;
+                        } else {
+                            rand = 3;
+                        }
+                        rand = random.nextInt(rand);
+                        switch (rand) {
+                            case 1:
+                                cells[j][i] = 2;
+                                break;
+                            case 2:
+                                cells[j][i] = 3;
+                                break;
+                            case 3:
+                                cells[j][i] = 4;
+                                break;
+                            case 4:
+                                cells[j][i] = 5;
+                                break;
+                        }
                     }
                 }
             }

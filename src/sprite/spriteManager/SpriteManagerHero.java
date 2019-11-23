@@ -1,6 +1,5 @@
 package sprite.spriteManager;
 
-import model.global.Cmd;
 import model.global.GlobalSprites;
 
 import java.awt.geom.AffineTransform;
@@ -11,12 +10,6 @@ public class SpriteManagerHero extends SpriteManagerEntity {
 
     public SpriteManagerHero(BufferedImage sprite) {
         super(sprite);
-    }
-
-    @Override
-    public void setSprite(Cmd direction) {
-        this.frame = (frame + 1) % 2;
-        facing = direction;
     }
 
     @Override
@@ -45,7 +38,7 @@ public class SpriteManagerHero extends SpriteManagerEntity {
                             GlobalSprites.get8Sprite() * RIGHT, GlobalSprites.get8Sprite() + GlobalSprites.get8Sprite() * attackFrame,
                             GlobalSprites.get8Sprite());
                     AffineTransform tx = AffineTransform.getScaleInstance(-1, 1);
-                    tx.translate(-(toReturn.getWidth(null) - (GlobalSprites.get8Sprite()*attackFrame)), 0);
+                    tx.translate(-toReturn.getWidth(null), 0);
                     AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
                     toReturn = op.filter(toReturn, null);
                     break;
@@ -53,7 +46,7 @@ public class SpriteManagerHero extends SpriteManagerEntity {
                 default: {
                     frame = 0;
                     toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * frame,
-                            GlobalSprites.get8Sprite() * RIGHT, GlobalSprites.get8Sprite(),
+                            GlobalSprites.get8Sprite() * DOWN, GlobalSprites.get8Sprite(),
                             GlobalSprites.get8Sprite());
                     break;
                 }
@@ -95,7 +88,7 @@ public class SpriteManagerHero extends SpriteManagerEntity {
                 default: {
                     frame = 0;
                     toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * frame,
-                            GlobalSprites.get8Sprite() * RIGHT, GlobalSprites.get8Sprite(),
+                            GlobalSprites.get8Sprite() * DOWN, GlobalSprites.get8Sprite(),
                             GlobalSprites.get8Sprite());
                     break;
                 }
@@ -104,4 +97,5 @@ public class SpriteManagerHero extends SpriteManagerEntity {
 
         return toReturn;
     }
+
 }

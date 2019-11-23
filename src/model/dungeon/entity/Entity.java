@@ -3,6 +3,7 @@ package model.dungeon.entity;
 import model.dungeon.Maze;
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Cmd;
+import model.global.GlobalSprites;
 import model.global.Position;
 import sprite.spriteManager.SpriteManagerEntity;
 
@@ -139,15 +140,6 @@ public abstract class Entity implements Serializable {
      * @param scale scale of the entity
      */
     public void draw(BufferedImage img, int x, int y, int scale) throws InterruptedException {
-        Graphics2D crayon = (Graphics2D) img.getGraphics();
-        BufferedImage image = spriteManager.getCurrentSprite();
-
-        crayon.drawImage(image,
-                x,
-                y,
-                image.getWidth() * scale,
-                image.getHeight() * scale,
-                null);
-        crayon.dispose();
+        spriteManager.draw(img, x, y, scale);
     }
 }
