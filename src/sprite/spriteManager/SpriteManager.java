@@ -5,6 +5,8 @@ import model.global.Cmd;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public abstract class SpriteManager implements Serializable {
     protected final static int UP = 2;
@@ -12,8 +14,8 @@ public abstract class SpriteManager implements Serializable {
     protected final static int LEFT = 0;
     protected final static int RIGHT = 0;
 
-    protected int frame;
-    protected Cmd facing;
+    int frame;
+    Cmd facing;
     protected transient BufferedImage sprite;
 
     public SpriteManager(BufferedImage sprite) {
@@ -25,4 +27,9 @@ public abstract class SpriteManager implements Serializable {
     public abstract void setSprite(Cmd direction);
 
     public abstract BufferedImage getCurrentSprite();
+
+    void setAnimation(TimerTask task, int delay){
+        Timer timer = new Timer();
+        timer.schedule(task, delay);
+    }
 }
