@@ -6,7 +6,7 @@ import model.dungeon.entity.Entity;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
-public abstract class Effect extends Tile implements Serializable {
+public abstract class Effect extends Tile {
     protected Tile decore;
 
     Effect(int hp, Tile decore){

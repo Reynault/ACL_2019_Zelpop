@@ -21,6 +21,7 @@ public class SpriteManagerTile extends SpriteManager {
 
     @Override
     public BufferedImage getCurrentSprite() {
+//        System.out.println(sprite);
         return sprite;
     }
 }

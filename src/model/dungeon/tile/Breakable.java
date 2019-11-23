@@ -1,9 +1,11 @@
 package model.dungeon.tile;
 
+import java.io.Serializable;
+
 /**
  * Abstract class that represent a breakable object
  */
-public abstract class Breakable {
+public abstract class Breakable implements Serializable {
     private int hp;
     private boolean destroyed;
 

@@ -12,7 +12,7 @@ import model.state.Menu;
 public class ZelpopGame implements Game, Serializable {
 
 	private GameState currentState;
-	private static String SAVE_PATH = "zelpopSave.ser";
+	private String SAVE_PATH = "zelpopSave.ser";
 
 	/**
 	 * Default constructor
@@ -81,7 +81,8 @@ public class ZelpopGame implements Game, Serializable {
 			o.close();
 			file.close();
 		}catch (Exception e){
-			dungeon = new Dungeon();
+			//dungeon = new Dungeon();
+            System.out.println(e.getMessage());
 		}
 		return dungeon;
 	}

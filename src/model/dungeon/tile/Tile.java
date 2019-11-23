@@ -12,7 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 import java.util.List;
 
-public class Tile extends Breakable implements Serializable {
+public class Tile extends Breakable{
 
     protected SpriteManager spriteManager;
 

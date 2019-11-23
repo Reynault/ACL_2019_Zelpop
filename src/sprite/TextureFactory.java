@@ -32,7 +32,7 @@ public class TextureFactory {
 
     private static TextManager textManager = new TextManager();
 
-    private TextureFactory(){
+    private TextureFactory() {
         try {
             //getting image path
             InputStream inputStream

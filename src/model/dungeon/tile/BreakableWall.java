@@ -16,6 +16,7 @@ public class BreakableWall extends Effect{
 
     @Override
     public void setImage() {
+        decore.setImage();
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getBreakableWall());
     }
 
