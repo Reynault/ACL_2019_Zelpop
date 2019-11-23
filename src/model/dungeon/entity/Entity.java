@@ -80,6 +80,9 @@ public abstract class Entity implements Serializable {
      */
     public void attack(Maze maze) {
         behavior.behave(maze, this, Cmd.ATTACK);
+    }
+
+    public void setAttacking(){
         spriteManager.setAttacking();
     }
 

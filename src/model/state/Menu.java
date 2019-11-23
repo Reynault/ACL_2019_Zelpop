@@ -111,7 +111,6 @@ public class Menu implements GameState{
                 break;
             case ATTACK:
                 buttons[selectedButton].trigger(game);
-                System.out.println("qsdqds");
                 break;
         }
     }

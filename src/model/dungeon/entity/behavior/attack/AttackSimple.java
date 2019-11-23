@@ -7,11 +7,12 @@ import model.dungeon.entity.Hero;
 import model.global.Cmd;
 import model.global.Position;
 
-public class AttackSimple implements Attack {
+public class AttackSimple extends Attack {
 
 
     @Override
     public void attack(Maze maze, Entity entity) {
+        super.attack(maze, entity);
         int damage = entity.getDmg();
 
         Position pos = entity.getPosition();
