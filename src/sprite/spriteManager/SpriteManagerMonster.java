@@ -43,10 +43,6 @@ public class SpriteManagerMonster extends SpriteManagerEntity{
                     break;
                 }
             }
-            // If attack animation is finished
-            if (attackFrame == 1) {
-                attacking = false;
-            }
         } else {
             switch (facing) {
                 case UP:

@@ -36,6 +36,13 @@ public abstract class SpriteManagerEntity extends SpriteManager{
             }
         };
         setAnimation(timerTask, GlobalSprites.getAnimationDelay());
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                attacking = false;
+            }
+        };
+        setAnimation(timerTask, GlobalSprites.getAnimationDelay()*3);
     }
 
     public boolean isAttacking() {

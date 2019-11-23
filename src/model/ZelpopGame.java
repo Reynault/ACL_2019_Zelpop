@@ -81,8 +81,7 @@ public class ZelpopGame implements Game, Serializable {
 			o.close();
 			file.close();
 		}catch (Exception e){
-			//dungeon = new Dungeon();
-            System.out.println(e.getMessage());
+			dungeon = new Dungeon();
 		}
 		return dungeon;
 	}
