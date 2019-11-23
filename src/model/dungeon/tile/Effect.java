@@ -17,7 +17,7 @@ public abstract class Effect extends Tile implements Serializable {
     public abstract void setImage();
 
     @Override
-    public void draw(BufferedImage img, int x, int y, int scale){
+    public void draw(BufferedImage img, int x, int y, int scale) throws InterruptedException{
         decore.draw(img, x, y, scale);
         drawPartOfTile(img, x, y, scale, spriteManager);
     }

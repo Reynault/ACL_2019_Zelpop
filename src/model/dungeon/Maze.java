@@ -68,7 +68,7 @@ public class Maze implements Serializable {
      *
      * @param img image
      */
-    public void draw(BufferedImage img) {
+    public void draw(BufferedImage img) throws InterruptedException{
         Graphics2D crayon = (Graphics2D) img.getGraphics();
         int width, height,
                 xShift, yShift,

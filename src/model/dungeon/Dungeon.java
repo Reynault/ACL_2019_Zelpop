@@ -91,7 +91,7 @@ public class Dungeon implements Serializable {
      *
      * @param img image
      */
-    public void draw(BufferedImage img) {
+    public void draw(BufferedImage img) throws InterruptedException{
         currentMaze.draw(img);
     }
 

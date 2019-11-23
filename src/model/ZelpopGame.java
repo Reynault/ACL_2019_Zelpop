@@ -25,7 +25,7 @@ public class ZelpopGame implements Game, Serializable {
 	 * Draw the game
 	 * @param img image
 	 */
-	public void draw(BufferedImage img){
+	public void draw(BufferedImage img) throws InterruptedException{
 		currentState.draw(img);
     }
 

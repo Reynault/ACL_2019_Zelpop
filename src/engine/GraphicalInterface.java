@@ -43,7 +43,7 @@ public class GraphicalInterface  {
 	/**
 	 * mise a jour du dessin
 	 */
-	public void paint() {
+	public void paint() throws InterruptedException{
 		this.panel.drawGame();	
 	}
 	

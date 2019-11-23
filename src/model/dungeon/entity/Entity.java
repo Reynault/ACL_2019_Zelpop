@@ -3,12 +3,14 @@ package model.dungeon.entity;
 import model.dungeon.Maze;
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Cmd;
+import model.global.GlobalSprites;
 import model.global.Position;
 import sprite.spriteManager.SpriteManagerEntity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.util.List;
 
 public abstract class Entity implements Serializable {
 
@@ -135,10 +137,18 @@ public abstract class Entity implements Serializable {
      * @param y     y position
      * @param scale scale of the entity
      */
-    public void draw(BufferedImage img, int x, int y, int scale) {
+    public void draw(BufferedImage img, int x, int y, int scale) throws InterruptedException{
         Graphics2D crayon = (Graphics2D) img.getGraphics();
+        BufferedImage image;
+        List<BufferedImage> images =  spriteManager.getCurrentSprite();
 
-        for(BufferedImage image : spriteManager.getCurrentSprite()) {
+        for(int i = 0; i < images.size(); i++) {
+
+            if(i > 0) {
+                Thread.sleep(GlobalSprites.getAnimationDelay());
+            }
+
+            image = images.get(i);
             crayon.drawImage(image,
                     x,
                     y,

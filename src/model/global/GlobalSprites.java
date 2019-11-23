@@ -21,4 +21,6 @@ public class GlobalSprites {
     public static int getScaling(){return 4;}
 
     public static int getMiniScaling(){return 1;}
+
+    public static int getAnimationDelay(){return 10;}
 }

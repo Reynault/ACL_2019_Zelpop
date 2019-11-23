@@ -2,6 +2,7 @@ package model.dungeon.tile;
 
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
+import model.global.GlobalSprites;
 import sprite.spriteManager.SpriteManager;
 import sprite.spriteManager.SpriteManagerTile;
 import sprite.TextureFactory;
@@ -9,6 +10,7 @@ import sprite.TextureFactory;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.util.List;
 
 public class Tile extends Breakable implements Serializable {
 
@@ -36,13 +38,22 @@ public class Tile extends Breakable implements Serializable {
      * @param y y-axes
      * @param scale scale of the game
      */
-    public void draw(BufferedImage img, int x, int y, int scale){
+    public void draw(BufferedImage img, int x, int y, int scale) throws InterruptedException{
         drawPartOfTile(img, x, y, scale, spriteManager);
     }
 
-    protected static void drawPartOfTile(BufferedImage img, int x, int y, int scale, SpriteManager spriteManager){
+    protected static void drawPartOfTile(BufferedImage img, int x, int y, int scale, SpriteManager spriteManager) throws InterruptedException{
         Graphics2D crayon = (Graphics2D) img.getGraphics();
-        for (BufferedImage image: spriteManager.getCurrentSprite()) {
+        BufferedImage image;
+        List<BufferedImage> images =  spriteManager.getCurrentSprite();
+
+        for(int i = 0; i < images.size(); i++) {
+
+            if(i > 0) {
+                Thread.sleep(GlobalSprites.getAnimationDelay());
+            }
+
+            image = images.get(i);
             crayon.drawImage(image,
                     x,
                     y,
