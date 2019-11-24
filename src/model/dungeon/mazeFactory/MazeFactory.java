@@ -229,7 +229,7 @@ public class MazeFactory implements Serializable {
                 y = random.nextInt(cells[x].length);
                 // While the stairs are near the spawn and while it is in a wall
             } while (cells[x][y] != 0 || (((double)size)*minimumDistance) >= (x+y));
-            cells[x][y] = 4;
+            cells[x][y] = 6;
         }
 
         // convertion of int[][] into a maze
