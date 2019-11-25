@@ -25,6 +25,7 @@ public class GraphicalInterface  {
 	 */
 	public GraphicalInterface(GamePainter gamePainter, GameController gameController){
 		JFrame f=new JFrame();
+		f.setResizable(false);	// Disable the resize of the window
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		// attacher le panel contenant l'afficheur du game
@@ -44,7 +45,7 @@ public class GraphicalInterface  {
 	/**
 	 * mise a jour du dessin
 	 */
-	public void paint() {
+	public void paint() throws InterruptedException{
 		this.panel.drawGame();	
 	}
 	

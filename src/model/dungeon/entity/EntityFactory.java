@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class EntityFactory implements Serializable {
 
-    public static int HERO_HP = 20;
+    public static int HERO_HP = 30;
     public static int HERO_X = 0;
     public static int HERO_Y = 0;
     public static Cmd HERO_DIRECTION = Cmd.DOWN;

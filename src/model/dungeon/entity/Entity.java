@@ -3,8 +3,9 @@ package model.dungeon.entity;
 import model.dungeon.Maze;
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Cmd;
+import model.global.GlobalSprites;
 import model.global.Position;
-import sprite.spriteManager.SpriteManager;
+import sprite.spriteManager.SpriteManagerEntity;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,12 +18,12 @@ public abstract class Entity implements Serializable {
     protected boolean passThrought;
     protected Position position;
     protected Behavior behavior;
-    protected SpriteManager spriteManager;
+    protected SpriteManagerEntity spriteManager;
     protected int damage;
     protected int score;
     protected int value;
 
-    protected Entity(int hp, boolean passThrought, int damage, int score, int value, Position position, Behavior behavior, SpriteManager spriteManager) {
+    protected Entity(int hp, boolean passThrought, int damage, int score, int value, Position position, Behavior behavior, SpriteManagerEntity spriteManager) {
         this.maxHp = hp;
         this.hp = hp;
         this.passThrought = passThrought;
@@ -35,7 +36,7 @@ public abstract class Entity implements Serializable {
         this.value = value;
     }
 
-    public int getValue(){
+    public int getValue() {
         return value;
     }
 
@@ -78,6 +79,10 @@ public abstract class Entity implements Serializable {
         behavior.behave(maze, this, Cmd.ATTACK);
     }
 
+    public void setAttacking() {
+        spriteManager.setAttacking();
+    }
+
     /**
      *
      */
@@ -100,7 +105,7 @@ public abstract class Entity implements Serializable {
     public boolean isAlive() {
         if (this.hp > 0) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -134,14 +139,7 @@ public abstract class Entity implements Serializable {
      * @param y     y position
      * @param scale scale of the entity
      */
-    public void draw(BufferedImage img, int x, int y, int scale) {
-        Graphics2D crayon = (Graphics2D) img.getGraphics();
-        crayon.drawImage(spriteManager.getCurrentSprite(),
-                x,
-                y,
-                spriteManager.getCurrentSprite().getWidth() * scale,
-                spriteManager.getCurrentSprite().getHeight() * scale,
-                null);
-        crayon.dispose();
+    public void draw(BufferedImage img, int x, int y, int scale) throws InterruptedException {
+        spriteManager.draw(img, x, y, scale);
     }
 }

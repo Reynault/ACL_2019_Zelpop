@@ -93,8 +93,7 @@ public class ZelpopController implements GameController {
 	 * met a jour les commandes quand le joueur relache une touche
 	 */
 	@Override
-	public void keyReleased(KeyEvent e) {
-	}
+	public void keyReleased(KeyEvent e) {}
 
 	/**
 	 * ne fait rien

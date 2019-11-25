@@ -8,21 +8,16 @@ import sprite.spriteManager.SpriteManagerTile;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Stairs extends Effect{
-
-    Stairs(int hp, Tile decore) {
+public class BreakableWall extends Effect{
+    BreakableWall(int hp, Tile decore) {
         super(hp, decore);
-        spriteManager = new SpriteManagerTile(
-                TextureFactory.getTextureFactory().getStairs()
-        );
+        spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getBreakableWall());
     }
 
     @Override
     public void setImage() {
         decore.setImage();
-        spriteManager = new SpriteManagerTile(
-                TextureFactory.getTextureFactory().getStairs()
-        );
+        spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getBreakableWall());
     }
 
     @Override
@@ -32,16 +27,21 @@ public class Stairs extends Effect{
 
     @Override
     public boolean canBeCrossed() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isStairs() {
-        return true;
+        return false;
     }
 
     @Override
     public int getGold() {
         return 0;
+    }
+
+    @Override
+    public boolean isBreakable() {
+        return true;
     }
 }

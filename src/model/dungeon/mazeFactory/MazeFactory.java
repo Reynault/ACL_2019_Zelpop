@@ -45,7 +45,7 @@ public class MazeFactory implements Serializable {
                 if (random.nextInt(5) == 0) {
                     tiles[i][j] = TileFactory.getWall();
                 } else {
-                    tiles[i][j] = TileFactory.generateTile();
+                    tiles[i][j] = TileFactory.getEmptyTile();
                 }
             }
         }
@@ -175,7 +175,7 @@ public class MazeFactory implements Serializable {
                 entityFactory);
     }
 
-    private int specialTileRation = 10;
+    private int specialTileRatio = 10;
     private int entityRatio = 30;
     private boolean hasStairs;
     private double minimumDistance;
@@ -229,7 +229,7 @@ public class MazeFactory implements Serializable {
                 y = random.nextInt(cells[x].length);
                 // While the stairs are near the spawn and while it is in a wall
             } while (cells[x][y] != 0 || (((double)size)*minimumDistance) >= (x+y));
-            cells[x][y] = 4;
+            cells[x][y] = 6;
         }
 
         // convertion of int[][] into a maze
@@ -245,15 +245,21 @@ public class MazeFactory implements Serializable {
                         maze[i][j] = TileFactory.getTrap(TRAP_DAMAGE);
                         break;
                     case 3:
-                        maze[i][j] = TileFactory.getTreasure(TREASURE_GOLD);
+                        maze[i][j] = TileFactory.getTeleport();
                         break;
                     case 4:
+                        maze[i][j] = TileFactory.getBreakableWall();
+                        break;
+                    case 5:
+                        maze[i][j] = TileFactory.getTreasure(TREASURE_GOLD);
+                        break;
+                    case 6:
                         maze[i][j] = TileFactory.getStairs();
                         break;
                     default:
-                        maze[i][j] = TileFactory.generateTile();
+                        maze[i][j] = TileFactory.getEmptyTile();
                         // Then adding entity
-                        if (random.nextInt(entityRatio) == 1) {
+                        if (random.nextInt(entityRatio) == 1 && i != 0 && j != 0) {
                             entities.add(entityFactory.getRandomMonster(
                                     new Position(j, i, Cmd.IDLE)
                             ));
@@ -275,10 +281,10 @@ public class MazeFactory implements Serializable {
     private void split(int[][] cells, int xmin, int xmax, int ymin, int ymax, ArrayList<Integer> prevxu, ArrayList<Integer> prevyr, ArrayList<Integer> prevxd, ArrayList<Integer> prevyl) {
         //final case to make sure we can split
         if (xmax - xmin < prevxd.size() + prevxd.size() + 3 || ymax - ymin < prevyl.size() + prevyr.size() + 3) {
-            // If we can't split, we fill the room with tiles only if it has a certain dimension
-            if (xmax - xmin > prevxd.size() + prevxd.size() && ymax - ymin > prevyl.size() + prevyr.size()) {
-                fillRoom(cells, xmin, xmax, ymin, ymax);
-            }
+            // Rooms are filled with treasures, traps and breakable walls
+            // Corridors are filled with traps
+            fillRoom(cells, xmin, xmax, ymin, ymax,
+                    (xmax - xmin > prevxd.size() + prevxd.size() && ymax - ymin > prevyl.size() + prevyr.size()));
             return;
         }
 
@@ -312,11 +318,13 @@ public class MazeFactory implements Serializable {
         int doory2 = random.nextInt(ymax - cuty - 1) + cuty + 1;
 
         // oppening the door
-        cells[cuty][doorx1] = 0;
-        cells[cuty][doorx2] = 0;
 
-        cells[doory1][cutx] = 0;
-        cells[doory2][cutx] = 0;
+        // A door can be an empty tile, or a breakable wall
+        cells[cuty][doorx1] = random.nextInt(2)*4 ;
+        cells[cuty][doorx2] = random.nextInt(2)*4 ;
+
+        cells[doory1][cutx] = random.nextInt(2)*4 ;
+        cells[doory2][cutx] = random.nextInt(2)*4 ;
 
         // calling recursivly on those 4 regions
         /**
@@ -350,25 +358,39 @@ public class MazeFactory implements Serializable {
     }
 
 
-    private void fillRoom(int[][] cells, int xmin, int xmax, int ymin, int ymax) {
+    private void fillRoom(int[][] cells, int xmin, int xmax, int ymin, int ymax, boolean room) {
         Random random = new Random();
         int rand;
+
 //        System.out.println("xmin : " + xmin);
 //        System.out.println("xmax : " + xmax);
 //        System.out.println("ymin : " + ymin);
 //        System.out.println("ymax : " + ymax);
         for (int i = xmin; i < xmax; i++) {
             for (int j = ymin; j < ymax; j++) {
-                rand = random.nextInt(specialTileRation);
-                if (rand == 1) {
-                    rand = random.nextInt(3);
-                    switch (rand) {
-                        case 1:
-                            cells[j][i] = 2;
-                            break;
-                        case 2:
-                            cells[j][i] = 3;
-                            break;
+                if(j !=  0 && i != 0) {
+                    rand = random.nextInt(specialTileRatio);
+                    if (rand == 1) {
+                        if (room) {
+                            rand = 5;
+                        } else {
+                            rand = 3;
+                        }
+                        rand = random.nextInt(rand);
+                        switch (rand) {
+                            case 1:
+                                cells[j][i] = 2;
+                                break;
+                            case 2:
+                                cells[j][i] = 3;
+                                break;
+                            case 3:
+                                cells[j][i] = 4;
+                                break;
+                            case 4:
+                                cells[j][i] = 5;
+                                break;
+                        }
                     }
                 }
             }

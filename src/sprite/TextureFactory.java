@@ -32,7 +32,7 @@ public class TextureFactory {
 
     private static TextManager textManager = new TextManager();
 
-    private TextureFactory(){
+    private TextureFactory() {
         try {
             //getting image path
             InputStream inputStream
@@ -89,13 +89,18 @@ public class TextureFactory {
         return sprite;
     }
 
-    public BufferedImage getEmptyTreasue(){
+    public BufferedImage getEmptyTreasure(){
         BufferedImage sprite = chest.getSubimage(1 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
 
     public BufferedImage getStairs(){
         BufferedImage sprite = tiles.getSubimage(8 * TILE_LENGTH, 2 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
+        return sprite;
+    }
+
+    public BufferedImage getBreakableWall(){
+        BufferedImage sprite = tiles.getSubimage(3 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
         return sprite;
     }
 

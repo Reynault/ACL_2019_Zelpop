@@ -20,7 +20,7 @@ public class InGame implements GameState {
     }
 
     @Override
-    public void draw(BufferedImage image) {
+    public void draw(BufferedImage image) throws InterruptedException{
         Graphics2D crayon = (Graphics2D) image.getGraphics();
         crayon.setBackground(new Color(0x4A362A));
         crayon.clearRect(0,0, image.getWidth(), image.getHeight());

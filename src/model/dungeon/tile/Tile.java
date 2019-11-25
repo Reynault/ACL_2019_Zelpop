@@ -2,6 +2,7 @@ package model.dungeon.tile;
 
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
+import model.global.GlobalSprites;
 import sprite.spriteManager.SpriteManager;
 import sprite.spriteManager.SpriteManagerTile;
 import sprite.TextureFactory;
@@ -9,15 +10,17 @@ import sprite.TextureFactory;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.util.List;
 
-public class Tile extends TileFactory implements Serializable {
+public class Tile extends Breakable{
 
     protected SpriteManager spriteManager;
 
     /**
      * Default constructor
      */
-    protected Tile(){
+    protected Tile(int hp){
+        super(hp);
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTiles());
     }
 
@@ -35,15 +38,12 @@ public class Tile extends TileFactory implements Serializable {
      * @param y y-axes
      * @param scale scale of the game
      */
-    public void draw(BufferedImage img, int x, int y, int scale){
-        Graphics2D crayon = (Graphics2D) img.getGraphics();
-        crayon.drawImage(spriteManager.getCurrentSprite(),
-                x,
-                y,
-                spriteManager.getCurrentSprite().getWidth() * scale,
-                spriteManager.getCurrentSprite().getHeight() * scale,
-                null);
-        crayon.dispose();
+    public void draw(BufferedImage img, int x, int y, int scale) throws InterruptedException{
+        drawPartOfTile(img, x, y, scale, spriteManager);
+    }
+
+    static void drawPartOfTile(BufferedImage img, int x, int y, int scale, SpriteManager spriteManager) throws InterruptedException{
+        spriteManager.draw(img, x, y, scale);
     }
 
     public void action(Maze maze, Entity entity){
@@ -69,5 +69,14 @@ public class Tile extends TileFactory implements Serializable {
 
     public int getGold() {
         return 0;
+    }
+
+    @Override
+    public boolean isBreakable() {
+        return false;
+    }
+
+    public Tile getAncestor(){
+        return this;
     }
 }

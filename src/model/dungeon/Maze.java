@@ -44,7 +44,6 @@ public class Maze implements Serializable {
         height = tiles.length;
         this.entities = entities;
         this.hero = entityFactory.getHero();
-        System.out.println("THE HERO : "+this.hero);
         this.scoring = scoring;
         removedEntity = new ArrayList<>();
     }
@@ -68,7 +67,7 @@ public class Maze implements Serializable {
      *
      * @param img image
      */
-    public void draw(BufferedImage img) {
+    public void draw(BufferedImage img) throws InterruptedException{
         Graphics2D crayon = (Graphics2D) img.getGraphics();
         int width, height,
                 xShift, yShift,
@@ -326,7 +325,7 @@ public class Maze implements Serializable {
      * @param y      position of the target tile
      * @return true if the entity can move
      */
-    private boolean canMove(Entity entity, int x, int y) {
+    public boolean canMove(Entity entity, int x, int y) {
         Tile tile;
         boolean can = false;
 
@@ -374,17 +373,6 @@ public class Maze implements Serializable {
     }
 
     /**
-     * To kill the entity
-     */
-    public void killEntity(Entity entity, Entity h) {
-        int bonus = scoring.killMonster(entity);
-        h.increaseScore(bonus);
-
-        // Deleting killed entity
-        removedEntity.add(entity);
-    }
-
-    /**
      * Method getEntity, it fetch an entity from a specify tile on the maze
      */
     public Entity getEntity(int x, int y) {
@@ -421,5 +409,72 @@ public class Maze implements Serializable {
 
     public int getChestScore(Tile tile) {
         return scoring.findChest(tile);
+    }
+
+    public int getWidth(){
+        return width;
+    }
+
+    public int getHeight(){
+        return height;
+    }
+
+    /**
+     * Getter that give the selected tile from the maze
+     * @param x the x position
+     * @param y the y position
+     * @return the selected tile
+     */
+    public Tile getTile(int x, int y) {
+        Tile tile = null;
+        if(x < width && x >= 0 && y < height && y >= 0){
+            tile = tiles[y][x];
+        }
+        return tile;
+    }
+
+    /**
+     * Method that destroy a targeted tile in the maze,
+     * the maze is taking damages from an entity, and if its
+     * destroyed, it becomes its decorated tile.
+     *
+     * @param x the x position
+     * @param y the y position
+     * @param damage the damages taken by the tile
+     */
+    public void destroy(int x, int y, int damage){
+        // The target is in the maze
+        if(x < width && x >= 0 && y < height && y >= 0) {
+            Tile tile = tiles[y][x];
+            // And is breakable
+            if(tile.isBreakable()){
+                // It takes damages
+                tile.takeDamage(damage);
+                if(tile.isDestroyed()){
+                    // And if destroyed, then it becomes its ancestor
+                    tiles[y][x] = tiles[y][x].getAncestor();
+                }
+            }
+        }
+    }
+
+    /**
+     * Method that hit a target from an entity. If the target is dead, then
+     * it is removed from the maze.
+     * @param entity The attacker
+     * @param victim The victim
+     * @param damage The damages taken by the victim
+     */
+    public void attackEntity(Entity entity, Entity victim, int damage) {
+        // Damaging the victim with entity's damages
+        victim.takeDamage(damage);
+        if (!victim.isAlive()) {
+            // If its dead, then we have to remove it and to increase score
+            int bonus = scoring.killMonster(victim);
+            entity.increaseScore(bonus);
+
+            // Deleting killed entity
+            removedEntity.add(victim);
+        }
     }
 }

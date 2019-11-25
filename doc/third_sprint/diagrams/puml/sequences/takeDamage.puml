@@ -11,13 +11,11 @@ participant "h: Hero" as h
 participant Scoring as s
 
 
-as -> e: isAlive()
+m -> e: isAlive()
 
-e --> as: alive
+e --> m: alive
 
 opt alive == false
-
-    as -> m: killEntity(entity, h)
 
     m -> h: isHero()
 

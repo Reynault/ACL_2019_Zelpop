@@ -12,6 +12,7 @@ import model.state.Menu;
 public class ZelpopGame implements Game, Serializable {
 
 	private GameState currentState;
+	private String SAVE_PATH = "zelpopSave.ser";
 
 	/**
 	 * Default constructor
@@ -25,7 +26,7 @@ public class ZelpopGame implements Game, Serializable {
 	 * Draw the game
 	 * @param img image
 	 */
-	public void draw(BufferedImage img){
+	public void draw(BufferedImage img) throws InterruptedException{
 		currentState.draw(img);
     }
 
@@ -41,7 +42,7 @@ public class ZelpopGame implements Game, Serializable {
 	 * Save the game in a file
 	 */
 	public void save(Dungeon dungeon) {
-		File f = new File("zelpopSave.ser");
+		File f = new File(SAVE_PATH);
 		try{
 			if(!f.exists()){
 				f.createNewFile();
@@ -73,7 +74,7 @@ public class ZelpopGame implements Game, Serializable {
 	public Dungeon load() {
 		Dungeon dungeon = null;
 		try {
-			FileInputStream file = new FileInputStream(new File("zelpopSave.ser"));
+			FileInputStream file = new FileInputStream(new File(SAVE_PATH));
 			ObjectInputStream o = new ObjectInputStream(file);
 			dungeon = (Dungeon)o.readObject();
 			dungeon.setImages();
