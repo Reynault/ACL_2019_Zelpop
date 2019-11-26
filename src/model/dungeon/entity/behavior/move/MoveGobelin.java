@@ -22,6 +22,7 @@ public class MoveGobelin implements Move {
     private int mazeWidth;
     private int mazeHeight;
     private Tile[][] mazeTile;
+    private Cmd movement = Cmd.IDLE;
 
     @Override
     public Cmd move(Maze maze, Entity entity, Cmd commande) {
@@ -47,7 +48,6 @@ public class MoveGobelin implements Move {
         }
 
 
-        Cmd movement = null;
 
         // seting the start pos == gobelin pos
         startPosition = matrix[entity.getPosition().getY()][entity.getPosition().getX()].getPos();
@@ -66,13 +66,22 @@ public class MoveGobelin implements Move {
         // if he is facing the new pos then add the new pos
         // else turn it to the same pos
 
-        pos = finalPos(entity , pos);
-        entity.setPosition(pos);
+        if ( pos != null){
+            pos = finalPos(entity , pos);
+            entity.setPosition(pos);
+            this.movement = Cmd.IDLE;
+        }else{
+            faceDirection();
+            entity.setPosition(new Position(
+                    entity.getPosition().getX(),
+                    entity.getPosition().getY(),
+                    this.movement
+            ));
+        }
 
-        movement = Cmd.IDLE;
-        //System.out.println("***********************************************");
+            //System.out.println("***********************************************");
 
-        return movement ;
+        return this.movement ;
     }
 
 
@@ -142,7 +151,9 @@ public class MoveGobelin implements Move {
                 }
             }
         }
-        return startPosition;
+
+
+        return null;
     }
 
     /**
@@ -204,17 +215,28 @@ public class MoveGobelin implements Move {
 
     }
 
-    public Cmd faceDirection (Entity g , Entity h){
-        if(g.getPosition().getX()+ 1 == h.getPosition().getX())
-            return Cmd.RIGHT;
-        else if (g.getPosition().getX() - 1 == h.getPosition().getX())
-            return Cmd.LEFT;
-        else if (g.getPosition().getY() + 1 == h.getPosition().getY())
-            return Cmd.UP;
-        else
-            return Cmd.DOWN;
+    public void faceDirection (){
 
+        int rand = (int)(Math.round(Math.random()*4));
+        switch (rand){
+            case 1:
+                this.movement = Cmd.LEFT;
+                break;
+            case 2:
+                this.movement = Cmd.UP;
+                break;
+            case 3:
+                this.movement = Cmd.RIGHT;
+                break;
+            case 4:
+                this.movement = Cmd.DOWN;
+                break;
+            default:
+                this.movement = Cmd.IDLE;
+                break;
+        }
     }
+
 
 
 }
