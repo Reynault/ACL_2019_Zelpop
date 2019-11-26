@@ -16,7 +16,7 @@ public class SpriteManagerHero extends SpriteManagerEntity {
     public BufferedImage getCurrentSprite() {
         BufferedImage toReturn;
 
-        if (isAttacking() && attackFrame < 2 ) {
+        if (isAttacking()) {
             switch (facing) {
                 case DOWN:
                     toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * 4 + attackFrame * GlobalSprites.get8Sprite(),

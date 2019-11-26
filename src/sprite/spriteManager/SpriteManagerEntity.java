@@ -32,7 +32,7 @@ public abstract class SpriteManagerEntity extends SpriteManager{
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                attackFrame ++;
+                attackFrame = 1;
             }
         };
         setAnimation(timerTask, GlobalSprites.getAnimationDelay());
