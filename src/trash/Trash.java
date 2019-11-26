@@ -109,7 +109,7 @@ public class Trash {
                 if(cell.isWall()){
                     tiles[i][j] = TileFactory.getWall();
                 }else{
-                    tiles[i][j] = TileFactory.generateTile();
+                    tiles[i][j] = TileFactory.getEmptyTile();
                 }
                 j++;
             }

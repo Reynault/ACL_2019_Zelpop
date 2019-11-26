@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public interface GameState{
 
-    void draw(BufferedImage image);
+    void draw(BufferedImage image) throws InterruptedException;
 
     void evolve(ZelpopGame game, Cmd commande);
 

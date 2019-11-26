@@ -3,11 +3,12 @@ package model.dungeon.entity.behavior.attack;
 import model.Pair;
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
-import model.dungeon.entity.Hero;
+import model.dungeon.tile.Breakable;
+import model.dungeon.tile.Tile;
 import model.global.Cmd;
 import model.global.Position;
 
-public class AttackSimple extends Attack {
+public class AttackHero extends Attack {
 
 
     @Override
@@ -26,7 +27,11 @@ public class AttackSimple extends Attack {
             Entity victim = maze.getEntity(val.getX(), val.getY());
 
             if (victim != null) {
+                // Attacking nearby entity
                 maze.attackEntity(entity, victim, damage);
+            }else{
+                // If there is no entity, attacking the tile
+                maze.destroy(val.getX(), val.getY(), damage);
             }
         }
     }

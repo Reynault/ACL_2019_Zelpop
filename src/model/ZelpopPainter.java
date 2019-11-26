@@ -36,9 +36,8 @@ public class ZelpopPainter implements GamePainter {
 	 * methode  redefinie de Afficheur retourne une image du jeu
 	 */
 	@Override
-	public void draw(BufferedImage im) {
+	public void draw(BufferedImage im) throws InterruptedException{
 		game.draw(im);
-
 	}
 
 	@Override

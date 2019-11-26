@@ -21,7 +21,7 @@ public class GameOver implements GameState{
     }
 
     @Override
-    public void draw(BufferedImage image) {
+    public void draw(BufferedImage image) throws InterruptedException{
         Graphics2D crayon = (Graphics2D) image.getGraphics();
         dungeon.draw(image);
 

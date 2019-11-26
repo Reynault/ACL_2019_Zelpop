@@ -2,32 +2,27 @@ package model.dungeon.tile;
 
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
-import sprite.spriteManager.SpriteManagerTile;
+import model.global.Position;
 import sprite.TextureFactory;
+import sprite.spriteManager.SpriteManagerTile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
-public class Trap extends Effect {
+public class Teleport extends Effect{
+    private boolean isTriggered;
 
-    private int trapDamage;
-    private boolean triggered;
-
-    /**
-     * Default constructor
-     * @param decore decorated tile
-     */
-    Trap(int hp, Tile decore, int trapDamage) {
+    Teleport(int hp, Tile decore) {
         super(hp, decore);
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
-        this.trapDamage = trapDamage;
-        this.triggered = false;
+        isTriggered = false;
     }
 
     @Override
     public void setImage() {
         decore.setImage();
-        if(triggered){
+        if(isTriggered){
             spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTiles());
         }else {
             spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
@@ -36,13 +31,30 @@ public class Trap extends Effect {
 
     @Override
     public void action(Maze maze, Entity e) {
-        if(!triggered) {
-            e.takeDamage(trapDamage);
-            triggered = true;
+        if(!isTriggered) {
+            // Retrieving information from maze
+            int width = maze.getWidth();
+            int height = maze.getHeight();
+
+            // Fetching empty position in the maze
+            int x, y;
+            Random random = new Random();
+            do {
+                x = random.nextInt(height);
+                y = random.nextInt(width);
+            } while (maze.getEntity(x, y) != null || !maze.canMove(e, x, y));
+
+            // Moving the entity
+            e.setPosition(
+                    new Position(
+                            x,
+                            y,
+                            e.getPosition().getCmd()
+                    )
+            );
+
+            isTriggered = true;
             spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTiles());
-            if (!e.isAlive()) {
-                maze.removeEntity(e);
-            }
         }
     }
 

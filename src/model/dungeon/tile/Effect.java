@@ -6,17 +6,21 @@ import model.dungeon.entity.Entity;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
-public abstract class Effect extends Tile implements Serializable {
+public abstract class Effect extends Tile {
     protected Tile decore;
 
-    Effect(Tile decore){
+    Effect(int hp, Tile decore){
+        super(hp);
         this.decore = decore;
     }
 
     public abstract void setImage();
 
     @Override
-    public abstract void draw(BufferedImage img, int x, int y, int scale);
+    public void draw(BufferedImage img, int x, int y, int scale) throws InterruptedException{
+        decore.draw(img, x, y, scale);
+        drawPartOfTile(img, x, y, scale, spriteManager);
+    }
 
     @Override
     public abstract void action(Maze maze, Entity e);
@@ -29,4 +33,16 @@ public abstract class Effect extends Tile implements Serializable {
 
     @Override
     public abstract int getGold();
+
+    @Override
+    public void takeDamage(int damage) {
+        // Taking damage
+        super.takeDamage(damage);
+
+    }
+
+    @Override
+    public Tile getAncestor(){
+        return decore;
+    }
 }

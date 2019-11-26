@@ -8,7 +8,9 @@ import java.io.Serializable;
 /**
  * Attack is responsible of executing the attack strategy of the entity
  */
-public interface Attack extends Serializable {
+public abstract class Attack implements Serializable {
 
-    void attack(Maze maze , Entity entity);
+    public void attack(Maze maze , Entity entity){
+        entity.setAttacking();
+    }
 }

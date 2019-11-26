@@ -24,5 +24,5 @@ public interface Game {
      */
     boolean isFinished();
 
-    void draw(BufferedImage img);
+    void draw(BufferedImage img) throws InterruptedException;
 }
