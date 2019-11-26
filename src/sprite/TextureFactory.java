@@ -26,9 +26,12 @@ public class TextureFactory {
 
     private static BufferedImage player;
     private static BufferedImage monster;
+    private static BufferedImage ghost;
+    private static BufferedImage gobelin;
     private static BufferedImage tiles;
     private static BufferedImage chest;
     private static BufferedImage text;
+
 
     private static TextManager textManager = new TextManager();
 
@@ -96,6 +99,16 @@ public class TextureFactory {
 
     public BufferedImage getStairs(){
         BufferedImage sprite = tiles.getSubimage(8 * TILE_LENGTH, 2 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
+        return sprite;
+    }
+
+    public BufferedImage getGhost() {
+        BufferedImage sprite = monster.getSubimage(0, 15*MONSTER_HEIGHT, MONSTER_LENGTH, MONSTER_HEIGHT);
+        return sprite;
+    }
+
+    public BufferedImage getGobelin() {
+        BufferedImage sprite = monster.getSubimage(0, 12*MONSTER_HEIGHT, MONSTER_LENGTH, MONSTER_HEIGHT);
         return sprite;
     }
 

@@ -3,6 +3,7 @@ package model.dungeon;
 import model.Pair;
 import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
+import model.dungeon.entity.Gobelin;
 import model.dungeon.entity.Hero;
 import model.dungeon.scoring.Scoring;
 import model.dungeon.tile.Tile;
@@ -66,7 +67,6 @@ public class Maze implements Serializable {
 
     /**
      * Draw the maze
-     *
      * @param img image
      */
     public void draw(BufferedImage img) {
@@ -422,5 +422,21 @@ public class Maze implements Serializable {
 
     public int getChestScore(Tile tile) {
         return scoring.findChest(tile);
+    }
+
+    public Hero getHero() {
+        return hero;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public Tile[][] getTiles() {
+        return tiles;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }

@@ -21,6 +21,16 @@ public class EntityFactory implements Serializable {
     public static int MONSTER_VALUE = 50;
     public static int MONSTER_SCORE = 0;
 
+    public static int GHOST_HP = 5;
+    public static int GHOST_DAMAGE = 5;
+    public static int GHOST_VALUE = 50;
+    public static int GHOST_SCORE = 0;
+
+    public static int GOBELIN_HP = 10;
+    public static int GOBELIN_DAMAGE = 5;
+    public static int GOBELIN_VALUE = 50;
+    public static int GOBELIN_SCORE = 0;
+
     private Hero hero;
 
     /**
@@ -60,5 +70,31 @@ public class EntityFactory implements Serializable {
                 MONSTER_VALUE,
                 position,
                 BehaveFactory.getSimpleBehavior());  // default hp
+    }
+
+    /**
+     * Generate a classic ghost
+     */
+    public Ghost getRandomGhost(Position position) {
+        return new Ghost(GHOST_HP,
+                true,
+                GHOST_DAMAGE,
+                GHOST_SCORE,
+                GHOST_VALUE,
+                position,
+                BehaveFactory.getSimpleBehavior());
+    }
+
+    /**
+     * Generate a classic gobelin
+     */
+    public Gobelin getRandomGobelin(Position position) {
+        return new Gobelin(GOBELIN_HP,
+                false,
+                GOBELIN_DAMAGE,
+                GOBELIN_SCORE,
+                GOBELIN_VALUE,
+                position,
+                BehaveFactory.getGobelinBehavior());
     }
 }
