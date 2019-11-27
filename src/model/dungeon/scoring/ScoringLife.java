@@ -10,7 +10,7 @@ public class ScoringLife extends ScoringParameter{
     }
 
     @Override
-    public int killMonster(Entity entity) {
+    public double killMonster(Entity entity) {
         return entity.getMaxHp();
     }
 

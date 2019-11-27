@@ -14,7 +14,7 @@ public class AttackHero extends Attack {
     @Override
     public void attack(Maze maze, Entity entity) {
         super.attack(maze, entity);
-        int damage = entity.getDmg();
+        double damage = entity.getDmg();
 
         Position pos = entity.getPosition();
         int x = pos.getX();
@@ -29,6 +29,7 @@ public class AttackHero extends Attack {
             if (victim != null) {
                 // Attacking nearby entity
                 maze.attackEntity(entity, victim, damage);
+                maze.defendEntity(entity, victim);
             }else{
                 // If there is no entity, attacking the tile
                 maze.destroy(val.getX(), val.getY(), damage);

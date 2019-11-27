@@ -72,6 +72,7 @@ public class Dungeon implements Serializable {
         if (!hero.isAlive()) {
             game.setState(StateFactory.getGameOver(this));
         }
+        currentMaze.regenEntites();
     }
 
     /**

@@ -446,12 +446,11 @@ public class Maze implements Serializable {
      * Method that destroy a targeted tile in the maze,
      * the maze is taking damages from an entity, and if its
      * destroyed, it becomes its decorated tile.
-     *
-     * @param x the x position
+     *  @param x the x position
      * @param y the y position
      * @param damage the damages taken by the tile
      */
-    public void destroy(int x, int y, int damage){
+    public void destroy(int x, int y, double damage){
         // The target is in the maze
         if(x < width && x >= 0 && y < height && y >= 0) {
             Tile tile = tiles[y][x];
@@ -474,16 +473,40 @@ public class Maze implements Serializable {
      * @param victim The victim
      * @param damage The damages taken by the victim
      */
-    public void attackEntity(Entity entity, Entity victim, int damage) {
+    public void attackEntity(Entity entity, Entity victim, double damage) {
         // Damaging the victim with entity's damages
         victim.takeDamage(damage);
         if (!victim.isAlive()) {
             // If its dead, then we have to remove it and to increase score
-            int bonus = scoring.killMonster(victim);
+            double bonus = scoring.killMonster(victim);
             entity.increaseScore(bonus);
 
             // Deleting killed entity
             removedEntity.add(victim);
         }
+    }
+
+    public void defendEntity(Entity entity, Entity victim) {
+        // Damaging the entity with victim's defence
+        entity.takeDamage(victim.getDef());
+        if (!entity.isAlive()){
+            if (victim.isHero()){
+                // If its dead and the hero is defending, then we have to remove it and to increase score
+                double bonus = scoring.killMonster(entity);
+                entity.increaseScore(bonus);
+
+                // Deleting killed entity
+                removedEntity.add(entity);
+            }
+        }
+    }
+
+    public void regenEntites() {
+        if (entities != null && entities.size() > 0) {
+            for (Entity e : entities) {
+                e.regen();
+            }
+        }
+        hero.regen();
     }
 }

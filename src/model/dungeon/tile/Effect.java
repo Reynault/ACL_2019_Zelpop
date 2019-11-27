@@ -4,7 +4,6 @@ import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 
 import java.awt.image.BufferedImage;
-import java.io.Serializable;
 
 public abstract class Effect extends Tile {
     protected Tile decore;
@@ -35,7 +34,7 @@ public abstract class Effect extends Tile {
     public abstract int getGold();
 
     @Override
-    public void takeDamage(int damage) {
+    public void takeDamage(double damage) {
         // Taking damage
         super.takeDamage(damage);
 

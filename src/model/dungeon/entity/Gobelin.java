@@ -6,8 +6,8 @@ import sprite.TextureFactory;
 import sprite.spriteManager.SpriteManagerMonster;
 
 public class Gobelin extends Entity{
-    protected Gobelin(int hp, boolean passThrought, int damage, int score, int value, Position position, Behavior behavior) {
-        super(hp, passThrought, damage, score, value, position, behavior, new SpriteManagerMonster(TextureFactory.getTextureFactory().getGobelin()));
+    protected Gobelin(Stats stats, boolean b, int score, int value, Position position, Behavior behavior) {
+        super(stats, b, score, value, position, behavior,  new SpriteManagerMonster(TextureFactory.getTextureFactory().getGobelin()));
     }
 
     @Override

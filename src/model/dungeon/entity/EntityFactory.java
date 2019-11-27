@@ -37,9 +37,9 @@ public class EntityFactory implements Serializable {
      * Generate the Hero
      */
     public Hero generateHero() {
-        return hero = new Hero(HERO_HP,
+        Stats stats = new Stats(HERO_HP, HERO_DAMAGE, 1, 1);
+        return hero = new Hero(stats,
                 false,
-                            HERO_DAMAGE,
                             HERO_SCORE,
                             HERO_VALUE,
                             new Position(
@@ -63,9 +63,9 @@ public class EntityFactory implements Serializable {
      * Generate a classic monster
      */
     public Monster getRandomMonster(Position position) {
-        return new Monster(MONSTER_HP,
+        Stats stats = new Stats(MONSTER_HP, MONSTER_DAMAGE, 0, 0);
+        return new Monster(stats,
                 false,
-                MONSTER_DAMAGE,
                 MONSTER_SCORE,
                 MONSTER_VALUE,
                 position,
@@ -76,9 +76,9 @@ public class EntityFactory implements Serializable {
      * Generate a classic ghost
      */
     public Ghost getRandomGhost(Position position) {
-        return new Ghost(GHOST_HP,
+        Stats stats = new Stats(GHOST_HP, GHOST_DAMAGE, 0, 0);
+        return new Ghost(stats,
                 true,
-                GHOST_DAMAGE,
                 GHOST_SCORE,
                 GHOST_VALUE,
                 position,
@@ -89,9 +89,9 @@ public class EntityFactory implements Serializable {
      * Generate a classic gobelin
      */
     public Gobelin getRandomGobelin(Position position) {
-        return new Gobelin(GOBELIN_HP,
+        Stats stats = new Stats(GOBELIN_HP, GOBELIN_DAMAGE, 0, 0);
+        return new Gobelin(stats,
                 false,
-                GOBELIN_DAMAGE,
                 GOBELIN_SCORE,
                 GOBELIN_VALUE,
                 position,

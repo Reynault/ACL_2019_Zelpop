@@ -15,7 +15,7 @@ public class Scoring implements Serializable {
     }
 
 
-    public int killMonster(Entity entity) {
+    public double killMonster(Entity entity) {
         return entity.getValue();
     }
 

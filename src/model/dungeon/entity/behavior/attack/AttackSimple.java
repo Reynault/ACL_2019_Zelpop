@@ -13,7 +13,7 @@ public class AttackSimple extends Attack {
     @Override
     public void attack(Maze maze, Entity entity) {
         super.attack(maze, entity);
-        int damage = entity.getDmg();
+        double damage = entity.getDmg();
 
         Position pos = entity.getPosition();
         int x = pos.getX();
@@ -27,6 +27,7 @@ public class AttackSimple extends Attack {
 
             if (victim != null) {
                 maze.attackEntity(entity, victim, damage);
+                maze.defendEntity(entity, victim);
             }
         }
     }
