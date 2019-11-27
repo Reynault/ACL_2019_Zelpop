@@ -12,7 +12,7 @@ public abstract class ScoringParameter extends Scoring {
     }
 
 
-    public abstract int killMonster(Entity entity);
+    public abstract double killMonster(Entity entity);
 
     public abstract int leaveMaze();
 

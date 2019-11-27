@@ -154,7 +154,15 @@ public class MazeFactory implements Serializable {
                     y = Integer.parseInt(lastInfo[0]);
                     if (firstSplit[0].compareTo("Hero") == 0) {
                         entityFactory.getHero().setPosition(new Position(x, y, Cmd.DOWN));
-                    } else {  // It's an enemy
+                    } else if(firstSplit[0].compareTo("Ghost") == 0) {  // It's an enemy
+                        entities.add(entityFactory.getRandomGhost(
+                                new Position(x, y, Cmd.IDLE))
+                        );
+                    } else if (firstSplit[0].compareTo("Gobelin") == 0){
+                        entities.add(entityFactory.getRandomGobelin(
+                                new Position(x, y, Cmd.IDLE))
+                        );
+                    }else {
                         entities.add(entityFactory.getRandomMonster(
                                 new Position(x, y, Cmd.IDLE))
                         );
@@ -176,7 +184,7 @@ public class MazeFactory implements Serializable {
     }
 
     private int specialTileRatio = 10;
-    private int entityRatio = 30;
+    private int entityRatio = 60;
     private boolean hasStairs;
     private double minimumDistance;
 
@@ -194,6 +202,7 @@ public class MazeFactory implements Serializable {
         // The maze will have one stairs
         hasStairs = false;
 
+//        size = 7;
         // init of return and int[][] to generate maze
         Tile[][] maze = new Tile[size][size];
         int[][] cells = new int[size][size];
@@ -261,6 +270,14 @@ public class MazeFactory implements Serializable {
                         // Then adding entity
                         if (random.nextInt(entityRatio) == 1 && i != 0 && j != 0) {
                             entities.add(entityFactory.getRandomMonster(
+                                    new Position(j, i, Cmd.IDLE)
+                            ));
+                        }else if (random.nextInt(entityRatio) == 2&& i != 0 && j != 0){
+                            entities.add(entityFactory.getRandomGhost(
+                                    new Position(j, i, Cmd.IDLE)
+                            ));
+                        }else if (random.nextInt(entityRatio) == 3&& i != 0 && j != 0){
+                            entities.add(entityFactory.getRandomGobelin(
                                     new Position(j, i, Cmd.IDLE)
                             ));
                         }

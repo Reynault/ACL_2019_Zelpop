@@ -26,13 +26,15 @@ public class TextureFactory {
 
     private static BufferedImage player;
     private static BufferedImage monster;
+    private static BufferedImage ghost;
+    private static BufferedImage gobelin;
     private static BufferedImage tiles;
     private static BufferedImage chest;
     private static BufferedImage text;
 
     private static TextManager textManager = new TextManager();
 
-    private TextureFactory() {
+    private TextureFactory(){
         try {
             //getting image path
             InputStream inputStream
@@ -101,6 +103,16 @@ public class TextureFactory {
 
     public BufferedImage getBreakableWall(){
         BufferedImage sprite = tiles.getSubimage(3 * TILE_LENGTH, 0 * TILE_HEIGHT , TILE_LENGTH, TILE_HEIGHT);
+        return sprite;
+    }
+
+    public BufferedImage getGhost() {
+        BufferedImage sprite = monster.getSubimage(0, 15*MONSTER_HEIGHT, MONSTER_LENGTH, MONSTER_HEIGHT);
+        return sprite;
+    }
+
+    public BufferedImage getGobelin() {
+        BufferedImage sprite = monster.getSubimage(0, 12*MONSTER_HEIGHT, MONSTER_LENGTH, MONSTER_HEIGHT);
         return sprite;
     }
 

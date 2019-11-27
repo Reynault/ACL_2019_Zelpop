@@ -3,49 +3,48 @@ package model.dungeon.entity;
 import model.dungeon.Maze;
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Cmd;
-import model.global.GlobalSprites;
 import model.global.Position;
 import sprite.spriteManager.SpriteManagerEntity;
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
 public abstract class Entity implements Serializable {
 
-    protected int maxHp;
-    protected int hp;
+    protected Stats stats;
+
     protected boolean passThrought;
     protected Position position;
     protected Behavior behavior;
     protected SpriteManagerEntity spriteManager;
-    protected int damage;
     protected int score;
     protected int value;
 
-    protected Entity(int hp, boolean passThrought, int damage, int score, int value, Position position, Behavior behavior, SpriteManagerEntity spriteManager) {
-        this.maxHp = hp;
-        this.hp = hp;
+    protected Entity(Stats stats, boolean passThrought, int score, int value, Position position, Behavior behavior, SpriteManagerEntity spriteManager) {
+        this.stats = stats;
         this.passThrought = passThrought;
         this.position = position;
         this.behavior = behavior;
         this.score = 0;
         this.spriteManager = spriteManager;
-        this.damage = damage;
         this.score = score;
         this.value = value;
+    }
+
+    public void regen(){
+        stats.setCurrentHp(Math.min(getHp() + stats.getVitality(), getMaxHp()));
     }
 
     public int getValue() {
         return value;
     }
 
-    public int getHp() {
-        return hp;
+    public double getHp() {
+        return stats.getCurrentHp();
     }
 
-    public int getMaxHp() {
-        return maxHp;
+    public double getMaxHp() {
+        return stats.getMaxHp();
     }
 
     public Position getPosition() {
@@ -86,16 +85,16 @@ public abstract class Entity implements Serializable {
     /**
      *
      */
-    public int getDmg() {
-        return damage;
+    public double getDmg() {
+        return stats.getDamage();
     }
 
     /**
      *
      */
-    public void takeDamage(int damage) {
+    public void takeDamage(double damage) {
         if (damage >= 0) {
-            hp = hp - damage;
+            this.stats.setCurrentHp(this.stats.getCurrentHp() - damage);
         }
     }
 
@@ -103,7 +102,7 @@ public abstract class Entity implements Serializable {
      *
      */
     public boolean isAlive() {
-        if (this.hp > 0) {
+        if (this.stats.getCurrentHp() > 0) {
             return true;
         } else {
             return false;
@@ -112,8 +111,9 @@ public abstract class Entity implements Serializable {
 
     /**
      *
+     * @param bonus
      */
-    public void increaseScore(int bonus) {
+    public void increaseScore(double bonus) {
         score += bonus;
     }
 
@@ -141,5 +141,9 @@ public abstract class Entity implements Serializable {
      */
     public void draw(BufferedImage img, int x, int y, int scale) throws InterruptedException {
         spriteManager.draw(img, x, y, scale);
+    }
+
+    public double getDef() {
+        return stats.getDefence();
     }
 }

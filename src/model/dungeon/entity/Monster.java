@@ -8,8 +8,8 @@ import sprite.TextureFactory;
 
 public class Monster extends Entity {
 
-    protected Monster(int hp, boolean passThrought, int damage, int score, int value, Position position, Behavior behavior) {
-        super(hp, passThrought, damage, score, value, position, behavior, new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster()));
+    protected Monster(Stats stats, boolean b, int score, int value, Position position, Behavior behavior) {
+        super(stats, b, score, value, position, behavior,  new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster()));
     }
 
     @Override
