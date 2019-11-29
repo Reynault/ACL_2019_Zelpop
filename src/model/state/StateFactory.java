@@ -16,4 +16,6 @@ public class StateFactory {
         return new Menu();
     }
 
+    public static GameState getHowToPlay() { return new HowToPlay(); }
+
 }

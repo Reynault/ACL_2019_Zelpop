@@ -54,11 +54,14 @@ public class Menu implements GameState{
         buttonColor = Color.BLACK;
         selectedButtonColor = Color.GRAY;
 
+        // Setting background color (Brown)
         crayon.setBackground(backgroundColor);
         crayon.clearRect(0,0, width, height);
 
+        // Fecthing the title
         titleImage = textManager.getString(title, titleColor);
 
+        // Which is an image drawn by the pencil
         crayon.drawImage(
                 titleImage,
                 (width/2) - (titleImage.getWidth()/2),
@@ -110,6 +113,7 @@ public class Menu implements GameState{
                 selectedButton = (selectedButton + 1) % 3;
                 break;
             case ATTACK:
+                //TODO direction la page HowToPlay, et non plus directement le jeu
                 buttons[selectedButton].trigger(game);
                 break;
         }

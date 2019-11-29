@@ -13,6 +13,6 @@ public class NewGame extends MenuButton {
 
     @Override
     public void trigger(ZelpopGame game) {
-        game.setState(StateFactory.getInGame(new Dungeon()));
+        game.setState(StateFactory.getHowToPlay());
     }
 }
