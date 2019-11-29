@@ -113,7 +113,6 @@ public class Menu implements GameState{
                 selectedButton = (selectedButton + 1) % 3;
                 break;
             case ATTACK:
-                //TODO direction la page HowToPlay, et non plus directement le jeu
                 buttons[selectedButton].trigger(game);
                 break;
         }
