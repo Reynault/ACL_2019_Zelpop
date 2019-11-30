@@ -4,9 +4,10 @@ import model.dungeon.tile.Tile;
 import model.global.Cmd;
 import model.global.Position;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PositionIA {
+public class PositionIA implements Serializable {
 
     private Position pos;
     private int f;

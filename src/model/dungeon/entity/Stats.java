@@ -2,7 +2,9 @@ package model.dungeon.entity;
 
 import model.global.GlobalGrow;
 
-public class Stats {
+import java.io.Serializable;
+
+public class Stats implements Serializable {
     private double maxHp;
     private double currentHp;
     private double damage;
