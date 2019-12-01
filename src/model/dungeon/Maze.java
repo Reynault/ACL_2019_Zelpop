@@ -69,11 +69,11 @@ public class Maze implements Serializable {
      */
     public void draw(BufferedImage img) throws InterruptedException{
         Graphics2D crayon = (Graphics2D) img.getGraphics();
-        int width, height,
+        int FrameWidth, FrameHeight,
                 xShift, yShift,
                 currentX, currentY,
-                tilePositionX, tilePositionY,
-                sideBarSizeX, sideBarSizeY;
+                sideBarSizeX, sideBarSizeY,
+                xShiftHero, yShiftHero;
 
         int nbTileDisplayed = 9;
         Position posHero = hero.getPosition();
@@ -81,17 +81,23 @@ public class Maze implements Serializable {
 
         crayon.setColor(Color.BLACK);
 
-        width = img.getWidth();
-        height = img.getHeight();
+        FrameWidth = img.getWidth();
+        FrameHeight = img.getHeight();
 
         sideBarSizeX = 8 * (GlobalSprites.getScaling() * GlobalSprites.get8Sprite());
         sideBarSizeY = (nbTileDisplayed * 2 + 1) * unit;
 
-        xShift = width / 2 - sideBarSizeX / 2;
-        yShift = height / 2;
+        xShift = (FrameWidth / 2 - sideBarSizeX / 2);
+        yShift = FrameHeight / 2;
 
-        tilePositionX = (GlobalSprites.getScaling() * GlobalSprites.get8Sprite());
-        tilePositionY = (GlobalSprites.getScaling() * GlobalSprites.get8Sprite());
+        crayon.drawImage(
+                TextureFactory.getTextureFactory().getBackground(),
+                xShift - (nbTileDisplayed * unit),
+                yShift - (nbTileDisplayed * unit),
+                ((nbTileDisplayed*2+1) * unit),
+                ((nbTileDisplayed*2+1) * unit),
+                null
+                );
 
         // Drawing surrounding tiles
         for (int x = -nbTileDisplayed; x <= nbTileDisplayed; x++) {
@@ -102,17 +108,19 @@ public class Maze implements Serializable {
                 if (currentX >= 0 && currentY >= 0 && currentY < tiles.length && currentX < tiles[currentY].length) {
                     // Drawing the current tile
                     tiles[currentY][currentX].draw(img,
-                            (x * tilePositionX) + xShift,
-                            (y * tilePositionY) + yShift, GlobalSprites.getScaling());
-                } else {
+                            (x * unit) + xShift,
+                            (y * unit) + yShift, GlobalSprites.getScaling());
+                }
+
+                /*else {
                     // Otherwise, the void
                     crayon.fillRect(
-                            (x * tilePositionX) + xShift,
-                            (y * tilePositionY) + yShift,
+                            (x * unit) + xShift,
+                            (y * unit) + yShift,
                             unit,
                             unit
                     );
-                }
+                }*/
             }
         }
 
@@ -124,11 +132,11 @@ public class Maze implements Serializable {
                     pos.getY() >= (posHero.getY() - nbTileDisplayed) && pos.getY() <= (posHero.getY() + nbTileDisplayed)) {
                 currentX = -(posHero.getX() - pos.getX());
                 currentY = -(posHero.getY() - pos.getY());
-                e.draw(img, (currentX * tilePositionX) + xShift, (currentY * tilePositionY) + yShift, GlobalSprites.getScaling());
+                e.draw(img, (currentX * unit) + xShift, (currentY * unit) + yShift, GlobalSprites.getScaling());
             }
         }
 
-        // Drawing hero at the center of the screen
+        // Drawing hero
         hero.draw(img, xShift, yShift, GlobalSprites.getScaling());
 
         // Drawing the side bar which inform the player of with things like the hero's HP
@@ -161,6 +169,15 @@ public class Maze implements Serializable {
         int miniTilePositionX = miniUnit;
         int miniTilePositionY = miniUnit;
 
+        crayon.drawImage(
+                TextureFactory.getTextureFactory().getBackground(),
+                miniShiftx - (nbTileDisplyedOnMap * miniUnit),
+                miniShifty - (nbTileDisplyedOnMap * miniUnit),
+                ((nbTileDisplyedOnMap*2+1) * miniUnit),
+                ((nbTileDisplyedOnMap*2+1) * miniUnit),
+                null
+        );
+
         // Drawing surrounding tiles
         for (int x = -nbTileDisplyedOnMap; x <= nbTileDisplyedOnMap; x++) {
             for (int y = -nbTileDisplyedOnMap; y <= nbTileDisplyedOnMap; y++) {
@@ -173,7 +190,8 @@ public class Maze implements Serializable {
                             (x * miniTilePositionX) + miniShiftx,
                             (y * miniTilePositionY) + miniShifty,
                             GlobalSprites.getMiniScaling());
-                } else {
+                }
+                /* else {
                     // Otherwise, the void
                     crayon.fillRect(
                             (x * miniTilePositionX) + miniShiftx,
@@ -181,7 +199,7 @@ public class Maze implements Serializable {
                             miniUnit,
                             miniUnit
                     );
-                }
+                }*/
             }
         }
 
@@ -281,7 +299,7 @@ public class Maze implements Serializable {
             // Checking if movement is in the maze
             if (canMove(e, p.getX(), p.getY())) {
                 newPosition = new Position(p.getX(), p.getY(), direction);
-                } else {
+            } else {
                 newPosition = new Position(
                         currentPosition.getX(),
                         currentPosition.getY(),

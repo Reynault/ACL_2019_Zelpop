@@ -31,6 +31,7 @@ public class TextureFactory {
     private static BufferedImage tiles;
     private static BufferedImage chest;
     private static BufferedImage text;
+    private static BufferedImage background;
 
     private static TextManager textManager = new TextManager();
 
@@ -56,9 +57,18 @@ public class TextureFactory {
             inputStream
                     = TextureFactory.class.getClassLoader().getResourceAsStream("sprites/text.png");
             text = ImageIO.read(inputStream);
+
+
+            inputStream
+                    = TextureFactory.class.getClassLoader().getResourceAsStream("sprites/background.png");
+            background = ImageIO.read(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public BufferedImage getBackground(){
+        return background;
     }
 
     public BufferedImage getHero(){
