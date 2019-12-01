@@ -102,7 +102,7 @@ public class MoveGobelin implements Move {
 
             if (currentPos.getPos().getX() == endPosition.getX()
                     && currentPos.getPos().getY() == endPosition.getY()) {
-                System.out.println("Algo finished");
+//                System.out.println("Algo finished");
                 PositionIA tempP = currentPos;
                 Stack<PositionIA> pilePath = new Stack();
                 while (tempP.getPreviousVoisin() != null) {
