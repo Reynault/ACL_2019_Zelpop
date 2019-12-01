@@ -7,18 +7,17 @@ import model.dungeon.tile.Tile;
 import model.global.Cmd;
 import model.global.Position;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Stack;
 
 public class MoveGobelin implements Move {
 
 
-    private ArrayList<PositionIA> checkedPositions ;
-    private ArrayList<PositionIA> unCheckedPositions ;
+    private ArrayList<PositionIA> checkedPositions;
+    private ArrayList<PositionIA> unCheckedPositions;
     private Position startPosition;
     private Position endPosition;
-    private PositionIA [][] matrix;
+    private PositionIA[][] matrix;
     private int mazeWidth;
     private int mazeHeight;
     private Tile[][] mazeTile;
@@ -32,21 +31,20 @@ public class MoveGobelin implements Move {
         // adding voisins
         // adding obstacles
         mazeWidth = maze.getWidth();
-        mazeHeight =  maze.getHeight();
+        mazeHeight = maze.getHeight();
         mazeTile = maze.getTiles();
         matrix = new PositionIA[mazeWidth][mazeHeight];
-        for (int i = 0 ; i < mazeHeight ; i++ ){
-            for (int j = 0 ; j < mazeWidth ; j++ ){
-                matrix[i][j] = new PositionIA(new Position(j , i , Cmd.IDLE));
-                matrix[i][j].addVoisins(mazeHeight , mazeWidth, mazeTile);
+        for (int i = 0; i < mazeHeight; i++) {
+            for (int j = 0; j < mazeWidth; j++) {
+                matrix[i][j] = new PositionIA(new Position(j, i, Cmd.IDLE));
+                matrix[i][j].addVoisins(mazeHeight, mazeWidth, mazeTile);
                 //System.out.println(mazeTile[i][j].canBeCrossed() + " / "+ j + " / " + i);
-                if (!mazeTile[i][j].canBeCrossed()){
+                if (!mazeTile[i][j].canBeCrossed()) {
                     //System.out.println(mazeTile[i][j].canBeCrossed() + " / "+ j + " / " + i);
                     matrix[i][j].setNromalTile(false);
                 }
             }
         }
-
 
 
         // seting the start pos == gobelin pos
@@ -66,11 +64,10 @@ public class MoveGobelin implements Move {
         // if he is facing the new pos then add the new pos
         // else turn it to the same pos
 
-        if ( pos != null){
-            pos = finalPos(entity , pos);
-            entity.setPosition(pos);
-            this.movement = Cmd.IDLE;
-        }else{
+        if (pos != null) {
+            pos = finalPos(entity, pos);
+            this.movement = pos.getCmd();
+        } else {
             faceDirection();
             entity.setPosition(new Position(
                     entity.getPosition().getX(),
@@ -79,44 +76,43 @@ public class MoveGobelin implements Move {
             ));
         }
 
-            //System.out.println("***********************************************");
+        //System.out.println("***********************************************");
 
-        return this.movement ;
+        return this.movement;
     }
 
 
     /**
-     *
      * @return
      */
-    public Position a_Star(){
+    public Position a_Star() {
         // condition
-        while(this.unCheckedPositions.size() > 0){
+        while (this.unCheckedPositions.size() > 0) {
 
             // continue lookinf for solution
             int winner = 0;
-            for (int i = 0 ; i < this.unCheckedPositions.size(); i++){
+            for (int i = 0; i < this.unCheckedPositions.size(); i++) {
                 //if we found a lowest way we take it
-                if (this.unCheckedPositions.get(i).getF() < this.unCheckedPositions.get(winner).getF()){
-                    winner = i ;
+                if (this.unCheckedPositions.get(i).getF() < this.unCheckedPositions.get(winner).getF()) {
+                    winner = i;
                 }
             }
 
             PositionIA currentPos = this.unCheckedPositions.get(winner);
 
             if (currentPos.getPos().getX() == endPosition.getX()
-                    && currentPos.getPos().getY() == endPosition.getY()){
+                    && currentPos.getPos().getY() == endPosition.getY()) {
                 System.out.println("Algo finished");
                 PositionIA tempP = currentPos;
                 Stack<PositionIA> pilePath = new Stack();
-                while(tempP.getPreviousVoisin() != null){
+                while (tempP.getPreviousVoisin() != null) {
                     pilePath.push(tempP.getPreviousVoisin());
                     tempP = tempP.getPreviousVoisin();
                 }
                 if (pilePath.size() == 1)
                     return pilePath.peek().getPos();
-                else if(pilePath.size() > 1)
-                    return pilePath.get(pilePath.size()-2).getPos();
+                else if (pilePath.size() > 1)
+                    return pilePath.get(pilePath.size() - 2).getPos();
             }
 
             // if the current it is not the end then we continue
@@ -127,20 +123,21 @@ public class MoveGobelin implements Move {
             this.checkedPositions.add(currentPos);
 
             //adding voisis of current to unchecked pos
-            ArrayList<PositionIA> voisinlist =  getVoisins(currentPos);;
+            ArrayList<PositionIA> voisinlist = getVoisins(currentPos);
+            ;
 
-            for (int i = 0; i < voisinlist.size(); i++){
+            for (int i = 0; i < voisinlist.size(); i++) {
                 PositionIA p = voisinlist.get(i);
-              //  System.out.println(p.getNromalTile() + " / "+ p.getPos().getX() + " / " + p.getPos().getY());
-                if ((!this.checkedPositions.contains(p)) && (p.getNromalTile())){
+                //  System.out.println(p.getNromalTile() + " / "+ p.getPos().getX() + " / " + p.getPos().getY());
+                if ((!this.checkedPositions.contains(p)) && (p.getNromalTile())) {
                     //System.out.println("************");
-                    int tempG = currentPos.getG() + 1 ;
-                    if (this.unCheckedPositions.contains(p)){
-                     //   System.out.println("************");
-                        if (tempG < p.getG()){
+                    int tempG = currentPos.getG() + 1;
+                    if (this.unCheckedPositions.contains(p)) {
+                        //   System.out.println("************");
+                        if (tempG < p.getG()) {
                             p.setG(tempG);
                         }
-                    }else {
+                    } else {
                         p.setG(tempG);
                         this.unCheckedPositions.add(p);
                     }
@@ -159,66 +156,67 @@ public class MoveGobelin implements Move {
     /**
      * en utilisant la distance de Manhattan
      * pour calculer la distance
+     *
      * @param p
      * @return
      */
-    public int heuristique( PositionIA p){
+    public int heuristique(PositionIA p) {
 
         int distance = Math.abs(endPosition.getX() - p.getPos().getX())
-                       +  Math.abs(endPosition.getY() - p.getPos().getY());
+                + Math.abs(endPosition.getY() - p.getPos().getY());
 
         return distance;
     }
 
 
-    public ArrayList getVoisins(PositionIA pos){
+    public ArrayList getVoisins(PositionIA pos) {
         return matrix[pos.getPos().getY()][pos.getPos().getX()].getVoisinList();
     }
 
-    public Position finalPos(Entity entity , Position pos ){
-        Cmd c ;
-       // System.out.println(pos.getX());
-        if (entity.getPosition().getX() + 1 == pos.getX()){
+    public Position finalPos(Entity entity, Position pos) {
+        Cmd c;
+        // System.out.println(pos.getX());
+        if (entity.getPosition().getX() + 1 == pos.getX()) {
 
-                return new Position(
-                        entity.getPosition().getX(),
-                        entity.getPosition().getY(),
-                        Cmd.RIGHT
-                );
-        }else if(entity.getPosition().getX() - 1 == pos.getX()){
+            return new Position(
+                    entity.getPosition().getX(),
+                    entity.getPosition().getY(),
+                    Cmd.RIGHT
+            );
+        } else if (entity.getPosition().getX() - 1 == pos.getX()) {
 
-               // System.out.println("--------------------------");
-                return new Position(
-                        pos.getX(),
-                        pos.getY(),
-                        Cmd.LEFT
-                );
+            // System.out.println("--------------------------");
+            return new Position(
+                    pos.getX(),
+                    pos.getY(),
+                    Cmd.LEFT
+            );
 
-        }else if (entity.getPosition().getY() - 1 == pos.getY()){
+        } else if (entity.getPosition().getY() - 1 == pos.getY()) {
 
-                //System.out.println("--------------------------");
-                return new Position(
-                        pos.getX(),
-                        pos.getY(),
-                        Cmd.UP
-                );
-
-        }else {
             //System.out.println("--------------------------");
-                return new Position(
-                        pos.getX(),
-                        pos.getY(),
-                        Cmd.DOWN
-                );
+            return new Position(
+                    pos.getX(),
+                    pos.getY(),
+                    Cmd.UP
+            );
+
+        } else {
+            //System.out.println("--------------------------");
+            return new Position(
+                    pos.getX(),
+                    pos.getY(),
+                    Cmd.DOWN
+            );
 
         }
 
     }
 
-    public void faceDirection (){
+    public void faceDirection() {
 
-        int rand = (int)(Math.round(Math.random()*4));
-        switch (rand){
+        int rand = (int) (Math.round(Math.random() * 4));
+        switch (rand) {
             case 1:
                 this.movement = Cmd.LEFT;
                 break;
@@ -236,7 +234,6 @@ public class MoveGobelin implements Move {
                 break;
         }
     }
-
 
 
 }
