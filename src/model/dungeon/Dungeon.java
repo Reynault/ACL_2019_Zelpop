@@ -21,6 +21,7 @@ public class Dungeon implements Serializable {
     private MazeFactory mazeFactory;
     private EntityFactory entityFactory;
     private Hero hero;
+    private int floor;
 
     private static int DEFAULT_MAZE_SIZE = 20;
 
@@ -32,6 +33,7 @@ public class Dungeon implements Serializable {
         this.entityFactory = new EntityFactory();
         this.hero = entityFactory.generateHero();
         currentMaze = mazeFactory.getRandomMaze(DEFAULT_MAZE_SIZE, entityFactory);
+        this.floor = 1;
     }
 
     /**
@@ -102,7 +104,7 @@ public class Dungeon implements Serializable {
         BufferedImage textImage;
         Graphics2D crayon = (Graphics2D) img.getGraphics();
         TextManager textManager = TextureFactory.getTextManager();
-        textImage = textManager.getString(mazeFactory.getMazeCounter() + "", Color.WHITE);
+        textImage = textManager.getString(floor + "", Color.WHITE);
         crayon.drawImage(
                 textImage,
                 1100 - 20,
@@ -120,6 +122,7 @@ public class Dungeon implements Serializable {
                     EntityFactory.HERO_X,
                     EntityFactory.HERO_Y,
                     EntityFactory.HERO_DIRECTION));
+            floor++;
         }
     }
 }
