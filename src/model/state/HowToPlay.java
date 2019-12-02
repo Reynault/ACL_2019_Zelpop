@@ -37,12 +37,13 @@ public class HowToPlay implements GameState {
         // Setting title and text
         title = textManager.getString("How to play", textColor);
 
-        command = new BufferedImage[5];
+        command = new BufferedImage[6];
         command[0] = textManager.getString("Z Q S D : move", textColor);
         command[1] = textManager.getString("SPACE : attack", textColor);
         command[2] = textManager.getString("Z : change level above stairs", textColor);
         command[3] = textManager.getString("O : save", textColor);
         command[4] = textManager.getString("ESCAPE : quit to menu without save", textColor);
+        command[5] = textManager.getString("J K L M : up a stat for a cost", textColor);
 
         mobs = new BufferedImage[4];
         mobs[0] = textManager.getString("You", textColor);
@@ -163,7 +164,7 @@ public class HowToPlay implements GameState {
         // Draw the labels for the commands
         cptCommand = HEIGHT_LABEL;
         for(BufferedImage s : command){
-            if(s.equals(command[2]) || s.equals(command[4])){ // change level & quit
+            if(s.equals(command[2]) || s.equals(command[4]) || s.equals(command[5])){ // change level & quit & up a stat
                 widthText = 700;
             }
             else if(s.equals(command[3])){   // save
@@ -278,8 +279,6 @@ public class HowToPlay implements GameState {
                     null
             );
 
-            //TODO Affichage du bouton pour augmenter la stat
-
             crayon.drawImage(
                     sidebar[4],
                     1200,
@@ -290,7 +289,7 @@ public class HowToPlay implements GameState {
             );
 
         }
-
+        crayon.dispose();
 
     }
 
