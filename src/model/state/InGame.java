@@ -3,13 +3,18 @@ package model.state;
 import model.ZelpopGame;
 import model.dungeon.Dungeon;
 import model.global.Cmd;
+import sprite.TextureFactory;
+import sprite.spriteManager.TextManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class InGame implements GameState {
 
+    private static int HEIGHT_LABEL = 20;
+
     private Dungeon dungeon;
+    private String[] stats, letters;
 
     /**
      * Default constructor
@@ -17,14 +22,56 @@ public class InGame implements GameState {
      */
     public InGame(Dungeon dungeon){
         this.dungeon = dungeon;
+        stats = new String[4];
+        stats[0] = "HP:";
+        stats[1] = "RGN:";
+        stats[2] = "ATK:";
+        stats[3] = "DEF:";
+
+        letters = new String[4];
+        letters[0] = "J";
+        letters[1] = "K";
+        letters[2] = "L";
+        letters[3] = "M";
     }
 
     @Override
     public void draw(BufferedImage image) throws InterruptedException{
+        BufferedImage textImage;
+        TextManager textManager = TextureFactory.getTextManager();
+        Color textColor;
         Graphics2D crayon = (Graphics2D) image.getGraphics();
         crayon.setBackground(new Color(0x4A362A));
         crayon.clearRect(0,0, image.getWidth(), image.getHeight());
         dungeon.draw(image);
+
+        textColor = Color.WHITE;
+
+        // Bottom-left corner : stats
+        for(int i = 0 ; i < stats.length ; i++){
+            textImage = textManager.getString(stats[i], textColor);
+            crayon.drawImage(
+                    textImage,
+                    1010,
+                    550 + i * HEIGHT_LABEL * 2,
+                    75,
+                    HEIGHT_LABEL,
+                    null
+            );
+
+            // Press the letter to up the stat
+            textImage = textManager.getString(letters[i], Color.black);
+            crayon.drawImage(
+                    textImage,
+                    1150,
+                    550 + i * HEIGHT_LABEL * 2,
+                    15,
+                    HEIGHT_LABEL,
+                    null
+            );
+
+        }
+
         crayon.dispose();
     }
 
@@ -62,6 +109,20 @@ public class InGame implements GameState {
             case RESTART:
                 dontUpdate = true;
                 break;
+            // Up a stat
+            case HP:
+                dontUpdate = true;
+                break;
+            case RGN:
+                dontUpdate = true;
+                break;
+            case ATK:
+                dontUpdate = true;
+                break;
+            case CNT:
+                dontUpdate = true;
+                break;
+
         }
 
         if(!dontUpdate) {

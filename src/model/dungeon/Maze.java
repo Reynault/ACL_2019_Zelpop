@@ -69,39 +69,40 @@ public class Maze implements Serializable {
      */
     public void draw(BufferedImage img) throws InterruptedException{
         Graphics2D crayon = (Graphics2D) img.getGraphics();
-        int FrameWidth, FrameHeight,
+        int frameWidth, frameHeight,
                 xShift, yShift,
                 currentX, currentY,
-                sideBarSizeX, sideBarSizeY,
-                xShiftHero, yShiftHero;
+                sideBarSizeX, sideBarSizeY;
 
-        int nbTileDisplayed = 9;
+        int nbTileDisplayedY = 12;
+        int nbTileDisplayedX = 20;
         Position posHero = hero.getPosition();
         int unit = GlobalSprites.get8Sprite() * GlobalSprites.getScaling();
 
         crayon.setColor(Color.BLACK);
 
-        FrameWidth = img.getWidth();
-        FrameHeight = img.getHeight();
+        frameWidth = img.getWidth();
+        frameHeight = img.getHeight();
 
-        sideBarSizeX = 8 * (GlobalSprites.getScaling() * GlobalSprites.get8Sprite());
-        sideBarSizeY = (nbTileDisplayed * 2 + 1) * unit;
+        //sideBarSizeX = 8 * unit;
+        sideBarSizeX = 280;
+        sideBarSizeY = (nbTileDisplayedY * 2 + 1) * unit;
 
-        xShift = (FrameWidth / 2 - sideBarSizeX / 2);
-        yShift = FrameHeight / 2;
+        xShift = frameWidth / 2 - sideBarSizeX;
+        yShift = frameHeight / 2;
 
         crayon.drawImage(
                 TextureFactory.getTextureFactory().getBackground(),
-                xShift - (nbTileDisplayed * unit),
-                yShift - (nbTileDisplayed * unit),
-                ((nbTileDisplayed*2+1) * unit),
-                ((nbTileDisplayed*2+1) * unit),
+                xShift - (nbTileDisplayedX * unit),
+                yShift - (nbTileDisplayedY * unit),
+                ((nbTileDisplayedX*2+1) * unit),
+                ((nbTileDisplayedY*2+1) * unit),
                 null
                 );
 
         // Drawing surrounding tiles
-        for (int x = -nbTileDisplayed; x <= nbTileDisplayed; x++) {
-            for (int y = -nbTileDisplayed; y <= nbTileDisplayed; y++) {
+        for (int x = -nbTileDisplayedX; x <= nbTileDisplayedX; x++) {
+            for (int y = -nbTileDisplayedY; y <= nbTileDisplayedY; y++) {
                 currentX = posHero.getX() + x;
                 currentY = posHero.getY() + y;
                 // If the tile exists
@@ -128,8 +129,8 @@ public class Maze implements Serializable {
         for (Entity e : entities) {
             Position pos = e.getPosition();
             // If it is nearby
-            if (pos.getX() >= (posHero.getX() - nbTileDisplayed) && pos.getX() <= (posHero.getX() + nbTileDisplayed) &&
-                    pos.getY() >= (posHero.getY() - nbTileDisplayed) && pos.getY() <= (posHero.getY() + nbTileDisplayed)) {
+            if (pos.getX() >= (posHero.getX() - nbTileDisplayedX) && pos.getX() <= (posHero.getX() + nbTileDisplayedX) &&
+                    pos.getY() >= (posHero.getY() - nbTileDisplayedY) && pos.getY() <= (posHero.getY() + nbTileDisplayedY)) {
                 currentX = -(posHero.getX() - pos.getX());
                 currentY = -(posHero.getY() - pos.getY());
                 e.draw(img, (currentX * unit) + xShift, (currentY * unit) + yShift, GlobalSprites.getScaling());
@@ -139,32 +140,37 @@ public class Maze implements Serializable {
         // Drawing hero
         hero.draw(img, xShift, yShift, GlobalSprites.getScaling());
 
-        // Drawing the side bar which inform the player of with things like the hero's HP
-        Color sideBarColor = new Color(
-                0x2E2E2E
-        );
+        //********************************************************************************************
+        // Drawing the side bar
+        int top_span = 75;
+        int heightLabel = 20;
         Color textColor = Color.WHITE;
         Color pvColor = new Color(0x800000);
 
-        crayon.setColor(sideBarColor);
+
+        BufferedImage textImage;
+        TextManager textManager = TextureFactory.getTextManager();
 
         // Drawing the bar
-        crayon.fillRect(
-                xShift + nbTileDisplayed * unit,
-                yShift - nbTileDisplayed * unit,
-                sideBarSizeX,
-                sideBarSizeY
-        );
-
+//        crayon.fillRect(
+//                xShift + nbTileDisplayed * unit,
+//                yShift - nbTileDisplayed * unit,
+//                sideBarSizeX,
+//                sideBarSizeY
+//        );
+        // Setting the right bar
+        Color sideBarColor;
+        sideBarColor = new Color(0x646464);
+        crayon.setBackground(sideBarColor);
+        crayon.clearRect(1000, 0, sideBarSizeX, frameHeight);
 
         crayon.setColor(Color.BLACK);
-
         // Drawing the mini-map
         int nbTileDisplyedOnMap = 14;
         int miniUnit = GlobalSprites.get8Sprite() * GlobalSprites.getMiniScaling();
 
-        int miniShiftx = xShift + nbTileDisplayed * unit + unit * 4;
-        int miniShifty = yShift - nbTileDisplayed * unit + unit * 4;
+        int miniShiftx = xShift + nbTileDisplayedX * unit + unit * 4;
+        int miniShifty = yShift - nbTileDisplayedY * unit + unit * 4 + top_span;
 
         int miniTilePositionX = miniUnit;
         int miniTilePositionY = miniUnit;
@@ -211,26 +217,26 @@ public class Maze implements Serializable {
 
 
         // Drawing the HP label
+        int sideBarElementX = xShift + nbTileDisplayedX * unit + unit;
+
         TextManager text = TextureFactory.getTextManager();
-        BufferedImage labelHP = text.getString(PV_STATUS, textColor);
-
-        int sideBarElementX = xShift + nbTileDisplayed * unit + unit;
-
-        crayon.drawImage(
-                labelHP,
-                sideBarElementX,
-                yShift - nbTileDisplayed * unit + unit * 8,
-                labelHP.getWidth(),
-                labelHP.getHeight(),
-                null
-        );
+//        BufferedImage labelHP = text.getString(PV_STATUS, textColor);
+//
+//        crayon.drawImage(
+//                labelHP,
+//                sideBarElementX,
+//                yShift - nbTileDisplayedY * unit + unit * 8 + top_span,
+//                labelHP.getWidth(),
+//                labelHP.getHeight(),
+//                null
+//        );
 
         // Drawing the HP bar
         crayon.setColor(pvColor);
 
         crayon.drawRect(
                 sideBarElementX,
-                yShift - nbTileDisplayed * unit + unit * 10,
+                yShift - nbTileDisplayedY * unit + unit * 10 + top_span,
                 unit * 6,
                 unit
         );
@@ -239,37 +245,60 @@ public class Maze implements Serializable {
 
         crayon.fillRect(
                 sideBarElementX,
-                yShift - nbTileDisplayed * unit + unit * 10,
+                yShift - nbTileDisplayedY * unit + unit * 10 + top_span,
                 (int) (unit * HPratio * 6),
                 unit
-        );
-
-        // Drawing score indicator
-        BufferedImage labelScore = text.getString(SCORE_STATUS, textColor);
-
-        // Drawing label
-        crayon.drawImage(
-                labelScore,
-                sideBarElementX,
-                yShift + (labelScore.getHeight() * 3),
-                labelScore.getWidth(),
-                labelScore.getHeight(),
-                null
         );
 
         // Drawing score value
         Color labelScoreColor = new Color(0xB99828);
 
         BufferedImage labelScoreValue = text.getString(String.valueOf(hero.getScore()), labelScoreColor);
-
         crayon.drawImage(
                 labelScoreValue,
-                sideBarElementX,
-                yShift + (labelScoreValue.getHeight() * 5),
+                1100,
+                450,
                 labelScoreValue.getWidth(),
                 labelScoreValue.getHeight(),
                 null
         );
+
+        // Stats
+        int stats[] = new int[4];
+        stats[0] = (int)hero.getMaxHp();
+        stats[1] = (int)hero.getVitality();
+        stats[2] = (int)hero.getDmg();
+        stats[3] = (int)hero.getDef();
+
+        double cost[] = new double[4];
+        cost[0] = hero.getMaxHpCostToUpgrade();
+        cost[1] = hero.getVitalityCostToUpgrade();
+        cost[2] = hero.getDamageCostToUpgrade();
+        cost[3] = hero.getDefenceCostToUpgrade();
+
+        for(int i = 0 ; i < stats.length ; i++){
+            textImage = textManager.getString(stats[i] + "", textColor);
+            crayon.drawImage(
+                    textImage,
+                    1080,
+                    550 + i * heightLabel * 2,
+                    40,
+                    heightLabel,
+                    null
+            );
+
+            // Cost to up a stat
+            textImage = textManager.getString(cost[i] + "", Color.RED);
+            crayon.drawImage(
+                    textImage,
+                    1200,
+                    560 + i * heightLabel * 2,
+                    50,
+                    heightLabel/2,
+                    null
+            );
+
+        }
 
         crayon.dispose();
     }

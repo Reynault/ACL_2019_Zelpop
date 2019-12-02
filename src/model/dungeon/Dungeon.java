@@ -8,7 +8,10 @@ import model.dungeon.mazeFactory.MazeFactory;
 import model.global.Cmd;
 import model.global.Position;
 import model.state.StateFactory;
+import sprite.TextureFactory;
+import sprite.spriteManager.TextManager;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 
@@ -93,7 +96,21 @@ public class Dungeon implements Serializable {
      * @param img image
      */
     public void draw(BufferedImage img) throws InterruptedException{
+        // Draw the maze
         currentMaze.draw(img);
+        // Draw the labels of the depth
+        BufferedImage textImage;
+        Graphics2D crayon = (Graphics2D) img.getGraphics();
+        TextManager textManager = TextureFactory.getTextManager();
+        textImage = textManager.getString(mazeFactory.getMazeCounter() + "", Color.WHITE);
+        crayon.drawImage(
+                textImage,
+                1100 - 20,
+                25,
+                100,
+                25,
+                null
+        );
     }
 
     public void changeLevel() {

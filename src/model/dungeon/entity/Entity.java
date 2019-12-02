@@ -39,14 +39,6 @@ public abstract class Entity implements Serializable {
         return value;
     }
 
-    public double getHp() {
-        return stats.getCurrentHp();
-    }
-
-    public double getMaxHp() {
-        return stats.getMaxHp();
-    }
-
     public Position getPosition() {
         return position;
     }
@@ -85,13 +77,6 @@ public abstract class Entity implements Serializable {
     /**
      *
      */
-    public double getDmg() {
-        return stats.getDamage();
-    }
-
-    /**
-     *
-     */
     public void takeDamage(double damage) {
         if (damage >= 0) {
             this.stats.setCurrentHp(this.stats.getCurrentHp() - damage);
@@ -110,8 +95,8 @@ public abstract class Entity implements Serializable {
     }
 
     /**
-     *
-     * @param bonus
+     *  Increase the total score
+     * @param bonus value of the bonus
      */
     public void increaseScore(double bonus) {
         score += bonus;
@@ -143,7 +128,29 @@ public abstract class Entity implements Serializable {
         spriteManager.draw(img, x, y, scale);
     }
 
+    public double getHp() {
+        return stats.getCurrentHp();
+    }
+
+    public double getMaxHp() {
+        return stats.getMaxHp();
+    }
+
+    public double getVitality() { return stats.getVitality(); }
+
+    public double getDmg() {
+        return stats.getDamage();
+    }
+
     public double getDef() {
         return stats.getDefence();
     }
+
+    public double getMaxHpCostToUpgrade() { return stats.getMaxHpCostToUpgrade(); }
+
+    public double getDamageCostToUpgrade() { return stats.getDamageCostToUpgrade(); }
+
+    public double getDefenceCostToUpgrade() { return stats.getDefenceCostToUpgrade(); }
+
+    public double getVitalityCostToUpgrade() { return stats.getVitalityCostToUpgrade(); }
 }
