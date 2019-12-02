@@ -1,5 +1,4 @@
 package test;
-
 import model.dungeon.Maze;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
@@ -84,7 +83,7 @@ class AttackSimpleTest {
             Maze maze = mazeFactory.getMaze(is, entityFactory);
             hero.setPosition(new Position(hero.getPosition().getX(),hero.getPosition().getY(), Cmd.RIGHT));
 
-            hero.takeDamage(15);
+            hero.takeDamage(50000);
             maze.getEntity(2,1).setPosition(new Position(2,1, Cmd.LEFT));
             maze.getEntity(2,1).behave(maze, Cmd.ATTACK);
             Assertions.assertFalse(hero.isAlive());
