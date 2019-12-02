@@ -4,6 +4,7 @@ import model.global.Cmd;
 
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,9 +29,15 @@ public abstract class SpriteManager implements Serializable {
 
     public abstract BufferedImage getCurrentSprite();
 
-    void setAnimation(TimerTask task, int delay){
+    public static void setAnimation(TimerTask task, int delay){
         Timer timer = new Timer();
         timer.schedule(task, delay);
+    }
+
+    public static Timer setConstantAnimation(TimerTask task, int delay, int last){
+        Timer timer = new Timer();
+        timer.schedule( task, delay, last);
+        return timer;
     }
 
     public abstract void draw(BufferedImage img, int x, int y, int scale);

@@ -3,57 +3,129 @@ package model.state;
 import model.ZelpopGame;
 import model.dungeon.Dungeon;
 import model.global.Cmd;
+import model.global.GlobalSprites;
 import sprite.TextureFactory;
-import sprite.spriteManager.SpriteManager;
-import sprite.spriteManager.SpriteManagerHero;
-import sprite.spriteManager.TextManager;
+import sprite.spriteManager.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class HowToPlay implements GameState {
 
     private static int TOP_SPAN = 50;
     private static int HEIGHT_LABEL = 20;
 
-    private String title;
-    private String[] command, mobs, stats;
-    private BufferedImage[] images, ennemies;
+    private BufferedImage title;
+    private BufferedImage[] command, mobs, stats, sidebar;
+    private SpriteManager[] ennemies, images;
 
+    private Timer animationTimer;
+    private int currentEnnemy;
+    private Random random;
 
     public HowToPlay() {
-        title = "How to play";
+        currentEnnemy = 0;
 
-        command = new String[5];
-        command[0] = "Z Q S D : move";
-        command[1] = "SPACE : attack";
-        command[2] = "Z : change level above stairs";
-        command[3] = "O : save";
-        command[4] = "ESCAPE : quit to menu without save";
+        Color textColor = Color.WHITE;
+        TextManager textManager = new TextManager();
 
-        mobs = new String[4];
-        mobs[0] = "You";
-        mobs[1] = "Enemies";
-        mobs[2] = "Chest";
-        mobs[3] = "Trap or not";
+        random = new Random();
 
-        images = new BufferedImage[4];
-        images[0] = TextureFactory.getTextureFactory().getHero();
-        images[1] = TextureFactory.getTextureFactory().getMonster();
-        images[2] = TextureFactory.getTextureFactory().getFilledTreasure();
-        images[3] = TextureFactory.getTextureFactory().getTraps();
+        // Setting title and text
+        title = textManager.getString("How to play", textColor);
 
-        ennemies = new BufferedImage[3];
-        ennemies[0] = TextureFactory.getTextureFactory().getMonster();
-        ennemies[1] = TextureFactory.getTextureFactory().getGhost();
-        ennemies[2] = TextureFactory.getTextureFactory().getGobelin();
+        command = new BufferedImage[5];
+        command[0] = textManager.getString("Z Q S D : move", textColor);
+        command[1] = textManager.getString("SPACE : attack", textColor);
+        command[2] = textManager.getString("Z : change level above stairs", textColor);
+        command[3] = textManager.getString("O : save", textColor);
+        command[4] = textManager.getString("ESCAPE : quit to menu without save", textColor);
 
-        stats = new String[4];
-        stats[0] = "Health";
-        stats[1] = "Regen";
-        stats[2] = "Attack";
-        stats[3] = "Counter";
+        mobs = new BufferedImage[4];
+        mobs[0] = textManager.getString("You", textColor);
+        mobs[1] = textManager.getString("Enemies", textColor);
+        mobs[2] = textManager.getString("Chest", textColor);
+        mobs[3] = textManager.getString("Trap or not", textColor);
 
+        stats = new BufferedImage[4];
+        stats[0] = textManager.getString("Health", textColor);
+        stats[1] = textManager.getString("Regen", textColor);
+        stats[2] = textManager.getString("Attack", textColor);
+        stats[3] = textManager.getString("Counter", textColor);
+
+        sidebar = new BufferedImage[5];
+        sidebar[0] = textManager.getString("Depth", textColor);
+        sidebar[1] = textManager.getString("Mini map", textColor);
+        sidebar[2] = textManager.getString("Health left", textColor);
+        sidebar[3] = textManager.getString("Score", Color.ORANGE);
+        sidebar[4] = textManager.getString("cost", Color.RED);
+
+        // Setting images of tiles and hero
+        images = new SpriteManager[4];
+
+        images[0] = new SpriteManagerHero(
+                TextureFactory.getTextureFactory().getHero()
+        );
+
+        images[2] = new SpriteManagerTile(
+                TextureFactory.getTextureFactory().getFilledTreasure()
+        );
+
+        images[3] = new SpriteManagerTile(
+                TextureFactory.getTextureFactory().getTraps()
+        );
+
+        // Setting images for ennemies
+        ennemies = new SpriteManager[3];
+
+        ennemies[0] = new SpriteManagerMonster(
+                TextureFactory.getTextureFactory().getGobelin()
+        );
+        ennemies[1] = new SpriteManagerMonster(
+                TextureFactory.getTextureFactory().getMonster()
+        );
+        ennemies[2] = new SpriteManagerMonster(
+                TextureFactory.getTextureFactory().getGhost()
+        );
+
+        // Timer is the object that will launch the animation
+        animationTimer = new Timer();
+
+        // The animation is done by a timer task object
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                // Looping on ennemies
+                currentEnnemy = (currentEnnemy+1) % 3;
+
+                // Changing the direction for both hero and ennemy
+                switch (random.nextInt(4)){
+                    case 0:
+                        images[0].setSprite(Cmd.DOWN);
+                        ennemies[currentEnnemy].setSprite(Cmd.DOWN);
+                        break;
+                    case 1:
+                        images[0].setSprite(Cmd.UP);
+                        ennemies[currentEnnemy].setSprite(Cmd.UP);
+                        break;
+                    case 2:
+                        images[0].setSprite(Cmd.LEFT);
+                        ennemies[currentEnnemy].setSprite(Cmd.LEFT);
+                        break;
+                    case 3:
+                        images[0].setSprite(Cmd.RIGHT);
+                        ennemies[currentEnnemy].setSprite(Cmd.RIGHT);
+                        break;
+                }
+            }
+        };
+        // Then we schedule the task
+        animationTimer.schedule(timerTask,
+                GlobalSprites.getHowToAnimationDelay(),
+                GlobalSprites.getHowToAnimationDelay());
     }
 
     @Override
@@ -78,23 +150,19 @@ public class HowToPlay implements GameState {
         crayon.setBackground(backgroundColor);
         crayon.clearRect(1000, 0, 280, height);
 
-        // Fecthing the title
-        textColor = Color.WHITE;
-        textImage = textManager.getString(title, textColor);
-
         // Draw the title with the pencil
         crayon.drawImage(
-                textImage,
-                (width / 2) - (textImage.getWidth() / 2),
+                title,
+                (width / 2) - (title.getWidth() / 2),
                 TOP_SPAN/2,
-                textImage.getWidth(),
-                textImage.getHeight(),
+                title.getWidth(),
+                title.getHeight(),
                 null
         );
 
         // Draw the labels for the commands
         cptCommand = HEIGHT_LABEL;
-        for(String s : command){
+        for(BufferedImage s : command){
             if(s.equals(command[2]) || s.equals(command[4])){ // change level & quit
                 widthText = 700;
             }
@@ -104,9 +172,8 @@ public class HowToPlay implements GameState {
             else {  // move & attack
                 widthText = 400;
             }
-            textImage = textManager.getString(s, textColor);
             crayon.drawImage(
-                    textImage,
+                    s,
                     HEIGHT_LABEL,
                     TOP_SPAN + HEIGHT_LABEL + cptCommand * 2,
                     widthText,
@@ -118,41 +185,54 @@ public class HowToPlay implements GameState {
 
         // Draw the labels for the mobs/tiles
         cptMob = HEIGHT_LABEL;
-        for(int i = 0 ; i < mobs.length ; i++){
-            if(i == 0 || i == 2){
+        for(int i = 0 ; i < mobs.length ; i++) {
+            if (i == 0 || i == 2) {
                 widthText = 100;
-            }
-            else {  // move & attack
+            } else {  // move & attack
                 widthText = 200;
             }
-            textImage = textManager.getString(mobs[i], textColor);
             crayon.drawImage(
-                    textImage,
+                    mobs[i],
                     cptMob,
-                    TOP_SPAN + HEIGHT_LABEL *5 + cptCommand * 2,
+                    TOP_SPAN + HEIGHT_LABEL * 5 + cptCommand * 2,
                     widthText,
                     HEIGHT_LABEL,
                     null
             );
-            if(i != 1) {
+            cptMob = cptMob + HEIGHT_LABEL *4 + widthText;
+        }
+
+        // Draw tiles, hero and ennemies
+        cptMob = HEIGHT_LABEL;
+        for (int i = 0; i < images.length; i++){
+            if (i == 0 || i == 2) {
+                widthText = 100;
+            } else {  // move & attack
+                widthText = 200;
+            }
+            if(i == 1) {
                 crayon.drawImage(
-                        images[i],
+                        ennemies[currentEnnemy].getCurrentSprite(),
+                        cptMob,
+                        TOP_SPAN + HEIGHT_LABEL * 7 + cptCommand * 2,
+                        100,
+                        100,
+                        null);
+            }else{
+                crayon.drawImage(
+                        images[i].getCurrentSprite(),
                         cptMob,
                         TOP_SPAN + HEIGHT_LABEL * 7 + cptCommand * 2,
                         100,
                         100,
                         null);
             }
-            else {  // Multiple images
-                //TODO Défilement des mobs
-            }
-            cptMob = cptMob + HEIGHT_LABEL *4 + widthText;
+            cptMob += HEIGHT_LABEL * 4 + widthText;
         }
 
         // Draw the labels of the right part
-        textImage = textManager.getString("Depth", textColor);
         crayon.drawImage(
-                textImage,
+                sidebar[0],
                 1100 - HEIGHT_LABEL,
                 TOP_SPAN / 2,
                 100,
@@ -160,29 +240,26 @@ public class HowToPlay implements GameState {
                 null
         );
 
-        textImage = textManager.getString("Mini map", textColor);
         crayon.drawImage(
-                textImage,
+                sidebar[1],
                 1100 - HEIGHT_LABEL,
                 170,
-                100,
-                HEIGHT_LABEL/2,
-                null
-        );
-
-        textImage = textManager.getString("Health left", textColor);
-        crayon.drawImage(
-                textImage,
-                1100 - HEIGHT_LABEL,
-                350,
-                100,
+                120,
                 HEIGHT_LABEL,
                 null
         );
 
-        textImage = textManager.getString("Score", Color.ORANGE);
         crayon.drawImage(
-                textImage,
+                sidebar[2],
+                1100 - HEIGHT_LABEL,
+                350,
+                120,
+                HEIGHT_LABEL,
+                null
+        );
+
+        crayon.drawImage(
+                sidebar[3],
                 1100 - HEIGHT_LABEL,
                 450,
                 100,
@@ -192,9 +269,8 @@ public class HowToPlay implements GameState {
 
         // Bottom-left corner
         for(int i = 0 ; i < stats.length ; i++){
-            textImage = textManager.getString(stats[i], textColor);
             crayon.drawImage(
-                    textImage,
+                    stats[i],
                     1020,
                     550 + i * HEIGHT_LABEL * 2,
                     100,
@@ -204,9 +280,8 @@ public class HowToPlay implements GameState {
 
             //TODO Affichage du bouton pour augmenter la stat
 
-            textImage = textManager.getString("cost", Color.RED);
             crayon.drawImage(
-                    textImage,
+                    sidebar[4],
                     1200,
                     550 + i * HEIGHT_LABEL * 2,
                     50,
@@ -221,6 +296,10 @@ public class HowToPlay implements GameState {
 
     @Override
     public void evolve(ZelpopGame game, Cmd commande) {
+        // First thing first, we cancel the animation timer
+        animationTimer.cancel();
+
+        // Then we execute the command
         if (commande == Cmd.ATTACK) {
             game.setState(StateFactory.getInGame(new Dungeon()));
         }
