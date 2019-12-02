@@ -34,7 +34,6 @@ public class MazeFactory implements Serializable {
      */
     public Maze getMaze(EntityFactory entityFactory) {
         MAZE_COUNTER++;
-        System.out.println(MAZE_COUNTER);
         int defaultLength = 20;
         int defaultEntities = 1;
         Tile[][] tiles = new Tile[defaultLength][defaultLength];
