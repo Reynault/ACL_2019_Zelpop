@@ -28,12 +28,7 @@ public class PositionIA implements Serializable {
     }
 
     public PositionIA(Position pos, Boolean nromalTile) {
-        this.pos = pos;
-        this.f = 0;
-        this.g = 0;
-        this.h = 0;
-        nextVoisinList = new ArrayList<>();
-        previousVoisin = null;
+        this(pos);
         this.nromalTile = nromalTile;
     }
 

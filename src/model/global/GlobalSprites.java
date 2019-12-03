@@ -25,6 +25,6 @@ public class GlobalSprites {
     public static int getAnimationDelay(){return 50;}
 
     public static long getHowToAnimationDelay() {
-        return 150;
+        return 250;
     }
 }

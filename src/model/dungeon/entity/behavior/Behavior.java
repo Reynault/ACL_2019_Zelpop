@@ -33,31 +33,27 @@ public class Behavior implements Serializable {
     public Cmd behave(Maze maze, Entity entity, Cmd commande) {
         Cmd res = Cmd.IDLE;
         switch (commande) {
-            case ATTACK:
-
+            case ATTACK:{
                 attack.attack(maze, entity);
                 break;
-
+            }
             case DOWN:
             case RIGHT:
             case LEFT:
-            case UP:
-
+            case UP: {
                 res = move.move(maze, entity, commande);
                 break;
-
-            default:
-
+            }
+            default: {
                 // Pattern Method
                 if (check.check(maze, entity)) {
                     attack.attack(maze, entity);
                 } else {
                     res = move.move(maze, entity, commande);
                 }
-
                 break;
+            }
         }
-
         return res;
     }
 }

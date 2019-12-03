@@ -124,7 +124,6 @@ public class MoveGobelin implements Move {
 
             //adding voisis of current to unchecked pos
             ArrayList<PositionIA> voisinlist = getVoisins(currentPos);
-            ;
 
             for (int i = 0; i < voisinlist.size(); i++) {
                 PositionIA p = voisinlist.get(i);
@@ -148,8 +147,6 @@ public class MoveGobelin implements Move {
                 }
             }
         }
-
-
         return null;
     }
 
@@ -161,13 +158,10 @@ public class MoveGobelin implements Move {
      * @return
      */
     public int heuristique(PositionIA p) {
-
         int distance = Math.abs(endPosition.getX() - p.getPos().getX())
                 + Math.abs(endPosition.getY() - p.getPos().getY());
-
         return distance;
     }
-
 
     public ArrayList getVoisins(PositionIA pos) {
         return matrix[pos.getPos().getY()][pos.getPos().getX()].getVoisinList();
@@ -177,30 +171,25 @@ public class MoveGobelin implements Move {
         Cmd c;
         // System.out.println(pos.getX());
         if (entity.getPosition().getX() + 1 == pos.getX()) {
-
             return new Position(
                     entity.getPosition().getX(),
                     entity.getPosition().getY(),
                     Cmd.RIGHT
             );
         } else if (entity.getPosition().getX() - 1 == pos.getX()) {
-
             // System.out.println("--------------------------");
             return new Position(
                     pos.getX(),
                     pos.getY(),
                     Cmd.LEFT
             );
-
         } else if (entity.getPosition().getY() - 1 == pos.getY()) {
-
             //System.out.println("--------------------------");
             return new Position(
                     pos.getX(),
                     pos.getY(),
                     Cmd.UP
             );
-
         } else {
             //System.out.println("--------------------------");
             return new Position(
@@ -208,13 +197,10 @@ public class MoveGobelin implements Move {
                     pos.getY(),
                     Cmd.DOWN
             );
-
         }
-
     }
 
     public void faceDirection() {
-
         int rand = (int) (Math.round(Math.random() * 4));
         switch (rand) {
             case 1:
@@ -234,6 +220,4 @@ public class MoveGobelin implements Move {
                 break;
         }
     }
-
-
 }
