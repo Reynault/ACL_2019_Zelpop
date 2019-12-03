@@ -37,7 +37,7 @@ public class EntityFactory implements Serializable {
      * Generate the Hero
      */
     public Hero generateHero() {
-        Stats stats = new Stats(HERO_HP, HERO_DAMAGE, 1, 1);
+        Stats stats = new Stats(HERO_HP, HERO_DAMAGE, 1, -2);
         return hero = new Hero(stats,
                 false,
                             HERO_SCORE,

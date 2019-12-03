@@ -26,11 +26,11 @@ that focus the player during the whole game. A new monster that can go through w
 |   Reynault     | Attack animation                             |   DONE   |
 |   Reda         | Gobelin                                      |   -   |
 |   Reda         | Ghost                                        |   -   |
-|   Jromary      | Stat system (model)                          |   -   |
-|   Matthieu     | Stat system (interface)                      |   -   |
+|   Jromary      | Stat system (model)                          |   DONE   |
+|   Matthieu     | Stat system (interface)                      |   TEST   |
 |   Reynault     | Teleport                                     |   TEST   |
 |   Reynault     | Destructible traps                           |   TEST   |
-|   Matthieu     | New how to use interface                     |   -   |
+|   Matthieu     | New how to use interface                     |   TEST   |
 |   Reynault     | Update Random maze to implement new features |   DONE   |
 
 ## Implementation ideas
