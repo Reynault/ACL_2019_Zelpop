@@ -68,7 +68,7 @@ public class Maze implements Serializable {
         int frameWidth, frameHeight,
                 xShift, yShift,
                 currentX, currentY,
-                sideBarSizeX, sideBarSizeY;
+                sideBarSize, centerSize;
 
         int nbTileDisplayedY = 12;
         int nbTileDisplayedX = 20;
@@ -80,11 +80,10 @@ public class Maze implements Serializable {
         frameWidth = img.getWidth();
         frameHeight = img.getHeight();
 
-        //sideBarSizeX = 8 * unit;
-        sideBarSizeX = 280;
-        sideBarSizeY = (nbTileDisplayedY * 2 + 1) * unit;
+        centerSize = 1000;
+        sideBarSize = 280;
 
-        xShift = frameWidth / 2 - sideBarSizeX;
+        xShift = frameWidth / 2 - sideBarSize;
         yShift = frameHeight / 2;
 
         // Drawing the background
@@ -142,38 +141,38 @@ public class Maze implements Serializable {
 //        crayon.fillRect(
 //                xShift + nbTileDisplayed * unit,
 //                yShift - nbTileDisplayed * unit,
-//                sideBarSizeX,
+//                sideBarSize,
 //                sideBarSizeY
 //        );
         // Setting the right bar
         Color sideBarColor;
         sideBarColor = new Color(0x646464);
         crayon.setBackground(sideBarColor);
-        crayon.clearRect(1000, 0, sideBarSizeX, frameHeight);
+        crayon.clearRect(1000, 0, sideBarSize, frameHeight);
 
         crayon.setColor(Color.BLACK);
         // Drawing the mini-map
-        int nbTileDisplyedOnMap = 14;
+        int nbTileDisployedOnMap = 14;
         int miniUnit = GlobalSprites.get8Sprite() * GlobalSprites.getMiniScaling();
 
-        int miniShiftx = xShift + nbTileDisplayedX * unit + unit * 4;
-        int miniShifty = yShift - nbTileDisplayedY * unit + unit * 4 + top_span;
+        int miniShiftx = centerSize + nbTileDisployedOnMap * miniUnit + ((sideBarSize/2) - (nbTileDisployedOnMap * miniUnit));
+        int miniShifty = top_span + nbTileDisplayedY * miniUnit;
 
         int miniTilePositionX = miniUnit;
         int miniTilePositionY = miniUnit;
 
         crayon.drawImage(
                 TextureFactory.getTextureFactory().getBackground(),
-                miniShiftx - (nbTileDisplyedOnMap * miniUnit),
-                miniShifty - (nbTileDisplyedOnMap * miniUnit),
-                ((nbTileDisplyedOnMap*2+1) * miniUnit),
-                ((nbTileDisplyedOnMap*2+1) * miniUnit),
+                miniShiftx - (nbTileDisployedOnMap * miniUnit),
+                miniShifty - (nbTileDisployedOnMap * miniUnit),
+                ((nbTileDisployedOnMap*2+1) * miniUnit),
+                ((nbTileDisployedOnMap*2+1) * miniUnit),
                 null
         );
 
         // Drawing surrounding tiles
-        for (int x = -nbTileDisplyedOnMap; x <= nbTileDisplyedOnMap; x++) {
-            for (int y = -nbTileDisplyedOnMap; y <= nbTileDisplyedOnMap; y++) {
+        for (int x = -nbTileDisployedOnMap; x <= nbTileDisployedOnMap; x++) {
+            for (int y = -nbTileDisployedOnMap; y <= nbTileDisployedOnMap; y++) {
                 currentX = posHero.getX() + x;
                 currentY = posHero.getY() + y;
                 // If the tile exists
@@ -212,19 +211,24 @@ public class Maze implements Serializable {
         // Drawing the HP bar
         crayon.setColor(pvColor);
 
+        int barWidth = unit * 6;
+        int barX = centerSize + (sideBarSize /2 - (barWidth/2));
+        int barY = unit;
+
         crayon.drawRect(
-                sideBarElementX,
+                barX,
                 yShift - nbTileDisplayedY * unit + unit * 10 + top_span,
-                unit * 6,
-                unit
+                barWidth,
+                barY
         );
 
         double HPratio = (double) hero.getHp() / (double) hero.getMaxHp();
+        int rectWidth = (int) (unit * HPratio * 6);
 
         crayon.fillRect(
-                sideBarElementX,
+                centerSize + (sideBarSize /2 - (barWidth/2)),
                 yShift - nbTileDisplayedY * unit + unit * 10 + top_span,
-                (int) (unit * HPratio * 6),
+                rectWidth,
                 unit
         );
 
@@ -234,7 +238,7 @@ public class Maze implements Serializable {
         BufferedImage labelScoreValue = text.getString(String.valueOf(hero.getScore()), labelScoreColor);
         crayon.drawImage(
                 labelScoreValue,
-                1100,
+                centerSize + (sideBarSize /2 - (labelScoreValue.getWidth()/2)),
                 450,
                 labelScoreValue.getWidth(),
                 labelScoreValue.getHeight(),
