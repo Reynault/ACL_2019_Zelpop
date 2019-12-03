@@ -19,78 +19,91 @@ class MazeTest {
 
             EntityFactory entityFactory = new EntityFactory();
             //hero position is down
-            //hero position is (0,0)
+            //hero position is (1,1)
             Hero hero = entityFactory.generateHero();
             MazeFactory mazeFactory = new MazeFactory();
-            Maze maze = mazeFactory.getRandomMaze(30, entityFactory);
 
+            //Position (1.2) is a valid position
+            InputStream is =  MazeTest.class.getClassLoader().getResourceAsStream("level/testMaze2");
+            Maze maze = mazeFactory.getMaze(is, entityFactory);
             maze.moveEntity(hero,Cmd.DOWN);
 
-            Assertions.assertEquals(0,hero.getPosition().getX());
-            Assertions.assertEquals(1,hero.getPosition().getY());
-
+            Assertions.assertEquals(1,hero.getPosition().getX());
+            Assertions.assertEquals(2,hero.getPosition().getY());
         }
 
         @Test
         void moveEntity__In_Idle_Position() {
             EntityFactory entityFactory = new EntityFactory();
             //hero position is down
-            //hero is on position (0,0)
+            //hero is on position (1,1)
             Hero hero = entityFactory.generateHero();
+            hero.setPosition(new Position(hero.getPosition().getX(),hero.getPosition().getY(),Cmd.IDLE));
             MazeFactory mazeFactory = new MazeFactory();
-            Maze maze = mazeFactory.getRandomMaze(30, entityFactory);
 
-            maze.moveEntity(hero,Cmd.UP);
+            //Position (1.2) is a valid position
+            InputStream is =  MazeTest.class.getClassLoader().getResourceAsStream("level/testMaze.txt");
+            Maze maze = mazeFactory.getMaze(is, entityFactory);
+            maze.moveEntity(hero,Cmd.DOWN);
 
-            Assertions.assertEquals(hero.getPosition().getX(),0);
-            Assertions.assertEquals(hero.getPosition().getY(),0);
-            Assertions.assertEquals(hero.getPosition().getCmd(),Cmd.UP);
+            Assertions.assertEquals(1,hero.getPosition().getX());
+            Assertions.assertEquals(1,hero.getPosition().getY());
+            Assertions.assertEquals(Cmd.DOWN,hero.getPosition().getCmd());
         }
 
         @Test
         void moveEntity_Not_Ok_Position() {
             EntityFactory entityFactory = new EntityFactory();
+            //here we are moving the hero
             //hero position is down
-            //hero is on position (0,0)
-
+            //hero is on position (1,1)
             Hero hero = entityFactory.generateHero();
             MazeFactory mazeFactory = new MazeFactory();
-            Maze maze = mazeFactory.getRandomMaze(30, entityFactory);
-            maze.moveEntity(hero,Cmd.LEFT);
-            Assertions.assertEquals(hero.getPosition().getX(),0);
-            Assertions.assertEquals(hero.getPosition().getY(),0);
+
+            //Position (1.0) is a wall
+            InputStream is =  MazeTest.class.getClassLoader().getResourceAsStream("level/testMaze.txt");
+            Maze maze = mazeFactory.getMaze(is, entityFactory);
+            hero.setPosition(new Position(hero.getPosition().getX(),hero.getPosition().getY(),Cmd.UP));
+            maze.moveEntity(hero,Cmd.UP);
+
+            Assertions.assertEquals(1,hero.getPosition().getX());
+            Assertions.assertEquals(1,hero.getPosition().getY());
         }
 
         @Test
         void Hero_Move_Valide_Pos(){
             EntityFactory entityFactory = new EntityFactory();
             //hero position is down
-            //hero position is (0,0)
-            //position 1 0 non valide
+            //hero position is (1,1)
             Hero hero = entityFactory.generateHero();
-            hero.setPosition(new Position(hero.getPosition().getX(),hero.getPosition().getY(),Cmd.RIGHT));
             MazeFactory mazeFactory = new MazeFactory();
-            Maze maze = mazeFactory.getRandomMaze(30, entityFactory);
-            maze.moveEntity(hero, Cmd.RIGHT);
+
+            //Position (2.1) is a valid position
+            InputStream is =  MazeTest.class.getClassLoader().getResourceAsStream("level/testMaze2");
+            Maze maze = mazeFactory.getMaze(is, entityFactory);
+            maze.moveEntity(hero,Cmd.DOWN);
+
             Assertions.assertEquals(1,hero.getPosition().getX());
-            Assertions.assertEquals(0,hero.getPosition().getY());
+            Assertions.assertEquals(2,hero.getPosition().getY());
         }
 
         @Test
         void Hero_Move_Not_Valide_Pos_OutSide_The_Maze(){
             EntityFactory entityFactory = new EntityFactory();
             //hero position is down
-            //hero position is (0,0)
-            //position -1 0 non valide
+            //hero position is (1,1)
+            //position 0 1 not valide
             Hero hero = entityFactory.generateHero();
             hero.setPosition(new Position(hero.getPosition().getX(),hero.getPosition().getY(),Cmd.LEFT));
             MazeFactory mazeFactory = new MazeFactory();
-            Maze maze = mazeFactory.getRandomMaze(30, entityFactory);
 
+            //Position (0.1) is a valid position
+            InputStream is =  MazeTest.class.getClassLoader().getResourceAsStream("level/testMaze.txt");
+            Maze maze = mazeFactory.getMaze(is, entityFactory);
             maze.moveEntity(hero,Cmd.LEFT);
 
-            Assertions.assertEquals(0,hero.getPosition().getX());
-            Assertions.assertEquals(0,hero.getPosition().getY());
+            Assertions.assertEquals(1,hero.getPosition().getX());
+            Assertions.assertEquals(1,hero.getPosition().getY());
         }
 
         @Test

@@ -9,6 +9,7 @@ in regard of the depth.
 - Scaling score
 - Possibility to improve hero stat, costing score
 - Sound systeme
+- force to go to next etage by making vitality negative after a set amount of step
 
 ## Attribution
 
@@ -22,3 +23,8 @@ in regard of the depth.
 
 ## Implementation ideas
 
+- More mob in higher level
+    - change probability
+- Each depth add a certain amount in a stat of monster
+    - default
+    - scaling Stat passed to each monster of the type

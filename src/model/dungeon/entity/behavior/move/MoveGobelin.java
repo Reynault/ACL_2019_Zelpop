@@ -26,9 +26,8 @@ public class MoveGobelin implements Move {
     @Override
     public Cmd move(Maze maze, Entity entity, Cmd commande) {
 
-        //System.out.println("***********************************************");
-        // creating matrix for calcuation
-        // adding voisins
+        // creating matrix for postion calcuation
+        // adding positions neighbours
         // adding obstacles
         mazeWidth = maze.getWidth();
         mazeHeight = maze.getHeight();
@@ -38,35 +37,35 @@ public class MoveGobelin implements Move {
             for (int j = 0; j < mazeWidth; j++) {
                 matrix[i][j] = new PositionIA(new Position(j, i, Cmd.IDLE));
                 matrix[i][j].addVoisins(mazeHeight, mazeWidth, mazeTile);
-                //System.out.println(mazeTile[i][j].canBeCrossed() + " / "+ j + " / " + i);
                 if (!mazeTile[i][j].canBeCrossed()) {
-                    //System.out.println(mazeTile[i][j].canBeCrossed() + " / "+ j + " / " + i);
                     matrix[i][j].setNromalTile(false);
                 }
             }
         }
 
 
-        // seting the start pos == gobelin pos
+        // setting the start pos == gobelin pos
         startPosition = matrix[entity.getPosition().getY()][entity.getPosition().getX()].getPos();
         // getting hero postion
         // setting the end pos == hero pos
         endPosition = maze.getHero().getPosition();
 
-        // cheked pos
+        // checked pos = position that aleardy has been tested
+        // to reach monster pos
         checkedPositions = new ArrayList<>();
-        // inchecked pos
+        // unchecked pos
         unCheckedPositions = new ArrayList<>();
         unCheckedPositions.add(matrix[entity.getPosition().getY()][entity.getPosition().getX()]);
 
         Position pos = a_Star();
+
         // setting Goeblin new position
         // if he is facing the new pos then add the new pos
         // else turn it to the same pos
-
         if (pos != null) {
-            pos = finalPos(entity, pos);
+            pos = finalPos(entity, pos, endPosition );
             this.movement = pos.getCmd();
+            System.out.println(pos.getCmd());
         } else {
             faceDirection();
             entity.setPosition(new Position(
@@ -75,8 +74,6 @@ public class MoveGobelin implements Move {
                     this.movement
             ));
         }
-
-        //System.out.println("***********************************************");
 
         return this.movement;
     }
@@ -89,7 +86,7 @@ public class MoveGobelin implements Move {
         // condition
         while (this.unCheckedPositions.size() > 0) {
 
-            // continue lookinf for solution
+            // continue looking for solution
             int winner = 0;
             for (int i = 0; i < this.unCheckedPositions.size(); i++) {
                 //if we found a lowest way we take it
@@ -167,9 +164,8 @@ public class MoveGobelin implements Move {
         return matrix[pos.getPos().getY()][pos.getPos().getX()].getVoisinList();
     }
 
-    public Position finalPos(Entity entity, Position pos) {
-        Cmd c;
-        // System.out.println(pos.getX());
+    public Position finalPos(Entity entity, Position pos, Position heroP) {
+        // if the new position is to right then go to right
         if (entity.getPosition().getX() + 1 == pos.getX()) {
             return new Position(
                     entity.getPosition().getX(),
@@ -177,28 +173,54 @@ public class MoveGobelin implements Move {
                     Cmd.RIGHT
             );
         } else if (entity.getPosition().getX() - 1 == pos.getX()) {
-            // System.out.println("--------------------------");
+            // if the new position is to the left then go to left
             return new Position(
-                    pos.getX(),
-                    pos.getY(),
+                    entity.getPosition().getX(),
+                    entity.getPosition().getY(),
                     Cmd.LEFT
             );
         } else if (entity.getPosition().getY() - 1 == pos.getY()) {
-            //System.out.println("--------------------------");
+            // if the new position is the Up then go Up
             return new Position(
-                    pos.getX(),
-                    pos.getY(),
+                    entity.getPosition().getX(),
+                    entity.getPosition().getY(),
                     Cmd.UP
             );
-        } else {
-            //System.out.println("--------------------------");
+        } else if (entity.getPosition().getY() + 1 == pos.getY()){
+            // if the new position is to down then go to down
             return new Position(
-                    pos.getX(),
-                    pos.getY(),
+                    entity.getPosition().getX(),
+                    entity.getPosition().getY(),
                     Cmd.DOWN
+            );
+        }else {
+            // if gobelion is aleardy in front on the hero
+            // then just face hero
+            Cmd c = finalFaceDirection(entity , heroP);
+            return new Position(
+                    entity.getPosition().getX(),
+                    entity.getPosition().getY(),
+                    c
             );
         }
     }
+
+    public Cmd finalFaceDirection (Entity entity, Position p){
+
+        if (entity.getPosition().getX() + 1 == p.getX()) {
+            return Cmd.RIGHT;
+        }
+        else if (entity.getPosition().getX() - 1 == p.getX()) {
+            return Cmd.LEFT;
+        }
+        else if (entity.getPosition().getY() - 1 == p.getY()) {
+            return Cmd.UP;
+        }
+        else {
+            return Cmd.DOWN;
+        }
+    }
+
 
     public void faceDirection() {
         int rand = (int) (Math.round(Math.random() * 4));
