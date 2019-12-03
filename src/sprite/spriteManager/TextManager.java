@@ -103,6 +103,22 @@ public class TextManager {
                 taille,
                 taille
         );
+
+        // -
+        images[45] = text.getSubimage(
+                5*taille,
+                7*taille,
+                taille,
+                taille
+        );
+
+        // !
+        images[0] = text.getSubimage(
+                3*taille,
+                0,
+                taille,
+                taille
+        );
     }
 
     public BufferedImage getString(String s, Color color){
@@ -117,19 +133,27 @@ public class TextManager {
         Graphics2D crayon = (Graphics2D) image.getGraphics();
 
         for(int i = 0; i < s.length(); i++){
-            character = images[s.charAt(i)];
 
-            for(int j = 0 ; j < character.getHeight(); j++){
-                for(int k = 0; k < character.getWidth(); k++){
-                    if( (character.getRGB(j, k) >> 24) != 0x00 ){
-                        character.setRGB(
-                                j,
-                                k,
-                                color.getRGB()
-                        );
+            // Verify if the actual character is available
+            if(s.charAt(i) >= images.length || images[s.charAt(i)] == null) {
+                character = images[0];
+            }else{
+                character = images[s.charAt(i)];
+
+                for(int j = 0 ; j < character.getHeight(); j++){
+                    for(int k = 0; k < character.getWidth(); k++){
+                        if( (character.getRGB(j, k) >> 24) != 0x00 ){
+                            character.setRGB(
+                                    j,
+                                    k,
+                                    color.getRGB()
+                            );
+                        }
                     }
                 }
             }
+
+
 
             crayon.drawImage(
                     character,

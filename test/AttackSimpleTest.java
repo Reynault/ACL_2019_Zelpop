@@ -1,4 +1,3 @@
-package test;
 import model.dungeon.Maze;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;

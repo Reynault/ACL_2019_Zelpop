@@ -3,7 +3,6 @@ package model.dungeon;
 import model.Pair;
 import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
-import model.dungeon.entity.Gobelin;
 import model.dungeon.entity.Hero;
 import model.dungeon.scoring.Scoring;
 import model.dungeon.tile.Tile;
@@ -28,9 +27,6 @@ public class Maze implements Serializable {
     private int width, height;
     private Hero hero;
     private Scoring scoring;
-
-    private static String PV_STATUS = "HP";
-    private static String SCORE_STATUS = "SCORE";
 
     /**
      * Default constructor
@@ -91,6 +87,7 @@ public class Maze implements Serializable {
         xShift = frameWidth / 2 - sideBarSizeX;
         yShift = frameHeight / 2;
 
+        // Drawing the background
         crayon.drawImage(
                 TextureFactory.getTextureFactory().getBackground(),
                 xShift - (nbTileDisplayedX * unit),
@@ -112,16 +109,6 @@ public class Maze implements Serializable {
                             (x * unit) + xShift,
                             (y * unit) + yShift, GlobalSprites.getScaling());
                 }
-
-                /*else {
-                    // Otherwise, the void
-                    crayon.fillRect(
-                            (x * unit) + xShift,
-                            (y * unit) + yShift,
-                            unit,
-                            unit
-                    );
-                }*/
             }
         }
 
@@ -197,15 +184,6 @@ public class Maze implements Serializable {
                             (y * miniTilePositionY) + miniShifty,
                             GlobalSprites.getMiniScaling());
                 }
-                /* else {
-                    // Otherwise, the void
-                    crayon.fillRect(
-                            (x * miniTilePositionX) + miniShiftx,
-                            (y * miniTilePositionY) + miniShifty,
-                            miniUnit,
-                            miniUnit
-                    );
-                }*/
             }
         }
 

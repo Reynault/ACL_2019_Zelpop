@@ -16,8 +16,8 @@ in regard of the depth.
 |     Member    |             Feature                           | State |
 |:-------------:|:---------------------------------------------:|:-----:|
 |    Réno       |           Sound Systeme                       |   -   |
-|               |           Score                               |   -   |
-|    Jro        |           Stats Hero                          |   -   |
+|    Matt       |           Score                               |   -   |
+|     Jro       |           Stats Hero                          |   -   |
 |               |           Stats monster                       |   -   |
 
 

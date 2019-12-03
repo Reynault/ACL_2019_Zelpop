@@ -74,10 +74,10 @@ public class Dungeon implements Serializable {
      */
     public void updateAll(ZelpopGame game) {
         currentMaze.moveEntities();
+        currentMaze.regenEntites();
         if (!hero.isAlive()) {
             game.setState(StateFactory.getGameOver(this));
         }
-        currentMaze.regenEntites();
     }
 
     /**
@@ -98,6 +98,9 @@ public class Dungeon implements Serializable {
      * @param img image
      */
     public void draw(BufferedImage img) throws InterruptedException{
+        int centerWidth = 1000;
+        int sidebarWidth = 280;
+
         // Draw the maze
         currentMaze.draw(img);
         // Draw the labels of the depth
@@ -107,10 +110,10 @@ public class Dungeon implements Serializable {
         textImage = textManager.getString(floor + "", Color.WHITE);
         crayon.drawImage(
                 textImage,
-                1100 - 20,
+                centerWidth + (sidebarWidth /2 - (textImage.getWidth()/2)),
                 25,
-                100,
-                25,
+                textImage.getWidth(),
+                textImage.getHeight(),
                 null
         );
     }
