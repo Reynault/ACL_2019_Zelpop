@@ -103,6 +103,14 @@ public class TextManager {
                 taille,
                 taille
         );
+
+        // .
+        images[45] = text.getSubimage(
+                5*taille,
+                7*taille,
+                taille,
+                taille
+        );
     }
 
     public BufferedImage getString(String s, Color color){
