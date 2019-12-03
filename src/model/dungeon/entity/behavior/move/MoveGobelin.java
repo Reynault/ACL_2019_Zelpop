@@ -67,7 +67,6 @@ public class MoveGobelin implements Move {
             this.movement = pos.getCmd();
             System.out.println(pos.getCmd());
         } else {
-            System.out.println("calculted");
             faceDirection();
             entity.setPosition(new Position(
                     entity.getPosition().getX(),
