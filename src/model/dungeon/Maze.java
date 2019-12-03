@@ -70,21 +70,18 @@ public class Maze implements Serializable {
                 currentX, currentY,
                 sideBarSize, centerSize;
 
-        int nbTileDisplayedY = 12;
-        int nbTileDisplayedX = 20;
-        Position posHero = hero.getPosition();
-        int unit = GlobalSprites.get8Sprite() * GlobalSprites.getScaling();
-
-        crayon.setColor(Color.BLACK);
-
-        frameWidth = img.getWidth();
-        frameHeight = img.getHeight();
-
         centerSize = 1000;
         sideBarSize = 280;
 
-        xShift = frameWidth / 2 - sideBarSize;
-        yShift = frameHeight / 2;
+        int unit = GlobalSprites.get8Sprite() * GlobalSprites.getScaling();
+        int nbTileDisplayedY = 12;
+        int nbTileDisplayedX = 20;
+        Position posHero = hero.getPosition();
+
+        crayon.setColor(Color.BLACK);
+
+        xShift = centerSize / 2;
+        yShift = img.getHeight() / 2;
 
         // Drawing the background
         crayon.drawImage(
@@ -148,7 +145,7 @@ public class Maze implements Serializable {
         Color sideBarColor;
         sideBarColor = new Color(0x646464);
         crayon.setBackground(sideBarColor);
-        crayon.clearRect(1000, 0, sideBarSize, frameHeight);
+        crayon.clearRect(1000, 0, sideBarSize, img.getHeight());
 
         crayon.setColor(Color.BLACK);
         // Drawing the mini-map

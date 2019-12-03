@@ -87,7 +87,7 @@ public abstract class Entity implements Serializable {
      *
      */
     public boolean isAlive() {
-        if (this.stats.getCurrentHp() >= 0) {
+        if (this.stats.getCurrentHp() > 0) {
             return true;
         } else {
             return false;
