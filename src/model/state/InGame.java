@@ -122,7 +122,6 @@ public class InGame implements GameState {
             case CNT:
                 dontUpdate = true;
                 break;
-
         }
 
         if(!dontUpdate) {

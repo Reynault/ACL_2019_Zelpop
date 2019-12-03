@@ -115,6 +115,9 @@ public class Menu implements GameState{
             case ATTACK:
                 buttons[selectedButton].trigger(game);
                 break;
+            case EXIT_GAME:
+                buttons[2].trigger(game);
+                break;
         }
     }
 }
