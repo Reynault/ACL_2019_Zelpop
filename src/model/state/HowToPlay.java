@@ -40,7 +40,7 @@ public class HowToPlay implements GameState {
         command = new BufferedImage[6];
         command[0] = textManager.getString("Z Q S D : move", textColor);
         command[1] = textManager.getString("SPACE : attack", textColor);
-        command[2] = textManager.getString("Z : change level above stairs", textColor);
+        command[2] = textManager.getString("E : change level above stairs", textColor);
         command[3] = textManager.getString("O : save", textColor);
         command[4] = textManager.getString("ESCAPE : quit to menu without save", textColor);
         command[5] = textManager.getString("J K L M : up a stat for a cost", textColor);
@@ -295,14 +295,15 @@ public class HowToPlay implements GameState {
 
     @Override
     public void evolve(ZelpopGame game, Cmd commande) {
-        // First thing first, we cancel the animation timer
-        animationTimer.cancel();
 
         // Then we execute the command
         if (commande == Cmd.ATTACK) {
+            // First thing first, we cancel the animation timer
+            animationTimer.cancel();
             game.setState(StateFactory.getInGame(new Dungeon()));
-        }
-        else if(commande == Cmd.EXIT_GAME) {
+        }else if(commande == Cmd.EXIT_GAME) {
+            // First thing first, we cancel the animation timer
+            animationTimer.cancel();
             game.setState(StateFactory.getMenu());
         }
     }
