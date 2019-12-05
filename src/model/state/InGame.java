@@ -3,6 +3,7 @@ package model.state;
 import model.ZelpopGame;
 import model.dungeon.Dungeon;
 import model.global.Cmd;
+import sound.Sound;
 import sprite.TextureFactory;
 import sprite.spriteManager.TextManager;
 
@@ -52,6 +53,7 @@ public class InGame implements GameState {
                 break;
             case ATTACK:
                 dungeon.attack();
+                Sound.getHeroAttack().play();
                 break;
             case LEAVE_LEVEL:
                 dontUpdate = true;
