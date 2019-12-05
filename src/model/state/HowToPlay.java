@@ -301,9 +301,7 @@ public class HowToPlay implements GameState {
         if (commande == Cmd.ATTACK) {
             // First thing first, we cancel the animation timer
             animationTimer.cancel();
-            game.setState(StateFactory.getInGame(new Dungeon(
-                    HowToPlay.class.getClassLoader().getResourceAsStream("level/testMazeStat.txt")
-            )));
+            game.setState(StateFactory.getInGame(new Dungeon()));
         }else if(commande == Cmd.EXIT_GAME) {
             // First thing first, we cancel the animation timer
             animationTimer.cancel();
