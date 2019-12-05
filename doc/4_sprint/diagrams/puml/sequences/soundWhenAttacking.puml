@@ -29,11 +29,9 @@ h -> b: behave(maze, h, ATTACK)
 
 b -> as: attack(maze, h)
 
-as -> h: getSoundManager()
+as --> h: isAttacking()
 
-h --> as: soundManager
-
-as -> s: playActionSound()
+h -> s: playActionSound()
 
 ref over b
     Attack sequence diagram
