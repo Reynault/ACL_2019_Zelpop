@@ -537,15 +537,18 @@ public class Maze implements Serializable {
      * @param damage The damages taken by the victim
      */
     public void attackEntity(Entity entity, Entity victim, double damage) {
-        // Damaging the victim with entity's damages
-        victim.takeDamage(damage);
-        if (!victim.isAlive()) {
-            // If its dead, then we have to remove it and to increase score
-            double bonus = scoring.killMonster(victim);
-            entity.increaseScore(bonus);
+        // If the attacker is alive, it can attack
+        if(entity.isAlive()) {
+            // Damaging the victim with entity's damages
+            victim.takeDamage(damage);
+            if (!victim.isAlive()) {
+                // If its dead, then we have to remove it and to increase score
+                double bonus = scoring.killMonster(victim);
+                entity.increaseScore(bonus);
 
-            // Deleting killed entity
-            removedEntity.add(victim);
+                // Deleting killed entity
+                removedEntity.add(victim);
+            }
         }
     }
 

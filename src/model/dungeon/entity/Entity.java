@@ -78,7 +78,9 @@ public abstract class Entity implements Serializable {
      *
      */
     public void takeDamage(double damage) {
-        if(damage >= 0 || -damage + getHp() <= getMaxHp()) {
+        if(damage < 0 && -damage + getHp() > getMaxHp()){
+            this.stats.setCurrentHp(getMaxHp());
+        }else {
             this.stats.setCurrentHp(this.stats.getCurrentHp() - damage);
         }
     }
@@ -87,7 +89,7 @@ public abstract class Entity implements Serializable {
      *
      */
     public boolean isAlive() {
-        if (this.stats.getCurrentHp() > 0) {
+        if (this.stats.getCurrentHp() >= 0) {
             return true;
         } else {
             return false;

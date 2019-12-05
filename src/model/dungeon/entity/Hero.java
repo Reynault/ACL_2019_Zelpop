@@ -23,4 +23,12 @@ public class Hero extends Entity {
         spriteManager = new SpriteManagerHero(TextureFactory.getTextureFactory().getHero());
         spriteManager.setSprite(position.getCmd());
     }
+
+    public void setVitality(double i) {
+        stats.setVitality(i);
+    }
+
+    public void setHP(int i) {
+        stats.setCurrentHp(i);
+    }
 }
