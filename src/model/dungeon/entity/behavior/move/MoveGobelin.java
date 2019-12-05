@@ -65,7 +65,6 @@ public class MoveGobelin implements Move {
         if (pos != null) {
             pos = finalPos(entity, pos, endPosition );
             this.movement = pos.getCmd();
-            System.out.println(pos.getCmd());
         } else {
             faceDirection();
             entity.setPosition(new Position(

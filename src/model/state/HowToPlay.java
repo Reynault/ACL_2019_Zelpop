@@ -9,7 +9,6 @@ import sprite.spriteManager.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;

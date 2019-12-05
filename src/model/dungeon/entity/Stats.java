@@ -67,4 +67,8 @@ public class Stats implements Serializable {
     public void setDmg(int dmg) {
         damage = dmg;
     }
+
+    public void setDefence(int defence) {
+        this.defence = defence;
+    }
 }

@@ -157,4 +157,8 @@ public abstract class Entity implements Serializable {
     public void setDmg(int dmg) {
         stats.setDmg(dmg);
     }
+
+    public void setDefence(int defence) {
+        stats.setDefence(defence);
+    }
 }

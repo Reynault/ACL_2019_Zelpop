@@ -1,8 +1,8 @@
 package model.dungeon.entity.behavior.check;
 
-import model.Pair;
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
+import model.global.Cmd;
 import model.global.Position;
 
 public class CheckSimple implements Check {
@@ -12,12 +12,27 @@ public class CheckSimple implements Check {
         Position pos = entity.getPosition();
         int x = pos.getX();
         int y = pos.getY();
-        Pair val = maze.getPositionByDirection(x,y, pos.getCmd());
+        Cmd commande = pos.getCmd();
 
-        Entity e = maze.getEntity(val.getX(), val.getY());
-        if(e != null && e != entity && e.isHero()){
+        Entity victim;
+
+        if ((victim = maze.getEntity(x+1, y)) != null) {
+            commande = Cmd.RIGHT;
+        } else if ((victim = maze.getEntity(x-1, y)) != null) {
+            commande = Cmd.LEFT;
+        } else if ((victim = maze.getEntity(x, y+1)) != null) {
+            commande = Cmd.DOWN;
+        } else if ((victim = maze.getEntity(x, y-1)) != null) {
+            commande = Cmd.UP;
+        }
+
+        entity.setPosition(
+                new Position(x, y, commande)
+        );
+
+        if (victim != null && victim != entity && victim.isHero()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
