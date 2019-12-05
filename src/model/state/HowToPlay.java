@@ -9,6 +9,7 @@ import sprite.spriteManager.*;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -300,7 +301,9 @@ public class HowToPlay implements GameState {
         if (commande == Cmd.ATTACK) {
             // First thing first, we cancel the animation timer
             animationTimer.cancel();
-            game.setState(StateFactory.getInGame(new Dungeon()));
+            game.setState(StateFactory.getInGame(new Dungeon(
+                    HowToPlay.class.getClassLoader().getResourceAsStream("level/testMaze.txt")
+            )));
         }else if(commande == Cmd.EXIT_GAME) {
             // First thing first, we cancel the animation timer
             animationTimer.cancel();

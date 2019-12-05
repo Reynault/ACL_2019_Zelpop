@@ -39,13 +39,12 @@ public class Dungeon implements Serializable {
     /**
      * Default constructor with a file given in parameter
      */
-    public Dungeon(File file) throws FileNotFoundException {
+    public Dungeon(InputStream inputStream){
         this.mazeFactory = new MazeFactory();
         this.entityFactory = new EntityFactory();
         this.hero = entityFactory.generateHero();
 
-        InputStream is = new FileInputStream(file);
-        currentMaze = mazeFactory.getMaze(is, entityFactory);
+        currentMaze = mazeFactory.getMaze(inputStream, entityFactory);
     }
 
 

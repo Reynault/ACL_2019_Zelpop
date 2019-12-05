@@ -153,4 +153,8 @@ public abstract class Entity implements Serializable {
     public double getDefenceCostToUpgrade() { return stats.getDefenceCostToUpgrade(); }
 
     public double getVitalityCostToUpgrade() { return stats.getVitalityCostToUpgrade(); }
+
+    public void setDmg(int dmg) {
+        stats.setDmg(dmg);
+    }
 }

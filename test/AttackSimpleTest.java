@@ -43,7 +43,7 @@ class AttackSimpleTest {
             InputStream is =  AttackSimpleTest.class.getClassLoader().getResourceAsStream("level/testMaze.txt");
             Maze maze = mazeFactory.getMaze(is, entityFactory);
             hero.setPosition(new Position(hero.getPosition().getX(),hero.getPosition().getY(), Cmd.RIGHT));
-            maze.attack();
+            hero.setDmg((int) maze.getEntity(2,1).getMaxHp());
             maze.attack();
 
             Assertions.assertFalse(maze.getEntity(2,1).isAlive());

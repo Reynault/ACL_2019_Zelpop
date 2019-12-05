@@ -56,16 +56,7 @@ public class MazeFactory implements Serializable {
                     new Position(0, 0, Cmd.IDLE))
             );
         }
-        /*
-        for (Tile[] row :
-                tiles) {
-            for (Tile tile :
-                    row) {
-                System.out.print(tile);
-            }
-            System.out.print("\n");
-        }
-        */
+
         return new Maze(tiles, entities, ScoringFactory.getSimpleScoring(
                 MAZE_COUNTER,
                 BASIC_MAZE_SCORE),
@@ -128,6 +119,10 @@ public class MazeFactory implements Serializable {
                             tiles[i][j] = TileFactory.getTreasure(TREASURE_GOLD);
                         } else if (typeOfTile.compareTo("t") == 0) {  // trap
                             tiles[i][j] = TileFactory.getTrap(TRAP_DAMAGE);
+                        } else if (typeOfTile.compareTo("b") == 0) {  // breakable wall
+                            tiles[i][j] = TileFactory.getBreakableWall();
+                        } else if (typeOfTile.compareTo("p") == 0) {  // passages
+                            tiles[i][j] = TileFactory.getTeleport();
                         }
                     }
                     line = buff.readLine();

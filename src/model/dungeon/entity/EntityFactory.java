@@ -7,24 +7,25 @@ import model.global.Position;
 import java.io.Serializable;
 
 public class EntityFactory implements Serializable {
-    public static Stats STAT_HERO = new Stats(100, 10, 1, 2);
+
+    private static Stats STAT_HERO = new Stats(100, 10, 1, 2);
     public static int HERO_X = 0;
     public static int HERO_Y = 0;
     public static Cmd HERO_DIRECTION = Cmd.DOWN;
-    public static int HERO_VALUE = 50;
-    public static int HERO_SCORE = 0;
+    private static int HERO_VALUE = 50;
+    private static int HERO_SCORE = 0;
 
-    public static Stats STAT_MONSTER = new Stats(25, 5, 1, 1);
-    public static int MONSTER_VALUE = 50;
-    public static int MONSTER_SCORE = 0;
+    private static Stats STAT_MONSTER = new Stats(25, 5, 1, 1);
+    private static int MONSTER_VALUE = 50;
+    private static int MONSTER_SCORE = 0;
 
-    public static Stats STAT_GHOST = new Stats(15, 25, 0, 10);
-    public static int GHOST_VALUE = 50;
-    public static int GHOST_SCORE = 0;
+    private static Stats STAT_GHOST = new Stats(15, 25, 0, 10);
+    private static int GHOST_VALUE = 50;
+    private static int GHOST_SCORE = 0;
 
-    public static Stats STAT_GOBLIN = new Stats(75, 5, 3, 1);
-    public static int GOBELIN_VALUE = 50;
-    public static int GOBELIN_SCORE = 0;
+    private static Stats STAT_GOBLIN = new Stats(75, 5, 3, 1);
+    private static int GOBELIN_VALUE = 50;
+    private static int GOBELIN_SCORE = 0;
 
     private Hero hero;
 

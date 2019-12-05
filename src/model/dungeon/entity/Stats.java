@@ -63,4 +63,8 @@ public class Stats implements Serializable {
     public double getVitalityCostToUpgrade() {
         return vitalityCostToUpgrade;
     }
+
+    public void setDmg(int dmg) {
+        damage = dmg;
+    }
 }

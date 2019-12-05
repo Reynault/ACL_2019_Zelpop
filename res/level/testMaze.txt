@@ -1,12 +1,12 @@
 {8,10}
 (w)(w)(w)(w)(w)(w)(w)(w)
 (w)(x)(x)(w)(x)(x)(x)(w)
-(w)(w)(w)(w)(x)(x)(x)(w)
+(w)(b)(w)(w)(x)(x)(x)(w)
 (w)(x)(w)(x)(x)(x)(x)(w)
 (w)(x)(x)(x)(x)(x)(x)(w)
 (w)(x)(x)(x)(c)(t)(x)(w)
 (w)(x)(x)(x)(x)(x)(x)(w)
-(w)(x)(x)(x)(x)(w)(w)(w)
+(w)(x)(b)(p)(x)(w)(w)(w)
 (w)(x)(x)(x)(x)(w)(x)(w)
 (w)(w)(w)(w)(w)(w)(w)(w)
 2
