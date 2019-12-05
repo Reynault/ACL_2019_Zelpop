@@ -15,31 +15,30 @@ package sound{
     }
 
     class SoundEntity{
-        - AudioClip: attackSound
-
         + SoundEntity(AudioClip: attackSound)
-        + playAttackSound()
-        + stopAttackSound()
     }
 
 
     class SoundTile{
-        - AudioClip: actionSound
-
         + SoundTile(AudioClip: actionSound)
-        + playActionSound()
-        + stopActionSound()
-        + loopActionSound()
     }
 
     class SoundMaze{
         - TimerTask: task
         - AudioClip: ambianceSound[0..*]
-        - AudioClip: musicSound
 
         + SoundMaze(AudioClip: ambianceSound[0..*], AudioClip: musicSound)
         + setAmbianceSoundOn()
         + setAmbianceSoundOff()
+    }
+
+    class SoundManager{
+        - AudioClip: mainSound
+
+        + SoundManager(AudioClip: actionSound)
+        + playActionSound()
+        + stopActionSound()
+        + loopActionSound()
     }
 }
 
@@ -59,5 +58,9 @@ class Tile{
 Entity --> "1" SoundEntity: -sound
 Tile --> "1" SoundTile: -sound
 Maze --> "1" SoundMaze: -sound
+
+SoundEntity --|> SoundManager
+SoundMaze --|> SoundManager
+SoundTile --|> SoundManager
 
 @enduml
