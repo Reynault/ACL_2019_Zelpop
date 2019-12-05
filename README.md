@@ -49,6 +49,19 @@ ending up with the current one.
 So to summarize, we were a little overconfident on certain aspects, in the future we will make sure to 
 estimate better our choices.
 
+## Third sprint report
+
+During this third sprint, we focused on adding multiple cases such as adding attack animation, new monsters with
+one having a path finding algorithm that follow the player. We had a stat system to the entities. Furthermore, we have
+updated the interface, providing a 'How to' screen which indicates the player how to play when he wants to create
+a new game.
+
+There were multiple difficulties, the main one is about the path finding algorithm, there was a misunderstanding
+between the members of the team leading into a bad implementation. Indeed, the movement of an entity is based on
+it's direction, and one member was not aware of it. So in the future, we will make sure to avoid this kind of
+problems with a better communication before assigning a task.
+
+
 ### Implemented Features
 
 So the player can move in every direction on the maze, we can generate
