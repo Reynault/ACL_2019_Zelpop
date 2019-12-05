@@ -24,4 +24,9 @@ public class Position implements Serializable {
     public Cmd getCmd() {
         return cmd;
     }
+
+    @Override
+    public String toString() {
+        return "(" + x + ";" + y + ")";
+    }
 }

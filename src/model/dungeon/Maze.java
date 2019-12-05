@@ -21,12 +21,16 @@ import java.util.List;
 
 public class Maze implements Serializable {
 
+    private static int HEIGHT_LABEL = 20;
+
     private List<Entity> entities;
     private List<Entity> removedEntity;
     private Tile[][] tiles;
     private int width, height;
     private Hero hero;
     private Scoring scoring;
+
+    private String[] stats, letters;    // Draw of stats
 
     /**
      * Default constructor
@@ -43,6 +47,17 @@ public class Maze implements Serializable {
         this.hero = entityFactory.getHero();
         this.scoring = scoring;
         removedEntity = new ArrayList<>();
+        // Stats
+        stats = new String[4];
+        stats[0] = "HP:";
+        stats[1] = "RGN:";
+        stats[2] = "ATK:";
+        stats[3] = "DEF:";
+        letters = new String[4];
+        letters[0] = "J";
+        letters[1] = "K";
+        letters[2] = "L";
+        letters[3] = "M";
     }
 
     /**
@@ -243,6 +258,29 @@ public class Maze implements Serializable {
         );
 
         // Stats
+        for(int i = 0 ; i < stats.length ; i++){
+            textImage = textManager.getString(stats[i], textColor);
+            crayon.drawImage(
+                    textImage,
+                    1010,
+                    550 + i * HEIGHT_LABEL * 2,
+                    75,
+                    HEIGHT_LABEL,
+                    null
+            );
+
+            // Press the letter to up the stat
+            textImage = textManager.getString(letters[i], Color.black);
+            crayon.drawImage(
+                    textImage,
+                    1150,
+                    550 + i * HEIGHT_LABEL * 2,
+                    15,
+                    HEIGHT_LABEL,
+                    null
+            );
+
+        }
         int stats[] = new int[4];
         stats[0] = (int)hero.getMaxHp();
         stats[1] = (int)hero.getVitality();

@@ -68,6 +68,8 @@ public class MazeFactory implements Serializable {
      * x = simple tile
      * c = chest
      * t = trap
+     * b = breakable wall
+     * p = teleporter
      **************************************/
     /**
      * Maze's getter with a file's reader
@@ -121,7 +123,7 @@ public class MazeFactory implements Serializable {
                             tiles[i][j] = TileFactory.getTrap(TRAP_DAMAGE);
                         } else if (typeOfTile.compareTo("b") == 0) {  // breakable wall
                             tiles[i][j] = TileFactory.getBreakableWall();
-                        } else if (typeOfTile.compareTo("p") == 0) {  // passages
+                        } else if (typeOfTile.compareTo("p") == 0) {  // teleporter
                             tiles[i][j] = TileFactory.getTeleport();
                         }
                     }

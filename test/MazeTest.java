@@ -126,25 +126,6 @@ class MazeTest {
         }
 
         @Test
-        void Hero_Move_Into_Trap(){
-            EntityFactory entityFactory = new EntityFactory();
-            //hero position is down
-            //hero position is (1,1)
-            //position 2 1 is a Trap
-            Hero hero = entityFactory.generateHero();
-            MazeFactory mazeFactory = new MazeFactory();
-
-            //Position (2.1) is a wall
-            InputStream is =  MazeTest.class.getClassLoader().getResourceAsStream("level/testMaze3.txt");
-            Maze maze = mazeFactory.getMaze(is, entityFactory);
-            hero.setPosition(new Position(hero.getPosition().getX(),hero.getPosition().getY(),Cmd.RIGHT));
-            maze.moveEntity(hero,Cmd.RIGHT);
-
-
-            Assertions.assertNotEquals(hero.getMaxHp(),hero.getHp());
-        }
-
-        @Test
         void Hero_Move_Into_Treasure(){
             EntityFactory entityFactory = new EntityFactory();
             //hero position is down
