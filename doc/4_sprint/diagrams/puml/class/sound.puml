@@ -1,0 +1,19 @@
+@startuml
+
+title How the sound integration works
+
+package sound{
+
+    class Sound{
+        + {static} getMonsterAttack(): AudioClip
+        + {static} getGoblinAttack(): AudioClip
+        + {static} getAmbianceOne(): AudioClip
+        + {static} getMenuButton(): AudioClip
+        + {static} getHeroAttack(): AudioClip
+        + {static} getLowLife(): AudioClip
+        + {static} getStairs(): AudioClip
+    }
+
+}
+
+@enduml

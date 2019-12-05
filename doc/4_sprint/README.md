@@ -9,7 +9,7 @@ in regard of the depth.
 - Scaling score
 - Possibility to improve hero stat, costing score
 - Sound systeme
-- force to go to next etage by making vitality negative after a set amount of step
+- force to go to the next stage by making vitality negative after a set amount of step
 
 ## Attribution
 
@@ -18,7 +18,7 @@ in regard of the depth.
 |    Réno       |           Sound Systeme                       |   -   |
 |    Matt       |           Score                               |   -   |
 |     Jro       |           Stats Hero                          |   -   |
-|               |           Stats monster                       |   -   |
+|    reda       |           Stats monster                       |   -   |
 
 
 ## Implementation ideas
