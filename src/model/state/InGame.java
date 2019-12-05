@@ -53,7 +53,6 @@ public class InGame implements GameState {
                 break;
             case ATTACK:
                 dungeon.attack();
-                Sound.getHeroAttack().play();
                 break;
             case LEAVE_LEVEL:
                 dontUpdate = true;

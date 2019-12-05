@@ -5,15 +5,59 @@ title How the sound integration works
 package sound{
 
     class Sound{
-        + {static} getMonsterAttack(): AudioClip
-        + {static} getGoblinAttack(): AudioClip
-        + {static} getAmbianceOne(): AudioClip
-        + {static} getMenuButton(): AudioClip
-        + {static} getHeroAttack(): AudioClip
-        + {static} getLowLife(): AudioClip
-        + {static} getStairs(): AudioClip
+        + {static} getMonsterAttack: AudioClip
+        + {static} getGoblinAttack: AudioClip
+        + {static} getAmbianceOne: AudioClip
+        + {static} getMenuButton: AudioClip
+        + {static} getHeroAttack: AudioClip
+        + {static} getLowLife: AudioClip
+        + {static} getStairs: AudioClip
     }
 
+    class SoundEntity{
+        - AudioClip: attackSound
+
+        + SoundEntity(AudioClip: attackSound)
+        + playAttackSound()
+        + stopAttackSound()
+    }
+
+
+    class SoundTile{
+        - AudioClip: actionSound
+
+        + SoundTile(AudioClip: actionSound)
+        + playActionSound()
+        + stopActionSound()
+        + loopActionSound()
+    }
+
+    class SoundMaze{
+        - TimerTask: task
+        - AudioClip: ambianceSound[0..*]
+        - AudioClip: musicSound
+
+        + SoundMaze(AudioClip: ambianceSound[0..*], AudioClip: musicSound)
+        + setAmbianceSoundOn()
+        + setAmbianceSoundOff()
+    }
 }
+
+
+class Entity{
+
+}
+
+class Maze{
+
+}
+
+class Tile{
+
+}
+
+Entity --> "1" SoundEntity: -sound
+Tile --> "1" SoundTile: -sound
+Maze --> "1" SoundMaze: -sound
 
 @enduml

@@ -7,6 +7,7 @@ actor player
 
 participant "InGame: inGame" as g
 participant "Sound" as s
+participant "SoundManager: manager" as sound
 participant "AudioClip: attack" as a
 
 player -> g: Want to attack
@@ -17,7 +18,7 @@ g -> s: getHeroAttack()
 
 s --> g: attack
 
-g -> a : play()
+g -> a : play(attack)
 
 
 @enduml
