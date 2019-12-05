@@ -1,24 +1,43 @@
 @startuml
 
-title When the player is attacking, a sound is triggered
+title When the player wants to attack
 autonumber
 
 actor player
 
-participant "InGame: inGame" as g
-participant "Sound" as s
-participant "SoundManager: manager" as sound
-participant "AudioClip: attack" as a
+participant ZelpopGame as z
+participant Dungeon as d
+participant "maze: Maze" as m
+participant "h: Hero" as h
+participant "SpriteManagerEntity" as sme
+participant Behavior as b
+participant AttackSimple as as
+participant "SoundEntity: soundManager" as s
 
-player -> g: Want to attack
 
-g -> g: evolve(game, Cmd.ATTACK)
+player --> z: The player wants to attack
 
-g -> s: getHeroAttack()
+z -> d: attack()
 
-s --> g: attack
+d -> m: attack()
 
-g -> a : play(attack)
+m -> h: attack(maze)
 
+h -> sme: isAttacking()
+
+h -> b: behave(maze, h, ATTACK)
+
+b -> as: attack(maze, h)
+
+as -> h: getSoundManager()
+
+h --> as: soundManager
+
+as -> s: playActionSound()
+
+ref over b
+    Attack sequence diagram
+    for the following
+end ref
 
 @enduml

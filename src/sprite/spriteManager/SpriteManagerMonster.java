@@ -38,7 +38,7 @@ public class SpriteManagerMonster extends SpriteManagerEntity{
                 default: {
                     frame = 0;
                     toReturn = sprite.getSubimage(GlobalSprites.get8Sprite() * frame,
-                            GlobalSprites.get8Sprite() * DOWN, GlobalSprites.get8Sprite(),
+                            GlobalSprites.get8Sprite() * RIGHT, GlobalSprites.get8Sprite(),
                             GlobalSprites.get8Sprite());
                     break;
                 }
