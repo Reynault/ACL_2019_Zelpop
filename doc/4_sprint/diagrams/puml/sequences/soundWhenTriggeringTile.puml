@@ -1,0 +1,14 @@
+@startuml
+
+title When a player is standing on a tile
+autonumber
+
+participant "maze: Maze" as m
+participant "t: Tile" as t
+participant "SoundTile: sound" as s
+
+m -> t: action(maze, e)
+
+t -> s : playActionSound()
+
+@enduml

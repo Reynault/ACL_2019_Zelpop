@@ -1,0 +1,20 @@
+@startuml
+
+title When the player wants to attack
+autonumber
+
+participant "Dungeon: d" as d
+participant "MazeFactory: factory" as mf
+participant "Maze: m" as m
+participant "SoundDungeon: sound" as s
+
+d -> mf: getMaze()
+
+create m
+mf -> m: create
+
+mf --> d: m
+
+d -> s: setAmbianceSoundOn()
+
+@enduml

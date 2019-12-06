@@ -5,13 +5,13 @@ title How the sound integration works
 package sound{
 
     class Sound{
-        + {static} getMonsterAttack: AudioClip
-        + {static} getGoblinAttack: AudioClip
-        + {static} getAmbianceOne: AudioClip
-        + {static} getMenuButton: AudioClip
-        + {static} getHeroAttack: AudioClip
-        + {static} getLowLife: AudioClip
-        + {static} getStairs: AudioClip
+        + getMonsterAttack(): AudioClip
+        + getGoblinAttack(): AudioClip
+        + getAmbianceOne(): AudioClip
+        + getMenuButton(): AudioClip
+        + getHeroAttack(): AudioClip
+        + getLowLife(): AudioClip
+        + getStairs(): AudioClip
     }
 
     class SoundEntity{
@@ -23,7 +23,7 @@ package sound{
         + SoundTile(AudioClip: actionSound)
     }
 
-    class SoundMaze{
+    class SoundDungeon{
         - TimerTask: task
         - AudioClip: ambianceSound[0..*]
 
@@ -47,7 +47,7 @@ class Entity{
 
 }
 
-class Maze{
+class Dungeon{
 
 }
 
@@ -57,10 +57,10 @@ class Tile{
 
 Entity --> "1" SoundEntity: -sound
 Tile --> "1" SoundTile: -sound
-Maze --> "1" SoundMaze: -sound
+Dungeon --> "1" SoundDungeon: -sound
 
 SoundEntity --|> SoundManager
-SoundMaze --|> SoundManager
+SoundDungeon --|> SoundManager
 SoundTile --|> SoundManager
 
 @enduml
