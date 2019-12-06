@@ -16,14 +16,4 @@ public class SoundEntity implements SoundManager{
     public void playActionSound() {
         actionSounds[random.nextInt(actionSounds.length)].play();
     }
-
-    @Override
-    public void stopActionSound() {
-
-    }
-
-    @Override
-    public void loopActionSound() {
-
-    }
 }

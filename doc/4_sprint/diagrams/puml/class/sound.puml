@@ -20,8 +20,6 @@ package sound{
         + SoundEntity(AudioClip: attackSound[0..*])
 
         + playActionSound()
-        + stopActionSound()
-        + loopActionSound()
     }
 
 
@@ -30,8 +28,6 @@ package sound{
         + SoundTile(AudioClip: actionSound)
 
         + playActionSound()
-        + stopActionSound()
-        + loopActionSound()
     }
 
     class SoundDungeon{
@@ -41,14 +37,10 @@ package sound{
         + SoundMaze(AudioClip: ambianceSound[0..*])
 
         + playActionSound()
-        + stopActionSound()
-        + loopActionSound()
     }
 
     interface SoundManager{
         + {abstract} playActionSound()
-        + {abstract} stopActionSound()
-        + {abstract} loopActionSound()
     }
 }
 
