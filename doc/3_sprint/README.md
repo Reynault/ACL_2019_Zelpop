@@ -24,8 +24,8 @@ that focus the player during the whole game. A new monster that can go through w
 |     Member     |             Feature                          |  State   |
 |:--------------:|:--------------------------------------------:|:--------:|
 |   Reynault     | Attack animation                             |   DONE   |
-|   Reda         | Gobelin                                      |     -    |
-|   Reda         | Ghost                                        |     -    |
+|   Reda         | Gobelin                                      |   DONE    |
+|   Reda         | Ghost                                        |   DONE    |
 |   Jromary      | Stat system (model)                          |   DONE   |
 |   Matthieu     | Stat system (interface)                      |   DONE   |
 |   Reynault     | Teleport                                     |   DONE   |

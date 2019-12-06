@@ -1,4 +1,4 @@
-# Backlog - Third Sprint
+# Backlog - Fourth Sprint
 
 Development of the fourth iteration. In this iteration, we focus on scaling difficulty, scoring and stats of monsters 
 in regard of the depth.
@@ -18,7 +18,7 @@ in regard of the depth.
 |    Réno       |           Sound Systeme                       |   -   |
 |    Matt       |           Score                               |   -   |
 |     Jro       |           Stats Hero                          |   -   |
-|    reda       |           Stats monster                       |   -   |
+|    Reda       |           Stats monster                       |   -   |
 
 
 ## Implementation ideas
