@@ -1,5 +1,8 @@
 package trash;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.applet.Applet;
 import java.applet.AudioClip;
 import java.util.Scanner;
@@ -13,15 +16,16 @@ public class TestSound {
     // https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java  --> Code
     public static void main(String[] args) throws InterruptedException {
         try {
-            /*Clip clip = AudioSystem.getClip();
+            Clip clip = AudioSystem.getClip();
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(
                     TestSound.class.getResourceAsStream("/audio/heroAttack.wav"));
+            AudioInputStream inputStream2 = AudioSystem.getAudioInputStream(
+                    TestSound.class.getResourceAsStream("/audio/ambiance_1.wav"));
             clip.open(inputStream);
-            clip.start();*/
 
-            AudioClip clip = Applet.newAudioClip(
-                    TestSound.class.getResource("/audio/heroAttack.wav")
-            );
+//            AudioClip clip = Applet.newAudioClip(
+//                    TestSound.class.getResource("/audio/menu_theme.wav")
+//            );
 
             Scanner sc = new Scanner(System.in);
 
@@ -36,7 +40,14 @@ public class TestSound {
                 switch (request) {
                     case 1:
                         System.out.println("START");
-                        clip.play();
+                        if(clip.isRunning()){
+                            System.out.println("STILL RUNNING");
+                            clip.stop();
+                            clip.loop(0);
+                        }else{
+                            clip.open(inputStream2);
+                            clip.loop(0);
+                        }
                         break;
                     case 2:
                         System.out.println("STOP");
@@ -44,11 +55,11 @@ public class TestSound {
                         break;
                     case 3:
                         System.out.println("LOOP CONTINUOUSLY");
-                        clip.loop();
+                        clip.loop(Clip.LOOP_CONTINUOUSLY);
                         break;
                     case 4:
                         System.out.println("LOOP 0");
-                        clip.loop();
+                        clip.loop(0);
                         break;
                 }
 

@@ -12,19 +12,18 @@ import sprite.spriteManager.TextManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Timer;
 
-public class Menu implements GameState{
+public class Menu implements GameState {
     private String title;
 
     private MenuButton[] buttons;
     private int selectedButton;
 
-    private static int BUTTON_WIDTH = GlobalSprites.get8Sprite()*GlobalSprites.getScaling()*10;
-    private static int BUTTON_HEIGHT = GlobalSprites.get8Sprite()*GlobalSprites.getScaling()*3;
+    private static int BUTTON_WIDTH = GlobalSprites.get8Sprite() * GlobalSprites.getScaling() * 10;
+    private static int BUTTON_HEIGHT = GlobalSprites.get8Sprite() * GlobalSprites.getScaling() * 3;
     private static int TOP_SPAN = 50;
 
-    public Menu(){
+    public Menu() {
         title = "Zelpop";
 
         selectedButton = 0;
@@ -56,7 +55,7 @@ public class Menu implements GameState{
 
         // Setting background color (Brown)
         crayon.setBackground(backgroundColor);
-        crayon.clearRect(0,0, width, height);
+        crayon.clearRect(0, 0, width, height);
 
         // Fecthing the title
         titleImage = textManager.getString(title, titleColor);
@@ -64,32 +63,32 @@ public class Menu implements GameState{
         // Which is an image drawn by the pencil
         crayon.drawImage(
                 titleImage,
-                (width/2) - (titleImage.getWidth()/2),
+                (width / 2) - (titleImage.getWidth() / 2),
                 TOP_SPAN,
                 titleImage.getWidth(),
                 titleImage.getHeight(),
                 null
         );
 
-        for(int i = 0; i < buttons.length; i++){
+        for (int i = 0; i < buttons.length; i++) {
             button = buttons[i];
-            if(i == selectedButton){
+            if (i == selectedButton) {
                 crayon.setColor(selectedButtonColor);
-            }else{
+            } else {
                 crayon.setColor(buttonColor);
             }
             crayon.fillRect(
-                    ((width/2) - (BUTTON_WIDTH/2)),
-                    ((TOP_SPAN + BUTTON_HEIGHT) * i) + (titleImage.getHeight() + TOP_SPAN*3),
+                    ((width / 2) - (BUTTON_WIDTH / 2)),
+                    ((TOP_SPAN + BUTTON_HEIGHT) * i) + (titleImage.getHeight() + TOP_SPAN * 3),
                     BUTTON_WIDTH,
                     BUTTON_HEIGHT
             );
             titleImage = textManager.getString(button.getName(), titleColor);
             crayon.drawImage(
                     titleImage,
-                    ((width/2) - (titleImage.getWidth()/2)),
-                    ((TOP_SPAN + BUTTON_HEIGHT) * i) + (titleImage.getHeight() + TOP_SPAN*3) + (BUTTON_HEIGHT/2) -
-                            (GlobalSprites.get8Sprite() * GlobalSprites.getScaling())/2,
+                    ((width / 2) - (titleImage.getWidth() / 2)),
+                    ((TOP_SPAN + BUTTON_HEIGHT) * i) + (titleImage.getHeight() + TOP_SPAN * 3) + (BUTTON_HEIGHT / 2) -
+                            (GlobalSprites.get8Sprite() * GlobalSprites.getScaling()) / 2,
                     titleImage.getWidth(),
                     titleImage.getHeight(),
                     null
@@ -101,11 +100,11 @@ public class Menu implements GameState{
 
     @Override
     public void evolve(ZelpopGame game, Cmd commande) {
-        switch (commande){
+        switch (commande) {
             case UP:
-                if(selectedButton == 0){
+                if (selectedButton == 0) {
                     selectedButton = 2;
-                }else {
+                } else {
                     selectedButton = (selectedButton - 1) % 3;
                 }
                 break;

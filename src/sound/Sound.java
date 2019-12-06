@@ -1,36 +1,42 @@
 package sound;
 
-import trash.TestSound;
-
 import java.applet.Applet;
 import java.applet.AudioClip;
 
 public class Sound {
-    static AudioClip MONSTER_ATTACK = Applet.newAudioClip(
-            TestSound.class.getResource("/audio/monsterAttack.wav")
-    );
+    public static AudioClip getMainMenu() {
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/menu_theme.wav")
+        );
+    }
+
+    public static AudioClip getMonsterAttack() {
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/monsterAttack.wav")
+        );
+    }
 
     static AudioClip GOBLIN_ATTACK = Applet.newAudioClip(
-            TestSound.class.getResource("/audio/goblinAttack.wav")
+            Sound.class.getResource("/audio/goblinAttack.wav")
     );
 
     static AudioClip AMBIANCE_ONE = Applet.newAudioClip(
-            TestSound.class.getResource("/audio/ambiance_1.wav")
+            Sound.class.getResource("/audio/ambiance_1.wav")
     );
 
     static AudioClip MENU_BUTTON = Applet.newAudioClip(
-            TestSound.class.getResource("/audio/buttonMenu.wav")
+            Sound.class.getResource("/audio/buttonMenu.wav")
     );
 
     static AudioClip HERO_ATTACK = Applet.newAudioClip(
-            TestSound.class.getResource("/audio/heroAttack.wav")
+            Sound.class.getResource("/audio/heroAttack.wav")
     );
 
     static AudioClip LOW_LIFE = Applet.newAudioClip(
-            TestSound.class.getResource("/audio/lowLife.wav")
+            Sound.class.getResource("/audio/lowLife.wav")
     );
 
     static AudioClip STAIRS = Applet.newAudioClip(
-            TestSound.class.getResource("/audio/stairs.wav")
+            Sound.class.getResource("/audio/stairs.wav")
     );
 }

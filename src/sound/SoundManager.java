@@ -1,4 +1,9 @@
 package sound;
 
-public class SoundManager {
+public interface SoundManager {
+    void playActionSound();
+
+    void stopActionSound();
+
+    void loopActionSound();
 }
