@@ -5,13 +5,12 @@ title How the sound integration works
 package sound{
 
     class Sound{
-        + getMonsterAttack(): AudioClip
-        + getGoblinAttack(): AudioClip
-        + getAmbianceOne(): AudioClip
-        + getMenuButton(): AudioClip
-        + getHeroAttack(): AudioClip
-        + getLowLife(): AudioClip
-        + getStairs(): AudioClip
+        + MONSTER_ATTACK: AudioClip
+        + GOBLIN_ATTACK: AudioClip
+        + MENU_BUTTON: AudioClip
+        + HERO_ATTACK: AudioClip
+        + LOW_LIFE: AudioClip
+        + STAIRS: AudioClip
     }
 
     class SoundEntity{
@@ -32,27 +31,38 @@ package sound{
         + stopActionSound()
     }
 
-    class SoundMaze{
-        - Timer: task
-        - AudioClip: ambianceSound[0..*]
-
-        + SoundMaze(AudioClip: ambianceSound[0..*])
-
-        + playActionSound()
-        + stopActionSound()
-    }
-
     interface SoundManager{
         + {abstract} playActionSound()
         + {abstract} stopActionSound()
     }
 }
+
+package state{
+
+    class InGame{
+        - Timer: task
+        - AudioClip: ambianceSound[0..*]
+    }
+
+    class Menu{
+        - AudioClip: buttonSound
+    }
+
+}
+
+class Entity{
+    + setRessources()
+}
+
+class Tile{
+    + setRessources()
+}
+note left: setRessources is setting sprites and sound
+
 Entity --> "1" SoundEntity: -sound
 Tile --> "1" SoundTile: -sound
-Maze --> "1" SoundMaze: -sound
 
 SoundEntity ..|> SoundManager
-SoundMaze ..|> SoundManager
 SoundTile ..|> SoundManager
 
 @enduml
