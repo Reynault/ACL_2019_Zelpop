@@ -8,8 +8,6 @@ import model.dungeon.tile.Tile;
 import model.dungeon.tile.TileFactory;
 import model.global.Cmd;
 import model.global.Position;
-import sound.SoundManager;
-import sound.SoundManagerFactory;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

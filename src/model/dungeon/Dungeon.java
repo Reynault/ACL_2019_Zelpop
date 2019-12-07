@@ -1,7 +1,6 @@
 package model.dungeon;
 
 import model.ZelpopGame;
-import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
 import model.dungeon.mazeFactory.MazeFactory;
@@ -85,7 +84,7 @@ public class Dungeon implements Serializable {
      */
     public void setImages() {
         this.currentMaze.setImages();
-        this.hero.setImage();
+        this.hero.setRessources();
     }
 
     public Hero getHero(){
@@ -126,7 +125,6 @@ public class Dungeon implements Serializable {
                     EntityFactory.HERO_Y,
                     EntityFactory.HERO_DIRECTION));
             floor++;
-            Sound.getStairs().play();
         }
     }
 }

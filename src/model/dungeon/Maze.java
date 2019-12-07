@@ -10,7 +10,6 @@ import model.global.Cmd;
 import model.global.GlobalSprites;
 import model.global.Position;
 import sound.Sound;
-import sound.SoundManager;
 import sprite.TextureFactory;
 import sprite.spriteManager.TextManager;
 
@@ -72,7 +71,7 @@ public class Maze implements Serializable {
             }
         }
         for (Entity e : entities) {
-            e.setImage();
+            e.setRessources();
         }
     }
 
@@ -526,7 +525,6 @@ public class Maze implements Serializable {
                 if(tile.isDestroyed()){
                     // And if destroyed, then it becomes its ancestor
                     tiles[y][x] = tiles[y][x].getAncestor();
-                    Sound.getBreak().play();
                 }
             }
         }
