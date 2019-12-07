@@ -7,7 +7,7 @@ public class SoundEntity implements SoundManager{
     AudioClip[] actionSounds;
     Random random;
 
-    public SoundEntity(AudioClip[] actionSounds) {
+    SoundEntity(AudioClip[] actionSounds) {
         this.actionSounds = actionSounds;
         this.random = new Random();
     }

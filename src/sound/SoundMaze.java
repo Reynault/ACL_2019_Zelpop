@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class SoundDungeon implements SoundManager{
+public class SoundMaze implements SoundManager{
 
     Timer timer;
     AudioClip[] ambianceSound;
@@ -13,7 +13,7 @@ public class SoundDungeon implements SoundManager{
 
     static int TIME_BETWEEN_SOUND = 500;
 
-    public SoundDungeon(AudioClip[] ambianceSound) {
+    SoundMaze(AudioClip[] ambianceSound) {
         this.ambianceSound = ambianceSound;
         this.random = new Random();
     }

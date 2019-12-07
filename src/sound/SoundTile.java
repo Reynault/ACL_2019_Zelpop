@@ -5,7 +5,7 @@ import java.applet.AudioClip;
 public class SoundTile implements SoundManager{
     AudioClip actionSound;
 
-    public SoundTile(AudioClip actionSound) {
+    SoundTile(AudioClip actionSound) {
         this.actionSound = actionSound;
     }
 

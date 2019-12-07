@@ -4,11 +4,6 @@ import java.applet.Applet;
 import java.applet.AudioClip;
 
 public class Sound {
-    public static AudioClip getMainMenu() {
-        return Applet.newAudioClip(
-                Sound.class.getResource("/audio/menu_theme.wav")
-        );
-    }
 
     public static AudioClip getMonsterAttack() {
         return Applet.newAudioClip(
@@ -16,27 +11,103 @@ public class Sound {
         );
     }
 
-    static AudioClip GOBLIN_ATTACK = Applet.newAudioClip(
+    public static AudioClip getGoblinAttack() {
+        return Applet.newAudioClip(
             Sound.class.getResource("/audio/goblinAttack.wav")
-    );
+        );
+    }
 
-    static AudioClip AMBIANCE_ONE = Applet.newAudioClip(
-            Sound.class.getResource("/audio/ambiance_1.wav")
-    );
+    public static AudioClip getHeroAttack(){
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/heroAttack.wav")
+        );
+    }
 
-    static AudioClip MENU_BUTTON = Applet.newAudioClip(
-            Sound.class.getResource("/audio/buttonMenu.wav")
-    );
 
-    static AudioClip HERO_ATTACK = Applet.newAudioClip(
-            Sound.class.getResource("/audio/heroAttack.wav")
-    );
+    public static AudioClip getHeroAttack1(){
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/heroAttack1.wav")
+        );
+    }
 
-    static AudioClip LOW_LIFE = Applet.newAudioClip(
-            Sound.class.getResource("/audio/lowLife.wav")
-    );
 
-    static AudioClip STAIRS = Applet.newAudioClip(
-            Sound.class.getResource("/audio/stairs.wav")
-    );
+    public static AudioClip getHeroAttack2(){
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/heroAttack2.wav")
+        );
+    }
+
+
+    public static AudioClip getHeroAttack3(){
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/heroAttack3.wav")
+        );
+    }
+
+    public static AudioClip getGhostAttack(){
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/ghostAttack.wav")
+        );
+    }
+
+    public static AudioClip getMenuButton(){
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/buttonMenu.wav")
+        );
+    }
+
+
+    public static AudioClip getLowLife(){
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/lowLife.wav")
+        );
+    }
+
+    public static AudioClip getStairs(){
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/stairs.wav")
+        );
+    }
+
+    public static AudioClip getTrap() {
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/stairs.wav")
+        );
+    }
+
+    public static AudioClip getTeleport() {
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/stairs.wav")
+        );
+    }
+
+    public static AudioClip getTreasure() {
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/stairs.wav")
+        );
+    }
+
+    public static AudioClip getAmbiance1(){
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/ambiance_1.wav")
+        );
+    }
+
+    public static AudioClip getAmbiance2() {
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/ambiance_1.wav")
+        );
+    }
+
+    public static AudioClip getAmbiance3() {
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/ambiance_1.wav")
+        );
+    }
+
+    public static AudioClip getAmbiance4() {
+        return Applet.newAudioClip(
+                Sound.class.getResource("/audio/ambiance_1.wav")
+        );
+    }
 }
