@@ -40,6 +40,9 @@ public class Hero extends Entity {
         if(this.stats.getCurrentHp() < 0.25*getMaxHp()){
             lowlife.play();
         }
+        if(this.stats.getCurrentHp() < 0){
+            lowlife.stop();
+        }
     }
 
     public void setVitality(double i) {
