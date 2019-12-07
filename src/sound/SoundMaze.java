@@ -11,11 +11,12 @@ public class SoundMaze implements SoundManager{
     AudioClip[] ambianceSound;
     Random random;
 
-    static int TIME_BETWEEN_SOUND = 500;
+    static int TIME_BETWEEN_SOUND = 5000;
 
     SoundMaze(AudioClip[] ambianceSound) {
         this.ambianceSound = ambianceSound;
         this.random = new Random();
+        this.timer = new Timer();
     }
 
     @Override
@@ -25,13 +26,22 @@ public class SoundMaze implements SoundManager{
             public void run() {
                 try {
                     Thread.sleep(random.nextInt(TIME_BETWEEN_SOUND));
+                    System.out.println("SON ??");
                     ambianceSound[random.nextInt(ambianceSound.length)].play();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         };
-        timer.schedule(task, 0,0);
+        timer.schedule(task, 0,1);
 
+    }
+
+    @Override
+    public void stopActionSound() {
+        timer.cancel();
+        for(AudioClip a: ambianceSound){
+            a.stop();
+        }
     }
 }

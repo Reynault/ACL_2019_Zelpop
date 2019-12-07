@@ -14,4 +14,9 @@ public class SoundTile implements SoundManager{
         actionSound.play();
     }
 
+    @Override
+    public void stopActionSound() {
+        actionSound.stop();
+    }
+
 }

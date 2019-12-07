@@ -16,14 +16,14 @@ public class TestSound {
     // https://stackoverflow.com/questions/26305/how-can-i-play-sound-in-java  --> Code
     public static void main(String[] args) throws InterruptedException {
         try {
-           /* Clip clip = AudioSystem.getClip();
+            Clip clip = AudioSystem.getClip();
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                    TestSound.class.getResourceAsStream("/audio/menu_thelme.wav"));
-            clip.open(inputStream);*/
+                    TestSound.class.getResourceAsStream("/audio/gold.wav"));
+            clip.open(inputStream);
 
-            AudioClip clip = Applet.newAudioClip(
-                    TestSound.class.getResource("/audio/stairs.wav")
-            );
+//            AudioClip clip = Applet.newAudioClip(
+//                    TestSound.class.getResource("/audio/gold.wav")
+//            );
 
             Scanner sc = new Scanner(System.in);
 
@@ -38,7 +38,13 @@ public class TestSound {
                 switch (request) {
                     case 1:
                         System.out.println("START");
-                        clip.play();
+                        if(clip.isRunning()) {
+                            clip.stop();
+                            clip.setMicrosecondPosition(0);
+                            clip.start();
+                        }else{
+                            clip.start();
+                        }
                         break;
                     case 2:
                         System.out.println("STOP");
@@ -46,11 +52,11 @@ public class TestSound {
                         break;
                     case 3:
                         System.out.println("LOOP CONTINUOUSLY");
-                        clip.loop();
+                        clip.loop(Clip.LOOP_CONTINUOUSLY);
                         break;
                     case 4:
                         System.out.println("LOOP 0");
-                        clip.loop();
+                        clip.loop(0);
                         break;
                 }
 

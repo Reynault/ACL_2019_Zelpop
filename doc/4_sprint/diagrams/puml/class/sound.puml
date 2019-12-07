@@ -20,6 +20,7 @@ package sound{
         + SoundEntity(AudioClip: attackSound[0..*])
 
         + playActionSound()
+        + stopActionSound()
     }
 
 
@@ -28,40 +29,30 @@ package sound{
         + SoundTile(AudioClip: actionSound)
 
         + playActionSound()
+        + stopActionSound()
     }
 
-    class SoundDungeon{
+    class SoundMaze{
         - Timer: task
         - AudioClip: ambianceSound[0..*]
 
         + SoundMaze(AudioClip: ambianceSound[0..*])
 
         + playActionSound()
+        + stopActionSound()
     }
 
     interface SoundManager{
         + {abstract} playActionSound()
+        + {abstract} stopActionSound()
     }
 }
-
-class Entity{
-
-}
-
-class Dungeon{
-
-}
-
-class Tile{
-
-}
-
 Entity --> "1" SoundEntity: -sound
 Tile --> "1" SoundTile: -sound
-Dungeon --> "1" SoundDungeon: -sound
+Maze --> "1" SoundMaze: -sound
 
 SoundEntity ..|> SoundManager
-SoundDungeon ..|> SoundManager
+SoundMaze ..|> SoundManager
 SoundTile ..|> SoundManager
 
 @enduml

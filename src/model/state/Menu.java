@@ -7,9 +7,11 @@ import model.state.buttons.ContinueButton;
 import model.state.buttons.MenuButton;
 import model.state.buttons.NewGame;
 import model.state.buttons.QuitMenu;
+import sound.Sound;
 import sprite.TextureFactory;
 import sprite.spriteManager.TextManager;
 
+import java.applet.AudioClip;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 

@@ -3,6 +3,7 @@ package model.dungeon.tile;
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
 import model.global.Position;
+import sound.SoundManagerFactory;
 import sprite.TextureFactory;
 import sprite.spriteManager.SpriteManagerTile;
 
@@ -14,7 +15,7 @@ public class Teleport extends Effect{
     private boolean isTriggered;
 
     Teleport(int hp, Tile decore) {
-        super(hp, decore);
+        super(hp, decore, SoundManagerFactory.getTeleportSounds());
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
         isTriggered = false;
     }
@@ -32,6 +33,7 @@ public class Teleport extends Effect{
     @Override
     public void action(Maze maze, Entity e) {
         if(!isTriggered) {
+            soundManager.playActionSound();
             // Retrieving information from maze
             int width = maze.getWidth();
             int height = maze.getHeight();

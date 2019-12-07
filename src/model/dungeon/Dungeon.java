@@ -8,6 +8,7 @@ import model.dungeon.mazeFactory.MazeFactory;
 import model.global.Cmd;
 import model.global.Position;
 import model.state.StateFactory;
+import sound.Sound;
 import sprite.TextureFactory;
 import sprite.spriteManager.TextManager;
 
@@ -125,6 +126,7 @@ public class Dungeon implements Serializable {
                     EntityFactory.HERO_Y,
                     EntityFactory.HERO_DIRECTION));
             floor++;
+            Sound.getStairs().play();
         }
     }
 }

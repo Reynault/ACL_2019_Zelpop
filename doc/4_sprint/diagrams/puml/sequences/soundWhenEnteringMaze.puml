@@ -3,18 +3,20 @@
 title When the player wants to attack
 autonumber
 
+actor player
+
 participant "Dungeon: d" as d
-participant "MazeFactory: factory" as mf
 participant "Maze: m" as m
 participant "SoundDungeon: sound" as s
 
-d -> mf: getMaze()
+player -> d: updateAll()
 
-create m
-mf -> m: create
+d -> m: moveEntities()
 
-mf --> d: m
+d -> m: regenEntites()
 
-d -> s: setAmbianceSoundOn()
+d -> m: playSound()
+
+m -> s: playActionSound()
 
 @enduml

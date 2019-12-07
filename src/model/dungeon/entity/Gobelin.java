@@ -2,12 +2,15 @@ package model.dungeon.entity;
 
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Position;
+import sound.SoundManagerFactory;
 import sprite.TextureFactory;
 import sprite.spriteManager.SpriteManagerMonster;
 
 public class Gobelin extends Entity{
     protected Gobelin(Stats stats, boolean b, int score, int value, Position position, Behavior behavior) {
-        super(stats, b, score, value, position, behavior,  new SpriteManagerMonster(TextureFactory.getTextureFactory().getGobelin()));
+        super(stats, b, score, value, position, behavior,
+                new SpriteManagerMonster(TextureFactory.getTextureFactory().getGobelin()),
+                SoundManagerFactory.getGoblinSounds());
     }
 
     @Override

@@ -2,6 +2,8 @@ package model.dungeon.tile;
 
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
+import sound.SoundManager;
+import sound.SoundManagerFactory;
 import sprite.TextureFactory;
 import sprite.spriteManager.SpriteManagerTile;
 
@@ -11,7 +13,7 @@ import java.awt.image.BufferedImage;
 public class Stairs extends Effect{
 
     Stairs(int hp, Tile decore) {
-        super(hp, decore);
+        super(hp, decore, null);
         spriteManager = new SpriteManagerTile(
                 TextureFactory.getTextureFactory().getStairs()
         );
@@ -26,9 +28,7 @@ public class Stairs extends Effect{
     }
 
     @Override
-    public void action(Maze maze, Entity e) {
-
-    }
+    public void action(Maze maze, Entity e) {}
 
     @Override
     public boolean canBeCrossed() {
