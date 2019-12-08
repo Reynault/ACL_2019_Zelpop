@@ -77,6 +77,15 @@ public class Dungeon implements Serializable {
         if (!hero.isAlive()) {
             game.setState(StateFactory.getGameOver(this));
         }
+
+        // Playing the low life sound when the hero is wounded
+        if(hero.getHp() < 0.25 * hero.getMaxHp()) {
+            Sound.loopSound(Sound.LOW_LIFE);
+        }
+        // Stopping the low life sound when the is dead or is healed
+        if(!hero.isAlive() || hero.getHp() >= 0.25 * hero.getMaxHp()){
+            Sound.stopSound(Sound.LOW_LIFE);
+        }
     }
 
     /**

@@ -36,6 +36,7 @@ public class ZelpopGame implements Game, Serializable {
 	 * @param state state for the game
 	 */
 	public void setState(GameState state) {
+		Sound.stopSound();
 		currentState = state;
 	}
 

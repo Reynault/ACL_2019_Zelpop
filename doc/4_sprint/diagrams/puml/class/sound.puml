@@ -23,7 +23,6 @@ package sound{
         + playActionSound()
     }
 
-
     class SoundTile{
         - String: actionSound
         + SoundTile(String: actionSound)
@@ -34,16 +33,6 @@ package sound{
     interface SoundManager{
         + {abstract} playActionSound()
     }
-}
-
-package state{
-
-    class InGame{
-        - Timer: task
-        - String: ambianceSound[0..*]
-    }
-    note left: that timer will be used to \ngenerate random sounds
-
 }
 
 Entity --> "1" SoundEntity: -sound

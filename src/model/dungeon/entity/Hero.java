@@ -3,6 +3,7 @@ package model.dungeon.entity;
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Position;
 import sound.Sound;
+import sound.soundManager.SoundManager;
 import sound.soundManager.SoundManagerFactory;
 import sprite.spriteManager.SpriteManagerHero;
 import sprite.TextureFactory;
@@ -29,6 +30,11 @@ public class Hero extends Entity {
     public void setRessources() {
         spriteManager = new SpriteManagerHero(TextureFactory.getTextureFactory().getHero());
         spriteManager.setSprite(position.getCmd());
+    }
+
+    @Override
+    public void takeDamage(double damage) {
+        super.takeDamage(damage);
     }
 
     public void setVitality(double i) {

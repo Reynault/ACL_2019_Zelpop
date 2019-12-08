@@ -2,6 +2,10 @@ package sound;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Sound is a factory class providing all sound assets and a method to play it
@@ -51,6 +55,40 @@ public class Sound {
         }
     }
 
+    private static HashMap<String ,Clip> loops = new HashMap<>();
+
+    public static void loopSound(String sound) {
+        try {
+
+            if(!loops.containsKey(sound)) {
+                Clip clip = AudioSystem.getClip();
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+                        Sound.class.getResourceAsStream(sound));
+                clip.open(inputStream);
+
+                FloatControl soundControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                soundControl.setValue(SOUND_LEVEL);
+
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+
+                loops.put(sound, clip);
+            }
+
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void stopSound(String sound) {
+        if(loops.containsKey(sound)) {
+            loops.get(sound).stop();
+            loops.remove(sound);
+        }
+    }
     /**
      * Method used to decrease the sound from the game
      */

@@ -9,10 +9,15 @@ import sprite.spriteManager.TextManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class InGame implements GameState {
 
     private Dungeon dungeon;
+    private Timer timer;
+    private String[] sounds;
 
     /**
      * Default constructor
@@ -20,6 +25,26 @@ public class InGame implements GameState {
      */
     public InGame(Dungeon dungeon){
         this.dungeon = dungeon;
+        timer = new Timer();
+        sounds = new String[1];
+        sounds[0] = Sound.TREASURE_SOUND;
+
+        // Timer that schedule some random sounds
+        timer.schedule(
+                new TimerTask() {
+                    private Random random = new Random();
+
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(random.nextInt(10000));
+                            Sound.playSound(sounds[random.nextInt(sounds.length)]);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, 0, 1
+        );
     }
 
     @Override
