@@ -100,9 +100,11 @@ public class ZelpopGame implements Game, Serializable {
 		switch (commande){
 			case INCREASE_SOUND:
 				Sound.increaseSound();
+				Sound.playSound(Sound.MENU_BUTTON);
 				break;
 			case DECREASE_SOUND:
 				Sound.decreaseSound();
+				Sound.playSound(Sound.MENU_BUTTON);
 				break;
 		}
 	}

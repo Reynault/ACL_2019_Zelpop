@@ -84,25 +84,15 @@ public class InGame implements GameState {
                 dungeon.changeLevel();
                 break;
             case SAVE:
-                dontUpdate = true;
                 game.save(dungeon);
-                break;
             case RESTART:
-                dontUpdate = true;
-                break;
-            // Up a stat
             case HP:
-                dontUpdate = true;
-                break;
             case RGN:
-                dontUpdate = true;
-                break;
             case ATK:
-                dontUpdate = true;
-                break;
             case CNT:
+            case INCREASE_SOUND:
+            case DECREASE_SOUND:
                 dontUpdate = true;
-                break;
         }
 
         if(!dontUpdate) {
