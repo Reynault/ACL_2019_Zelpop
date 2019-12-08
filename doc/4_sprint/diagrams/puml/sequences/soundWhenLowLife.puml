@@ -1,0 +1,15 @@
+@startuml
+actor player
+
+participant "Dungeon: d" as d
+participant "Sound" as s
+
+player -> d: updateAll()
+
+alt The player is injured
+    d -> s: loopSound(LOW_LIFE)
+else
+    d -> s: stopSound(LOW_LIFE)
+end
+
+@enduml

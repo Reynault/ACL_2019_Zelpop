@@ -2,10 +2,9 @@ package sound;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Sound is a factory class providing all sound assets and a method to play it
@@ -13,6 +12,14 @@ import java.util.Set;
 public class Sound {
 
     public static float SOUND_LEVEL = -15;
+
+    public static String CAVE_1 = "/audio/Cave1.wav";
+    public static String CAVE_2 = "/audio/Cave2.wav";
+    public static String CAVE_3 = "/audio/Cave3.wav";
+    public static String CAVE_4 = "/audio/Cave4.wav";
+    public static String CAVE_5 = "/audio/Cave5.wav";
+    public static String CAVE_6 = "/audio/Cave6.wav";
+    public static String CAVE_7 = "/audio/Cave7.wav";
 
     public static String MONSTER_ATTACK = "/audio/monsterAttack.wav";
     public static String GOBLIN_ATTACK = "/audio/goblinAttack.wav";
@@ -55,12 +62,12 @@ public class Sound {
         }
     }
 
-    private static HashMap<String ,Clip> loops = new HashMap<>();
+    private static HashMap<String, Clip> loops = new HashMap<>();
 
     public static void loopSound(String sound) {
         try {
 
-            if(!loops.containsKey(sound)) {
+            if (!loops.containsKey(sound)) {
                 Clip clip = AudioSystem.getClip();
                 AudioInputStream inputStream = AudioSystem.getAudioInputStream(
                         Sound.class.getResourceAsStream(sound));
@@ -84,17 +91,35 @@ public class Sound {
     }
 
     public static void stopSound(String sound) {
-        if(loops.containsKey(sound)) {
+        if (loops.containsKey(sound)) {
             loops.get(sound).stop();
             loops.remove(sound);
         }
     }
+
+    private static Timer delay = new Timer();
+    private static boolean isRunning = false;
+
+    public static void playDelaySound(TimerTask task, int period) {
+        isRunning = true;
+        delay.schedule(task, period, period);
+    }
+
+    public static void stopDelaySound() {
+        if (isRunning) {
+            delay.purge();
+            delay.cancel();
+            delay = new Timer();
+            isRunning = false;
+        }
+    }
+
     /**
      * Method used to decrease the sound from the game
      */
-    public static void decreaseSound(){
+    public static void decreaseSound() {
         float sound = SOUND_LEVEL - 5;
-        if(sound > -80) {
+        if (sound > -80) {
             SOUND_LEVEL = sound;
         }
     }
@@ -102,9 +127,9 @@ public class Sound {
     /**
      * Method used to amplify the sound from the game
      */
-    public static void increaseSound(){
+    public static void increaseSound() {
         float sound = SOUND_LEVEL + 5;
-        if(sound < 10) {
+        if (sound < 10) {
             SOUND_LEVEL = sound;
         }
     }

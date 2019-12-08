@@ -12,20 +12,28 @@ package sound{
         + {static}LOW_LIFE: String
         + {static}STAIRS: String
         ...
-        + {static}playSound(String sound)
+        + {static}playSound(sound: String)
+
+        - loops: String[0..*]
+        - delay: Timer
+
+        + {static}loopSound(sound: String)
+        + {static}stopSound(sound: String)
+        + {static}delaySound(task: TimeTask)
+        + {static}stopDelaySound()
     }
 
     class SoundEntity{
-        - String: attackSound[0..*]
+        - attackSound: String[0..*]
 
-        + SoundEntity(String: attackSound[0..*])
+        + SoundEntity(attackSound: String[0..*])
 
         + playActionSound()
     }
 
     class SoundTile{
-        - String: actionSound
-        + SoundTile(String: actionSound)
+        - actionSound: String
+        + SoundTile(actionSound: String)
 
         + playActionSound()
     }
