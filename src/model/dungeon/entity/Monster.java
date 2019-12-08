@@ -2,6 +2,7 @@ package model.dungeon.entity;
 
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Position;
+import sound.soundManager.SoundManagerFactory;
 import sprite.spriteManager.SpriteManagerMonster;
 import sprite.TextureFactory;
 
@@ -9,7 +10,8 @@ public class Monster extends Entity {
 
     protected Monster(Stats stats, boolean b, int score, int value, Position position, Behavior behavior) {
         super(stats, b, score, value, position, behavior,
-                new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster()));
+                new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster()),
+                SoundManagerFactory.getMonsterSounds());
     }
 
     @Override

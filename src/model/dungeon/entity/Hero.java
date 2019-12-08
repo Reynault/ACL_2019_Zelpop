@@ -3,6 +3,7 @@ package model.dungeon.entity;
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Position;
 import sound.Sound;
+import sound.soundManager.SoundManagerFactory;
 import sprite.spriteManager.SpriteManagerHero;
 import sprite.TextureFactory;
 
@@ -13,7 +14,8 @@ public class Hero extends Entity {
 
     public Hero(Stats stats, boolean b, int score, int value, Position position, Behavior behavior) {
         super(stats, b, score, value, position, behavior,
-                new SpriteManagerHero(TextureFactory.getTextureFactory().getHero()));
+                new SpriteManagerHero(TextureFactory.getTextureFactory().getHero()),
+                SoundManagerFactory.getHeroSounds());
     }
 
     @Override

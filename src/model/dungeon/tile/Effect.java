@@ -2,15 +2,18 @@ package model.dungeon.tile;
 
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
+import sound.soundManager.SoundManager;
 
 import java.awt.image.BufferedImage;
 
 public abstract class Effect extends Tile {
     protected Tile decore;
+    protected SoundManager sound;
 
-    Effect(int hp, Tile decore){
+    Effect(int hp, Tile decore, SoundManager sound){
         super(hp);
         this.decore = decore;
+        this.sound = sound;
     }
 
     public abstract void setImage();

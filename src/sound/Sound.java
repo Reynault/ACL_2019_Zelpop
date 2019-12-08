@@ -1,58 +1,73 @@
 package sound;
 
-import java.applet.Applet;
-import java.applet.AudioClip;
+import javax.sound.sampled.*;
+import java.io.IOException;
 
+/**
+ * Sound is a factory class providing all sound assets and a method to play it
+ */
 public class Sound {
-    public static AudioClip MONSTER_ATTACK  = Applet.newAudioClip(
-            Sound.class.getResource("/audio/monsterAttack.wav")
-        );
 
-    public static AudioClip GOBLIN_ATTACK =  Applet.newAudioClip(
-            Sound.class.getResource("/audio/goblinAttack.wav")
-        );
+    public static float SOUND_LEVEL = -15;
 
-    public static AudioClip HERO_ATTACK_1 =  Applet.newAudioClip(
-            Sound.class.getResource("/audio/heroAttack1.wav")
-    );
+    public static String MONSTER_ATTACK = "/audio/monsterAttack.wav";
+    public static String GOBLIN_ATTACK = "/audio/goblinAttack.wav";
+    public static String HERO_ATTACK_1 = "/audio/heroAttack1.wav";
+    public static String HERO_ATTACK_2 = "/audio/heroAttack2.wav";
+    public static String HERO_ATTACK_3 = "/audio/heroAttack3.wav";
+    public static String GHOST_ATTACK = "/audio/ghostAttack.wav";
+    public static String MENU_BUTTON = "/audio/buttonMenu.wav";
+    public static String LOW_LIFE = "/audio/lowLife.wav";
+    public static String STAIRS_SOUND = "/audio/stairs.wav";
+    public static String TRAP_SOUND = "/audio/trap.wav";
+    public static String TELEPORT_SOUND = "/audio/teleport.wav";
+    public static String TREASURE_SOUND = "/audio/gold.wav";
+    public static String BREAK_SOUND = "/audio/breakWall.wav";
 
-    public static AudioClip HERO_ATTACK_2 =  Applet.newAudioClip(
-            Sound.class.getResource("/audio/heroAttack2.wav")
-    );
+    /**
+     * PlaySound is used to play a sound using clips
+     *
+     * @param sound
+     */
+    public static void playSound(String sound) {
+        try {
 
-    public static AudioClip HERO_ATTACK_3 =  Applet.newAudioClip(
-            Sound.class.getResource("/audio/heroAttack3.wav")
-    );
+            Clip clip = AudioSystem.getClip();
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+                    Sound.class.getResourceAsStream(sound));
+            clip.open(inputStream);
 
-    public static AudioClip GHOST_ATTACK =  Applet.newAudioClip(
-            Sound.class.getResource("/audio/ghostAttack.wav")
-    );
+            FloatControl soundControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            soundControl.setValue(SOUND_LEVEL);
 
-    public static AudioClip MENU_BUTTON =  Applet.newAudioClip(
-            Sound.class.getResource("/audio/buttonMenu.wav")
-    );
+            clip.start();
 
-    public static AudioClip LOW_LIFE =  Applet.newAudioClip(
-            Sound.class.getResource("/audio/lowLife.wav")
-    );
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public static AudioClip STAIRS_SOUND =  Applet.newAudioClip(
-            Sound.class.getResource("/audio/stairs.wav")
-    );
+    /**
+     * Method used to decrease the sound from the game
+     */
+    public static void decreaseSound(){
+        float sound = SOUND_LEVEL - 5;
+        if(sound > -80) {
+            SOUND_LEVEL = sound;
+        }
+    }
 
-    public static AudioClip TRAP_SOUND =  Applet.newAudioClip(
-            Sound.class.getResource("/audio/trap.wav")
-    );
-
-    public static AudioClip TELEPORT_SOUND =  Applet.newAudioClip(
-            Sound.class.getResource("/audio/teleport.wav")
-    );
-
-    public static AudioClip TREASURE_SOUND =  Applet.newAudioClip(
-            Sound.class.getResource("/audio/gold.wav")
-    );
-
-    public static AudioClip BREAK_SOUND =  Applet.newAudioClip(
-            Sound.class.getResource("/audio/breakWall.wav")
-    );
+    /**
+     * Method used to amplify the sound from the game
+     */
+    public static void increaseSound(){
+        float sound = SOUND_LEVEL + 5;
+        if(sound < 10) {
+            SOUND_LEVEL = sound;
+        }
+    }
 }

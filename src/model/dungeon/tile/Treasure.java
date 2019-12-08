@@ -2,6 +2,8 @@ package model.dungeon.tile;
 
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
+import sound.soundManager.SoundManager;
+import sound.soundManager.SoundManagerFactory;
 import sprite.spriteManager.SpriteManagerTile;
 import sprite.TextureFactory;
 
@@ -15,7 +17,7 @@ public class Treasure extends Effect {
      * @param decore decorated tile
      */
     Treasure(int hp, Tile decore, int gold) {
-        super(hp, decore);
+        super(hp, decore, SoundManagerFactory.getTreasureSounds());
         open = false;
         this.gold = gold;
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getFilledTreasure());
@@ -34,6 +36,7 @@ public class Treasure extends Effect {
     @Override
     public void action(Maze maze, Entity e) {
         if(!open) {
+            sound.playActionSound();
             e.increaseScore(maze.getChestScore(this));
             spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getEmptyTreasure());
         }

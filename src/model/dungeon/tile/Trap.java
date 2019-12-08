@@ -2,6 +2,7 @@ package model.dungeon.tile;
 
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
+import sound.soundManager.SoundManagerFactory;
 import sprite.spriteManager.SpriteManagerTile;
 import sprite.TextureFactory;
 
@@ -15,7 +16,7 @@ public class Trap extends Effect {
      * @param decore decorated tile
      */
     Trap(int hp, Tile decore, int trapDamage) {
-        super(hp, decore);
+        super(hp, decore, SoundManagerFactory.getTrapSounds());
         spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTraps());
         this.trapDamage = trapDamage;
         this.triggered = false;
@@ -34,6 +35,7 @@ public class Trap extends Effect {
     @Override
     public void action(Maze maze, Entity e) {
         if(!triggered) {
+            sound.playActionSound();
             e.takeDamage(trapDamage);
             triggered = true;
             spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTiles());

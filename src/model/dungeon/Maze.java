@@ -462,6 +462,7 @@ public class Maze implements Serializable {
         Tile t = tiles[pos.getY()][pos.getX()];
         if (t.isStairs()) {
             hero.increaseScore(scoring.leaveMaze());
+            Sound.playSound(Sound.STAIRS_SOUND);
             return true;
         } else {
             return false;
@@ -525,6 +526,8 @@ public class Maze implements Serializable {
                 if(tile.isDestroyed()){
                     // And if destroyed, then it becomes its ancestor
                     tiles[y][x] = tiles[y][x].getAncestor();
+                    // Playing sound
+                    Sound.playSound(Sound.BREAK_SOUND);
                 }
             }
         }

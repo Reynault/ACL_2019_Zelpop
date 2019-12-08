@@ -4,6 +4,7 @@ import model.dungeon.Maze;
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Cmd;
 import model.global.Position;
+import sound.soundManager.SoundManager;
 import sprite.spriteManager.SpriteManagerEntity;
 
 import java.awt.image.BufferedImage;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 public abstract class Entity implements Serializable {
 
     protected Stats stats;
+    protected SoundManager sounds;
 
     protected boolean passThrought;
     protected Position position;
@@ -20,7 +22,7 @@ public abstract class Entity implements Serializable {
     protected int score;
     protected int value;
 
-    protected Entity(Stats stats, boolean passThrought, int score, int value, Position position, Behavior behavior, SpriteManagerEntity spriteManager) {
+    protected Entity(Stats stats, boolean passThrought, int score, int value, Position position, Behavior behavior, SpriteManagerEntity spriteManager, SoundManager soundManager) {
         this.stats = stats;
         this.passThrought = passThrought;
         this.position = position;
@@ -29,6 +31,7 @@ public abstract class Entity implements Serializable {
         this.spriteManager = spriteManager;
         this.score = score;
         this.value = value;
+        this.sounds = soundManager;
     }
 
     public void regen(){
@@ -72,6 +75,7 @@ public abstract class Entity implements Serializable {
 
     public void setAttacking() {
         spriteManager.setAttacking();
+        sounds.playActionSound();
     }
 
     /**

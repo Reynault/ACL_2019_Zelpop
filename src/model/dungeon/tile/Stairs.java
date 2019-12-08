@@ -8,7 +8,7 @@ import sprite.spriteManager.SpriteManagerTile;
 public class Stairs extends Effect{
 
     Stairs(int hp, Tile decore) {
-        super(hp, decore);
+        super(hp, decore, null);
         spriteManager = new SpriteManagerTile(
                 TextureFactory.getTextureFactory().getStairs()
         );

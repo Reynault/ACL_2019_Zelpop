@@ -8,6 +8,7 @@ import model.dungeon.Dungeon;
 import model.global.Cmd;
 import model.state.GameState;
 import model.state.Menu;
+import sound.Sound;
 
 public class ZelpopGame implements Game, Serializable {
 
@@ -94,6 +95,16 @@ public class ZelpopGame implements Game, Serializable {
 	@Override
 	public void evolve(Cmd commande) {
 		currentState.evolve(this, commande);
+
+		// This switch is here to change the sound volume anywhere and anytime in the game
+		switch (commande){
+			case INCREASE_SOUND:
+				Sound.increaseSound();
+				break;
+			case DECREASE_SOUND:
+				Sound.decreaseSound();
+				break;
+		}
 	}
 
 	/**

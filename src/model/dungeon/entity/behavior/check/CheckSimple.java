@@ -16,13 +16,13 @@ public class CheckSimple implements Check {
 
         Entity victim;
 
-        if ((victim = maze.getEntity(x+1, y)) != null) {
+        if ((victim = maze.getEntity(x+1, y)) != null && victim.isHero()) {
             commande = Cmd.RIGHT;
-        } else if ((victim = maze.getEntity(x-1, y)) != null) {
+        } else if ((victim = maze.getEntity(x-1, y)) != null && victim.isHero()) {
             commande = Cmd.LEFT;
-        } else if ((victim = maze.getEntity(x, y+1)) != null) {
+        } else if ((victim = maze.getEntity(x, y+1)) != null && victim.isHero()) {
             commande = Cmd.DOWN;
-        } else if ((victim = maze.getEntity(x, y-1)) != null) {
+        } else if ((victim = maze.getEntity(x, y-1)) != null && victim.isHero()) {
             commande = Cmd.UP;
         }
 

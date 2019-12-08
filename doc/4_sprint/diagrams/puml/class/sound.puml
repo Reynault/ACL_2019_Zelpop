@@ -5,35 +5,34 @@ title How the sound integration works
 package sound{
 
     class Sound{
-        + MONSTER_ATTACK: AudioClip
-        + GOBLIN_ATTACK: AudioClip
-        + MENU_BUTTON: AudioClip
-        + HERO_ATTACK: AudioClip
-        + LOW_LIFE: AudioClip
-        + STAIRS: AudioClip
+        + {static}MONSTER_ATTACK: String
+        + {static}GOBLIN_ATTACK: String
+        + {static}MENU_BUTTON: String
+        + {static}HERO_ATTACK: String
+        + {static}LOW_LIFE: String
+        + {static}STAIRS: String
+        ...
+        + {static}playSound(String sound)
     }
 
     class SoundEntity{
-        - AudioClip: attackSound[0..*]
+        - String: attackSound[0..*]
 
-        + SoundEntity(AudioClip: attackSound[0..*])
+        + SoundEntity(String: attackSound[0..*])
 
         + playActionSound()
-        + stopActionSound()
     }
 
 
     class SoundTile{
-        - AudioClip: actionSound
-        + SoundTile(AudioClip: actionSound)
+        - String: actionSound
+        + SoundTile(String: actionSound)
 
         + playActionSound()
-        + stopActionSound()
     }
 
     interface SoundManager{
         + {abstract} playActionSound()
-        + {abstract} stopActionSound()
     }
 }
 
@@ -41,23 +40,11 @@ package state{
 
     class InGame{
         - Timer: task
-        - AudioClip: ambianceSound[0..*]
+        - String: ambianceSound[0..*]
     }
-
-    class Menu{
-        - AudioClip: buttonSound
-    }
+    note left: that timer will be used to \ngenerate random sounds
 
 }
-
-class Entity{
-    + setRessources()
-}
-
-class Tile{
-    + setRessources()
-}
-note left: setRessources is setting sprites and sound
 
 Entity --> "1" SoundEntity: -sound
 Tile --> "1" SoundTile: -sound

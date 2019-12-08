@@ -120,5 +120,9 @@ public class Menu implements GameState {
                 buttons[2].trigger(game);
                 break;
         }
+
+        if(commande == Cmd.UP || commande == Cmd.DOWN){
+            Sound.playSound(Sound.MENU_BUTTON);
+        }
     }
 }
