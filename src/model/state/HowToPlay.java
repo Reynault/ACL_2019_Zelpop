@@ -37,14 +37,15 @@ public class HowToPlay implements GameState {
         // Setting title and text
         title = textManager.getString("How to play", textColor);
 
-        command = new BufferedImage[7];
+        command = new BufferedImage[8];
         command[0] = textManager.getString("Z Q S D : move", textColor);
         command[1] = textManager.getString("SPACE : attack", textColor);
-        command[2] = textManager.getString("E : change level above stairs", textColor);
-        command[3] = textManager.getString("O : save", textColor);
-        command[4] = textManager.getString("ESCAPE : quit to menu without save", textColor);
-        command[5] = textManager.getString("J K L M : up a stat for a cost", textColor);
-        command[6] = textManager.getString("B N : Increase / Decrease the sound level", textColor);
+        command[2] = textManager.getString("W : Throw projectile (cost HP)", textColor);
+        command[3] = textManager.getString("E : change level above stairs", textColor);
+        command[4] = textManager.getString("O : save", textColor);
+        command[5] = textManager.getString("ESCAPE : quit to menu without save", textColor);
+        command[6] = textManager.getString("J K L M : up a stat for a cost", textColor);
+        command[7] = textManager.getString("B N : Increase / Decrease the sound level", textColor);
 
         mobs = new BufferedImage[4];
         mobs[0] = textManager.getString("You", textColor);
@@ -165,21 +166,12 @@ public class HowToPlay implements GameState {
         // Draw the labels for the commands
         cptCommand = HEIGHT_LABEL;
         for(BufferedImage s : command){
-            if(s.equals(command[2]) || s.equals(command[4]) || s.equals(command[5]) || s.equals(command[6])){ // change level & quit & up a stat
-                widthText = 700;
-            }
-            else if(s.equals(command[3])){   // save
-                widthText = 200;
-            }
-            else {  // move & attack
-                widthText = 400;
-            }
             crayon.drawImage(
                     s,
                     HEIGHT_LABEL,
                     TOP_SPAN + HEIGHT_LABEL + cptCommand * 2,
-                    widthText,
-                    HEIGHT_LABEL,
+                    (int)(s.getWidth()*0.6),
+                    s.getHeight(),
                     null
             );
             cptCommand = cptCommand + HEIGHT_LABEL;
