@@ -49,7 +49,6 @@ public class Sound {
                 }
             }
 
-
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(
                     Sound.class.getResource(sound));
 
@@ -81,9 +80,14 @@ public class Sound {
         try {
 
             if (!loops.containsKey(sound)) {
-                Clip clip = AudioSystem.getClip();
+
                 AudioInputStream inputStream = AudioSystem.getAudioInputStream(
                         Sound.class.getResourceAsStream(sound));
+
+                AudioFormat format = inputStream.getFormat();
+                DataLine.Info info = new DataLine.Info(Clip.class, format);
+
+                Clip clip = (Clip)AudioSystem.getLine(info);
                 clip.open(inputStream);
 
                 FloatControl soundControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
@@ -105,6 +109,7 @@ public class Sound {
 
     public static void stopSound(String sound) {
         if (loops.containsKey(sound)) {
+            System.out.println("STOP SOUND ?");
             loops.get(sound).stop();
             loops.get(sound).close();
             loops.remove(sound);
