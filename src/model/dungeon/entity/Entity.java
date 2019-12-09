@@ -123,6 +123,10 @@ public abstract class Entity implements Serializable {
         return score;
     }
 
+    /**
+     *
+     */
+    public abstract Boolean isHero();
 
     /**
      * Give an image for the entity (used after a load)
@@ -174,5 +178,10 @@ public abstract class Entity implements Serializable {
     public void setDefence(int defence) {
         stats.setDefence(defence);
     }
+
+    public Stats getStats() {
+        return stats;
+    }
+
 
 }

@@ -4,6 +4,7 @@ import model.ZelpopGame;
 import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
+import model.dungeon.entity.ScaleStat;
 import model.dungeon.mazeFactory.MazeFactory;
 import model.global.Cmd;
 import model.global.Position;
@@ -142,6 +143,7 @@ public class Dungeon implements Serializable {
 
     public void changeLevel() {
         if (currentMaze.isFinished()) {
+            ScaleStat.getInstance().setLevel();
             currentMaze = mazeFactory.getRandomMaze(DEFAULT_MAZE_SIZE, entityFactory);
             hero.setPosition(new Position(
                     EntityFactory.HERO_X,
