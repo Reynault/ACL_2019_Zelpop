@@ -43,28 +43,34 @@ public class Sound {
      */
     public static void playSound(String sound) {
         try {
-            
+
+            List<Clip> toRemove = new ArrayList<>();
             for(Clip c: clips){
                 if(!c.isRunning()){
                     c.close();
+                    toRemove.add(c);
                 }
             }
 
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                    Sound.class.getResource(sound));
+            clips.removeAll(toRemove);
 
-            AudioFormat format = inputStream.getFormat();
-            DataLine.Info info = new DataLine.Info(Clip.class, format);
-            
-            Clip clip = (Clip)AudioSystem.getLine(info);
-            clip.open(inputStream);
+            if(clips.size() < 30) {
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+                        Sound.class.getResource(sound));
 
-            FloatControl soundControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            soundControl.setValue(SOUND_LEVEL);
+                AudioFormat format = inputStream.getFormat();
+                DataLine.Info info = new DataLine.Info(Clip.class, format);
 
-            clip.start();
+                Clip clip = (Clip) AudioSystem.getLine(info);
+                clip.open(inputStream);
 
-            clips.add(clip);
+                FloatControl soundControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                soundControl.setValue(SOUND_LEVEL);
+
+                clip.start();
+
+                clips.add(clip);
+            }
 
         } catch (LineUnavailableException e) {
             e.printStackTrace();
@@ -110,7 +116,6 @@ public class Sound {
 
     public static void stopSound(String sound) {
         if (loops.containsKey(sound)) {
-            System.out.println("STOP SOUND ?");
             loops.get(sound).stop();
             loops.get(sound).close();
             loops.remove(sound);
