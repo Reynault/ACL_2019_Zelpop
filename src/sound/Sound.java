@@ -49,10 +49,14 @@ public class Sound {
                 }
             }
 
-            Clip clip = AudioSystem.getClip();
 
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(
                     Sound.class.getResource(sound));
+
+            AudioFormat format = inputStream.getFormat();
+            DataLine.Info info = new DataLine.Info(Clip.class, format);
+            
+            Clip clip = (Clip)AudioSystem.getLine(info);
             clip.open(inputStream);
 
             FloatControl soundControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
