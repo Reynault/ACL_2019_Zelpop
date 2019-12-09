@@ -336,7 +336,7 @@ public class Maze implements Serializable {
     }
 
     /**
-     * Move a entity in the maze using a direction
+     * Move an entity in the maze using a direction
      *
      * @param e         entity in the maze
      * @param direction direction for the move
@@ -674,7 +674,7 @@ public class Maze implements Serializable {
         }
     }
 
-    public void regenEntites() {
+    public void regenEntities() {
         if (entities != null && entities.size() > 0) {
             for (Entity e : entities) {
                 e.regen();

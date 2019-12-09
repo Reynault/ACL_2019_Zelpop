@@ -88,7 +88,7 @@ public class Dungeon implements Serializable {
      */
     public void updateAll(ZelpopGame game) {
         currentMaze.moveEntities();
-        currentMaze.regenEntites();
+        currentMaze.regenEntities();
         if (!hero.isAlive()) {
             game.setState(StateFactory.getGameOver(this));
         }

@@ -16,7 +16,7 @@ public class Scoring implements Serializable {
 
 
     public double killMonster(Entity entity) {
-        return entity.getValue();
+        return entity.getValue() * entity.getScore();
     }
 
     public int leaveMaze() {
@@ -24,6 +24,6 @@ public class Scoring implements Serializable {
     }
 
     public int findChest(Tile tile) {
-        return tile.getGold();
+        return tile.getGold() * multiplier;
     }
 }

@@ -18,7 +18,7 @@ public class ScaleStat {
     }
 
     public double scaleStat (double defaultStat){
-        return defaultStat + (defaultStat / (this.level/5));
+        return defaultStat + (defaultStat + (this.level/5));
     }
 
 }

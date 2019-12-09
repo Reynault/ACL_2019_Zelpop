@@ -14,13 +14,13 @@ public class EntityFactory implements Serializable {
     private static int HERO_SCORE = 0;
 
     private static int MONSTER_VALUE = 50;
-    private static int MONSTER_SCORE = 0;
+    private static int MONSTER_SCORE = 1;
 
     private static int GHOST_VALUE = 50;
-    private static int GHOST_SCORE = 0;
+    private static int GHOST_SCORE = 2;
 
     private static int GOBELIN_VALUE = 50;
-    private static int GOBELIN_SCORE = 0;
+    private static int GOBELIN_SCORE = 3;
 
     private Hero hero;
 

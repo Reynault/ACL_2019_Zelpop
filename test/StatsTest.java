@@ -169,7 +169,7 @@ class StatsTest {
             @Test
             public void positive(){
                 hero.takeDamage(1);
-                maze.regenEntites();
+                maze.regenEntities();
 
                 Assertions.assertEquals(hero.getMaxHp(), hero.getHp());
             }
@@ -182,7 +182,7 @@ class StatsTest {
              */
             @Test
             public void positive_max(){
-                maze.regenEntites();
+                maze.regenEntities();
 
                 Assertions.assertEquals(hero.getMaxHp(), hero.getHp());
             }
@@ -198,7 +198,7 @@ class StatsTest {
                 hero.setVitality(hero.getMaxHp());
                 hero.takeDamage(1);
 
-                maze.regenEntites();
+                maze.regenEntities();
 
                 Assertions.assertEquals(hero.getMaxHp(), hero.getHp());
             }
@@ -219,7 +219,7 @@ class StatsTest {
                 hero.takeDamage(hero.getMaxHp());
 
                 hero.takeDamage(hero.getVitality());
-                maze.regenEntites();
+                maze.regenEntities();
 
                 Assertions.assertEquals(0, hero.getHp());
             }
@@ -234,7 +234,7 @@ class StatsTest {
             @Test
             public void zero(){
                 hero.setVitality(0);
-                maze.regenEntites();
+                maze.regenEntities();
 
                 Assertions.assertEquals(hero.getMaxHp(), hero.getHp());
             }
@@ -248,7 +248,7 @@ class StatsTest {
             @Test
             public void negative(){
                 hero.setVitality(-1);
-                maze.regenEntites();
+                maze.regenEntities();
 
                 Assertions.assertEquals(hero.getMaxHp()+hero.getVitality(), hero.getHp());
             }

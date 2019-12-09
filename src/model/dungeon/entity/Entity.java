@@ -19,15 +19,24 @@ public abstract class Entity implements Serializable {
     protected Position position;
     protected Behavior behavior;
     protected SpriteManagerEntity spriteManager;
-    protected int score;
-    protected int value;
+    protected int score;   // multiplier for the score
+    protected int value;   // value of the score
 
+    /**
+     *
+     * @param stats stats of the entity
+     * @param passThrought if the entity can move throught walls
+     * @param score
+     * @param value value of the score when the entity dies
+     * @param position position  of the entity
+     * @param behavior behavior of the entity
+     * @param spriteManager sprite manager
+     */
     protected Entity(Stats stats, boolean passThrought, int score, int value, Position position, Behavior behavior, SpriteManagerEntity spriteManager, SoundManager soundManager) {
         this.stats = stats;
         this.passThrought = passThrought;
         this.position = position;
         this.behavior = behavior;
-        this.score = 0;
         this.spriteManager = spriteManager;
         this.score = score;
         this.value = value;
