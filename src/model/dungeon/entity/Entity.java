@@ -124,11 +124,6 @@ public abstract class Entity implements Serializable {
     }
 
     /**
-     *
-     */
-    public abstract Boolean isHero();
-
-    /**
      * Give an image for the entity (used after a load)
      */
     public abstract void setRessources();
