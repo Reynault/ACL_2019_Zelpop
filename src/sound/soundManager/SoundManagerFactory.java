@@ -33,6 +33,13 @@ public class SoundManagerFactory {
         return new SoundEntity(sounds);
     }
 
+    public static SoundManager getProjectileSound(){
+        String[] sounds = {
+                Sound.FIRE_BALL
+        };
+        return new SoundEntity(sounds);
+    }
+
     public static SoundManager getTrapSounds(){
         return new SoundTile(Sound.TRAP_SOUND);
     }

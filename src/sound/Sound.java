@@ -32,6 +32,7 @@ public class Sound {
     public static String TELEPORT_SOUND = "/audio/teleport.wav";
     public static String TREASURE_SOUND = "/audio/gold.wav";
     public static String BREAK_SOUND = "/audio/breakWall.wav";
+    public static String FIRE_BALL = "/audio/heroAttack.wav";
 
     public static List<Clip> clips = new ArrayList<>();
 
