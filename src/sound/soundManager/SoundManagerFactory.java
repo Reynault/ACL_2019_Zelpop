@@ -35,7 +35,7 @@ public class SoundManagerFactory {
 
     public static SoundManager getProjectileSound(){
         String[] sounds = {
-                Sound.FIRE_BALL
+                Sound.HERO_ATTACK_1
         };
         return new SoundEntity(sounds);
     }
