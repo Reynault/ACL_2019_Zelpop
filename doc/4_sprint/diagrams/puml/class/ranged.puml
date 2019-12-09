@@ -1,5 +1,7 @@
 @startuml
 
+title Adding projectiles in the game
+
 package entity{
 
     package behavior{
@@ -140,6 +142,7 @@ class Maze{
 
 }
 
-
+Maze --> "*" Entity: entities
+Maze --> "*" Entity: projectiles
 
 @enduml
