@@ -14,11 +14,6 @@ public class Gobelin extends Entity{
     }
 
     @Override
-    public Boolean isHero() {
-        return false;
-    }
-
-    @Override
     public void setRessources() {
         // change to getGobelin
         spriteManager = new SpriteManagerMonster(TextureFactory.getTextureFactory().getGobelin());

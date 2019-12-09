@@ -20,7 +20,7 @@ public class Hero extends Entity {
     }
 
     @Override
-    public Boolean isHero() {
+    public boolean isHero() {
         return true;
     }
 

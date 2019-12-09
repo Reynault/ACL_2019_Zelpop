@@ -15,11 +15,6 @@ public class Ghost extends Entity {
     }
 
     @Override
-    public Boolean isHero() {
-        return false;
-    }
-
-    @Override
     public void setRessources() {
         //change to getGhost
         spriteManager = new SpriteManagerMonster(TextureFactory.getTextureFactory().getGhost());

@@ -2,6 +2,9 @@ package model.state;
 
 import model.ZelpopGame;
 import model.dungeon.Dungeon;
+import model.dungeon.entity.Entity;
+import model.dungeon.entity.EntityFactory;
+import model.dungeon.entity.Hero;
 import model.global.Cmd;
 import sound.Sound;
 import sprite.TextureFactory;
@@ -78,6 +81,9 @@ public class InGame implements GameState {
                 break;
             case ATTACK:
                 dungeon.attack();
+                break;
+            case RANGED:
+                dungeon.rangedAttackHero();
                 break;
             case LEAVE_LEVEL:
                 dontUpdate = true;

@@ -85,6 +85,10 @@ public class ZelpopController implements GameController {
             case 'N':
                 this.commandeEnCours = Cmd.DECREASE_SOUND;
                 break;
+			case 'w':
+			case 'W':
+				this.commandeEnCours = Cmd.RANGED;
+				break;
         }
 
 		switch (e.getKeyCode()){

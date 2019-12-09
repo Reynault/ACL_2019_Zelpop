@@ -101,6 +101,17 @@ public abstract class Entity implements Serializable {
     }
 
     /**
+     *
+     */
+    public boolean isHero() {
+        return false;
+    }
+
+    public boolean isProjectile() {
+        return false;
+    }
+
+    /**
      *  Increase the total score
      * @param bonus value of the bonus
      */
@@ -112,10 +123,6 @@ public abstract class Entity implements Serializable {
         return score;
     }
 
-    /**
-     *
-     */
-    public abstract Boolean isHero();
 
     /**
      * Give an image for the entity (used after a load)
@@ -167,4 +174,5 @@ public abstract class Entity implements Serializable {
     public void setDefence(int defence) {
         stats.setDefence(defence);
     }
+
 }

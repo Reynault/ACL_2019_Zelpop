@@ -1,6 +1,7 @@
 package model.dungeon;
 
 import model.ZelpopGame;
+import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
 import model.dungeon.mazeFactory.MazeFactory;
@@ -67,6 +68,19 @@ public class Dungeon implements Serializable {
     public void attack() {
         currentMaze.attack();
     }
+
+    /**
+     * Entity is ranged-attacking
+     */
+    public void rangedAttackHero() {
+        rangedAttack(hero);
+    }
+
+
+    public void rangedAttack(Entity entity) {
+        currentMaze.rangedAttack(entity);
+    }
+
 
     /**
      * Update the whole dungeon

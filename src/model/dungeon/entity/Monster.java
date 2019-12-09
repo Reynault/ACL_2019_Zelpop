@@ -14,11 +14,6 @@ public class Monster extends Entity {
                 SoundManagerFactory.getMonsterSounds());
     }
 
-    @Override
-    public Boolean isHero() {
-        return false;
-    }
-
     /**
      * Give an image for the hero (used after a load)
      */

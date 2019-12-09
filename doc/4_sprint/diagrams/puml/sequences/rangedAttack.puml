@@ -1,0 +1,111 @@
+@startuml
+
+title When the player wants to do a ranged attack
+autonumber
+
+actor player
+
+participant ZelpopGame as z
+participant Dungeon as d
+participant "maze: Maze" as m
+participant "h: Hero" as h
+participant "SpriteManagerEntity" as sme
+participant Behavior as b
+participant RangedAttack as as
+participant "entity: Entity" as e
+participant "tile: Tile" as t
+
+
+player --> z: The player wants to attack
+
+z -> d: rangedAttack()
+
+d -> m: rangedAttack()
+
+m -> h: rangedAttack(maze)
+
+h -> sme: isRangedAttacking()
+note left
+We notify the sprite manager
+that it has to display the ranged attack sprite
+end note
+
+h -> b: behave(maze, h, RANGED_ATTACK)
+
+b -> as: rangedAttack(maze, h)
+
+as -> h: getDmg()
+
+h --> as: damage
+
+as -> m: getEntity(x, y)
+
+note left
+maze will loop on every
+entities it owns and search
+for the one at (x, y)
+end note
+
+
+alt entity != null
+
+    as -> m: rangedAttackEntity(entity, victim, damage)
+
+    m -> e: takeDamage(damage)
+
+    ref over e
+        See the diagram when an
+        entity is taking damages
+        entitled takeDamage.
+    end ref
+
+    as -> e: getCounter()
+
+    e --> as: counter
+
+    as -> m: rangedAttackEntity(entity, victim, counter)
+    note left
+    The entity is then taking damages depending on
+    the defence of the victim, for more details, see the
+    take damages diagram
+    end note
+
+else
+
+    as -> m: destroy(int x, int y, int damage)
+
+    opt t != null
+
+        m -> t: isBreakable()
+
+        t --> m: breakable
+
+        opt breakable == true
+
+            m -> t: takeDamage(damage)
+            note left
+            When a wall or a trap is destroyed,
+            it simply switching with the decorated
+            tile
+            end note
+
+            as -> t: isDestroyed()
+
+            t --> as: destroyed
+
+            opt destroyed == true
+
+                note left
+                    The tile is replaced by
+                    its decorated one
+                end note
+
+            end
+
+        end
+
+    end
+end
+
+
+@enduml

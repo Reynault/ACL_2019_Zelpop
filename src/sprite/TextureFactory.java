@@ -32,6 +32,7 @@ public class TextureFactory {
     private static BufferedImage chest;
     private static BufferedImage text;
     private static BufferedImage background;
+    private static BufferedImage projectile;
 
     private static TextManager textManager = new TextManager();
 
@@ -62,9 +63,19 @@ public class TextureFactory {
             inputStream
                     = TextureFactory.class.getClassLoader().getResourceAsStream("sprites/background.png");
             background = ImageIO.read(inputStream);
+
+            inputStream
+                    = TextureFactory.class.getClassLoader().getResourceAsStream("sprites/projectiles.png");
+            projectile = ImageIO.read(inputStream);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public BufferedImage getFireBall() {
+        BufferedImage sprite = projectile.getSubimage(13 * TILE_LENGTH, 3 * TILE_HEIGHT, TILE_LENGTH, TILE_HEIGHT);
+        return sprite;
     }
 
     public BufferedImage getBackground(){
@@ -72,12 +83,12 @@ public class TextureFactory {
     }
 
     public BufferedImage getHero(){
-        BufferedImage sprite = player.getSubimage(0, 5*HERO_HEIGHT, HERO_LENGTH, HERO_HEIGHT);
+        BufferedImage sprite = player.getSubimage(0, 5 * HERO_HEIGHT, HERO_LENGTH, HERO_HEIGHT);
         return sprite;
     }
 
     public BufferedImage getMonster(){
-        BufferedImage sprite = monster.getSubimage(0, 5*MONSTER_HEIGHT, MONSTER_LENGTH, MONSTER_HEIGHT);
+        BufferedImage sprite = monster.getSubimage(0, 5 * MONSTER_HEIGHT, MONSTER_LENGTH, MONSTER_HEIGHT);
         return sprite;
     }
 
