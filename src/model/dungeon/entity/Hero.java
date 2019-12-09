@@ -13,8 +13,8 @@ import java.applet.AudioClip;
 public class Hero extends Entity {
 
 
-    public Hero(Stats stats, boolean b, int score, int value, Position position, Behavior behavior) {
-        super(stats, b, score, value, position, behavior,
+    public Hero(Stats stats, boolean b, boolean untouchable, int score, int value, Position position, Behavior behavior) {
+        super(stats, b, untouchable, score, value, position, behavior,
                 new SpriteManagerHero(TextureFactory.getTextureFactory().getHero()),
                 SoundManagerFactory.getHeroSounds());
     }

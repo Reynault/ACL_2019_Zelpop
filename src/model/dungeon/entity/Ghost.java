@@ -8,8 +8,8 @@ import sprite.spriteManager.SpriteManagerMonster;
 
 public class Ghost extends Entity {
 
-    protected Ghost(Stats stats, boolean b, int score, int value, Position position, Behavior behavior) {
-        super(stats, b, score, value, position, behavior,
+    protected Ghost(Stats stats, boolean b, boolean untouchable, int score, int value, Position position, Behavior behavior) {
+        super(stats, b, untouchable, score, value, position, behavior,
                 new SpriteManagerMonster(TextureFactory.getTextureFactory().getGhost()),
                 SoundManagerFactory.getGhostSounds());
     }

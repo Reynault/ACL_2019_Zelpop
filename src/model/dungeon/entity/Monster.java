@@ -8,8 +8,8 @@ import sprite.TextureFactory;
 
 public class Monster extends Entity {
 
-    protected Monster(Stats stats, boolean b, int score, int value, Position position, Behavior behavior) {
-        super(stats, b, score, value, position, behavior,
+    protected Monster(Stats stats, boolean b, boolean untouchable, int score, int value, Position position, Behavior behavior) {
+        super(stats, b, untouchable, score, value, position, behavior,
                 new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster()),
                 SoundManagerFactory.getMonsterSounds());
     }

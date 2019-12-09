@@ -19,6 +19,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static model.dungeon.entity.StatFactory.HERO_DAMAGE_CALLBACK;
+
 
 public class Maze implements Serializable {
 
@@ -30,6 +32,7 @@ public class Maze implements Serializable {
     private int width, height;
     private Hero hero;
     private Scoring scoring;
+    private EntityFactory entityFactory;
 
     private String[] stats, letters;    // Draw of stats
 
@@ -49,6 +52,7 @@ public class Maze implements Serializable {
         this.scoring = scoring;
         removedEntity = new ArrayList<>();
         projectiles = new ArrayList<>();
+        this.entityFactory = entityFactory;
         // Stats
         stats = new String[4];
         stats[0] = "HP:";
@@ -372,53 +376,14 @@ public class Maze implements Serializable {
             e.setPosition(newPosition);
 
             // Then adding tile action to the hero
-            Position position = hero.getPosition();
-            Tile t = tiles[position.getY()][position.getX()];
-            t.action(this, hero);
-        }
-    }
-    /**
-     * Move a entity in the maze using a direction
-     *
-     * @param e         entity in the maze
-     * @param direction direction for the move
-     */
-    public void moveEntityProjectile(Entity e, Cmd direction) {
-        int x, y;
-        Position currentPosition, newPosition;
-
-        // Generating a movement
-        direction = e.behave(this, direction);
-
-        if (direction == Cmd.IDLE) {
-
-            currentPosition = e.getPosition();
-
-            x = currentPosition.getX();
-            y = currentPosition.getY();
-
-            Pair p = getPositionByDirection(x, y, direction);
-
-            // Checking if movement is in the maze
-            if (canMoveProjectile(e, p.getX(), p.getY())) {
-                newPosition = new Position(p.getX(), p.getY(), direction);
-            } else {
-                newPosition = new Position(
-                        currentPosition.getX(),
-                        currentPosition.getY(),
-                        direction
-                );
+            if(e.isHero()) {
+                Position position = e.getPosition();
+                Tile t = tiles[position.getY()][position.getX()];
+                t.action(this, e);
             }
-
-            // Setting position
-            e.setPosition(newPosition);
-
-            // Then adding tile action to the hero
-            Position position = hero.getPosition();
-            Tile t = tiles[position.getY()][position.getX()];
-            t.action(this, hero);
         }
     }
+
     public Pair getPositionByDirection(int x, int y, Cmd direction) {
         switch (direction) {
             case LEFT:
@@ -466,44 +431,13 @@ public class Maze implements Serializable {
                 }
             }
 
-            // Checking there already is an entity on it
-            if (getEntity(x, y) != null || (hero.getPosition().getX() == x && hero.getPosition().getY() == y)) {
+            // Checking if there already is an entity on it, if the moved one is not untouchable
+            Entity other = getEntity(x, y);
+            if(other != null && !entity.isUntouchable() && !other.isUntouchable()) {
                 can = false;
             }
         }
 
-        return can;
-    }
-
-    /**
-     * Verify if an entity can move or not
-     *
-     * @param entity entity who wants to move
-     * @param x      position of the target tile
-     * @param y      position of the target tile
-     * @return true if the entity can move
-     */
-    public boolean canMoveProjectile(Entity entity, int x, int y) {
-        Tile tile;
-        boolean can = false;
-
-        // Checking if the movement is in the maze
-        if (x >= 0 && x < width && y >= 0 && y < height) {
-            tile = tiles[y][x];
-
-            // Checking if the entity can go on the tile
-            if (tile.canBeCrossed()) {
-                can = true;
-            } else {
-                if (entity.canPassThrought()) {
-                    can = true;
-                }
-                else {
-                    can = false;
-                    removedEntity.add(entity);
-                }
-            }
-        }
         return can;
     }
 
@@ -519,12 +453,13 @@ public class Maze implements Serializable {
                 moveEntity(e, Cmd.IDLE);
             }
         }
+
         if (projectiles != null && projectiles.size() > 0) {
             for (Entity e : removedEntity) {
                 removeEntity(e);
             }
             for (Entity e : projectiles) {
-                moveEntityProjectile(e, Cmd.IDLE);
+                moveEntity(e, Cmd.IDLE);
             }
         }
     }
@@ -686,10 +621,15 @@ public class Maze implements Serializable {
     public void rangedAttack(Entity entity) {
         Position pos = entity.getPosition();
         Pair p = getPositionByDirection(pos.getX(), pos.getY(), pos.getCmd());
-        Entity projectile = new Projectile(new Stats(1.0, entity.getDmg(), 0, 0), false,
-                0, 0, new Position(p.getX(), p.getY(), pos.getCmd()), BehaveFactory.getProjectileBehavior());
-        if (canMoveProjectile(projectile, p.getX(), p.getY())) {
+        Entity projectile = entityFactory.getProjectile(new Position(p.getX(), p.getY(), pos.getCmd()));
+        if (canMove(projectile, p.getX(), p.getY())) {
             projectiles.add(projectile);
+            hero.takeDamage(HERO_DAMAGE_CALLBACK);
         }
+        hero.setAttacking();
+    }
+
+    public void removeProjectile(Entity entity) {
+        removedEntity.add(entity);
     }
 }

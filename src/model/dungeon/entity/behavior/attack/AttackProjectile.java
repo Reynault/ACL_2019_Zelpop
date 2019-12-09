@@ -1,9 +1,7 @@
 package model.dungeon.entity.behavior.attack;
 
-import model.Pair;
 import model.dungeon.Maze;
 import model.dungeon.entity.Entity;
-import model.global.Cmd;
 import model.global.Position;
 
 public class AttackProjectile extends Attack {
@@ -17,15 +15,12 @@ public class AttackProjectile extends Attack {
         int x = pos.getX();
         int y = pos.getY();
 
-        if(pos.getCmd() == Cmd.IDLE) {
-            Pair val = maze.getPositionByDirection(x, y, pos.getCmd());
-
-            // Fetching targeted entity (In this case (AttackSimple), the entity in front of the attacker)
-            Entity victim = maze.getEntity(val.getX(), val.getY());
-
-            if (victim != null) {
-                maze.attackEntity(entity, victim, damage);
-            }
+        // Fetching targeted entity (In this case (AttackSimple), the entity in front of the attacker)
+        Entity victim = maze.getEntity(x, y);
+        if (victim != null) {
+            maze.attackEntity(entity, victim, damage);
+        } else {
+            maze.destroy(x, y, damage);
         }
     }
 }

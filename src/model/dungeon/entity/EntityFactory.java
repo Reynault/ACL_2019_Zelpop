@@ -30,6 +30,7 @@ public class EntityFactory implements Serializable {
     public Hero generateHero() {
         return hero = new Hero(StatFactory.getHeroStats(),
                 false,
+                            false,
                             HERO_SCORE,
                             HERO_VALUE,
                             new Position(
@@ -52,8 +53,9 @@ public class EntityFactory implements Serializable {
     /**
      * Generate a classic monster
      */
-    public Monster getRandomMonster(Position position) {
+    public Entity getRandomMonster(Position position) {
         return new Monster(StatFactory.getmonsterStats(),
+                false,
                 false,
                 MONSTER_SCORE,
                 MONSTER_VALUE,
@@ -64,9 +66,10 @@ public class EntityFactory implements Serializable {
     /**
      * Generate a classic ghost
      */
-    public Ghost getRandomGhost(Position position) {
+    public Entity getRandomGhost(Position position) {
         return new Ghost(StatFactory.getGhostStats(),
                 true,
+                false,
                 GHOST_SCORE,
                 GHOST_VALUE,
                 position,
@@ -76,12 +79,26 @@ public class EntityFactory implements Serializable {
     /**
      * Generate a classic gobelin
      */
-    public Gobelin getRandomGobelin(Position position) {
+    public Entity getRandomGobelin(Position position) {
         return new Gobelin(StatFactory.getGoblinStats(),
+                false,
                 false,
                 GOBELIN_SCORE,
                 GOBELIN_VALUE,
                 position,
                 BehaveFactory.getGobelinBehavior());
+    }
+
+    /**
+     * Generate a classic gobelin
+     */
+    public Entity getProjectile(Position position) {
+        return new Projectile(StatFactory.getProjectileStats(),
+                false,
+                true,
+                0,
+                0,
+                position,
+                BehaveFactory.getProjectileBehavior());
     }
 }

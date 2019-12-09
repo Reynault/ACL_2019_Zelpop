@@ -74,12 +74,7 @@ public class Dungeon implements Serializable {
      * Entity is ranged-attacking
      */
     public void rangedAttackHero() {
-        rangedAttack(hero);
-    }
-
-
-    public void rangedAttack(Entity entity) {
-        currentMaze.rangedAttack(entity);
+        currentMaze.rangedAttack(hero);
     }
 
 

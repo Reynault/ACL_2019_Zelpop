@@ -16,6 +16,7 @@ public abstract class Entity implements Serializable {
     protected SoundManager sounds;
 
     protected boolean passThrought;
+    protected boolean untouchable;
     protected Position position;
     protected Behavior behavior;
     protected SpriteManagerEntity spriteManager;
@@ -32,7 +33,7 @@ public abstract class Entity implements Serializable {
      * @param behavior behavior of the entity
      * @param spriteManager sprite manager
      */
-    protected Entity(Stats stats, boolean passThrought, int score, int value, Position position, Behavior behavior, SpriteManagerEntity spriteManager, SoundManager soundManager) {
+    protected Entity(Stats stats, boolean passThrought, boolean untouchable, int score, int value, Position position, Behavior behavior, SpriteManagerEntity spriteManager, SoundManager soundManager) {
         this.stats = stats;
         this.passThrought = passThrought;
         this.position = position;
@@ -40,6 +41,7 @@ public abstract class Entity implements Serializable {
         this.spriteManager = spriteManager;
         this.score = score;
         this.value = value;
+        this.untouchable = untouchable;
         this.sounds = soundManager;
     }
 
@@ -188,4 +190,7 @@ public abstract class Entity implements Serializable {
     }
 
 
+    public boolean isUntouchable() {
+        return untouchable;
+    }
 }

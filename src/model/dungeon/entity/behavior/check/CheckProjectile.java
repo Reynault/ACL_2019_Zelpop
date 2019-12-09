@@ -14,15 +14,8 @@ public class CheckProjectile implements Check {
         int y = pos.getY();
         Cmd commande = pos.getCmd();
 
-        Entity victim;
+        Entity victim = maze.getEntity(x, y);
 
-        if ((victim = maze.getEntity(x, y)) != null) {
-            commande = Cmd.IDLE;
-        }
-
-        entity.setPosition(
-                new Position(x, y, commande)
-        );
 
         if (victim != null && victim != entity) {
             return true;
