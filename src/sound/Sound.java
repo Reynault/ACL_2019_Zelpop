@@ -2,9 +2,7 @@ package sound;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 
 /**
  * Sound is a factory class providing all sound assets and a method to play it
@@ -35,6 +33,8 @@ public class Sound {
     public static String TREASURE_SOUND = "/audio/gold.wav";
     public static String BREAK_SOUND = "/audio/breakWall.wav";
 
+    public static List<Clip> clips = new ArrayList<>();
+
     /**
      * PlaySound is used to play a sound using clips
      *
@@ -42,8 +42,15 @@ public class Sound {
      */
     public static void playSound(String sound) {
         try {
+            
+            for(Clip c: clips){
+                if(!c.isRunning()){
+                    c.close();
+                }
+            }
 
             Clip clip = AudioSystem.getClip();
+
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(
                     Sound.class.getResource(sound));
             clip.open(inputStream);
@@ -52,6 +59,8 @@ public class Sound {
             soundControl.setValue(SOUND_LEVEL);
 
             clip.start();
+
+            clips.add(clip);
 
         } catch (LineUnavailableException e) {
             e.printStackTrace();
@@ -93,6 +102,7 @@ public class Sound {
     public static void stopSound(String sound) {
         if (loops.containsKey(sound)) {
             loops.get(sound).stop();
+            loops.get(sound).close();
             loops.remove(sound);
         }
     }
@@ -106,6 +116,13 @@ public class Sound {
     }
 
     public static void stopDelaySound() {
+        Set<String> keys = loops.keySet();
+        for (String key: keys){
+            loops.get(key).stop();
+            loops.get(key).close();
+            loops.remove(key);
+        }
+
         if (isRunning) {
             delay.purge();
             delay.cancel();
