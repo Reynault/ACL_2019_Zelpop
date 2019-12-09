@@ -7,6 +7,9 @@ The idea is to develop a game using an agile method of developpement. (SCRUM)
 
 ## Running the game
 
+> [!WARNING]
+> The game can only be executed with a version of Java of 10 at least.
+
 An ant build file is given in the repository at the root of the project. 
 It builds and create a jar automatically, if you want to use it, please execute the following command:
 
@@ -19,6 +22,7 @@ It builds and create a jar automatically, if you want to use it, please execute 
 - Change level above stairs with E
 - Save with O
 - Menu with ESCAPE
+- Increase/Decrease sound with B and N
 
 ## First Sprint report
 
