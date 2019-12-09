@@ -167,4 +167,10 @@ public abstract class Entity implements Serializable {
     public void setDefence(int defence) {
         stats.setDefence(defence);
     }
+
+    public Stats getStats() {
+        return stats;
+    }
+
+    
 }

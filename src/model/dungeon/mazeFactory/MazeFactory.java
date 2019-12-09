@@ -269,11 +269,11 @@ public class MazeFactory implements Serializable {
                             entities.add(entityFactory.getRandomMonster(
                                     new Position(j, i, Cmd.IDLE)
                             ));
-                        }else if (random.nextInt(entityRatio) == 2&& i != 0 && j != 0){
+                        }else if (random.nextInt(entityRatio) == 2 && i != 0 && j != 0){
                             entities.add(entityFactory.getRandomGhost(
                                     new Position(j, i, Cmd.IDLE)
                             ));
-                        }else if (random.nextInt(entityRatio) == 3&& i != 0 && j != 0){
+                        }else if (random.nextInt(entityRatio) == 3 && i != 0 && j != 0){
                             entities.add(entityFactory.getRandomGobelin(
                                     new Position(j, i, Cmd.IDLE)
                             ));

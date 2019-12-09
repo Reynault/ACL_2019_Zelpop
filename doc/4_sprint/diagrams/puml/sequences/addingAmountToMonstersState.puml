@@ -1,42 +1,34 @@
 @startuml
-title  When round is finished adding a defiend amount to monster state
+title  When passing to another level add defiend amount to monster state
 autonumber
 
 participant "ZelpopGame: game" as z
 participant InGame as g
 participant Dungeon as d
-participant "maze: Maze" as m
-participant "e: Entity" as e
-participant "Stats" as s
+participant "mazeFactory: mf" as mf
+participant "ef: entityFactory" as ef
+participant "StatFactory" as sf
+participant "ss: ScaleStat" as ss
 
 
-z -> g: evolve(game, CMD)
+z -> g: evolve(game, LEAVE_LEVEL)
 
-g -> d: updateAll(game)
+g -> d: changeLevel()
 
-d -> m: regenEntites()
+d -> ss: setLevel()
 
-loop for each monster entity
-    m -> e: regen()
-    alt if default state
-          e -> s: setCurrentHp()
-          note right
-	       min between
-               Max Hp of the montser
-               and (Vitality stat +
-               current Hp) of the monster
-          end note
-    else if passed Stat
-          e -> s: setCurrentHp(passedStat)
-          note right
-	       it depend of
-	       the monster type
-          end note
-    end
+d -> mf: getRandomMaze()
+
+alt depends on monster type here is a ghost
+    mf -> ef: getRandomGhost()
+    ef -> sf: getGhostStats()
+    sf -> ss: scaleStat()
+    sf -> sf: new Stats()
+
 end
 
 
-m --> d: entities is been updated
+mf --> d: entities is been updated
 
 d --> g: entities is been updated
 
