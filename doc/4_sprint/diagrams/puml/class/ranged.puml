@@ -1,0 +1,148 @@
+@startuml
+
+title Adding projectiles in the game
+
+package entity{
+
+    package behavior{
+
+        class BehaveFactory{
+            + getHeroBehavior(): Behavior
+            + getSimpleBehavior(): Behavior
+            + getGobelinBehavior(): Behavior
+
+            + getProjectileBehavior(): Behavior
+        }
+
+        class Behavior{
+
+        }
+
+        BehaveFactory ..> Behavior: create
+
+        package check{
+            interface Check{
+
+            }
+
+            class CheckHero{
+
+            }
+
+            class CheckSimple{
+
+            }
+
+            class CheckProjectile{
+
+            }
+
+            CheckSimple ..|> Check
+            CheckHero ..|> Check
+            CheckProjectile ..|> Check
+        }
+
+        package move{
+            interface Move{
+
+            }
+
+            class MoveGoblin{
+
+            }
+
+            class MoveHero{
+
+            }
+
+            class MoveProjectile{
+
+            }
+
+            class MoveRandom{
+
+            }
+
+            MoveHero ..|> Move
+            MoveProjectile ..|> Move
+            MoveRandom ..|> Move
+            MoveGoblin ..|> Move
+
+            package ia{
+                class PositionIA{
+
+                }
+            }
+        }
+
+        package attack{
+
+            abstract Attack{
+
+            }
+
+            class AttackHero{
+
+            }
+
+            class AttackSimple{
+
+            }
+
+            class AttackProjectile{
+
+            }
+
+            AttackHero --|> Attack
+            AttackSimple --|> Attack
+            AttackProjectile --|> Attack
+        }
+
+    }
+
+    abstract Entity{
+
+    }
+
+    class Projectile{
+
+    }
+
+    class Monster{
+
+    }
+
+    class Goblin{
+
+    }
+
+    class Ghost{
+
+    }
+
+    class Hero{
+
+    }
+
+    class EntityFactory{
+        + getProjectile()
+    }
+
+    EntityFactory ..> Entity: create
+
+    Projectile --|> Entity
+    Monster --|> Entity
+    Hero --|> Entity
+    Goblin --|> Entity
+    Ghost --|> Entity
+
+}
+
+class Maze{
+
+}
+
+Maze --> "*" Entity: entities
+Maze --> "*" Entity: projectiles
+
+@enduml

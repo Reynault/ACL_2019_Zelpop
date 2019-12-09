@@ -32,6 +32,7 @@ public class Sound {
     public static String TELEPORT_SOUND = "/audio/teleport.wav";
     public static String TREASURE_SOUND = "/audio/gold.wav";
     public static String BREAK_SOUND = "/audio/breakWall.wav";
+    public static String FIRE_BALL = "/audio/heroAttack.wav";
 
     public static List<Clip> clips = new ArrayList<>();
 
@@ -42,29 +43,34 @@ public class Sound {
      */
     public static void playSound(String sound) {
         try {
-            
+
+            List<Clip> toRemove = new ArrayList<>();
             for(Clip c: clips){
                 if(!c.isRunning()){
                     c.close();
+                    toRemove.add(c);
                 }
             }
 
+            clips.removeAll(toRemove);
 
-            AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                    Sound.class.getResource(sound));
+            if(clips.size() < 30) {
+                AudioInputStream inputStream = AudioSystem.getAudioInputStream(
+                        Sound.class.getResource(sound));
 
-            AudioFormat format = inputStream.getFormat();
-            DataLine.Info info = new DataLine.Info(Clip.class, format);
-            
-            Clip clip = (Clip)AudioSystem.getLine(info);
-            clip.open(inputStream);
+                AudioFormat format = inputStream.getFormat();
+                DataLine.Info info = new DataLine.Info(Clip.class, format);
 
-            FloatControl soundControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            soundControl.setValue(SOUND_LEVEL);
+                Clip clip = (Clip) AudioSystem.getLine(info);
+                clip.open(inputStream);
 
-            clip.start();
+                FloatControl soundControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+                soundControl.setValue(SOUND_LEVEL);
 
-            clips.add(clip);
+                clip.start();
+
+                clips.add(clip);
+            }
 
         } catch (LineUnavailableException e) {
             e.printStackTrace();
@@ -81,9 +87,14 @@ public class Sound {
         try {
 
             if (!loops.containsKey(sound)) {
-                Clip clip = AudioSystem.getClip();
+
                 AudioInputStream inputStream = AudioSystem.getAudioInputStream(
                         Sound.class.getResourceAsStream(sound));
+
+                AudioFormat format = inputStream.getFormat();
+                DataLine.Info info = new DataLine.Info(Clip.class, format);
+
+                Clip clip = (Clip)AudioSystem.getLine(info);
                 clip.open(inputStream);
 
                 FloatControl soundControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
