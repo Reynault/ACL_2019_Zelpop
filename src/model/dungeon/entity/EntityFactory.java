@@ -93,7 +93,8 @@ public class EntityFactory implements Serializable {
      * Generate a classic gobelin
      */
     public Entity getProjectile(Entity owner, Position position) {
-        return new Projectile(StatFactory.getProjectileStats(),
+        Stats stats = new Stats(1, owner.getDmg(), 0, 0);
+        return new Projectile(stats,
                 false,
                 true,
                 0,

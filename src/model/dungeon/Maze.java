@@ -623,7 +623,7 @@ public class Maze implements Serializable {
         Entity projectile = entityFactory.getProjectile(entity, pos);
         if (canMove(projectile, pos.getX(), pos.getY())) {
             projectiles.add(projectile);
-            hero.takeDamage(HERO_DAMAGE_CALLBACK);
+            hero.takeDamage(hero.getMaxHp()/10);
             Sound.playSound(Sound.FIRE_BALL);
         }
         hero.setAttacking();
