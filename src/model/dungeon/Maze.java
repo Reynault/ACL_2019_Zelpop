@@ -445,21 +445,21 @@ public class Maze implements Serializable {
      * Method that move all the entities non controlled by the player.
      */
     public void moveEntities() {
-        if (entities != null && entities.size() > 0) {
-            for (Entity e : removedEntity) {
-                removeEntity(e);
-            }
-            for (Entity e : entities) {
-                moveEntity(e, Cmd.IDLE);
-            }
-        }
-
         if (projectiles != null && projectiles.size() > 0) {
             for (Entity e : projectiles) {
                 moveEntity(e, Cmd.IDLE);
             }
             for (Entity e : removedEntity) {
                 removeEntity(e);
+            }
+        }
+         
+        if (entities != null && entities.size() > 0) {
+            for (Entity e : removedEntity) {
+                removeEntity(e);
+            }
+            for (Entity e : entities) {
+                moveEntity(e, Cmd.IDLE);
             }
         }
     }
