@@ -620,9 +620,8 @@ public class Maze implements Serializable {
 
     public void rangedAttack(Entity entity) {
         Position pos = entity.getPosition();
-        Pair p = getPositionByDirection(pos.getX(), pos.getY(), pos.getCmd());
-        Entity projectile = entityFactory.getProjectile(new Position(p.getX(), p.getY(), pos.getCmd()));
-        if (canMove(projectile, p.getX(), p.getY())) {
+        Entity projectile = entityFactory.getProjectile(entity, pos);
+        if (canMove(projectile, pos.getX(), pos.getY())) {
             projectiles.add(projectile);
             hero.takeDamage(HERO_DAMAGE_CALLBACK);
             Sound.playSound(Sound.FIRE_BALL);
