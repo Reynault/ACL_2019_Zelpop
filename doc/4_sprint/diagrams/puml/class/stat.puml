@@ -1,0 +1,48 @@
+@startuml
+title How stats works
+
+package stat{
+
+    class StatFactory{
+        + {static}HERO_DAMAGE_CALLBACK: double
+
+        + {static}getHeroStats(sound: String)
+        + {static}getProjectileStats(sound: String)
+        + {static}getmonsterStats(task: TimeTask)
+        + {static}getGhostStats()
+        + {static}getGoblinStats()
+
+        + {static}scaleStat(defaultStat: double)
+    }
+
+    class Stats{
+        - maxHp: double
+        - currentHp: double
+        - damage: double
+        - defence: double
+        ...
+        - maxHpCostToUpgrade: double
+        - damageCostToUpgrade: double
+        ...
+        + getMaxHp()
+        + getCurrentHp()
+        ...
+    }
+
+    class ScaleStat << (S,#FF7700) Singleton >>{
+        - level: double
+
+        + getLevel()
+        + setLevel()
+
+        + scaleStat(double defaultStat)
+    }
+    note left: Methode scaleStat  calculate a new amount \n for the stat of monsters
+
+}
+
+
+StatFactory ..|> Stats: -create
+
+EntityFactory -- StatFactory
+@enduml
