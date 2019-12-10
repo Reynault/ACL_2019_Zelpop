@@ -27,6 +27,11 @@ public class Projectile extends Entity {
     }
 
     @Override
+    public int getMultiplier() {
+        return 0;
+    }
+
+    @Override
     public void increaseScore(double bonus) {
         super.increaseScore(bonus);
         owner.increaseScore(bonus);

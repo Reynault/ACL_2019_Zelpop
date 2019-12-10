@@ -16,11 +16,13 @@ public class Scoring implements Serializable {
 
 
     public double killMonster(Entity entity) {
-        return entity.getValue() * entity.getScore();
+        double aa = entity.getValue() * entity.getMultiplier() * multiplier;
+        System.out.println(aa);
+        return aa;
     }
 
     public int leaveMaze() {
-        return score*multiplier;
+        return score * multiplier;
     }
 
     public int findChest(Tile tile) {

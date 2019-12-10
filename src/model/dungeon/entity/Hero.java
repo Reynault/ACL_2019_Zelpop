@@ -2,13 +2,9 @@ package model.dungeon.entity;
 
 import model.dungeon.entity.behavior.Behavior;
 import model.global.Position;
-import sound.Sound;
-import sound.soundManager.SoundManager;
 import sound.soundManager.SoundManagerFactory;
 import sprite.spriteManager.SpriteManagerHero;
 import sprite.TextureFactory;
-
-import java.applet.AudioClip;
 
 public class Hero extends Entity {
 
@@ -22,6 +18,11 @@ public class Hero extends Entity {
     @Override
     public boolean isHero() {
         return true;
+    }
+
+    @Override
+    public int getMultiplier() {
+        return 0;
     }
 
     /**

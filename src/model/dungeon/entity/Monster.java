@@ -14,6 +14,11 @@ public class Monster extends Entity {
                 SoundManagerFactory.getMonsterSounds());
     }
 
+    @Override
+    public int getMultiplier() {
+        return 1;
+    }
+
     /**
      * Give an image for the hero (used after a load)
      */

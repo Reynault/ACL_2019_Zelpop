@@ -104,11 +104,7 @@ public abstract class Entity implements Serializable {
      *
      */
     public boolean isAlive() {
-        if (this.stats.getCurrentHp() >= 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.stats.getCurrentHp() >= 0;
     }
 
     /**
@@ -193,4 +189,6 @@ public abstract class Entity implements Serializable {
     public boolean isUntouchable() {
         return untouchable;
     }
+
+    public abstract int getMultiplier();
 }
