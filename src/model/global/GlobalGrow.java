@@ -5,13 +5,13 @@ public class GlobalGrow {
         return 1.01;
     }
     public static double growRateDef(){
-        return 1.01;
+        return 1.006;
     }
     public static double growRatevit(){
-        return 1.01;
+        return 1.005;
     }
     public static double growRateAtk(){
-        return 1.01;
+        return 1.004;
     }
 
     public static double startingPriceHp(){
@@ -32,6 +32,6 @@ public class GlobalGrow {
     }
 
     public static double statGrow(double currentStat){
-        return currentStat * 1.01;
+        return currentStat * 1.05;
     }
 }
