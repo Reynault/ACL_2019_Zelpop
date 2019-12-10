@@ -20,7 +20,7 @@ public abstract class Entity implements Serializable {
     protected Position position;
     protected Behavior behavior;
     protected SpriteManagerEntity spriteManager;
-    protected int score;   // multiplier for the score
+    protected int score;   // base score for the entity
     protected int value;   // value of the score
 
     /**
@@ -190,5 +190,9 @@ public abstract class Entity implements Serializable {
         return untouchable;
     }
 
+    /**
+     * Multiplier for the scoring
+     * @return value of the multiplier
+     */
     public abstract int getMultiplier();
 }

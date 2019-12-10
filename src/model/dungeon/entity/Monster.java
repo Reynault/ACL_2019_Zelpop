@@ -19,9 +19,7 @@ public class Monster extends Entity {
         return 1;
     }
 
-    /**
-     * Give an image for the hero (used after a load)
-     */
+    @Override
     public void setRessources() {
         spriteManager = new SpriteManagerMonster(TextureFactory.getTextureFactory().getMonster());
     }
