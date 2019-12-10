@@ -446,6 +446,9 @@ public class Maze implements Serializable {
      */
     public void moveEntities() {
         if (projectiles != null && projectiles.size() > 0) {
+            for (Entity e : removedEntity) {
+                removeEntity(e);
+            }
             for (Entity e : projectiles) {
                 moveEntity(e, Cmd.IDLE);
             }
@@ -460,6 +463,9 @@ public class Maze implements Serializable {
             }
             for (Entity e : entities) {
                 moveEntity(e, Cmd.IDLE);
+            }
+            for (Entity e : removedEntity) {
+                removeEntity(e);
             }
         }
     }
