@@ -625,6 +625,7 @@ public class Maze implements Serializable {
         if (canMove(projectile, p.getX(), p.getY())) {
             projectiles.add(projectile);
             hero.takeDamage(HERO_DAMAGE_CALLBACK);
+            Sound.playSound(Sound.FIRE_BALL);
         }
         hero.setAttacking();
     }
