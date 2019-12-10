@@ -14,6 +14,11 @@ public class Gobelin extends Entity{
     }
 
     @Override
+    public int getMultiplier() {
+        return 3;
+    }
+
+    @Override
     public void setRessources() {
         // change to getGobelin
         spriteManager = new SpriteManagerMonster(TextureFactory.getTextureFactory().getGobelin());

@@ -15,6 +15,11 @@ public class Ghost extends Entity {
     }
 
     @Override
+    public int getMultiplier() {
+        return 2;
+    }
+
+    @Override
     public void setRessources() {
         //change to getGhost
         spriteManager = new SpriteManagerMonster(TextureFactory.getTextureFactory().getGhost());

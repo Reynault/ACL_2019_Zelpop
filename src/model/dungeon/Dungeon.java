@@ -1,7 +1,6 @@
 package model.dungeon;
 
 import model.ZelpopGame;
-import model.dungeon.entity.Entity;
 import model.dungeon.entity.EntityFactory;
 import model.dungeon.entity.Hero;
 import model.dungeon.entity.ScaleStat;

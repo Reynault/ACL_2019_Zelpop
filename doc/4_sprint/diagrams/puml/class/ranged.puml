@@ -1,5 +1,4 @@
 @startuml
-
 title Adding projectiles in the game
 
 package entity{
@@ -37,7 +36,7 @@ package entity{
 
             }
 
-            CheckSimple ..|> Check
+            CheckSimple .|> Check
             CheckHero ..|> Check
             CheckProjectile ..|> Check
         }
@@ -63,8 +62,8 @@ package entity{
 
             }
 
-            MoveHero ..|> Move
-            MoveProjectile ..|> Move
+            MoveHero .|> Move
+            MoveProjectile .|> Move
             MoveRandom ..|> Move
             MoveGoblin ..|> Move
 
@@ -94,7 +93,7 @@ package entity{
             }
 
             AttackHero --|> Attack
-            AttackSimple --|> Attack
+            AttackSimple -|> Attack
             AttackProjectile --|> Attack
         }
 
@@ -128,9 +127,9 @@ package entity{
         + getProjectile()
     }
 
-    EntityFactory ..> Entity: create
+    EntityFactory .> Entity: create
 
-    Projectile --|> Entity
+    Projectile -|> Entity
     Monster --|> Entity
     Hero --|> Entity
     Goblin --|> Entity
@@ -142,7 +141,6 @@ class Maze{
 
 }
 
-Maze --> "*" Entity: entities
-Maze --> "*" Entity: projectiles
-
+Maze -Up-> "*" Entity: entities
+Maze -Up-> "*" Entity: projectiles
 @enduml
