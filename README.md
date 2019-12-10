@@ -71,7 +71,13 @@ During this forth sprint, we focused on adding the sound system,
 a new functionality letting the player to throw a fireball, an ennemy scaling
 system, and the ability to increase the hero stats.
 
-The main difficulty was about the sound system, the conception
+The main difficulty was about the sound system, the conception was difficult to
+maintain. Each time we used a different package to trigger a sound, we were
+interrupted by a behavior of the package. Furthermore, the current used package
+can only work with a certain version of Java. (10 and more)
+
+What's more, we managed to implement the projectile feature without modifying a
+lot of things in our conception.
 
 ### Implemented Features
 
