@@ -17,6 +17,8 @@ public class ScaleStat {
         level ++;
     }
 
+    public void resetLevel(){level = 0;}
+
     public double scaleStat (double defaultStat){
         return defaultStat + (defaultStat * (this.level/5));
     }

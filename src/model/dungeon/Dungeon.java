@@ -33,6 +33,7 @@ public class Dungeon implements Serializable {
      */
     public Dungeon() {
         this.mazeFactory = new MazeFactory();
+        ScaleStat.getInstance().resetLevel();
         this.entityFactory = new EntityFactory();
         this.hero = entityFactory.generateHero();
         currentMaze = mazeFactory.getRandomMaze(DEFAULT_MAZE_SIZE, entityFactory);
@@ -44,6 +45,7 @@ public class Dungeon implements Serializable {
      */
     public Dungeon(InputStream inputStream){
         this.mazeFactory = new MazeFactory();
+        ScaleStat.getInstance().resetLevel();
         this.entityFactory = new EntityFactory();
         this.hero = entityFactory.generateHero();
 
