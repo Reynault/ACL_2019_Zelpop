@@ -65,6 +65,13 @@ between the members of the team leading into a bad implementation. Indeed, the m
 it's direction, and one member was not aware of it. So in the future, we will make sure to avoid this kind of
 problems with a better communication before assigning a task.
 
+## Fourth sprint report
+
+During this forth sprint, we focused on adding the sound system, 
+a new functionality letting the player to throw a fireball, an ennemy scaling
+system, and the ability to increase the hero stats.
+
+The main difficulty was about the sound system, the conception
 
 ### Implemented Features
 

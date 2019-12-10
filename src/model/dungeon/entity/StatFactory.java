@@ -2,7 +2,7 @@ package model.dungeon.entity;
 
 public class StatFactory {
 
-    public static double HERO_DAMAGE_CALLBACK = 20;
+    public static double HERO_DAMAGE_CALLBACK = 10;
 
     // Hero
     public static Stats getHeroStats(){

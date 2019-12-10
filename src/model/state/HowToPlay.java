@@ -40,7 +40,7 @@ public class HowToPlay implements GameState {
         command = new BufferedImage[8];
         command[0] = textManager.getString("Z Q S D : move", textColor);
         command[1] = textManager.getString("SPACE : attack", textColor);
-        command[2] = textManager.getString("W : Throw projectile (cost HP)", textColor);
+        command[2] = textManager.getString("A : Throw projectile (cost HP)", textColor);
         command[3] = textManager.getString("E : change level above stairs", textColor);
         command[4] = textManager.getString("O : save", textColor);
         command[5] = textManager.getString("ESCAPE : quit to menu without save", textColor);
