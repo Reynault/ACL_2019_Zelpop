@@ -27,6 +27,12 @@ public class Projectile extends Entity {
     }
 
     @Override
+    public void increaseScore(double bonus) {
+        super.increaseScore(bonus);
+        owner.increaseScore(bonus);
+    }
+
+    @Override
     public void setRessources() {
         spriteManager = new SpriteManagerProjectile(TextureFactory.getTextureFactory().getFireBall());
         spriteManager.setSprite(position.getCmd());

@@ -53,6 +53,9 @@ public class Teleport extends Effect{
                     )
             );
 
+            // Adding the action to the entity
+            maze.getTile(x,y).action(maze, e);
+
             isTriggered = true;
             spriteManager = new SpriteManagerTile(TextureFactory.getTextureFactory().getTiles());
         }
