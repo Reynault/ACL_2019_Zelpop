@@ -601,7 +601,7 @@ public class Maze implements Serializable {
             if (victim.isHero()){
                 // If its dead and the hero is defending, then we have to remove it and to increase score
                 double bonus = scoring.killMonster(entity);
-                entity.increaseScore(bonus);
+                victim.increaseScore(bonus);
 
                 // Deleting killed entity
                 removedEntity.add(entity);
