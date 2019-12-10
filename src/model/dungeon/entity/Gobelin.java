@@ -7,6 +7,7 @@ import sprite.TextureFactory;
 import sprite.spriteManager.SpriteManagerMonster;
 
 public class Gobelin extends Entity{
+
     protected Gobelin(Stats stats, boolean b, boolean untouchable, int score, int value, Position position, Behavior behavior) {
         super(stats, b, untouchable, score, value, position, behavior,
                 new SpriteManagerMonster(TextureFactory.getTextureFactory().getGobelin()),
@@ -20,7 +21,6 @@ public class Gobelin extends Entity{
 
     @Override
     public void setRessources() {
-        // change to getGobelin
         spriteManager = new SpriteManagerMonster(TextureFactory.getTextureFactory().getGobelin());
     }
 }
