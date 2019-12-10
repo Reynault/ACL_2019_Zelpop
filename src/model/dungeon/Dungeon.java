@@ -7,6 +7,7 @@ import model.dungeon.entity.Hero;
 import model.dungeon.entity.ScaleStat;
 import model.dungeon.mazeFactory.MazeFactory;
 import model.global.Cmd;
+import model.global.GlobalGrow;
 import model.global.Position;
 import model.state.StateFactory;
 import sound.Sound;
@@ -145,6 +146,38 @@ public class Dungeon implements Serializable {
                     EntityFactory.HERO_Y,
                     EntityFactory.HERO_DIRECTION));
             floor++;
+        }
+    }
+
+    public void upgradeHP() {
+        if ( hero.getScore() >= hero.getStats().getMaxHpCostToUpgrade()){
+            hero.increaseScore( -hero.getStats().getMaxHpCostToUpgrade());
+            hero.getStats().setMaxHpCostToUpgrade(GlobalGrow.priceGrow(hero.getStats().getMaxHp(), GlobalGrow.growRateHp(), GlobalGrow.startingPriceHp()));
+            hero.getStats().setMaxHp(GlobalGrow.statGrow(hero.getStats().getMaxHp()));
+        }
+    }
+
+    public void upgradeRNG() {
+        if ( hero.getScore() >= hero.getStats().getVitalityCostToUpgrade()){
+            hero.increaseScore( -hero.getStats().getVitalityCostToUpgrade());
+            hero.getStats().setVitalityCostToUpgrade(GlobalGrow.priceGrow(hero.getStats().getVitality(), GlobalGrow.growRatevit(), GlobalGrow.startingPriceVit()));
+            hero.getStats().setVitality(GlobalGrow.statGrow(hero.getStats().getVitality()));
+        }
+    }
+
+    public void upgradeATK() {
+        if ( hero.getScore() >= hero.getStats().getDamageCostToUpgrade()){
+            hero.increaseScore( -hero.getStats().getDamageCostToUpgrade());
+            hero.getStats().setDamageCostToUpgrade(GlobalGrow.priceGrow(hero.getStats().getDamage(), GlobalGrow.growRateAtk(), GlobalGrow.startingPriceAtk()));
+            hero.getStats().setDmg(GlobalGrow.statGrow(hero.getStats().getDamage()));
+        }
+    }
+
+    public void upgradeCNT() {
+        if ( hero.getScore() >= hero.getStats().getDefenceCostToUpgrade()){
+            hero.increaseScore( -hero.getStats().getDefenceCostToUpgrade());
+            hero.getStats().setDefenceCostToUpgrade(GlobalGrow.priceGrow(hero.getStats().getDefence(), GlobalGrow.growRateDef(), GlobalGrow.startingPriceDef()));
+            hero.getStats().setDefence(GlobalGrow.statGrow(hero.getStats().getDefence()));
         }
     }
 }

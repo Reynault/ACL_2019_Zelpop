@@ -64,15 +64,45 @@ public class Stats implements Serializable {
         return vitalityCostToUpgrade;
     }
 
-    public void setDmg(int dmg) {
+    public void setDmg(double dmg) {
         damage = dmg;
     }
 
-    public void setDefence(int defence) {
+    public void setDefence(double defence) {
         this.defence = defence;
     }
 
     public void setVitality(double i) {
         vitality = i;
+    }
+
+    public void setMaxHp(double maxHp) {
+        this.maxHp = maxHp;
+    }
+
+    public void setMaxHpCostToUpgrade(double maxHpCostToUpgrade) {
+        this.maxHpCostToUpgrade = maxHpCostToUpgrade;
+    }
+
+    public void setDamageCostToUpgrade(double damageCostToUpgrade) {
+        this.damageCostToUpgrade = damageCostToUpgrade;
+    }
+
+    public void setDefenceCostToUpgrade(double defenceCostToUpgrade) {
+        this.defenceCostToUpgrade = defenceCostToUpgrade;
+    }
+
+    public void setVitalityCostToUpgrade(double vitalityCostToUpgrade) {
+        this.vitalityCostToUpgrade = vitalityCostToUpgrade;
+    }
+
+    @Override
+    public String toString() {
+        return "Stats{" +
+                "maxHp=" + maxHp +
+                ", damage=" + damage +
+                ", defence=" + defence +
+                ", vitality=" + vitality +
+                '}';
     }
 }

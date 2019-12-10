@@ -6,10 +6,10 @@ public class StatFactory {
 
     // Hero
     public static Stats getHeroStats(){
-        return new Stats(100, 1000, 1, 2);
+        return new Stats(100, 10, 1, 2);
     }
     public static Stats getProjectileStats(){
-        return new Stats(1,1000, 0, 0);
+        return new Stats(1,10, 0, 0);
     }
 
 

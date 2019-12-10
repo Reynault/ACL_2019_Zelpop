@@ -14,18 +14,17 @@ public class GlobalGrow {
         return 1.01;
     }
 
-
     public static double startingPriceHp(){
-        return 1;
+        return 100;
     }
     public static double startingPriceDef(){
-        return 1;
+        return 100;
     }
     public static double startingPriceVit(){
-        return 1;
+        return 100;
     }
     public static double startingPriceAtk(){
-        return 1;
+        return 100;
     }
 
     public static double priceGrow(double currentStat, double growOfStat, double startingPriceOfStat){

@@ -307,10 +307,10 @@ public class Maze implements Serializable {
         stats[3] = (int)hero.getDef();
 
         double cost[] = new double[4];
-        cost[0] = hero.getMaxHpCostToUpgrade();
-        cost[1] = hero.getVitalityCostToUpgrade();
-        cost[2] = hero.getDamageCostToUpgrade();
-        cost[3] = hero.getDefenceCostToUpgrade();
+        cost[0] = Math.round(hero.getMaxHpCostToUpgrade());
+        cost[1] = Math.round(hero.getVitalityCostToUpgrade());
+        cost[2] = Math.round(hero.getDamageCostToUpgrade());
+        cost[3] = Math.round(hero.getDefenceCostToUpgrade());
 
         for(int i = 0 ; i < stats.length ; i++){
             textImage = textManager.getString(stats[i] + "", textColor);
