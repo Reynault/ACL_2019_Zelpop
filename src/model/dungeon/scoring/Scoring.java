@@ -16,9 +16,7 @@ public class Scoring implements Serializable {
 
 
     public double killMonster(Entity entity) {
-        double aa = entity.getValue() * entity.getMultiplier() * multiplier;
-        System.out.println(aa);
-        return aa;
+        return entity.getValue() * entity.getMultiplier() * multiplier;
     }
 
     public int leaveMaze() {
